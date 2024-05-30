@@ -10,6 +10,9 @@ class MBsolver(ABC):
 
         self._K = K
 
+    def __str__(self) -> str:
+        return "MBsolver"
+
     @abstractmethod
     def select_arm(self) -> int:
 
@@ -24,7 +27,6 @@ class MBsolver(ABC):
     def reset(self):
 
         pass
-
 
 
 class Model(MBsolver):
@@ -49,6 +51,9 @@ class Model(MBsolver):
         self._W = np.zeros((K, 1))
         self._choice = None
         self.is_random = False
+
+    def __str__(self):
+        return "`Model`"
 
     def __repr__(self):
 

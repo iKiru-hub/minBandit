@@ -288,6 +288,106 @@ def trial(model: object, environment: KArmedBandit,
     return stats
 
 
+def trial_multi_model(models: list, environment: KArmedBandit,
+              nb_trials: int, nb_rounds: int,
+                      verbose: bool=False) -> list:
+
+    """
+    Run a trial of the k-armed bandit problem with the given model
+
+    Parameters
+    ----------
+    model : object
+        The model to use
+    environment : KArmedBandit
+        The k-armed bandit environment
+    nb_trials : int
+        The number of trials
+    nb_rounds : int 
+        The number of rounds
+    verbose : bool, optional
+        Display information, by default False
+
+    Returns
+    -------
+    list
+        The results of the trial
+    """
+
+    # initialize
+    names = []
+    for m in models:
+        m.reset()
+        names += [m.__str__()]
+
+    print(names)
+
+    # record
+    reward_list = np.empty((len(models), nb_trials, nb_rounds))
+    chance_list = np.empty(nb_trials)
+    upper_bound_list = np.empty(nb_trials)
+
+    #
+    if verbose:
+        logger.info(f"%trials={nb_trials}")
+        logger.info(f"%rounds={nb_rounds}")
+        for m in models:
+            logger.info(f"Model: {m}")
+        logger.info(f"K-armed bandit: {environment}")
+
+    # run
+    for trial_i in tqdm(range(nb_trials)):
+
+        # renew the reward distribution
+        if trial_i > 0:
+            environment.update()
+
+        # record
+        rewards = np.zeros((len(models), nb_rounds))
+
+        for round_i in range(nb_rounds):
+
+            # select an arm
+            for i, m in enumerate(models):
+
+                k = m.select_arm()
+
+                # sample the reward
+                reward = environment.sample(k=k)
+
+                # update the model
+                m.update(k=k, reward=reward)
+
+                # record
+                rewards[i, round_i] = reward
+
+        # ---------------------------- #
+
+        scores = rewards.mean(axis=1)
+        reward_list[:, trial_i, :] = rewards
+        chance_list[trial_i] = environment.chance_level
+        upper_bound_list[trial_i] = environment.upper_bound
+
+    # ---------------------------- #
+
+        if verbose:
+            logger.info("")
+            logger.info(f"trial {trial_i}")
+            logger.info(f">>> upper : {upper_bound_list[trial_i]:.3f}")
+            logger.info(f">>> chance: {chance_list[trial_i]:.3f}")
+            for i, name in enumerate(names):
+                logger.info(f">>> {name} : {scores[i]:.3f}")
+
+    stats = {
+        "reward_list": reward_list,
+        "chance_list": chance_list,
+        "upper_bound_list": upper_bound_list,
+        "scores": scores,
+        "names": names
+    }
+
+    return stats
+
 
 """ other functions """
 
