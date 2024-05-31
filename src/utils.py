@@ -1,11 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.ticker import MultipleLocator,FormatStrFormatter,MaxNLocator
 import os, logging, coloredlogs, json, pprint
 
 
 
 DEBUG = False
-
+plt.rcParams['pdf.fonttype'] = 42
+plt.rcParams['ps.fonttype'] = 42
+plt.rcParams['font.family'] = 'Arial'
 
 # logger
 def setup_logger(name: str="MAIN", colored: bool=True) -> logging.Logger:
@@ -95,7 +98,9 @@ def plot_multiple(stats: dict):
     names = stats["names"]
     scores = stats["scores"]
     upper = stats["upper_bound_list"].mean()
-    N, nb_trials, nb_rounds = rewards.shape 
+    best_arms = stats["best_arm_list"]
+    arms = stats["arm_list"]
+    N, nb_reps, nb_trials, nb_rounds = rewards.shape
 
     x = range(nb_trials * nb_rounds)
     chance_x = np.tile(stats["chance_list"], (nb_rounds, 1)).T.flatten()
@@ -104,27 +109,53 @@ def plot_multiple(stats: dict):
     # plt.plot(x, np.cumsum(chance_x), 'k--', label="chance", alpha=0.5)
     # plt.plot(x, np.cumsum(upper_bound_x), 'k-', label="upper", alpha=0.5)
 
-    window = 500 
+    window = 1
     # y = np.cumsum(upper_bound_x) - np.cumsum(chance_x)
     # y = np.convolve(y, np.ones(window), 'valid') / window
     # y = np.concatenate((np.array([0]*(len(x)-len(y))), y))
     # plt.plot(x, y, 'k--', label=f"chance", alpha=0.3)
-    plt.axhline(0, color="black", alpha=0.5, label=f"upper bound [{upper:.2f}]")
+    # plt.axhline(0, color="black", alpha=0.5, label=f"upper bound [{upper:.2f}]")
+    # print(f"{best_arms=}")
+
+    #
+    fig, ax = plt.subplots(1, 1, figsize=(20, 5))
+
+    ax.axhline(0, color="black", alpha=0.3)
+    for i in range(0, nb_trials):
+        ax.axvline(nb_rounds * i, color="black", linestyle="--", alpha=0.3)
+        ax.text(x=nb_rounds*i+5, y=-0.03, s=f"trial {i}")
 
     for i in range(N):
         # y = np.cumsum(upper_bound_x) - np.cumsum(rewards[i].flatten())
-        y = upper_bound_x - rewards[i].flatten()
-        y = np.convolve(y, np.ones(window), 'valid') / window
-        y = np.concatenate((np.array([0]*(len(x)-len(y))), y))
+        # y = upper_bound_x - rewards[i].flatten()
+        # y = np.convolve(y, np.ones(window), 'valid') / window
+        # y = np.concatenate((np.array([0]*(len(x)-len(y))), y))
         # y = np.cumsum(rewards[i].flatten())
-        plt.plot(x, y, label=f"{names[i]} [{scores[i]:.2f}]",
+
+
+        y = ((arms[i] - best_arms)**2).astype(int).sum(axis=3)/2
+        y = y.mean(axis=0).flatten()
+        sy = y.var(axis=0).flatten()
+
+        # y = np.convolve(y, np.ones(window), 'valid') / window
+        # y = np.concatenate((np.array([0]*(len(x)-len(y))), y))
+        # sy = np.convolve(sy, np.ones(window), 'valid') / window
+        # sy = np.concatenate((np.array([0]*(len(x)-len(sy))), sy))
+
+        # print(f"{i} - {arms[i]}")
+
+        # add variance
+        ax.fill_between(x, y-sy, y+sy, alpha=0.1)
+        ax.plot(x, y, label=f"{names[i]} [$R$={scores[i]:.3f}]",
                  alpha=0.4 if (i+1) != N else 0.9)
 
-    plt.legend()
-    plt.title(f"error wrt the upper bound")
-    plt.grid()
-    plt.xlabel("rounds for all trials")
-    plt.ylabel("error")
+    ax.legend(loc="upper right")
+    ax.set_title(f"Regret")
+    # ax.grid()
+    ax.set_xlabel("rounds for all trials")
+    ax.set_ylabel("error")
+    ax.set_ylim(-0.1, 1.3)
+
     plt.show()
 
 

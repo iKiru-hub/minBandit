@@ -33,6 +33,7 @@ class KArmedBandit:
         """
 
         self.K = K
+        self._probabilities_set_or = probabilities_set
         self.probabilities_set = probabilities_set
         self.probabilities = probabilities_set[0]
         self.nb_sets = len(probabilities_set)
@@ -40,6 +41,7 @@ class KArmedBandit:
 
         self.chance_level = np.mean(self.probabilities)
         self.upper_bound = np.max(self.probabilities)
+        self.best_arm = np.argmax(self.probabilities)
 
         self.verbose = verbose
 
@@ -75,6 +77,7 @@ class KArmedBandit:
         self.probabilities = self.probabilities_set[self.counter % self.nb_sets]
         self.chance_level = np.mean(self.probabilities)
         self.upper_bound = np.max(self.probabilities)
+        self.best_arm = np.argmax(self.probabilities)
 
         if self.verbose:
             logger.info("---renew")
@@ -89,6 +92,17 @@ class KArmedBandit:
             "chance": self.chance_level.tolist(),
             "upper_bound": self.upper_bound.tolist()
         }
+
+    def reset(self):
+
+        self.probabilities_set = self._probabilities_set_or
+        self.probabilities = self.probabilities_set[0]
+        self.trg_probabilities = self.probabilities_set[1]
+        self.counter = 0
+
+        self.chance_level = np.mean(self.probabilities)
+        self.upper_bound = np.max(self.probabilities)
+        self.best_arm = np.argmax(self.probabilities)
 
 
 class KArmedBanditSmooth:
@@ -115,6 +129,8 @@ class KArmedBanditSmooth:
         self.K = K
         self.probabilities_set = probabilities_set if isinstance(probabilities_set,
                                             np.ndarray) else np.array(probabilities_set)
+
+        self._probabilities_set_or = self.probabilities_set.copy()
         self.probabilities = self.probabilities_set[0]
         self.trg_probabilities = self.probabilities_set[1]
         self.nb_sets = len(probabilities_set)
@@ -123,6 +139,7 @@ class KArmedBanditSmooth:
 
         self.chance_level = np.mean(self.probabilities)
         self.upper_bound = np.max(self.probabilities)
+        self.best_arm = np.argmax(self.probabilities)
 
         self.verbose = verbose
 
@@ -163,6 +180,7 @@ class KArmedBanditSmooth:
         self.probabilities += (self.trg_probabilities - self.probabilities) / self._tau
         self.chance_level = np.mean(self.probabilities)
         self.upper_bound = np.max(self.probabilities)
+        self.best_arm = np.argmax(self.probabilities)
 
         if self.verbose:
             logger.info("---renew")
@@ -177,6 +195,17 @@ class KArmedBanditSmooth:
             "chance": self.chance_level.tolist(),
             "upper_bound": self.upper_bound.tolist()
         }
+
+    def reset(self):
+
+        self.probabilities_set = self._probabilities_set_or
+        self.probabilities = self.probabilities_set[0]
+        self.trg_probabilities = self.probabilities_set[1]
+        self.counter = 0
+
+        self.chance_level = np.mean(self.probabilities)
+        self.upper_bound = np.max(self.probabilities)
+        self.best_arm = np.argmax(self.probabilities)
 
 
 
@@ -289,7 +318,7 @@ def trial(model: object, environment: KArmedBandit,
 
 
 def trial_multi_model(models: list, environment: KArmedBandit,
-              nb_trials: int, nb_rounds: int,
+                      nb_trials: int, nb_rounds: int, nb_reps: int=1,
                       verbose: bool=False) -> list:
 
     """
@@ -305,6 +334,8 @@ def trial_multi_model(models: list, environment: KArmedBandit,
         The number of trials
     nb_rounds : int 
         The number of rounds
+    nb_reps: int
+        The number of repetitions
     verbose : bool, optional
         Display information, by default False
 
@@ -320,69 +351,96 @@ def trial_multi_model(models: list, environment: KArmedBandit,
         m.reset()
         names += [m.__str__()]
 
-    print(names)
+    logger(f"%names: {names}")
 
     # record
-    reward_list = np.empty((len(models), nb_trials, nb_rounds))
+    K = environment.K
     chance_list = np.empty(nb_trials)
     upper_bound_list = np.empty(nb_trials)
+    best_arm_list = np.zeros((nb_trials, nb_rounds, K))
+
+    reward_list = np.empty((len(models), nb_reps, nb_trials, nb_rounds))
+    arm_list = np.zeros((len(models), nb_reps, nb_trials, nb_rounds, K))
+    score_list = np.zeros((len(models), nb_reps, nb_trials))
 
     #
     if verbose:
+        logger.info(f"%reps={nb_reps}")
         logger.info(f"%trials={nb_trials}")
         logger.info(f"%rounds={nb_rounds}")
         for m in models:
             logger.info(f"Model: {m}")
         logger.info(f"K-armed bandit: {environment}")
 
+
     # run
-    for trial_i in tqdm(range(nb_trials)):
+    for rep_i in tqdm(range(nb_reps), disable=not verbose or nb_reps < 2):
 
-        # renew the reward distribution
-        if trial_i > 0:
-            environment.update()
+        environment.reset()
 
-        # record
-        rewards = np.zeros((len(models), nb_rounds))
+        for trial_i in tqdm(range(nb_trials), disable=not verbose or nb_reps > 2):
 
-        for round_i in range(nb_rounds):
+            # renew the reward distribution
+            if trial_i > 0:
+                environment.update()
 
-            # select an arm
-            for i, m in enumerate(models):
+            # record
+            rewards = np.zeros((len(models), nb_rounds))
+            arms = np.zeros((len(models), nb_rounds, K))
 
-                k = m.select_arm()
+            for round_i in range(nb_rounds):
 
-                # sample the reward
-                reward = environment.sample(k=k)
+                # select an arm
+                for i, m in enumerate(models):
 
-                # update the model
-                m.update(k=k, reward=reward)
+                    k = m.select_arm()
 
-                # record
-                rewards[i, round_i] = reward
+                    # sample the reward
+                    reward = environment.sample(k=k)
+
+                    # update the model
+                    m.update(k=k, reward=reward)
+
+                    # record
+                    rewards[i, round_i] = reward
+                    arms[i, round_i, k] = 1
+
+            # ---------------------------- #
+
+            if rep_i == 0:
+                chance_list[trial_i] = environment.chance_level
+                upper_bound_list[trial_i] = environment.upper_bound
+                best_arm_list[trial_i, :, environment.best_arm] = 1.
+
+            # scores = rewards.mean(axis=1)
+            # average score for the 10% of a trial
+            score_list[:, rep_i, trial_i] = rewards[:, -int(nb_rounds/10):].mean(axis=1)
+            reward_list[:, rep_i, trial_i, :] = rewards
+            arm_list[:, rep_i, trial_i, :, :] = arms
 
         # ---------------------------- #
 
-        scores = rewards.mean(axis=1)
-        reward_list[:, trial_i, :] = rewards
-        chance_list[trial_i] = environment.chance_level
-        upper_bound_list[trial_i] = environment.upper_bound
-
-    # ---------------------------- #
-
-        if verbose:
+        if verbose and nb_reps < 2:
             logger.info("")
             logger.info(f"trial {trial_i}")
             logger.info(f">>> upper : {upper_bound_list[trial_i]:.3f}")
             logger.info(f">>> chance: {chance_list[trial_i]:.3f}")
             for i, name in enumerate(names):
-                logger.info(f">>> {name} : {scores[i]:.3f}")
+                logger.info(f">>> {name} : {score_list[i, rep_i].mean():.3f}")
+
+    # ---------------------------- #
+
+    # calculate averages over all simulations
+    score_list = score_list.mean(axis=2).mean(axis=1)
+    # reward_list = reward_list.mean(axis=1)
 
     stats = {
         "reward_list": reward_list,
         "chance_list": chance_list,
         "upper_bound_list": upper_bound_list,
-        "scores": scores,
+        "best_arm_list": best_arm_list,
+        "arm_list": arm_list,
+        "scores": score_list,
         "names": names
     }
 

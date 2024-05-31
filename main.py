@@ -68,23 +68,28 @@ def main_multiple(args):
     K = args.K
     nb_rounds = args.rounds
     nb_trials = args.trials
+    nb_reps = args.reps
     verbose = args.verbose
 
     # define proababilities set
     probabilities_set = []
     for i in range(nb_trials):
         p = np.around(np.random.uniform(0.05, 0.3, K), 2)
-        # p[i%K] = 0.9
-        p[np.random.randint(0, K)] = 0.9
+        p[i%K] = 0.9
+        # p[np.random.randint(0, K)] = 0.9
         probabilities_set += [p.tolist()]
 
     probabilities_set = np.array(probabilities_set)
 
     # define the environment
-    env = envs.KArmedBanditSmooth(K=K,
+    env = envs.KArmedBandit(K=K,
                             probabilities_set=probabilities_set,
-                            verbose=False,
-                            tau=5)
+                            verbose=False)
+
+    # env = envs.KArmedBanditSmooth(K=K,
+    #                         probabilities_set=probabilities_set,
+    #                         verbose=False,
+    #                         tau=5)
 
     # define models
     dur_pre = 2000
@@ -104,6 +109,7 @@ def main_multiple(args):
                          environment=env,
                          nb_trials=nb_trials,
                          nb_rounds=nb_rounds,
+                         nb_reps=nb_reps,
                          verbose=verbose)
 
     utils.plot_multiple(results)
@@ -123,6 +129,9 @@ if __name__ == "__main__":
                         default=50)
     parser.add_argument('--trials', type=int,
                         help='number of trials',
+                        default=1)
+    parser.add_argument('--reps', type=int,
+                        help='number of repetitions',
                         default=1)
     parser.add_argument('--K', type=int,
                         help='number of arms of the bandit',
