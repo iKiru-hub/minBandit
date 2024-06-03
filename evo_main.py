@@ -50,7 +50,8 @@ class Env:
     """
 
     def __init__(self, protocol: dict,
-                 probabilities_set: list, verbose: bool):
+                 probabilities_set: list, verbose: bool,
+                 env_type: str="simple"):
 
         """
         The game class.
@@ -65,6 +66,10 @@ class Env:
             The set of probabilities for each round.
         verbose : bool
             Whether to print information.
+        env_type: str
+            type of kbandit environment, options are
+            `simple` or `smooth`.
+            Default `simple`.
         """
 
         #
@@ -72,6 +77,7 @@ class Env:
         self.protocol = protocol
         self.probabilities_set = probabilities_set
         self.verbose = verbose
+        self.env_type = env_type
 
         self.K = protocol["K"]
         self.tau = protocol["tau"]
@@ -101,15 +107,16 @@ class Env:
 
         ### environment ###
         # environment & game
-        env = envs.KArmedBandit(K=self.K,
-                                probabilities_set=self.probabilities_set,
-                                verbose=False)
-
-        # env = envs.KArmedBanditSmooth(
-        #                 K=self.K,
-        #                 probabilities_set=self.probabilities_set,
-        #                 verbose=False,
-        #                 tau=self.tau)
+        if self.env_type == "simple":
+            env = envs.KArmedBandit(K=self.K,
+                                    probabilities_set=self.probabilities_set,
+                                    verbose=False)
+        else:
+            env = envs.KArmedBanditSmooth(
+                             K=self.K,
+                             probabilities_set=self.probabilities_set,
+                             verbose=False,
+                             tau=self.tau)
 
         ### model ###
         params = agent.get_genome()
@@ -210,6 +217,7 @@ if __name__ == "__main__" :
     me.FORCE_POOL = True
 
     # trial settings
+    env_type = "simple"
     K = config_model["bandits"]["K"]
     nb_trials = config_model["trial"]["nb_trials"]
     nb_rounds = config_model["trial"]["nb_rounds"]
@@ -238,7 +246,8 @@ if __name__ == "__main__" :
     # environment & game
     env = Env(protocol=protocol,
               probabilities_set=probabilities_set,
-              verbose=verbose)
+              verbose=verbose,
+              env_type=env_type)
 
     logger(f"%env : {env}")
 
@@ -318,7 +327,7 @@ if __name__ == "__main__" :
         "game": env.__repr__(),
         "evolved": [key for key in PARAMETERS.keys() if key not in FIXED_PARAMETERS.keys()],
         "data": "k-armed bandit",
-        "other": " "
+        "other": f"{env_type=}"
     }
 
     # ---| Run |---
