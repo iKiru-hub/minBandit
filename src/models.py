@@ -35,7 +35,8 @@ class Model(MBsolver):
                  dur_pre: int=100, dur_post: int=100,
                  alpha: float=0., beta: float=1.,
                  mu: float=0., sigma: float=1.,
-                 r: float=1., w_max: float=5.):
+                 r: float=1., w_max: float=5.,
+                 value_function: str="gaussian"):
 
         super().__init__(K)
 
@@ -44,6 +45,7 @@ class Model(MBsolver):
         self._lr = lr
         self._tau = tau
         self._w_max = w_max
+        self._value_function_name = value_function
 
         # roll parameters
         self._dur_pre = dur_pre
@@ -93,11 +95,13 @@ class Model(MBsolver):
 
     def _value_function(self):
 
-        return self._W
+        if value_function == "gaussian":
 
-        # return gaussian_sigmoid(x=self._W, alpha=self._alpha,
-        #                         beta=self._beta, mu=self._mu,
-        #                         sigma=self._sigma, r=self._r)
+            return gaussian_sigmoid(x=self._W, alpha=self._alpha,
+                                    beta=self._beta, mu=self._mu,
+                                    sigma=self._sigma, r=self._r)
+        
+        return self._W
 
     def _step(self, Iext: np.ndarray=0):
 
@@ -156,7 +160,7 @@ class Model(MBsolver):
         Get the values of the model
         """
 
-        return self._W.flatten().copy()
+        return self._value_function().flatten().copy()
 
     def reset(self):
 

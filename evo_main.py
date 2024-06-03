@@ -17,7 +17,6 @@ logger = setup_logger(__name__)
 
 
 
-
 """ Env """
 
 
@@ -133,8 +132,6 @@ class Env:
         return calc_fitness(stats=stats)
 
 
-
-
 """
 GENOME SETUP
 ------------
@@ -155,6 +152,7 @@ FIXED_PARAMETERS = {
     # 'mu': 0.,
     # 'sigma': 1.,
     # 'r': 0.5,
+    'value_function': "gaussian",
 }
 
 PARAMETERS = {
@@ -169,6 +167,7 @@ PARAMETERS = {
     'tau': lambda: round(random.uniform(1, 100), 1),
     'dur_pre': lambda: random.randint(100, 3000),
     'dur_post': lambda: random.randint(100, 3000),
+    'value_function': lambda: random.choice(["gaussian", "none"]),
 }
 
 
