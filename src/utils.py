@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator,FormatStrFormatter,MaxNLocator
 import os, logging, coloredlogs, json, pprint
 
+CACHE_PATH = r"/Users/daniekru/Research/lab/minBandit/src/cache"
 
 
 DEBUG = False
@@ -83,6 +84,38 @@ def tqdm_enumerate(iter, **tqdm_kwargs):
     for y in tqdm(iter, **tqdm_kwargs):
         yield i, y
         i += 1
+
+
+def load_model(model_name: str=None):
+
+    """
+    load a model from the models folder
+
+    Parameters
+    ----------
+    model_name : str
+        name of the model
+
+    Returns
+    -------
+    model : object
+        model object
+    """
+
+    if model_name is None:
+        files = {i: f for i, f in enumerate(os.listdir(CACHE_PATH))}
+        pprint.pprint(files)
+
+        model_name = files[int(input("Enter the model number: "))]
+
+    if model_name not in os.listdir(CACHE_PATH):
+        raise ValueError(f"Model {model_name} not found in {CACHE_PATH}")
+
+    with open(os.path.join(CACHE_PATH, model_name), "r") as f:
+        model_params = json.load(f)["genome"]
+
+    return model_params
+
 
 
 """ visualization """

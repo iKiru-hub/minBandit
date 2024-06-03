@@ -92,15 +92,30 @@ def main_multiple(args):
                             tau=40)
 
     # define models
-    dur_pre = 2000
-    dur_post = 2000
+    if args.load:
+        params = utils.load_model()
+        params["K"] = K
+
+    else:
+        params = {
+            "K": K,
+            "dur_pre": 2000,
+            "dur_post": 2000,
+            "lr": 0.1,
+            "alpha": 0.,
+            "beta": 1.,
+            "mu": 0.,
+            "sigma": 1.,
+            "r": 1.,
+            "w_max": 5.,
+            "value_function": "none"
+        }
+
     models = [
         mm.ThompsonSampling(K=K),
         mm.EpsilonGreedy(K=K, epsilon=0.1),
         mm.UCB1(K=K),
-        mm.Model(K=K, dur_pre=dur_pre,
-                 dur_post=dur_post,
-                 lr=0.1)
+        mm.Model(**params)
     ]
 
     # run
@@ -142,6 +157,9 @@ if __name__ == "__main__":
         '`epsilon`; if nothing specified or wrong name, ' + \
         'the default is the custom model',
                         default="model")
+    parser.add_argument('--load', action='store_true',
+                        help='load saved model',
+                        default=False)
 
     args = parser.parse_args()
 
