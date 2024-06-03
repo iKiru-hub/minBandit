@@ -95,7 +95,7 @@ class Model(MBsolver):
 
     def _value_function(self):
 
-        if value_function == "gaussian":
+        if self._value_function_name == "gaussian":
 
             return gaussian_sigmoid(x=self._W, alpha=self._alpha,
                                     beta=self._beta, mu=self._mu,
@@ -413,11 +413,19 @@ def max_normalize(x: np.ndarray) -> np.ndarray:
     return x / np.max(x)
 
 
-@jit(no_python=True)
+@jit#(no_python=True)
 def gaussian_sigmoid(x: np.ndarray, alpha: float, beta: float,
                      mu: float, sigma: float, r: float) -> np.ndarray:
 
     return r / (1 + np.exp(-beta*(x - alpha))) + \
         (1 - r) * np.exp(- ((x - mu)**2) / sigma)
+
+
+# @jit(nopython=True)
+# def mlp(x: float, y: np.ndarray, param1: float, param2: float,
+#         param3: float, param4: float, param5: float, param6: float) -> float:
+
+#     return ()
+
 
 

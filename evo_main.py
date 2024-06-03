@@ -202,6 +202,8 @@ if __name__ == "__main__" :
                         default=-1)
     parser.add_argument('--nosave', action='store_true', help='dont save',
                         default=True)
+    parser.add_argument('--noplot', action='store_true', help='plot evolution results',
+                        default=False)
 
     args = parser.parse_args()
 
@@ -300,13 +302,16 @@ if __name__ == "__main__" :
 
     title_text = f"{protocol['nb_reps']}:{protocol['nb_trials']}:{protocol['nb_rounds']} "
 
-    visualizer = me.Visualizer(settings=settings, online=True,
-                               target=None,
-                               k_average=10,
-                               fitness_size=len(fitness_weights),
-                               ylims=[0., 1.1],
-                               title_text=title_text,
-                               path=path)
+    if not args.noplot:
+        visualizer = me.Visualizer(settings=settings, online=True,
+                                   target=None,
+                                   k_average=10,
+                                   fitness_size=len(fitness_weights),
+                                   ylims=[0., 1.1],
+                                   title_text=title_text,
+                                   path=path)
+    else:
+        visualizer = None
 
     """ Simulation initialization """
 
