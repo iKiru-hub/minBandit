@@ -32,7 +32,10 @@ class MBsolver(ABC):
 class Model(MBsolver):
 
     def __init__(self, K: int, lr: float=0.01, tau: float=10.,
-                 dur_pre: int=100, dur_post: int=100):
+                 dur_pre: int=100, dur_post: int=100,
+                 alpha: float=0., beta: float=1.,
+                 mu: float=0., sigma: float=1.,
+                 r: float=1., w_max: float=5.):
 
         super().__init__(K)
 
@@ -40,6 +43,7 @@ class Model(MBsolver):
         self._options = np.arange(K).astype(int)
         self._lr = lr
         self._tau = tau
+        self._w_max = w_max
 
         # roll parameters
         self._dur_pre = dur_pre
@@ -51,6 +55,13 @@ class Model(MBsolver):
         self._W = np.zeros((K, 1))
         self._choice = None
         self.is_random = False
+
+        # value function
+        self._alpha = alpha
+        self._beta = beta
+        self._mu = mu
+        self._sigma = sigma
+        self._r = r
 
     def __str__(self):
         return "`Model`"
@@ -80,6 +91,14 @@ class Model(MBsolver):
 
         return self._choice
 
+    def _value_function(self):
+
+        return self._W
+
+        # return gaussian_sigmoid(x=self._W, alpha=self._alpha,
+        #                         beta=self._beta, mu=self._mu,
+        #                         sigma=self._sigma, r=self._r)
+
     def _step(self, Iext: np.ndarray=0):
 
         """
@@ -93,7 +112,7 @@ class Model(MBsolver):
 
         # update
         self._u += (- self._u + self._v + Iext) / self._tau
-        self._v += (- self._v + self._W * self._u) / self._tau
+        self._v += (- self._v + self._value_function() * self._u) / self._tau
 
     def select_arm(self) -> int:
 
@@ -128,7 +147,8 @@ class Model(MBsolver):
             the reward received by the model
         """
 
-        self._W[self._choice] += self._lr * (5*reward - self._W[self._choice])
+        self._W[self._choice] += self._lr * (self._w_max * \
+            reward - self._W[self._choice])
 
     def get_values(self) -> np.ndarray:
 
@@ -143,7 +163,6 @@ class Model(MBsolver):
         self._u = np.zeros((self._K, 1))
         self._v = np.zeros((self._K, 1))
         self._choice = None
-
 
 
 
@@ -389,5 +408,12 @@ def max_normalize(x: np.ndarray) -> np.ndarray:
 
     return x / np.max(x)
 
+
+@jit(no_python=True)
+def gaussian_sigmoid(x: np.ndarray, alpha: float, beta: float,
+                     mu: float, sigma: float, r: float) -> np.ndarray:
+
+    return r / (1 + np.exp(-beta*(x - alpha))) + \
+        (1 - r) * np.exp(- ((x - mu)**2) / sigma)
 
 

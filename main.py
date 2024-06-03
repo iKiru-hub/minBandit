@@ -82,14 +82,14 @@ def main_multiple(args):
     probabilities_set = np.array(probabilities_set)
 
     # define the environment
-    env = envs.KArmedBandit(K=K,
-                            probabilities_set=probabilities_set,
-                            verbose=False)
-
-    # env = envs.KArmedBanditSmooth(K=K,
+    # env = envs.KArmedBandit(K=K,
     #                         probabilities_set=probabilities_set,
-    #                         verbose=False,
-    #                         tau=5)
+    #                         verbose=False)
+
+    env = envs.KArmedBanditSmooth(K=K,
+                            probabilities_set=probabilities_set,
+                            verbose=False,
+                            tau=40)
 
     # define models
     dur_pre = 2000
@@ -112,7 +112,8 @@ def main_multiple(args):
                          nb_reps=nb_reps,
                          verbose=verbose)
 
-    utils.plot_multiple(results)
+    # utils.plot_multiple_regret(results, window=10)
+    utils.plot_multiple_reward(results, window=20)
 
 
 

@@ -74,7 +74,8 @@ class KArmedBandit:
         """
 
         self.counter += 1
-        self.probabilities = self.probabilities_set[self.counter % self.nb_sets]
+        self.probabilities = self.probabilities_set[self.counter % \
+            self.nb_sets]
         self.chance_level = np.mean(self.probabilities)
         self.upper_bound = np.max(self.probabilities)
         self.best_arm = np.argmax(self.probabilities)
@@ -127,8 +128,9 @@ class KArmedBanditSmooth:
         """
 
         self.K = K
-        self.probabilities_set = probabilities_set if isinstance(probabilities_set,
-                                            np.ndarray) else np.array(probabilities_set)
+        self.probabilities_set = probabilities_set if isinstance(
+            probabilities_set, np.ndarray) else np.array(
+                    probabilities_set)
 
         self._probabilities_set_or = self.probabilities_set.copy()
         self.probabilities = self.probabilities_set[0]
@@ -177,7 +179,8 @@ class KArmedBanditSmooth:
             # print(f"%trg: {np.around(self.trg_probabilities, 2)}")
             self.counter += 1
 
-        self.probabilities += (self.trg_probabilities - self.probabilities) / self._tau
+        self.probabilities += (self.trg_probabilities - \
+            self.probabilities) / self._tau
         self.chance_level = np.mean(self.probabilities)
         self.upper_bound = np.max(self.probabilities)
         self.best_arm = np.argmax(self.probabilities)
@@ -351,17 +354,21 @@ def trial_multi_model(models: list, environment: KArmedBandit,
         m.reset()
         names += [m.__str__()]
 
-    logger(f"%names: {names}")
+    if verbose:
+        logger(f"%names: {names}")
 
     # record
     K = environment.K
-    chance_list = np.empty(nb_trials)
-    upper_bound_list = np.empty(nb_trials)
+    # chance_list = np.empty(nb_trials)
+    # upper_bound_list = np.empty(nb_trials)
+    chance_list = np.zeros((nb_trials, nb_rounds))
+    upper_bound_list = np.zeros((nb_trials, nb_rounds))
     best_arm_list = np.zeros((nb_trials, nb_rounds, K))
 
     reward_list = np.empty((len(models), nb_reps, nb_trials, nb_rounds))
     arm_list = np.zeros((len(models), nb_reps, nb_trials, nb_rounds, K))
     score_list = np.zeros((len(models), nb_reps, nb_trials))
+    mean_score_list = np.zeros((len(models), nb_reps, nb_trials))
 
     #
     if verbose:
@@ -372,21 +379,17 @@ def trial_multi_model(models: list, environment: KArmedBandit,
             logger.info(f"Model: {m}")
         logger.info(f"K-armed bandit: {environment}")
 
-
     # run
     for rep_i in tqdm(range(nb_reps), disable=not verbose or nb_reps < 2):
 
         environment.reset()
 
-        for trial_i in tqdm(range(nb_trials), disable=not verbose or nb_reps > 2):
+        for trial_i in tqdm(range(nb_trials),
+                            disable=not verbose or nb_reps > 2):
 
             # renew the reward distribution
             if trial_i > 0:
                 environment.update()
-
-            # record
-            rewards = np.zeros((len(models), nb_rounds))
-            arms = np.zeros((len(models), nb_rounds, K))
 
             for round_i in range(nb_rounds):
 
@@ -402,21 +405,18 @@ def trial_multi_model(models: list, environment: KArmedBandit,
                     m.update(k=k, reward=reward)
 
                     # record
-                    rewards[i, round_i] = reward
-                    arms[i, round_i, k] = 1
+                    arm_list[i, rep_i, trial_i, round_i, k] = 1
+                    reward_list[i, rep_i, trial_i, round_i] = reward
+
+                    if rep_i == 0:
+                        chance_list[trial_i, round_i] = environment.chance_level
+                        upper_bound_list[trial_i, round_i] = environment.upper_bound
+                        best_arm_list[trial_i, round_i, environment.best_arm] = 1.
 
             # ---------------------------- #
 
-            if rep_i == 0:
-                chance_list[trial_i] = environment.chance_level
-                upper_bound_list[trial_i] = environment.upper_bound
-                best_arm_list[trial_i, :, environment.best_arm] = 1.
-
-            # scores = rewards.mean(axis=1)
-            # average score for the 10% of a trial
-            score_list[:, rep_i, trial_i] = rewards[:, -int(nb_rounds/10):].mean(axis=1)
-            reward_list[:, rep_i, trial_i, :] = rewards
-            arm_list[:, rep_i, trial_i, :, :] = arms
+            score_list[:, rep_i, trial_i] = reward_list[:, rep_i, trial_i, -int(nb_rounds/10):].mean(axis=1)
+            mean_score_list[:, rep_i, trial_i] = reward_list[:, rep_i, trial_i].mean(axis=1)
 
         # ---------------------------- #
 
@@ -432,7 +432,6 @@ def trial_multi_model(models: list, environment: KArmedBandit,
 
     # calculate averages over all simulations
     score_list = score_list.mean(axis=2).mean(axis=1)
-    # reward_list = reward_list.mean(axis=1)
 
     stats = {
         "reward_list": reward_list,
@@ -441,6 +440,7 @@ def trial_multi_model(models: list, environment: KArmedBandit,
         "best_arm_list": best_arm_list,
         "arm_list": arm_list,
         "scores": score_list,
+        "mean_scores": mean_score_list,
         "names": names
     }
 
@@ -448,7 +448,6 @@ def trial_multi_model(models: list, environment: KArmedBandit,
 
 
 """ other functions """
-
 
 
 @jit(nopython=True)
@@ -498,8 +497,10 @@ if __name__ == "__main__":
     probabilities_set = np.random.uniform(0, 1, size=(Np, K)).tolist()
 
     # mab = KArmedBandit(K=K, probabilities_set=probabilities_set, verbose=False)
-    mab = KArmedBanditSmooth(K=K, probabilities_set=probabilities_set, tau=10,
-                              verbose=False)
+    mab = KArmedBanditSmooth(K=K,
+                             probabilities_set=probabilities_set,
+                             tau=100,
+                             verbose=False)
 
     T = 200
     rec = np.zeros((T, K))
