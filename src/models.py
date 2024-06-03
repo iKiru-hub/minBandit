@@ -421,11 +421,21 @@ def gaussian_sigmoid(x: np.ndarray, alpha: float, beta: float,
         (1 - r) * np.exp(- ((x - mu)**2) / sigma)
 
 
-# @jit(nopython=True)
-# def mlp(x: float, y: np.ndarray, param1: float, param2: float,
-#         param3: float, param4: float, param5: float, param6: float) -> float:
+@jit(nopython=True)
+def sigmoid(x: np.ndarray, alpha: float=0., beta: float=1.) -> np.ndarray:
 
-#     return ()
+    return 1 / (1 + np.exp(-beta*(x - alpha)))
+
+@jit(nopython=True)
+def mlp(x: float, y: np.ndarray, param1: float, param2: float,
+        param3: float, param4: float, param5: float, param6: float,
+        param7: float, param8: float) -> float:
+
+    return param7 * sigmoid(
+        param1 * x + param2 * y + param3,
+    ) + param8 * sigmoid(
+        param4 * x + param5 * y + param6
+    )
 
 
 

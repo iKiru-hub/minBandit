@@ -201,7 +201,7 @@ if __name__ == "__main__" :
                         help='max duration of the simulation',
                         default=-1)
     parser.add_argument('--nosave', action='store_true', help='dont save',
-                        default=True)
+                        default=False)
     parser.add_argument('--noplot', action='store_true', help='plot evolution results',
                         default=False)
 
@@ -250,8 +250,6 @@ if __name__ == "__main__" :
               verbose=verbose,
               env_type=env_type)
 
-    logger(f"%env : {env}")
-
 
     """ Evolution initialization """
 
@@ -284,7 +282,8 @@ if __name__ == "__main__" :
                               model=model,
                               strategy=strategy,
                               FIXED_PARAMETERS=FIXED_PARAMETERS.copy(),
-                              fitness_weights=fitness_weights)
+                              fitness_weights=fitness_weights,
+                              verbose=verbose)
 
     # ---| Run |---
     settings = {
@@ -317,6 +316,10 @@ if __name__ == "__main__" :
 
     # ---| save |---
     save = not args.nosave
+    if verbose:
+        logger(f"%env : {env}")
+        logger.info(f"%save: {save}")
+
     # save = True
 
     # get number of files in the cache
@@ -339,7 +342,7 @@ if __name__ == "__main__" :
     best_ind = me.main(toolbox=toolbox, settings=settings,
                        info=info, save=save, visualizer=visualizer,
                        filename=filename,
-                       verbose=True,
+                       verbose=verbose,
                        max_duration=max_duration,
                        save_figure=save,
                        path=path)
