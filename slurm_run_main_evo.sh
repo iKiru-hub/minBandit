@@ -1,14 +1,13 @@
 #!/bin/bash
-#sbatch --job-name="hsnn"
-#sbatch -p milanq #ipuq #milanq #armq #fpgaq #milanq # partition (queue)
-#sbatch -n 1 # number of nodes
-#sbatch --ntasks=1
-#sbatch --cpus-per-task=64
-##sbatch --mem-per-cpu=1gb
-#sbatch --time=0-03:00:00
-#sbatch -o /home/daniekru/slurm.%j.%n.out # stdout
-#sbatch -e /home/daniekru/slurm.%j.%n.err # stderr
-
+#SBATCH --job-name="mkb"
+#SBATCH -p milanq #armq #milanq #fpgaq #milanq # partition (queue)
+#SBATCH -N 1 # number of nodes
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=32
+##SBATCH --mem-per-cpu=1GB
+#SBATCH --time=0-10:00
+#SBATCH -o /home/daniekru/slurm.column.%j.%N.out # STDOUT
+#SBATCH -e /home/daniekru/slurm.column.%j.%N.err # STDERR
 
 . /home/daniekru/codebase/myenvs/ecl1/bin/activate
 echo "ecl1 activated"
@@ -16,7 +15,7 @@ echo "ecl1 activated"
 cd ~/lab/minBandit
 echo "$(pwd)"
 
-srun python3 evo_main.py
+srun python3 evo_main.py --verbose
 echo "finished"
 
 
