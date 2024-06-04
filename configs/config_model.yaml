@@ -5,7 +5,7 @@ seed: 1337
 trial:
     nb_trials: 3
     nb_rounds: 150
-    nb_reps: 5
+    nb_reps: 20
 
 # bandit settings
 bandits:
