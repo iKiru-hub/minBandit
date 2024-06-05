@@ -86,7 +86,7 @@ class Env:
 
     def __repr__(self):
 
-        return f"Env({self.nb_reps}:{self.nb_trials}:{self.nb_rounds}, K={self.K})"
+        return f"Env({self.nb_reps}:{self.nb_trials}:{self.nb_rounds}, K={self.K}, env_type={self.env_type})"
 
     def run(self, agent: object) -> float:
 
