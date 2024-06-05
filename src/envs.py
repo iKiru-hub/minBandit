@@ -174,7 +174,7 @@ class KArmedBanditSmooth:
         """
 
         # check if the target distribution has been reached
-        if np.abs(self.probabilities - self.trg_probabilities).sum() < 0.001:
+        if np.abs(self.probabilities - self.trg_probabilities).sum() < 0.01:
             self.trg_probabilities = self.probabilities_set[self.counter % self.nb_sets]
             # print(f"%trg: {np.around(self.trg_probabilities, 2)}")
             self.counter += 1

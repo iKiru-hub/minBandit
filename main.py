@@ -82,14 +82,18 @@ def main_multiple(args):
     probabilities_set = np.array(probabilities_set)
 
     # define the environment
-    # env = envs.KArmedBandit(K=K,
-    #                         probabilities_set=probabilities_set,
-    #                         verbose=False)
+    if args.env == "simple":
+        env = envs.KArmedBandit(K=K,
+                                probabilities_set=probabilities_set,
+                                verbose=False)
+    else:
+        env = envs.KArmedBanditSmooth(K=K,
+                                probabilities_set=probabilities_set,
+                                verbose=False,
+                                tau=40)
 
-    env = envs.KArmedBanditSmooth(K=K,
-                            probabilities_set=probabilities_set,
-                            verbose=False,
-                            tau=40)
+    if verbose:
+        logger.info(f"%env: {env}")
 
     # define models
     if args.load:
@@ -128,7 +132,9 @@ def main_multiple(args):
                          verbose=verbose)
 
     # utils.plot_multiple_regret(results, window=10)
-    utils.plot_multiple_reward(results, window=20)
+    if args.plot:
+        utils.plot_multiple_reward(results, window=20)
+
 
 
 
@@ -160,6 +166,12 @@ if __name__ == "__main__":
     parser.add_argument('--load', action='store_true',
                         help='load saved model',
                         default=False)
+    parser.add_argument('--plot', action='store_true',
+                        help='plot at the end of the simulation',
+                        default=False)
+    parser.add_argument('--env', type=str,
+                        help='type of environment: `simple`, `smooth`',
+                        default="simple")
 
     args = parser.parse_args()
 

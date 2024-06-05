@@ -218,7 +218,7 @@ if __name__ == "__main__" :
     me.FORCE_POOL = True
 
     # trial settings
-    env_type = "simple"
+    env_type = "smooth"  # "simple" or "smooth"
     K = config_model["bandits"]["K"]
     nb_trials = config_model["trial"]["nb_trials"]
     nb_rounds = config_model["trial"]["nb_rounds"]

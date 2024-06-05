@@ -7,9 +7,13 @@ CACHE_PATH = r"/Users/daniekru/Research/lab/minBandit/src/cache"
 
 
 DEBUG = False
-plt.rcParams['pdf.fonttype'] = 42
-plt.rcParams['ps.fonttype'] = 42
-plt.rcParams['font.family'] = 'Arial'
+try:
+    plt.rcParams['pdf.fonttype'] = 42
+    plt.rcParams['ps.fonttype'] = 42
+    plt.rcParams['font.family'] = 'Arial'
+except:
+    import warnings
+    warnings.warn("Could not set font properties")
 
 # logger
 def setup_logger(name: str="MAIN", colored: bool=True) -> logging.Logger:
@@ -103,7 +107,11 @@ def load_model(model_name: str=None):
     """
 
     if model_name is None:
-        files = {i: f for i, f in enumerate(os.listdir(CACHE_PATH))}
+        files = []
+        for f in os.listdir(CACHE_PATH):
+            if f.endswith(".json"):
+                files.append(f)
+        files = {i: f for i, f in enumerate(files)}
         pprint.pprint(files)
 
         model_name = files[int(input("Enter the model number: "))]
@@ -112,9 +120,11 @@ def load_model(model_name: str=None):
         raise ValueError(f"Model {model_name} not found in {CACHE_PATH}")
 
     with open(os.path.join(CACHE_PATH, model_name), "r") as f:
-        model_params = json.load(f)["genome"]
+        model_params = json.load(f)
 
-    return model_params
+    logger(f"Model info: {model_params['info']}")
+
+    return model_params["genome"]
 
 
 
