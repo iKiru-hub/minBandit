@@ -162,12 +162,19 @@ PARAMETERS = {
     'sigma': lambda: round(random.uniform(0.01, 10), 1),
     'r': lambda: round(random.uniform(.0, 1.0), 2),
 
+    'alpha_lr': lambda: round(random.uniform(-5, 5), 1),
+    'beta_lr': lambda: round(random.uniform(0.1, 10), 1),
+    'mu_lr': lambda: round(random.uniform(-5, 5), 1),
+    'sigma_lr': lambda: round(random.uniform(0.01, 10), 1),
+    'r_lr': lambda: round(random.uniform(.0, 1.0), 2),
+
     'w_max': lambda: round(random.uniform(3, 4), 1),
     'lr': lambda: round(random.uniform(0.001, 0.1), 3),
     'tau': lambda: round(random.uniform(1, 100), 1),
     'dur_pre': lambda: random.randint(100, 3000),
     'dur_post': lambda: random.randint(100, 3000),
     'value_function': lambda: random.choice(["gaussian", "none"]),
+    'lr_function': lambda: random.choice(["gaussian", "none"]),
 }
 
 

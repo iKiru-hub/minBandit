@@ -111,8 +111,14 @@ def main_multiple(args):
             "mu": 0.,
             "sigma": 1.,
             "r": 1.,
+            "alpha_lr": 0.1,
+            "beta_lr": 0.1,
+            "mu_lr": 0.1,
+            "sigma_lr": 0.1,
+            "r_lr": 0.1,
             "w_max": 5.,
-            "value_function": "none"
+            "value_function": "gaussian",
+            "lr_function": "gaussian",
         }
 
     models = [

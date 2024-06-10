@@ -36,7 +36,11 @@ class Model(MBsolver):
                  alpha: float=0., beta: float=1.,
                  mu: float=0., sigma: float=1.,
                  r: float=1., w_max: float=5.,
-                 value_function: str="gaussian"):
+                 alpha_lr: float=0., beta_lr: float=1.,
+                 mu_lr: float=0., sigma_lr: float=1.,
+                 r_lr: float=1.,
+                 value_function: str="gaussian",
+                 lr_function: str="none"):
 
         super().__init__(K)
 
@@ -46,6 +50,9 @@ class Model(MBsolver):
         self._tau = tau
         self._w_max = w_max
         self._value_function_name = value_function
+        self._lr_function_name = lr_function
+        if self._lr_function_name == "gaussian":
+            self._lr = 1.
 
         # roll parameters
         self._dur_pre = dur_pre
@@ -64,6 +71,13 @@ class Model(MBsolver):
         self._mu = mu
         self._sigma = sigma
         self._r = r
+
+        # learning rate function
+        self._alpha_lr = alpha_lr
+        self._beta_lr = beta_lr
+        self._mu_lr = mu_lr
+        self._sigma_lr = sigma_lr
+        self._r_lr = r_lr
 
     def __str__(self):
         return "`Model`"
@@ -100,8 +114,18 @@ class Model(MBsolver):
             return gaussian_sigmoid(x=self._W, alpha=self._alpha,
                                     beta=self._beta, mu=self._mu,
                                     sigma=self._sigma, r=self._r)
-        
+
         return self._W
+
+    def _lr_function(self):
+
+        if self._lr_function_name == "gaussian":
+
+            return self._lr * gaussian_sigmoid(x=self._W, alpha=self._alpha_lr,
+                                               beta=self._beta_lr, mu=self._mu_lr,
+                                               sigma=self._sigma_lr, r=self._r_lr)
+
+        return self._lr
 
     def _step(self, Iext: np.ndarray=0):
 
@@ -151,15 +175,14 @@ class Model(MBsolver):
             the reward received by the model
         """
 
-        self._W[self._choice] += self._lr * (self._w_max * \
-            reward - self._W[self._choice])
+        self._W[self._choice] += self._lr_function()[self._choice] * \
+            (self._w_max * reward - self._W[self._choice])
 
     def get_values(self) -> np.ndarray:
 
         """
         Get the values of the model
         """
-
         return self._value_function().flatten().copy()
 
     def reset(self):
