@@ -46,13 +46,13 @@ class Model(MBsolver):
 
         # parameters
         self._options = np.arange(K).astype(int)
-        self._lr = lr
+        # self._lr = lr
         self._tau = tau
         self._w_max = w_max
         self._value_function_name = value_function
         self._lr_function_name = lr_function
-        if self._lr_function_name == "gaussian":
-            self._lr = np.ones(K) * lr
+        # if self._lr_function_name == "gaussian":
+        self._lr = np.ones(K) * lr
 
         # roll parameters
         self._dur_pre = dur_pre
@@ -121,9 +121,10 @@ class Model(MBsolver):
 
         if self._lr_function_name == "gaussian":
 
-            return self._lr * gaussian_sigmoid(x=self._W, alpha=self._alpha_lr,
+            dw = gaussian_sigmoid(x=self._W, alpha=self._alpha_lr,
                                                beta=self._beta_lr, mu=self._mu_lr,
-                                               sigma=self._sigma_lr, r=self._r_lr)
+                                               sigma=self._sigma_lr, r=self._r_lr).flatten()
+            return dw
 
         return self._lr
 
@@ -175,8 +176,23 @@ class Model(MBsolver):
             the reward received by the model
         """
 
-        self._W[self._choice] += self._lr_function()[self._choice] * \
-            (self._w_max * reward - self._W[self._choice])
+        try:
+            lr = self._lr_function()
+            # try:
+            #     print("lr: ", lr.shape, self._choice)
+            # except AttributeError:
+            #     print("lr: ", lr)
+
+            # if isinstance(lr, float):
+            #     print(f"float, {lr=}")
+
+            self._W[self._choice] += lr[self._choice] * \
+                (self._w_max * reward - self._W[self._choice])
+
+        except TypeError:
+            print(f"type error, {lr}, {self._choice=}")
+            # print(self._lr_function(), self._choice)
+            raise ValueError
 
     def get_values(self) -> np.ndarray:
 
