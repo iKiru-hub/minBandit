@@ -52,7 +52,7 @@ class Model(MBsolver):
         self._value_function_name = value_function
         self._lr_function_name = lr_function
         if self._lr_function_name == "gaussian":
-            self._lr = 1.
+            self._lr = np.ones(K) * lr
 
         # roll parameters
         self._dur_pre = dur_pre
