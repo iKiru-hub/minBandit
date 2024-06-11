@@ -86,6 +86,11 @@ def main_multiple(args):
         env = envs.KArmedBandit(K=K,
                                 probabilities_set=probabilities_set,
                                 verbose=False)
+    elif args.env == "smooth2":
+        env = envs.KArmedBanditSmoothII(K=K,
+                                verbose=False,
+                                tau=40,
+                                fix_p=0.7)
     else:
         env = envs.KArmedBanditSmooth(K=K,
                                 probabilities_set=probabilities_set,

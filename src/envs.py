@@ -176,7 +176,6 @@ class KArmedBanditSmooth:
         # check if the target distribution has been reached
         if np.abs(self.probabilities - self.trg_probabilities).sum() < 0.01:
             self.trg_probabilities = self.probabilities_set[self.counter % self.nb_sets]
-            # print(f"%trg: {np.around(self.trg_probabilities, 2)}")
             self.counter += 1
 
         self.probabilities += (self.trg_probabilities - \
@@ -204,6 +203,127 @@ class KArmedBanditSmooth:
         self.probabilities_set = self._probabilities_set_or
         self.probabilities = self.probabilities_set[0]
         self.trg_probabilities = self.probabilities_set[1]
+        self.counter = 0
+
+        self.chance_level = np.mean(self.probabilities)
+        self.upper_bound = np.max(self.probabilities)
+        self.best_arm = np.argmax(self.probabilities)
+
+
+class KArmedBanditSmoothII:
+
+    """
+    concept drift occuring smoothly but each time with a
+    random probability distribution
+    """
+
+    def __init__(self, K: int, tau: float=5., verbose: bool=False,
+                 fix_p: float=False, seed: int=None):
+
+        """
+        Parameters
+        ----------
+        K : int
+            The number of arms of the bandit.
+        tau : float
+            time constant of the distribution update
+        verbose : bool, optional.
+            Default False.
+        fix_p : float, optional.
+            Default False.
+        seed : int, optional.
+            Default None.
+        """
+
+        if seed is not None:
+            np.random.seed(seed)
+
+        self.K = K
+        self._fix_p = fix_p
+        self._tau = tau
+
+        self.probabilities = self._new_distribution()
+        self.trg_probabilities = self._new_distribution()
+        self.counter = 0
+
+        self.chance_level = np.mean(self.probabilities)
+        self.upper_bound = np.max(self.probabilities)
+        self.best_arm = np.argmax(self.probabilities)
+
+        self.verbose = verbose
+
+    def __repr__(self):
+
+        return f"KArmedBanditSmooth(K={self.K}, tau={self._tau}, fix_p={self._fix_p})"
+
+    def _new_distribution(self):
+
+        """
+        Generate a new distribution
+        """
+
+        if self._fix_p:
+            p = np.random.uniform(0, 0.3, size=self.K)
+            p[np.random.randint(0, self.K)] = 0.9
+        else:
+            p = np.random.uniform(0, 1, size=self.K)
+
+        p /= p.sum()
+        return p
+
+    def sample(self, k: int) -> int:
+
+        """
+        Sample the reward of the k-th arm
+
+        Parameters
+        ----------
+        k : int
+            The index of the arm
+
+        Returns
+        -------
+        int
+            The reward
+        """
+
+        return np.random.binomial(1, p=self.probabilities[k])
+
+    def update(self):
+
+        """
+        Renew the reward distribution
+        """
+
+        # check if the target distribution has been reached
+        if np.abs(self.probabilities - self.trg_probabilities).sum() < 0.01:
+            self.trg_probabilities = self._new_distribution()
+            self.counter += 1
+
+        self.probabilities += (self.trg_probabilities - \
+            self.probabilities) / self._tau
+        self.chance_level = np.mean(self.probabilities)
+        self.upper_bound = np.max(self.probabilities)
+        self.best_arm = np.argmax(self.probabilities)
+
+        if self.verbose:
+            logger.info("---renew")
+            logger.info(f"%probabilities: {self.probabilities}")
+            logger.info(f"%chance level: {self.chance_level:.3f}")
+            logger.info(f"%upper bound: {self.upper_bound:.3f}")
+
+    def get_info(self):
+
+        return {
+            "probabilities": self.probabilities.tolist(),
+            "chance": self.chance_level.tolist(),
+            "upper_bound": self.upper_bound.tolist()
+        }
+
+    def reset(self):
+
+        self.probabilities = self._new_distribution()
+        self.trg_probabilities = self._new_distribution()
         self.counter = 0
 
         self.chance_level = np.mean(self.probabilities)

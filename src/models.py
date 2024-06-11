@@ -101,7 +101,6 @@ class Model(MBsolver):
             self._choice = choice
             self.is_random = False
         else:
-            # print(f"Random choice, v={self._W[choice]}")
             self._choice = np.random.choice(self._options)
             self.is_random = True
 
@@ -121,10 +120,9 @@ class Model(MBsolver):
 
         if self._lr_function_name == "gaussian":
 
-            dw = gaussian_sigmoid(x=self._W, alpha=self._alpha_lr,
+            return gaussian_sigmoid(x=self._W, alpha=self._alpha_lr,
                                                beta=self._beta_lr, mu=self._mu_lr,
                                                sigma=self._sigma_lr, r=self._r_lr).flatten()
-            return dw
 
         return self._lr
 
@@ -176,23 +174,8 @@ class Model(MBsolver):
             the reward received by the model
         """
 
-        try:
-            lr = self._lr_function()
-            # try:
-            #     print("lr: ", lr.shape, self._choice)
-            # except AttributeError:
-            #     print("lr: ", lr)
-
-            # if isinstance(lr, float):
-            #     print(f"float, {lr=}")
-
-            self._W[self._choice] += lr[self._choice] * \
-                (self._w_max * reward - self._W[self._choice])
-
-        except TypeError:
-            print(f"type error, {lr}, {self._choice=}")
-            # print(self._lr_function(), self._choice)
-            raise ValueError
+        self._W[self._choice] += self._lr_function()[self._choice] * \
+            (self._w_max * reward - self._W[self._choice])
 
     def get_values(self) -> np.ndarray:
 
