@@ -448,6 +448,7 @@ def sigmoid(x: np.ndarray, alpha: float=0., beta: float=1.) -> np.ndarray:
 
     return 1 / (1 + np.exp(-beta*(x - alpha)))
 
+
 @jit(nopython=True)
 def mlp(x: float, y: np.ndarray, param1: float, param2: float,
         param3: float, param4: float, param5: float, param6: float,

@@ -111,7 +111,7 @@ class Env:
                                     probabilities_set=self.probabilities_set,
                                     verbose=False)
         elif self.env_type == "smooth2":
-            env = envs.KArmedBanditSmooth2(
+            env = envs.KArmedBanditSmoothII(
                              K=self.K,
                              verbose=False,
                              tau=self.tau,

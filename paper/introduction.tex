@@ -1,0 +1,55 @@
+
+\section{Introduction}
+\hfill \break
+\vspace {0.5cm}
+
+% brief introduction to decision making and the brain.
+The ability to make decisions for long-term reward maximization is a fundamental aspect of cognition. The brain has evolved a complex web of interconnected regions that work together to express this behaviour under the constraints of biology. The Pre-Frontal Cortex (PFC) is considered
+a fundamental high-level region for the attention and cognitive control, in particular the medial PFC \cite{millerIntegrativeTheoryPrefrontal2001a, sheynikhovichLongtermMemorySynaptic2023}.
+Further, the orbitofrontal cortex (OFC) is thought to be involved in motivation and representation of the expected value of the actions, either positive or negative  \cite{odohertyAbstractRewardPunishment2001, ricebergRewardStabilityDetermines2012, tremblayRelativeRewardPreference1999}, and action
+selection in uncertain environments \cite{elliottDissociableFunctionsMedial2000}.
+A relevant element for online executive functions is working memory, which is usually defined as the capacity to hold and manipulate information over short periods of time \cite{baddeleyWorkingMemory1974}; thus functionality 
+ has been associated with the dorsolateral PFC \cite{dardenneRolePrefrontalCortex2012, cohenTemporalDynamicsBrain1997, constantinidisPersistentSpikingActivity2018, zylberbergMechanismsPersistentActivity2017}.
+ However, it has also been suggested that the PFC is instead exercising a more top-down control over more sensory regions \cite{laraRolePrefrontalCortex2015}. This cortical projectons have been proposed to target also the basal ganglia, which are thought to rely on first-order reward statistics,
+ while the OFC is able to capture more complex contextual dynamics \cite{frankAnatomyDecisionStriatoorbitofrontal2006}.
+
+% introduction to the role of dopamine in decision making.
+An important ingredient for processing and selecting adaptive behaviours is the neuromodulation. In particular, the catecholamine dopamine has been shown to play a crucial role in learning and memory in numerous brain regions, and across animal species \cite{puigDopamineModulationLearning2014, duszkiewiczNoveltyDopaminergicModulation2019}.
+Important sources are the ventral tegmental area (VTA), locus coeruleus (LC), and the substantia nigra pars compacta (SNpc), which project consistently to the frontal lobe, the basal ganglia (BG), and the hippocampus \cite{gotoPrefrontalCorticalSynaptic2007, coolsChemistryAdaptiveMind2019, reynoldsDopaminedependentPlasticityCorticostriatal2002}.
+Dopamine has been long associated with reward prediction errors, for which dopaminergic neurons have been recorded tuning their phasic firing rate to signal either unexectedly positive, neutral, or negative feedback \cite{toblerAdaptiveCodingReward2005, schultzNeuralSubstratePrediction1997}.
+Further, several studies have highlighted the importance of dopamine in modulating processes in the PFC, such as multiple types of synaptic plasticity, balance of neuronal excitation and inhibition, updating and supporting representation in working memory, learning in operant conditioning protocols,
+and helping value encoding \cite{sheynikhovichLongtermMemorySynaptic2023, didomenicoDopaminergicModulationPrefrontal2023, lohaniDopamineModulationPrefrontal2019, dardenneRolePrefrontalCortex2012,
+roeschDopamineNeuronsEncode2007}.
+
+% bridge between decision making and the k-armed bandit problem.
+Regarding decision-making tasks, simple and well-studied ecological settings are foraging problems, \textit{e.g.} food search, where an agent is set to choose between different options to maximize the expected reward.
+Depending on context, animals have been shown to exhibit different strategies.
+In this regard, \textit{matching behaviour} is a well-known phenomenon in which the animal's choice behaviour is proportional to the reward probability of the options.
+This behaviour is thought to be the result of a trade-off between exploration and exploitation \cite{suttonReinforcementLearningProblem1998, nivEvolutionReinforcementLearning2002}, where the animal must balance the need to explore new alternatives with the need to exploit the best option found so far.
+Other options are \textit{input matching}, where social cues are considered, and \textit{probability matching}, where the animal's choice behaviour is proportional to the reward probability of the options
+\cite{bariDynamicDecisionMaking2021, houstonMatchingBehavioursRewards2021}. A popular formalization of such tasks in optimal decision theory is the "multi-armed bandit problem" (MABP) \cite{averbeckTheoryChoiceBandit2015}, where an agent is faced with a set of $K$ possible actions, each one associated with an unknown reward probability distribution.
+The agent has to learn to choose the action that maximizes the expected reward by repeatedly selecting actions and observing the rewards obtained.
+This problem has been extensively studied in the context of reinforcement learning, and it is considered a fundamental building block for more complex tasks \cite{suttonReinforcementLearningProblem1998}.
+
+% short overview of the literature
+Extensive research has been conducted on the topic, and several algorithms have been proposed, such as Thompson sampling, $\epsilon$-greedy, UCB1, VDBE, alongside convergence proofs for specific settings \cite{gittinsBanditProcessesDynamic1979, kaufmannThompsonSamplingAsymptotically2012, banMultifacetContextualBandits2021, tokicAdaptiveEGreedyExploration2010, tokicValueDifferenceBasedExploration2011}.
+
+% aim of the work
+In this work, we focus on a stochastic bandit problem, a more challenging variant of the original task endowed with \textit{concept drift}, where the reward distribution changes over time \cite{garivierUpperConfidenceBoundPolicies2008, besbesStochasticMultiArmedBanditProblem2014, cavenaghiNonStationaryMultiArmed2021}.
+We propose a biologically plausible model using spiking neural networks (SNN), obtaining good performance over an arbitrary number of bandit trials.
+Its architecture is composed of two parts. The first is a working memory component, whose scope is to maintain an active representation of the current stimulus, and it is inspired by the functionality of the dorsolateral PFC. Several previous studies have proposed bio-realistic models of WM
+\cite{barakWorkingModelsWorking2014}, including focus on synaptic facilitation \cite{barakNeuronalPopulationCoding2010}, random connectivity \cite{bouchacourtFlexibleModelWorking2019}, excitation-inhibition balance (E-I)
+\cite{brunelEffectsNeuromodulationCortical2001, vogelsGatingMultipleSignals2009}, and echo state networks \cite{pascanuNeurodynamicalModelWorking2011, fetteShortTermMemory2005}. Here in particular, we used a three-population SNN exploiting the E-I balance to maintain the stimulus trace, similarly to
+\cite{chenSpikingNeuralNetwork2023}.
+The second component is a one-layer hybrid network, and it is where a pre-defined architectural policy assign a subjective value to the available options \textit{i.e.} the bandits.
+This component is modeled after the interaction between the OFC and the basal ganglia, in particular the striatum
+\cite{bariDynamicDecisionMaking2021, frankAnatomyDecisionStriatoorbitofrontal2006}, given role of the frontal lobe in reversal learning \cite{bartoloPrefrontalCortexPredicts2020},
+Various network models of the PFC and BG for decision-making have been proposed, centered on the role of dopamine in the basal ganglia \cite{bastonBiologicallyInspiredComputational2015}, spike-time dependent plasticity (STPD) \cite{kannanUnsupervisedSpikingNeural2023}, cortico-striatal interaction
+\cite{frankInteractionsFrontalCortex2001}, and task switching processes \cite{zhaoBrainInspiredDecisionMakingSpiking2018, herdNeuralNetworkModel2014}.
+
+Regarding our model, the novelty relies in two main elements. The first is the decision making process itself, implemented as a dynamic population interaction between the neural traces active in working memory and the values represented in the hybrid network, similarly to bump attractor networks for
+perceptual computations \cite{carrollEncodingCertaintyBump2014, esnaola-acebesBumpAttractorDynamics2021}.
+The second is learning, which is applied to the hybrid network, and it is based on a neuromodulated Hebbian-like synaptic plasticity rule with special weight-dependent kernels for long-term potentiation (LTP) and long-term depression (LTD).
+This choice is motivated by the asymmetry of the dopamine signal in supporting LTP or LTD \cite{schultzNeuralSubstratePrediction1997, toblerAdaptiveCodingReward2005, reynoldsDopaminedependentPlasticityCorticostriatal2002, madadiaslDopaminergicModulationSynaptic2019}.
+
+
