@@ -10,5 +10,5 @@ trial:
 # bandit settings
 bandits:
     K: 10
-    tau: 40
+    tau: 100
 

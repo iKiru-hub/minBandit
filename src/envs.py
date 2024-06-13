@@ -617,12 +617,16 @@ if __name__ == "__main__":
     probabilities_set = np.random.uniform(0, 1, size=(Np, K)).tolist()
 
     # mab = KArmedBandit(K=K, probabilities_set=probabilities_set, verbose=False)
-    mab = KArmedBanditSmooth(K=K,
-                             probabilities_set=probabilities_set,
-                             tau=100,
+    # mab = KArmedBanditSmooth(K=K,
+    #                          probabilities_set=probabilities_set,
+    #                          tau=100,
+    #                          verbose=False)
+
+    mab = KArmedBanditSmoothII(K=K,
+                             tau=80,
                              verbose=False)
 
-    T = 200
+    T = 1000
     rec = np.zeros((T, K))
     upp = np.zeros(T)
     for t in range(T):

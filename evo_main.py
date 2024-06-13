@@ -110,6 +110,12 @@ class Env:
             env = envs.KArmedBandit(K=self.K,
                                     probabilities_set=self.probabilities_set,
                                     verbose=False)
+        elif self.env_type == "smooth2":
+            env = envs.KArmedBanditSmooth2(
+                             K=self.K,
+                             verbose=False,
+                             tau=self.tau,
+                             fix_p=0.7)
         else:
             env = envs.KArmedBanditSmooth(
                              K=self.K,
