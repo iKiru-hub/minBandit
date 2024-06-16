@@ -124,18 +124,38 @@ class Env:
                              tau=self.tau)
 
         ### model ###
-        params = agent.get_genome()
-        params['K'] = self.K
-        model = mm.Model(**params)
+        # params = agent.get_genome()
+        # params['K'] = self.K
+        # model = mm.Model(**params)
 
         ### fit ###
-        stats = envs.trial_multi_model(models=[model],
-                                       environment=env,
-                                       nb_trials=self.nb_trials,
-                                       nb_rounds=self.nb_rounds,
-                                       nb_reps=self.nb_reps)
+        # stats = envs.trial_multi_model(models=[model],
+        #                                environment=env,
+        #                                nb_trials=self.nb_trials,
+        #                                nb_rounds=self.nb_rounds,
+        #                                nb_reps=self.nb_reps)
 
-        return calc_fitness(stats=stats)
+        # return calc_fitness(stats=stats)
+
+        # variant: multiple K
+        Ks = [5, 15, 40]
+
+        fitness = 0.
+        for K in Ks:
+            env.K = K
+            env.reset()
+            params = agent.get_genome()
+            params['K'] = K
+            model = mm.Model(**params)
+            stats = envs.trial_multi_model(models=[model],
+                                           environment=env,
+                                           nb_trials=self.nb_trials,
+                                           nb_rounds=self.nb_rounds,
+                                           nb_reps=self.nb_reps)
+
+            fitness += calc_fitness(stats=stats)[0]
+
+        return (fitness / len(Ks),)
 
 
 """
@@ -162,6 +182,9 @@ FIXED_PARAMETERS = {
 }
 
 PARAMETERS = {
+    'gain': lambda: random.randint(1, 500) / 10,
+    'threshold': lambda: round(random.uniform(0.1, 10), 2),
+
     'alpha': lambda: round(random.uniform(-5, 5), 1),
     'beta': lambda: round(random.uniform(0.1, 10), 1),
     'mu': lambda: round(random.uniform(-5, 5), 1),

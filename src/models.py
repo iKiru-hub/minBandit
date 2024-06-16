@@ -38,7 +38,8 @@ class Model(MBsolver):
                  r: float=1., w_max: float=5.,
                  alpha_lr: float=0., beta_lr: float=1.,
                  mu_lr: float=0., sigma_lr: float=1.,
-                 r_lr: float=1.,
+                 r_lr: float=1., gain: float=1.,
+                 threshold: float=0.,
                  value_function: str="gaussian",
                  lr_function: str="none"):
 
@@ -53,6 +54,9 @@ class Model(MBsolver):
         self._lr_function_name = lr_function
         # if self._lr_function_name == "gaussian":
         self._lr = np.ones(K) * lr
+
+        self._gain = gain
+        self._threshold = threshold
 
         # roll parameters
         self._dur_pre = dur_pre
@@ -138,7 +142,9 @@ class Model(MBsolver):
         """
 
         # update
-        self._u += (- self._u + self._v + Iext) / self._tau
+        self._u += (- self._u + generalized_sigmoid(self._v,
+                                                    self._gain,
+                                                    self._threshold) + Iext) / self._tau
         self._v += (- self._v + self._value_function() * self._u) / self._tau
 
     def select_arm(self) -> int:
@@ -460,5 +466,8 @@ def mlp(x: float, y: np.ndarray, param1: float, param2: float,
         param4 * x + param5 * y + param6
     )
 
+@jit
+def generalized_sigmoid(x: np.ndarray, gain: float, threshold: float) -> np.ndarray:
 
+    return 1 / (1 + np.exp(-gain*(x - threshold)))
 
