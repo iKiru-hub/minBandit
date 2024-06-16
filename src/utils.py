@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator,FormatStrFormatter,MaxNLocator
 import os, logging, coloredlogs, json, pprint
+import argparse
+from numba import jit
 
 CACHE_PATH = r"/Users/daniekru/Research/lab/minBandit/src/cache"
 
@@ -235,6 +237,140 @@ def plot_multiple_reward(stats: dict, window: int=1, ax: plt.Axes=None):
     plt.show()
 
 
+def plot_lr_policy(params: dict):
+
+    """
+    plot the learning rate policy
+    """
+
+    X = np.arange(0, 10, 0.05)
+    Y = gaussian_sigmoid(x=X, alpha=params["alpha_lr"], beta=params["beta_lr"],
+                         mu=params["mu_lr"], sigma=params["sigma_lr"],
+                         r=params["r_lr"]).flatten()
+
+    fig, ax = plt.subplots(1, 1, figsize=(5, 5))
+    ax.plot(X, Y)
+    ax.set_title("Learning rate policy $\\tilde{\eta}$")
+    ax.set_xlabel("weight value")
+    ax.set_ylabel("learning rate")
+    ax.grid()
+    plt.show()
+
+
+def plot_value_function(params: dict):
+
+    """
+    plot the value function
+    """
+
+    X = np.arange(0, 10, 0.05)
+    Y = gaussian_sigmoid(x=X, alpha=params["alpha"], beta=params["beta"],
+                         mu=params["mu"], sigma=params["sigma"],
+                         r=params["r"]).flatten()
+
+    fig, ax = plt.subplots(1, 1, figsize=(5, 5))
+    ax.plot(X, Y)
+    ax.set_title("Value function $V$")
+    ax.set_xlabel("weight value")
+    ax.set_ylabel("value")
+    ax.grid()
+    plt.show()
+
+
+def plot_activation_function(params: dict):
+
+    """
+    plot the activation function
+    """
+
+    X = np.arange(0, 10, 0.05)
+    Y = sigmoid(x=X, gain=params["gain"], threshold=params["threshold"]).flatten()
+
+    fig, ax = plt.subplots(1, 1, figsize=(5, 5))
+    ax.plot(X, Y)
+    ax.set_title("Activation function $\\sigma$")
+    ax.set_xlabel("weight value")
+    ax.set_ylabel("activation")
+    ax.grid()
+    plt.show()
+
+
+
+""" jit functions """
+
+
+
+@jit(nopython=True)
+def softmax(x: np.ndarray, beta: float=1.) -> np.ndarray:
+
+    """
+    Compute the softmax of an array
+
+    Parameters
+    ----------
+    x: np.ndarray
+        the array to compute the softmax of
+    beta: float
+        the inverse temperature of the softmax
+
+    Returns
+    -------
+    np.ndarray
+        the softmax of the array
+    """
+
+    return np.exp(beta * x) / np.sum(np.exp(beta * x))
+
+
+@jit(nopython=True)
+def max_normalize(x: np.ndarray) -> np.ndarray:
+
+    """
+    Normalize an array to the maximum value
+
+    Parameters
+    ----------
+    x: np.ndarray
+        the array to normalize
+
+    Returns
+    -------
+    np.ndarray
+        the normalized array
+    """
+
+    return x / np.max(x)
+
+
+@jit#(no_python=True)
+def gaussian_sigmoid(x: np.ndarray, alpha: float, beta: float,
+                     mu: float, sigma: float, r: float) -> np.ndarray:
+
+    return r / (1 + np.exp(-beta*(x - alpha))) + \
+        (1 - r) * np.exp(- ((x - mu)**2) / sigma)
+
+
+@jit(nopython=True)
+def sigmoid(x: np.ndarray, alpha: float=0., beta: float=1.) -> np.ndarray:
+
+    return 1 / (1 + np.exp(-beta*(x - alpha)))
+
+
+@jit(nopython=True)
+def mlp(x: float, y: np.ndarray, param1: float, param2: float,
+        param3: float, param4: float, param5: float, param6: float,
+        param7: float, param8: float) -> float:
+
+    return param7 * sigmoid(
+        param1 * x + param2 * y + param3,
+    ) + param8 * sigmoid(
+        param4 * x + param5 * y + param6
+    )
+
+@jit
+def generalized_sigmoid(x: np.ndarray, gain: float, threshold: float) -> np.ndarray:
+
+    return 1 / (1 + np.exp(-gain*(x - threshold)))
 
 
 
@@ -242,7 +378,22 @@ def plot_multiple_reward(stats: dict, window: int=1, ax: plt.Axes=None):
 
 if __name__ == "__main__":
 
-    x = np.array([2, 4])
-    y = np.tile(x, (3, 1)).T.flatten()
-    print(x)
-    print(y)
+    parser = argparse.ArgumentParser(description="plotting functions")
+    parser.add_argument("--policy", type=str, default=None,
+                        help="plot one of the policies: lr, value, activation")
+    args = parser.parse_args()
+
+
+    # load model
+    model_params = load_model()
+
+    if args.policy == "lr":
+        plot_lr_policy(model_params)
+    elif args.policy == "value":
+        plot_value_function(model_params)
+    elif args.policy == "activation":
+        plot_activation_function(model_params)
+    else:
+        raise ValueError("Invalid policy")
+
+

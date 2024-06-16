@@ -88,6 +88,34 @@ class Env:
 
         return f"Env({self.nb_reps}:{self.nb_trials}:{self.nb_rounds}, K={self.K}, env_type={self.env_type})"
 
+    def _make_env(self) -> object:
+
+        """
+        Make the environment.
+
+        Returns
+        -------
+        env : object
+            The environment object.
+        """
+
+        if self.env_type == "simple":
+            return envs.KArmedBandit(K=self.K,
+                                    probabilities_set=self.probabilities_set,
+                                    verbose=False)
+        elif self.env_type == "smooth2":
+            return envs.KArmedBanditSmoothII(
+                             K=self.K,
+                             verbose=False,
+                             tau=self.tau,
+                             fix_p=0.7)
+        else:
+            return envs.KArmedBanditSmooth(
+                             K=self.K,
+                             probabilities_set=self.probabilities_set,
+                             verbose=False,
+                             tau=self.tau)
+
     def run(self, agent: object) -> float:
 
         """
@@ -106,22 +134,7 @@ class Env:
 
         ### environment ###
         # environment & game
-        if self.env_type == "simple":
-            env = envs.KArmedBandit(K=self.K,
-                                    probabilities_set=self.probabilities_set,
-                                    verbose=False)
-        elif self.env_type == "smooth2":
-            env = envs.KArmedBanditSmoothII(
-                             K=self.K,
-                             verbose=False,
-                             tau=self.tau,
-                             fix_p=0.7)
-        else:
-            env = envs.KArmedBanditSmooth(
-                             K=self.K,
-                             probabilities_set=self.probabilities_set,
-                             verbose=False,
-                             tau=self.tau)
+        # env = self._make_env()
 
         ### model ###
         # params = agent.get_genome()
@@ -142,8 +155,7 @@ class Env:
 
         fitness = 0.
         for K in Ks:
-            env.K = K
-            env.reset()
+            env = self._make_env()
             params = agent.get_genome()
             params['K'] = K
             model = mm.Model(**params)

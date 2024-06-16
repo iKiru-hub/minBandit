@@ -111,6 +111,8 @@ def main_multiple(args):
             "dur_pre": 2000,
             "dur_post": 2000,
             "lr": 0.1,
+            "gain": 1.,
+            "threshold": 0.5,
             "alpha": 0.,
             "beta": 1.,
             "mu": 0.,

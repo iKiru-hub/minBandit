@@ -1,6 +1,7 @@
 import numpy as np
 from numba import jit
 from abc import ABC, abstractmethod
+from utils import sigmoid, gaussian_sigmoid, generalized_sigmoid
 
 
 
@@ -396,78 +397,4 @@ class UCB1(MBsolver):
         self.n = np.zeros(self._K)
         self.t = 0
 
-
-
-
-@jit(nopython=True)
-def softmax(x: np.ndarray, beta: float=1.) -> np.ndarray:
-
-    """
-    Compute the softmax of an array
-
-    Parameters
-    ----------
-    x: np.ndarray
-        the array to compute the softmax of
-    beta: float
-        the inverse temperature of the softmax
-
-    Returns
-    -------
-    np.ndarray
-        the softmax of the array
-    """
-
-    return np.exp(beta * x) / np.sum(np.exp(beta * x))
-
-
-@jit(nopython=True)
-def max_normalize(x: np.ndarray) -> np.ndarray:
-
-    """
-    Normalize an array to the maximum value
-
-    Parameters
-    ----------
-    x: np.ndarray
-        the array to normalize
-
-    Returns
-    -------
-    np.ndarray
-        the normalized array
-    """
-
-    return x / np.max(x)
-
-
-@jit#(no_python=True)
-def gaussian_sigmoid(x: np.ndarray, alpha: float, beta: float,
-                     mu: float, sigma: float, r: float) -> np.ndarray:
-
-    return r / (1 + np.exp(-beta*(x - alpha))) + \
-        (1 - r) * np.exp(- ((x - mu)**2) / sigma)
-
-
-@jit(nopython=True)
-def sigmoid(x: np.ndarray, alpha: float=0., beta: float=1.) -> np.ndarray:
-
-    return 1 / (1 + np.exp(-beta*(x - alpha)))
-
-
-@jit(nopython=True)
-def mlp(x: float, y: np.ndarray, param1: float, param2: float,
-        param3: float, param4: float, param5: float, param6: float,
-        param7: float, param8: float) -> float:
-
-    return param7 * sigmoid(
-        param1 * x + param2 * y + param3,
-    ) + param8 * sigmoid(
-        param4 * x + param5 * y + param6
-    )
-
-@jit
-def generalized_sigmoid(x: np.ndarray, gain: float, threshold: float) -> np.ndarray:
-
-    return 1 / (1 + np.exp(-gain*(x - threshold)))
 
