@@ -129,6 +129,49 @@ def load_model(model_name: str=None):
     return model_params["genome"]
 
 
+def make_probability_set(K: int, nb_trials: int,
+                         fixed_p: bool=False,
+                         normalize: bool=False) -> np.ndarray:
+
+    """
+    make a set of probabilities for the bandit
+
+    Parameters
+    ----------
+    K : int
+        number of arms
+    nb_trials : int
+        number of trials
+    fixed_p : bool
+        fix the probabilities. Default=False
+    normalize : bool
+        normalize the probabilities.
+        Default=False
+
+    Returns
+    -------
+    probabilities_set : np.ndarray
+        set of probabilities
+    """
+
+
+    probabilities_set = []
+    for i in range(nb_trials):
+
+        if fixed_p:
+            p = np.around(np.random.uniform(0.05, 0.3, K), 2)
+            p[i%K] = fixed_p
+        else:
+            p = np.around(np.random.uniform(0.05, 0.95, K), 2)
+
+        if normalize:
+            p = p / p.sum()
+
+        probabilities_set += [p.tolist()]
+
+    return np.array(probabilities_set)
+
+
 
 """ visualization """
 

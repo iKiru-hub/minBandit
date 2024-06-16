@@ -11,7 +11,7 @@ import time, warnings
 import src.envs as envs
 import src.models as mm
 
-from src.utils import setup_logger
+from src.utils import setup_logger, make_probability_set
 logger = setup_logger(__name__)
 
 
@@ -49,7 +49,7 @@ class Env:
     """
 
     def __init__(self, protocol: dict,
-                 probabilities_set: list, verbose: bool,
+                 verbose: bool,
                  env_type: str="simple"):
 
         """
@@ -74,7 +74,6 @@ class Env:
         #
         self.fitness_size = 1
         self.protocol = protocol
-        self.probabilities_set = probabilities_set
         self.verbose = verbose
         self.env_type = env_type
 
@@ -88,7 +87,7 @@ class Env:
 
         return f"Env({self.nb_reps}:{self.nb_trials}:{self.nb_rounds}, K={self.K}, env_type={self.env_type})"
 
-    def _make_env(self) -> object:
+    def _make_env(self, K: int=None) -> object:
 
         """
         Make the environment.
@@ -99,21 +98,27 @@ class Env:
             The environment object.
         """
 
+        if K is None:
+            K = self.K
+
+        probabilities_set = make_probability_set(K=K,
+                                                 nb_trials=self.nb_trials,
+                                                 fixed_p=0.9,
+                                                 normalize=False)
+
         if self.env_type == "simple":
-            return envs.KArmedBandit(K=self.K,
-                                    probabilities_set=self.probabilities_set,
-                                    verbose=False)
+            return envs.KArmedBandit(K=K,
+                                    probabilities_set=probabilities_set)
         elif self.env_type == "smooth2":
             return envs.KArmedBanditSmoothII(
-                             K=self.K,
+                             K=K,
                              verbose=False,
                              tau=self.tau,
                              fix_p=0.7)
         else:
             return envs.KArmedBanditSmooth(
-                             K=self.K,
-                             probabilities_set=self.probabilities_set,
-                             verbose=False,
+                             K=K,
+                             probabilities_set=probabilities_set,
                              tau=self.tau)
 
     def run(self, agent: object) -> float:
@@ -155,7 +160,7 @@ class Env:
 
         fitness = 0.
         for K in Ks:
-            env = self._make_env()
+            env = self._make_env(K=K)
             params = agent.get_genome()
             params['K'] = K
             model = mm.Model(**params)
@@ -278,23 +283,8 @@ if __name__ == "__main__" :
         "tau": config_model["bandits"]["tau"],
     }
 
-    # # define the set of probabilities for each trial
-    # probabilities_set = [list(np.random.uniform(config_model["trial"]["p_min"],
-    #                                             config_model["trial"]["p_max"], 
-    #                                 protocol["K"])) for _ in range(protocol["nb_trials"])]
-
-    probabilities_set = []
-    for i in range(nb_trials):
-        p = np.around(np.random.uniform(0.05, 0.3, K), 2)
-        p[i%K] = 0.9
-        # p[np.random.randint(0, K)] = 0.9
-        probabilities_set += [p.tolist()]
-
-    probabilities_set = np.array(probabilities_set)
-
     # environment & game
     env = Env(protocol=protocol,
-              probabilities_set=probabilities_set,
               verbose=verbose,
               env_type=env_type)
 

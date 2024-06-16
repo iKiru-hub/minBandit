@@ -1,7 +1,7 @@
 import numpy as np
 from numba import jit
 from abc import ABC, abstractmethod
-from utils import sigmoid, gaussian_sigmoid, generalized_sigmoid
+from src.utils import sigmoid, gaussian_sigmoid, generalized_sigmoid
 
 
 
@@ -126,8 +126,8 @@ class Model(MBsolver):
         if self._lr_function_name == "gaussian":
 
             return gaussian_sigmoid(x=self._W, alpha=self._alpha_lr,
-                                               beta=self._beta_lr, mu=self._mu_lr,
-                                               sigma=self._sigma_lr, r=self._r_lr).flatten()
+                                    beta=self._beta_lr, mu=self._mu_lr,
+                                    sigma=self._sigma_lr, r=self._r_lr).flatten()
 
         return self._lr
 

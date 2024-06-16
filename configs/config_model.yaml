@@ -3,12 +3,13 @@ seed: 1337
 
 # trial settings
 trial:
-    nb_trials: 900
-    nb_rounds: 1
+    nb_trials: 3
+    nb_rounds: 200
     nb_reps: 10
 
 # bandit settings
 bandits:
     K: 10
     tau: 100
+  
 
