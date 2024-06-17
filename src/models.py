@@ -34,7 +34,7 @@ class MBsolver(ABC):
 class Model(MBsolver):
 
     def __init__(self, K: int, lr: float=0.01, tau_u: float=10.,
-                 tau_v: float=10.,
+                 tau_v: float=10., tau: int=None,
                  dur_pre: int=100, dur_post: int=100,
                  alpha: float=0., beta: float=1.,
                  mu: float=0., sigma: float=1.,
@@ -53,6 +53,9 @@ class Model(MBsolver):
         # self._lr = lr
         self._tau_u = tau_u
         self._tau_v = tau_v
+        if tau is not None:
+            self._tau_u = tau
+            self._tau_v = tau
         self._w_max = w_max
         self._value_function_name = value_function
         self._lr_function_name = lr_function
