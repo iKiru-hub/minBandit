@@ -567,6 +567,55 @@ def trial_multi_model(models: list, environment: KArmedBandit,
     return stats
 
 
+def visual_trial(model: object, environment: object, nb_rounds: int):
+
+    """
+    Visualize the trial
+
+    Parameters
+    ----------
+    model : object
+        The model to use
+    environment : object
+        The environment
+    nb_rounds : int
+        The number of rounds
+    """
+
+    logger.info("%visual trial")
+
+    # initialize
+    model.reset()
+    K = environment.K
+
+    if K != 3:
+        warnings.warn("The visual trial is only available for K=3")
+        return
+
+    # 3D plot
+    fig = plt.figure()
+    fig.suptitle(f"{environment.probabilities}")
+    ax = fig.add_subplot(111, projection='3d')
+
+    total_rewards = 0
+
+    # run
+    for round_i in tqdm(range(nb_rounds)):
+
+        # select an arm
+        k = model.select_arm(visualize=round_i > 0,
+                             ax=ax)
+
+        # sample the reward
+        reward = environment.sample(k=k)
+        total_rewards += reward
+
+        # update the model
+        model.update(k=k, reward=reward)
+
+
+
+
 """ other functions """
 
 

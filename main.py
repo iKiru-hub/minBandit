@@ -15,26 +15,30 @@ def main(args) -> dict:
     K = args.K
     nb_rounds = args.rounds
     nb_trials = args.trials
+    env_type = args.env
     verbose = args.verbose
+    visual = args.visual
 
     # define proababilities set
-    probabilities_set = []
-    for i in range(nb_trials):
-        p = np.around(np.random.uniform(0.05, 0.3, K), 2)
-        # p[i%K] = 0.9
-        p[np.random.randint(0, K)] = 0.9
-        probabilities_set += [p.tolist()]
-
-    probabilities_set = np.array(probabilities_set)
-
+    probabilities_set = utils.make_probability_set(K=K,
+                                                   nb_trials=nb_trials,
+                                                   fixed_p=None,
+                                                   normalize=False)
     # define the environment
-    # env = envs.KArmedBandit(K=K,
-    #                         probabilities_set=probabilities_set,
-    #                         verbose=False)
-    env = envs.KArmedBanditSmooth(K=K,
-                            probabilities_set=probabilities_set,
-                            verbose=False,
-                            tau=5)
+    if env_type == "simple":
+        env = envs.KArmedBandit(K=K,
+                                probabilities_set=probabilities_set,
+                                verbose=False)
+    elif env_type == "smooth":
+        env = envs.KArmedBanditSmooth(K=K,
+                                probabilities_set=probabilities_set,
+                                verbose=False,
+                                tau=5)
+    else:
+        env = envs.KArmedBanditSmoothII(K=K,
+                                verbose=False,
+                                tau=5,
+                                fix_p=0.9)
 
     # define the model
     model_name = args.model
@@ -45,18 +49,48 @@ def main(args) -> dict:
     elif model_name == "ucb":
         model = mm.UCB1(K=K)
     else:
-        dur_pre = 2000
-        dur_post = 2000
-        model = mm.Model(K=K, dur_pre=dur_pre,
-                         dur_post=dur_post,
-                         lr=0.1)
+        # define models
+        if args.load:
+            params = utils.load_model()
+            params["K"] = K
+
+        else:
+            params = {
+                "K": K,
+                "dur_pre": 2000,
+                "dur_post": 2000,
+                "lr": 0.1,
+                "gain": 1.,
+                "threshold": 0.5,
+                "alpha": 0.,
+                "beta": 1.,
+                "mu": 0.,
+                "sigma": 1.,
+                "r": 1.,
+                "alpha_lr": 0.1,
+                "beta_lr": 0.1,
+                "mu_lr": 0.1,
+                "sigma_lr": 0.1,
+                "r_lr": 0.1,
+                "w_max": 5.,
+                "value_function": "gaussian",
+                "lr_function": "gaussian",
+            }
+
+        model = mm.Model(**params)
 
     # run
-    results = envs.trial(model=model,
-                         environment=env,
-                         nb_trials=nb_trials,
-                         nb_rounds=nb_rounds,
-                         verbose=verbose)
+    if visual:
+        envs.visual_trial(model=model,
+                          environment=env,
+                          nb_rounds=nb_rounds)
+        results = None
+    else:
+        results = envs.trial(model=model,
+                             environment=env,
+                             nb_trials=nb_trials,
+                             nb_rounds=nb_rounds,
+                             verbose=verbose)
 
     return results
 
@@ -184,11 +218,17 @@ if __name__ == "__main__":
     parser.add_argument('--env', type=str,
                         help='type of environment: `simple`, `smooth`',
                         default="simple")
+    parser.add_argument('--multiple', type=int,
+                        help='run multiple models: 0 (single) or 1 (multiple)',
+                        default=1)
+    parser.add_argument('--visual', action='store_true',
+                        help='visualize the trial',
+                        default=False)
 
     args = parser.parse_args()
 
-    # main(args=args)
-
-    main_multiple(args=args)
-
+    if args.multiple == 1:
+        main_multiple(args=args)
+    else:
+        main(args=args)
 

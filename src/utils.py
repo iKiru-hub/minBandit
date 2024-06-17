@@ -327,12 +327,12 @@ def plot_activation_function(params: dict):
     """
 
     X = np.arange(0, 10, 0.05)
-    Y = sigmoid(x=X, gain=params["gain"], threshold=params["threshold"]).flatten()
+    Y = generalized_sigmoid(x=X, gain=params["gain"], threshold=params["threshold"]).flatten()
 
     fig, ax = plt.subplots(1, 1, figsize=(5, 5))
     ax.plot(X, Y)
     ax.set_title("Activation function $\\sigma$")
-    ax.set_xlabel("weight value")
+    ax.set_xlabel("x")
     ax.set_ylabel("activation")
     ax.grid()
     plt.show()

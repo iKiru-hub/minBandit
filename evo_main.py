@@ -199,6 +199,8 @@ FIXED_PARAMETERS = {
 }
 
 PARAMETERS = {
+    'tau_u': lambda: random.randint(1, 300),
+    'tau_v': lambda: random.randint(1, 300),
     'gain': lambda: random.randint(1, 500) / 10,
     'threshold': lambda: round(random.uniform(0.1, 10), 2),
 

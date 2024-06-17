@@ -2,6 +2,7 @@ import numpy as np
 from numba import jit
 from abc import ABC, abstractmethod
 from src.utils import sigmoid, gaussian_sigmoid, generalized_sigmoid
+import matplotlib.pyplot as plt
 
 
 
@@ -32,7 +33,8 @@ class MBsolver(ABC):
 
 class Model(MBsolver):
 
-    def __init__(self, K: int, lr: float=0.01, tau: float=10.,
+    def __init__(self, K: int, lr: float=0.01, tau_u: float=10.,
+                 tau_v: float=10.,
                  dur_pre: int=100, dur_post: int=100,
                  alpha: float=0., beta: float=1.,
                  mu: float=0., sigma: float=1.,
@@ -49,7 +51,8 @@ class Model(MBsolver):
         # parameters
         self._options = np.arange(K).astype(int)
         # self._lr = lr
-        self._tau = tau
+        self._tau_u = tau_u
+        self._tau_v = tau_v
         self._w_max = w_max
         self._value_function_name = value_function
         self._lr_function_name = lr_function
@@ -143,28 +146,132 @@ class Model(MBsolver):
         """
 
         # update
-        self._u += (- self._u + generalized_sigmoid(self._v,
-                                                    self._gain,
-                                                    self._threshold) + Iext) / self._tau
-        self._v += (- self._v + self._value_function() * self._u) / self._tau
+        self._u += (- self._u + generalized_sigmoid(
+                            self._v, self._gain, self._threshold) + \
+                            Iext) / self._tau_u
+        self._v += (- self._v + self._value_function() * self._u) / self._tau_v
 
-    def select_arm(self) -> int:
+    def _visualize_selection(self, ax: plt.Axes=None):
 
         """
-        Rollout the model and obtain a response
+        Visualize the selection made by the model
         """
 
         Iext = np.ones((self._K, 1))
+ 
+        U = np.zeros((self._dur_pre + self._dur_post, self._K))
+        V = np.zeros((self._dur_pre + self._dur_post, self._K))
+
+        # figure
+        if ax is None:
+            fig = plt.figure()
+            ax = fig.add_subplot(111, projection='3d')
+
+        # pre-decision period
+        for t in range(self._dur_pre):
+            self._step(Iext=Iext)
+            U[t] = self._u.flatten()
+            V[t] = self._v.flatten()
+
+            if t % 20 != 0:
+                continue
+
+            # plot
+            ax.clear()
+            # plot U as a black line in 3D
+            ax.plot(U[:t, 0], U[:t, 1], U[:t, 2], 'k-',
+                    alpha=0.5)
+            # plot V as a red line in 3D
+            ax.plot(V[:t, 0], V[:t, 1], V[:t, 2], 'r-',
+                    alpha=0.5)
+            # plot the current point in 3D
+            ax.plot([self._u[0]], [self._u[1]], [self._u[2]], 'ko', label="u")
+            ax.plot([self._v[0]], [self._v[1]], [self._v[2]], 'ro', label="v")
+            ax.set_title(f"Pre - t={t}ms")
+
+            ax.set_xlim(0., 2.)
+            ax.set_ylim(0., 2.)
+            ax.set_zlim(0., 2.)
+
+            ax.set_xlabel("1")
+            ax.set_ylabel("2")
+            ax.set_zlabel("3")
+
+            ax.legend()
+
+            plt.pause(0.001)
+
+        # post-decision period
+        for t in range(t, t+self._dur_post):
+
+            self._step()
+            U[t] = self._u.flatten()
+            V[t] = self._v.flatten()
+
+            if t % 20 != 0:
+                continue
+
+            # plot
+            ax.clear()
+            # plot U as a black line in 3D
+            ax.plot(U[:t, 0], U[:t, 1], U[:t, 2], 'k-',
+                    alpha=0.5)
+            # plot V as a red line in 3D
+            ax.plot(V[:t, 0], V[:t, 1], V[:t, 2], 'r-',
+                    alpha=0.5)
+            # plot the current point in 3D
+            ax.plot([self._u[0]], [self._u[1]], [self._u[2]], 'ko', label="u")
+            ax.plot([self._v[0]], [self._v[1]], [self._v[2]], 'ro', label="v")
+            ax.set_title(f"Post - t={t}ms")
+
+            ax.set_xlim(0., 2.)
+            ax.set_ylim(0., 2.)
+            ax.set_zlim(0., 2.)
+
+            ax.set_xlabel("1")
+            ax.set_ylabel("2")
+            ax.set_zlabel("3")
+
+            ax.legend()
+
+            plt.pause(0.001)
+
+
+    def select_arm(self, visualize: bool=False,
+                   ax: plt.Axes=None) -> int:
+
+        """
+        Rollout the model and obtain a response
+
+        Parameters
+        ----------
+        visualize: bool
+            whether to visualize the model.
+            Default is False
+        ax: plt.Axes
+            the axis to plot on (3D).
+            Default is None
+
+        Returns
+        -------
+        int
+            the choice made by the model
+        """
 
         self.reset()
 
-        # pre-decision period
-        for _ in range(self._dur_pre):
-            self._step(Iext=Iext)
+        if visualize:
+            self._visualize_selection(ax=ax)
+        else:
+            Iext = np.ones((self._K, 1))
 
-        # post-decision period
-        for _ in range(self._dur_post):
-            self._step()
+            # pre-decision period
+            for _ in range(self._dur_pre):
+                self._step(Iext=Iext)
+
+            # post-decision period
+            for _ in range(self._dur_post):
+                self._step()
 
         return self._make_decison()
 
@@ -190,6 +297,14 @@ class Model(MBsolver):
         Get the values of the model
         """
         return self._value_function().flatten().copy()
+
+    def get_activations(self) -> tuple:
+
+        """
+        Get the activations of the model
+        """
+
+        return self._u.flatten().copy(), self._v.flatten().copy()
 
     def reset(self):
 
