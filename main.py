@@ -37,7 +37,7 @@ def main(args) -> dict:
     else:
         env = envs.KArmedBanditSmoothII(K=K,
                                 verbose=False,
-                                tau=5,
+                                tau=100,
                                 fix_p=0.9)
 
     # define the model

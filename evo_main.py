@@ -87,10 +87,17 @@ class Env:
 
         return f"Env({self.nb_reps}:{self.nb_trials}:{self.nb_rounds}, K={self.K}, env_type={self.env_type})"
 
-    def _make_env(self, K: int=None) -> object:
+    def _make_env(self, env_type: str, K: int=None) -> object:
 
         """
         Make the environment.
+
+        Parameters
+        ----------
+        env_type : str
+            The type of environment.
+        K : int
+            The number of bandits.
 
         Returns
         -------
@@ -101,20 +108,23 @@ class Env:
         if K is None:
             K = self.K
 
+        normalize = False
+        fixed_p = 0.7
         probabilities_set = make_probability_set(K=K,
                                                  nb_trials=self.nb_trials,
-                                                 fixed_p=0.9,
-                                                 normalize=False)
+                                                 fixed_p=fixed_p,
+                                                 normalize=normalize)
 
-        if self.env_type == "simple":
+        if env_type == "simple":
             return envs.KArmedBandit(K=K,
-                                    probabilities_set=probabilities_set)
-        elif self.env_type == "smooth2":
+                                     probabilities_set=probabilities_set)
+        elif env_type == "smooth2":
             return envs.KArmedBanditSmoothII(
                              K=K,
                              verbose=False,
                              tau=self.tau,
-                             fix_p=0.7)
+                             fixed_p=fixed_p,
+                             normalize=normalize)
         else:
             return envs.KArmedBanditSmooth(
                              K=K,
@@ -156,23 +166,27 @@ class Env:
         # return calc_fitness(stats=stats)
 
         # variant: multiple K
-        Ks = [5, 15, 40]
+        # Ks = [5, 15, 40]
+        Ks = [5, 35]
 
         fitness = 0.
-        for K in Ks:
-            env = self._make_env(K=K)
-            params = agent.get_genome()
-            params['K'] = K
-            model = mm.Model(**params)
-            stats = envs.trial_multi_model(models=[model],
-                                           environment=env,
-                                           nb_trials=self.nb_trials,
-                                           nb_rounds=self.nb_rounds,
-                                           nb_reps=self.nb_reps)
+        for env_type in ("simple", "smooth", "smooth2"):
 
-            fitness += calc_fitness(stats=stats)[0]
+            for K in Ks:
+                env = self._make_env(env_type=env_type,
+                                     K=K)
+                params = agent.get_genome()
+                params['K'] = K
+                model = mm.Model(**params)
+                stats = envs.trial_multi_model(models=[model],
+                                               environment=env,
+                                               nb_trials=self.nb_trials,
+                                               nb_rounds=self.nb_rounds,
+                                               nb_reps=self.nb_reps)
 
-        return (fitness / len(Ks),)
+                fitness += calc_fitness(stats=stats)[0]
+
+        return (fitness / (len(Ks) + 3),)
 
 
 """
@@ -374,7 +388,7 @@ if __name__ == "__main__" :
         "game": env.__repr__(),
         "evolved": [key for key in PARAMETERS.keys() if key not in FIXED_PARAMETERS.keys()],
         "data": "k-armed bandit",
-        "other": f"{env_type=}"
+        "other": "all (2 Ks and 3 variants)",
     }
 
     # ---| Run |---

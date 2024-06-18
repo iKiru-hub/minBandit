@@ -218,7 +218,7 @@ class KArmedBanditSmoothII:
     """
 
     def __init__(self, K: int, tau: float=5., verbose: bool=False,
-                 fix_p: float=False, seed: int=None):
+                 fixed_p: float=False, seed: int=None, normalize: bool=False):
 
         """
         Parameters
@@ -229,18 +229,21 @@ class KArmedBanditSmoothII:
             time constant of the distribution update
         verbose : bool, optional.
             Default False.
-        fix_p : float, optional.
+        fixed_p : float, optional.
             Default False.
         seed : int, optional.
             Default None.
+        normalize : bool, optional.
+            Default False.
         """
 
         if seed is not None:
             np.random.seed(seed)
 
         self.K = K
-        self._fix_p = fix_p
+        self._fixed_p = fixed_p
         self._tau = tau
+        self._normalize = normalize
 
         self.probabilities = self._new_distribution()
         self.trg_probabilities = self._new_distribution()
@@ -254,7 +257,7 @@ class KArmedBanditSmoothII:
 
     def __repr__(self):
 
-        return f"KArmedBanditSmooth(K={self.K}, tau={self._tau}, fix_p={self._fix_p})"
+        return f"KArmedBanditSmooth(K={self.K}, tau={self._tau}, fixed_p={self._fixed_p})"
 
     def _new_distribution(self):
 
@@ -262,13 +265,14 @@ class KArmedBanditSmoothII:
         Generate a new distribution
         """
 
-        if self._fix_p:
+        if self._fixed_p:
             p = np.random.uniform(0, 0.3, size=self.K)
-            p[np.random.randint(0, self.K)] = 0.9
+            p[np.random.randint(0, self.K)] = self._fixed_p
         else:
             p = np.random.uniform(0, 1, size=self.K)
 
-        p /= p.sum()
+        if self._normalize:
+            p /= p.sum()
         return p
 
     def sample(self, k: int) -> int:
