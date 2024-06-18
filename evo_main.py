@@ -366,7 +366,7 @@ if __name__ == "__main__" :
     else:
         visualizer = None
 
-    """ Simulation initialization """
+    """ simulation initialization """
 
     # ---| save |---
     save = not args.nosave
