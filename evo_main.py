@@ -87,7 +87,7 @@ class Env:
 
         return f"Env({self.nb_reps}:{self.nb_trials}:{self.nb_rounds}, K={self.K}, env_type={self.env_type})"
 
-    def _make_env(self, env_type: str, K: int=None) -> object:
+    def _make_env(self, env_type: str, nb_trials: int, K: int=None) -> object:
 
         """
         Make the environment.
@@ -96,6 +96,8 @@ class Env:
         ----------
         env_type : str
             The type of environment.
+        nb_trials : int
+            The number of trials.
         K : int
             The number of bandits.
 
@@ -110,8 +112,9 @@ class Env:
 
         normalize = False
         fixed_p = 0.7
+
         probabilities_set = make_probability_set(K=K,
-                                                 nb_trials=self.nb_trials,
+                                                 nb_trials=nb_trials,
                                                  fixed_p=fixed_p,
                                                  normalize=normalize)
 
@@ -172,16 +175,21 @@ class Env:
         fitness = 0.
         for env_type in ("simple", "smooth", "smooth2"):
 
+            # config-overwriting settings <<<< ! >>>>
+            nb_trials = 3 if env_type == "simple" else self.nb_trials
+            nb_rounds = 200 if env_type == "simple" else self.nb_rounds
+
             for K in Ks:
                 env = self._make_env(env_type=env_type,
+                                     nb_trials=nb_trials,
                                      K=K)
                 params = agent.get_genome()
                 params['K'] = K
                 model = mm.Model(**params)
                 stats = envs.trial_multi_model(models=[model],
                                                environment=env,
-                                               nb_trials=self.nb_trials,
-                                               nb_rounds=self.nb_rounds,
+                                               nb_trials=nb_trials,
+                                               nb_rounds=nb_rounds,
                                                nb_reps=self.nb_reps)
 
                 fitness += calc_fitness(stats=stats)[0]
@@ -306,13 +314,16 @@ if __name__ == "__main__" :
 
 
     """ Evolution initialization """
-
+    
 
     fitness_weights = (1.,)
     NPOP = config_evo["evolution"]["NPOP"]
     NGEN = config_evo["evolution"]["NGEN"]
     NUM_CORES = config_evo["evolution"]["NUM_CORES"]  # out of 8
     path = r"src/cache/"
+
+    NPOP = 3
+    NUM_CORES = 3
 
     # Ignore runtime warnings
     import warnings
