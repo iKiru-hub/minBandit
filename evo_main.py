@@ -322,9 +322,6 @@ if __name__ == "__main__" :
     NUM_CORES = config_evo["evolution"]["NUM_CORES"]  # out of 8
     path = r"src/cache/"
 
-    NPOP = 3
-    NUM_CORES = 3
-
     # Ignore runtime warnings
     import warnings
     warnings.filterwarnings("ignore", category=RuntimeWarning)
