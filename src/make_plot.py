@@ -40,7 +40,7 @@ def run_main(settings):
     return main_multiple(settings)
 
 
-def calc_reg_smooth(record: dict, ki: int, mi: int) -> float:
+def calc_reg_smooth(record: dict, mi: int) -> float:
 
     """
     Calculate regret for a given model and environment `smooth`
@@ -60,13 +60,13 @@ def calc_reg_smooth(record: dict, ki: int, mi: int) -> float:
         regret
     """
 
-    z = record[f'{ki}']['reward_list'][mi].mean(axis=0).mean(axis=1)
-    upper = record['0']['upper_bound_list'][:, 0]
+    z = record['reward_list'][mi].mean(axis=0).mean(axis=1)
+    upper = record['upper_bound_list'][:, 0]
     res = relu(upper - z)
     return res.sum()
 
 
-def calc_reg_simple(record: dict, ki: int, mi: int) -> float:
+def calc_reg_simple(record: dict, mi: int) -> float:
 
     """
     Calculate regret for a given model and environment `simple`
@@ -87,10 +87,10 @@ def calc_reg_simple(record: dict, ki: int, mi: int) -> float:
     """
 
     # average over repetitions and over trials
-    z = record[f'{ki}']['reward_list'][mi].mean(axis=0).mean(axis=0)
+    z = record['reward_list'][mi].mean(axis=0).mean(axis=0)
 
     # upper bound | assuming that it is the same for all trials
-    upper = record['0']['upper_bound_list'][0]
+    upper = record['upper_bound_list'][0]
 
     # calculate element-wise error
     res = relu(upper - z)
@@ -227,12 +227,16 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
 
     ENV = "simple"
     RUN_NAME = f"{ENV}_"
+    NUM_VAR = len(variable)
 
     """ simulation settings """
 
-    settings_list = []
+    # list of unique settings
+    var_settings_list = []
 
-    NUM_VAR = len(variable)
+    # list of settings for each repetition
+    rep_settings_list = []
+
     for r in variable:
         settings = Settings()
         settings.trials = trials
@@ -240,12 +244,13 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
         settings.K = r
         settings.rounds = rounds
 
-        settings_list.append(settings)
+        rep_settings_list += [[settings for _ in range(NUM_REP)]]
 
     """ run in parallel """
 
     # define number of processes (cores)
-    NUM_CORES = min((os.cpu_count() - 1), NUM_VAR)
+    # NUM_CORES = min((os.cpu_count() - 1), NUM_VAR)
+    NUM_CORES = min((os.cpu_count() - 1), NUM_REP)
 
     logger(f"%{ENV=}")
     logger(f"%{NUM_REP=}")
@@ -255,28 +260,29 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
     logger(f"%{SHOW=}")
 
     # run
-    results = np.zeros((4, NUM_REP, NUM_VAR))
-    for rep in tqdm(range(NUM_REP)):
+    results = np.zeros((4, NUM_VAR))
+
+    # loop over the variables
+    for i_var in tqdm(range(NUM_VAR)):
+
+        # run with a single variable settings for all repetitions
         with Pool(NUM_CORES) as p:
-            record = list(tqdm(p.imap(run_main, settings_list),
-                               total=len(settings_list), disable=True))
+            record = list(tqdm(p.imap(run_main, rep_settings_list[i_var]),
+                               total=NUM_REP, disable=True))
 
         record = {f"{i}": res for i, res in enumerate(record)}
 
-        # calculate regret
+        # calculate regret for all models
         for mi in range(4):
-            res_m = []
-            for ki in range(NUM_VAR):
-                if ENV == "simple":
-                    res_m += [calc_reg_simple(record, ki, mi)]
-                else:
-                    res_m += [calc_reg_smooth(record, ki, mi)]
 
-            #
-            results[mi, rep] = res_m
+            # regret over all repetitions
+            regret = 0.
+            for i_rep in range(NUM_REP):
+                regret += calc_reg_simple(record=record[str(i_rep)],
+                                          mi=mi)
 
-    # average
-    results = results.mean(axis=1)
+            # save average regret
+            results[mi, i_var] = regret / NUM_REP
 
     """ plot """
 
@@ -314,12 +320,16 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
 
     ENV = "smooth2"
     RUN_NAME = f"{ENV}_"
+    NUM_VAR = len(variable)
 
     """ simulation settings """
 
-    settings_list = []
+    # list of unique settings
+    var_settings_list = []
 
-    NUM_VAR = len(variable)
+    # list of settings for each repetition
+    rep_settings_list = []
+
     for r in variable:
         settings = Settings()
         settings.trials = trials
@@ -327,12 +337,12 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
         settings.K = K
         settings.rounds = r  # <<<--- 
 
-        settings_list.append(settings)
+        rep_settings_list += [[settings for _ in range(NUM_REP)]]
 
     """ run in parallel """
 
     # define number of processes (cores)
-    NUM_CORES = min((os.cpu_count() - 1), NUM_VAR)
+    NUM_CORES = min((os.cpu_count() - 1), NUM_REP)
 
     logger(f"%{ENV=}")
     logger(f"%{NUM_REP=}")
@@ -342,25 +352,29 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
     logger(f"%{SHOW=}")
 
     # run
-    results = np.zeros((4, NUM_REP, NUM_VAR))
-    for rep in tqdm(range(NUM_REP)):
+    results = np.zeros((4, NUM_VAR))
+
+    # loop over the variables
+    for i_var in tqdm(range(NUM_VAR)):
+
+        # run with a single variable settings for all repetitions
         with Pool(NUM_CORES) as p:
-            record = list(tqdm(p.imap(run_main, settings_list),
-                               total=len(settings_list), disable=True))
+            record = list(tqdm(p.imap(run_main, rep_settings_list[i_var]),
+                               total=NUM_REP, disable=True))
 
         record = {f"{i}": res for i, res in enumerate(record)}
 
-        # calculate regret
+        # calculate regret for all models
         for mi in range(4):
-            res_m = []
-            for ki in range(NUM_VAR):
-                res_m += [calc_reg_smooth(record, ki, mi)]
 
-            #
-            results[mi, rep] = res_m
+            # regret over all repetitions
+            regret = 0.
+            for i_rep in range(NUM_REP):
+                regret += calc_reg_smooth(record=record[str(i_rep)],
+                                          mi=mi)
 
-    # average
-    results = results.mean(axis=1)
+            # save average regret
+            results[mi, i_var] = regret / NUM_REP
 
     """ plot """
 
@@ -427,18 +441,18 @@ if __name__ == "__main__":
 
     # run simple : K
     if run == "simple":
-        main_simple(variable=[3, 5, 10],  # K
-                    NUM_REP=2,
-                    SAVE=True,
-                    SHOW=False,
-                    trials=10,
-                    rounds=200)
+        main_simple(variable=[3, 10],  # K
+                    NUM_REP=4,
+                    SAVE=False,
+                    SHOW=True,
+                    trials=3,
+                    rounds=100)
 
     # run smooth : rounds
     else:
-        main_smooth(variable=[1, 2, 5],  # rounds
-                    NUM_REP=2,
-                    SAVE=True,
-                    SHOW=False,
+        main_smooth(variable=[1, 2],  # rounds
+                    NUM_REP=5,
+                    SAVE=False,
+                    SHOW=True,
                     trials=200,
                     K=10)
