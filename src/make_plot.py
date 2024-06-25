@@ -450,9 +450,9 @@ if __name__ == "__main__":
 
     # run smooth : rounds
     else:
-        main_smooth(variable=[1, 2],  # rounds
-                    NUM_REP=5,
-                    SAVE=False,
-                    SHOW=True,
-                    trials=200,
+        main_smooth(variable=[1, 2, 3, 6, 10],  # rounds
+                    NUM_REP=128,
+                    SAVE=True,
+                    SHOW=False,
+                    trials=600,
                     K=10)

@@ -3,9 +3,9 @@
 #SBATCH -p milanq #armq #milanq #fpgaq #milanq # partition (queue)
 #SBATCH -N 1 # number of nodes
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=64
+#SBATCH --cpus-per-task=128
 ##SBATCH --mem-per-cpu=1GB
-#SBATCH --time=3-10:00
+#SBATCH --time=0-10:00
 #SBATCH -o /home/daniekru/slurm.column.%j.%N.out # STDOUT
 #SBATCH -e /home/daniekru/slurm.column.%j.%N.err # STDERR
 
@@ -15,7 +15,8 @@ echo "ecl1 activated"
 cd ~/lab/minBandit
 echo "$(pwd)"
 
-srun python3 evo_main.py --verbose
+#srun python3 evo_main.py --verbose
+srun python3 src/make_plot.py
 echo "finished"
 
 
