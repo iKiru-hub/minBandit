@@ -261,6 +261,7 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
 
     # run
     results = np.zeros((4, NUM_VAR))
+    variances = np.zeros((4, NUM_VAR, 2))
 
     # loop over the variables
     for i_var in tqdm(range(NUM_VAR)):
@@ -276,13 +277,20 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
         for mi in range(4):
 
             # regret over all repetitions
-            regret = 0.
+            regret = np.zeros(NUM_REP)
             for i_rep in range(NUM_REP):
-                regret += calc_reg_simple(record=record[str(i_rep)],
+                regret[i_rep] = calc_reg_simple(record=record[str(i_rep)],
                                           mi=mi)
 
             # save average regret
-            results[mi, i_var] = regret / NUM_REP
+            mean = regret.mean()
+            results[mi, i_var] = mean
+
+            # calculate variance above/below the mean
+            # as the 68% value
+            var_above = np.percentile(regret[np.where(regret > mean)], 68)
+            var_below = np.percentile(regret[np.where(regret < mean)], 68)
+            variances[mi, i_var] = [var_above, var_below]
 
     """ plot """
 
@@ -292,9 +300,25 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
     colors = plt.cm.tab10(range(4))
     for mi in range(4):
 
-        name = names[mi]
+        # plot variances above/below the mean as a shaded area
+        # plt.fill_between(range(len(variable)),
+        #                  results[mi] - variances[mi, :, 1],
+        #                  results[mi] + variances[mi, :, 0],
+        #                  color=colors[mi],
+        #                  alpha=0.3)
+
+        # as an arrow with both ends defined
+        plt.errorbar(range(len(variable)),
+                     results[mi],
+                     yerr=[variances[mi, :, 1], variances[mi, :, 0]],
+                     fmt='o',
+                     color=colors[mi],
+                     label=name)
+
+        # plot mean
         plt.plot(results[mi],
-                 '-o',
+                 '-',
+                 alpha=0.2,
                  color=colors[mi], 
                  label=name)
 
@@ -353,6 +377,7 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
 
     # run
     results = np.zeros((4, NUM_VAR))
+    variances = np.zeros((4, NUM_VAR, 2))
 
     # loop over the variables
     for i_var in tqdm(range(NUM_VAR)):
@@ -368,13 +393,20 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
         for mi in range(4):
 
             # regret over all repetitions
-            regret = 0.
+            regret = np.zeros(NUM_REP)
             for i_rep in range(NUM_REP):
-                regret += calc_reg_smooth(record=record[str(i_rep)],
+                regret[i_rep] = calc_reg_smooth(record=record[str(i_rep)],
                                           mi=mi)
 
             # save average regret
-            results[mi, i_var] = regret / NUM_REP
+            mean = regret.mean()
+            results[mi, i_var] = mean
+
+            # calculate variance above/below the mean
+            # as the 68% value
+            var_above = np.percentile(regret[np.where(regret > mean)], 68)
+            var_below = np.percentile(regret[np.where(regret < mean)], 68)
+            variances[mi, i_var] = [var_above, var_below]
 
     """ plot """
 
@@ -385,6 +417,23 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
     for mi in range(4):
 
         name = names[mi]
+
+        # plot variances above/below the mean as a shaded area
+        # plt.fill_between(range(len(variable)),
+        #                  results[mi] - variances[mi, :, 1],
+        #                  results[mi] + variances[mi, :, 0],
+        #                  color=colors[mi],
+        #                  alpha=0.3)
+
+        # as an arrow with both ends defined
+        plt.errorbar(range(len(variable)),
+                     results[mi],
+                     yerr=[variances[mi, :, 1], variances[mi, :, 0]],
+                     fmt='o',
+                     color=colors[mi],
+                     label=name)
+
+        # plot mean
         plt.plot(results[mi],
                  '-o',
                  color=colors[mi], 
@@ -437,7 +486,7 @@ def save_run(results: np.ndarray, variable: list, RUN_NAME: str, fig: plt.Figure
 
 if __name__ == "__main__":
 
-    run = "smooth"
+    run = "simple"
 
     # run simple : K
     if run == "simple":
