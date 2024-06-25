@@ -95,7 +95,7 @@ def tqdm_enumerate(iter, **tqdm_kwargs):
         i += 1
 
 
-def load_model(model_name: str=None, idx: int=None, verbose: bool=True):
+def load_model(model_name: str=None, idx: int=None, verbose: bool=True, CACHE_PATH=CACHE_PATH):
 
     """
     load a model from the models folder
