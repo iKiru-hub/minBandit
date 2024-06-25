@@ -229,6 +229,29 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
     RUN_NAME = f"{ENV}_"
     NUM_VAR = len(variable)
 
+    """ settings for parallellization """
+
+    # define number of processes (cores)
+    NUM_CORES = min((os.cpu_count() - 1), NUM_REP)
+    NUM_TASKS    = 1
+
+    # if the total number of cores is less than the number of repetitions
+    # defined the maximum number of cores and over-repetitions
+    if NUM_CORES < NUM_REP:
+
+        # number of repetitions per core
+        NUM_TASKS = int(np.ceil(NUM_REP / NUM_CORES))
+
+        # determine the number of cores
+        NUM_CORES = NUM_REP // NUM_TASKS
+
+        # adjust the number of repetitions
+        NUM_REP_new = int(NUM_CORES * NUM_TASKS)
+
+        if NUM_REP_new != NUM_REP:
+            logger.warning(f"Number of repetitions adjusted to {NUM_REP_new}")
+            NUM_REP = NUM_REP_new
+
     """ simulation settings """
 
     # list of unique settings
@@ -246,16 +269,11 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
 
         rep_settings_list += [[settings for _ in range(NUM_REP)]]
 
-    """ run in parallel """
-
-    # define number of processes (cores)
-    # NUM_CORES = min((os.cpu_count() - 1), NUM_VAR)
-    NUM_CORES = min((os.cpu_count() - 1), NUM_REP)
-
     logger(f"%{ENV=}")
     logger(f"%{NUM_REP=}")
     logger(f"%variables={variable} [{NUM_VAR}]")
     logger(f"%{NUM_CORES=}")
+    logger(f"%{NUM_TASKS=}")
     logger(f"%{SAVE=}")
     logger(f"%{SHOW=}")
 
@@ -266,19 +284,24 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
     # loop over the variables
     for i_var in tqdm(range(NUM_VAR)):
 
-        # run with a single variable settings for all repetitions
-        with Pool(NUM_CORES) as p:
-            record = list(tqdm(p.imap(run_main, rep_settings_list[i_var]),
-                               total=NUM_REP, disable=True))
+        record = []
 
+        # run with a single variable settings for all repetitions
+        # split each cpu over tasks
+        for _ in range(NUM_TASKS):
+            with Pool(NUM_CORES) as p:
+                record += list(tqdm(p.imap(run_main, rep_settings_list[i_var]),
+                                   total=NUM_REP, disable=True))
+
+        # make dict out of the repetitions
         record = {f"{i}": res for i, res in enumerate(record)}
 
         # calculate regret for all models
         for mi in range(4):
 
             # regret over all repetitions
-            regret = np.zeros(NUM_REP)
-            for i_rep in range(NUM_REP):
+            regret = np.zeros(NUM_REP*NUM_TASKS)
+            for i_rep in range(NUM_REP*NUM_TASKS):
                 regret[i_rep] = calc_reg_simple(record=record[str(i_rep)],
                                           mi=mi)
 
@@ -300,25 +323,19 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
     colors = plt.cm.tab10(range(4))
     for mi in range(4):
 
-        # plot variances above/below the mean as a shaded area
-        # plt.fill_between(range(len(variable)),
-        #                  results[mi] - variances[mi, :, 1],
-        #                  results[mi] + variances[mi, :, 0],
-        #                  color=colors[mi],
-        #                  alpha=0.3)
+        name = names[mi]
 
-        # as an arrow with both ends defined
-        plt.errorbar(range(len(variable)),
-                     results[mi],
-                     yerr=[variances[mi, :, 1], variances[mi, :, 0]],
-                     fmt='o',
-                     color=colors[mi],
-                     label=name)
+        # plot variances above/below the mean as a shaded area
+        plt.fill_between(range(len(variable)),
+                         results[mi] - variances[mi, :, 1],
+                         results[mi] + variances[mi, :, 0],
+                         color=colors[mi],
+                         alpha=0.15)
 
         # plot mean
         plt.plot(results[mi],
-                 '-',
-                 alpha=0.2,
+                 '-o',
+                 alpha=0.4,
                  color=colors[mi], 
                  label=name)
 
@@ -327,7 +344,7 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
     plt.xlabel("K (#arms)")
     plt.ylabel("regret")
 
-    plt.title(f"Regret [{NUM_REP}-average] - variant=`slow stochastic`")
+    plt.title(f"Regret [{NUM_REP*NUM_TASKS}-average] - variant=`slow stochastic`")
     plt.grid(alpha=0.5)
 
     if SHOW:
@@ -346,6 +363,29 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
     RUN_NAME = f"{ENV}_"
     NUM_VAR = len(variable)
 
+    """ settings for parallellization """
+
+    # define number of processes (cores)
+    NUM_CORES = min((os.cpu_count() - 1), NUM_REP)
+    NUM_TASKS    = 1
+
+    # if the total number of cores is less than the number of repetitions
+    # defined the maximum number of cores and over-repetitions
+    if NUM_CORES < NUM_REP:
+
+        # number of repetitions per core
+        NUM_TASKS = int(np.ceil(NUM_REP / NUM_CORES))
+
+        # determine the number of cores
+        NUM_CORES = NUM_REP // NUM_TASKS
+
+        # adjust the number of repetitions
+        NUM_REP_new = int(NUM_CORES * NUM_TASKS)
+
+        if NUM_REP_new != NUM_REP:
+            logger.warning(f"Number of repetitions adjusted to {NUM_REP_new}")
+            NUM_REP = NUM_REP_new
+
     """ simulation settings """
 
     # list of unique settings
@@ -363,15 +403,11 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
 
         rep_settings_list += [[settings for _ in range(NUM_REP)]]
 
-    """ run in parallel """
-
-    # define number of processes (cores)
-    NUM_CORES = min((os.cpu_count() - 1), NUM_REP)
-
     logger(f"%{ENV=}")
     logger(f"%{NUM_REP=}")
     logger(f"%variables={variable} [{NUM_VAR}]")
     logger(f"%{NUM_CORES=}")
+    logger(f"%{NUM_TASKS=}")
     logger(f"%{SAVE=}")
     logger(f"%{SHOW=}")
 
@@ -382,19 +418,24 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
     # loop over the variables
     for i_var in tqdm(range(NUM_VAR)):
 
-        # run with a single variable settings for all repetitions
-        with Pool(NUM_CORES) as p:
-            record = list(tqdm(p.imap(run_main, rep_settings_list[i_var]),
-                               total=NUM_REP, disable=True))
+        record = []
 
+        # run with a single variable settings for all repetitions
+        # split each cpu over tasks
+        for _ in range(NUM_TASKS):
+            with Pool(NUM_CORES) as p:
+                record += list(tqdm(p.imap(run_main, rep_settings_list[i_var]),
+                                   total=NUM_REP, disable=True))
+
+        # make dict out of the repetitions
         record = {f"{i}": res for i, res in enumerate(record)}
 
         # calculate regret for all models
         for mi in range(4):
 
             # regret over all repetitions
-            regret = np.zeros(NUM_REP)
-            for i_rep in range(NUM_REP):
+            regret = np.zeros(NUM_REP*NUM_TASKS)
+            for i_rep in range(NUM_REP*NUM_TASKS):
                 regret[i_rep] = calc_reg_smooth(record=record[str(i_rep)],
                                           mi=mi)
 
@@ -419,23 +460,16 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
         name = names[mi]
 
         # plot variances above/below the mean as a shaded area
-        # plt.fill_between(range(len(variable)),
-        #                  results[mi] - variances[mi, :, 1],
-        #                  results[mi] + variances[mi, :, 0],
-        #                  color=colors[mi],
-        #                  alpha=0.3)
-
-        # as an arrow with both ends defined
-        plt.errorbar(range(len(variable)),
-                     results[mi],
-                     yerr=[variances[mi, :, 1], variances[mi, :, 0]],
-                     fmt='o',
-                     color=colors[mi],
-                     label=name)
+        plt.fill_between(range(len(variable)),
+                         results[mi] - variances[mi, :, 1],
+                         results[mi] + variances[mi, :, 0],
+                         color=colors[mi],
+                         alpha=0.15)
 
         # plot mean
         plt.plot(results[mi],
                  '-o',
+                 alpha=0.4,
                  color=colors[mi], 
                  label=name)
 
@@ -444,7 +478,7 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
     plt.xlabel("rounds per trial")
     plt.ylabel("regret")
 
-    plt.title(f"Regret [{NUM_REP}-average] - variant=`fast stochastic`")
+    plt.title(f"Regret [{NUM_REP*NUM_REP}-average] - variant=`fast stochastic`")
     plt.grid(alpha=0.5)
 
     if SHOW:
@@ -486,22 +520,24 @@ def save_run(results: np.ndarray, variable: list, RUN_NAME: str, fig: plt.Figure
 
 if __name__ == "__main__":
 
-    run = "simple"
+    run = "smooth"
+    SAVE = True
+    SHOW = False
 
     # run simple : K
     if run == "simple":
-        main_simple(variable=[3, 10],  # K
-                    NUM_REP=4,
-                    SAVE=False,
-                    SHOW=True,
+        main_simple(variable=[3, 5, 10, 30, 60, 100],  # K
+                    NUM_REP=int(4*128),
+                    SAVE=SAVE,
+                    SHOW=SHOW,
                     trials=3,
-                    rounds=100)
+                    rounds=300)
 
     # run smooth : rounds
     else:
         main_smooth(variable=[1, 2, 3, 6, 10],  # rounds
-                    NUM_REP=128,
-                    SAVE=True,
-                    SHOW=False,
+                    NUM_REP=int(3*128),
+                    SAVE=SAVE,
+                    SHOW=SHOW,
                     trials=600,
                     K=10)
