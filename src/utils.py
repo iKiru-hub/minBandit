@@ -2,10 +2,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator,FormatStrFormatter,MaxNLocator
 import os, logging, coloredlogs, json, pprint
+from tqdm import tqdm
 import argparse
 from numba import jit
 
 CACHE_PATH = r"/Users/daniekru/Research/lab/minBandit/src/cache"
+MEDIA_PATH = r"/Users/daniekru/Research/lab/minBandit/media"
 
 
 DEBUG = False
@@ -92,7 +94,7 @@ def tqdm_enumerate(iter, **tqdm_kwargs):
         i += 1
 
 
-def load_model(model_name: str=None):
+def load_model(model_name: str=None, idx: int=None):
 
     """
     load a model from the models folder
@@ -101,6 +103,8 @@ def load_model(model_name: str=None):
     ----------
     model_name : str
         name of the model
+    idx : int
+        index of the model. Default=None
 
     Returns
     -------
@@ -114,9 +118,12 @@ def load_model(model_name: str=None):
             if f.endswith(".json"):
                 files.append(f)
         files = {i: f for i, f in enumerate(files)}
-        pprint.pprint(files)
 
-        model_name = files[int(input("Enter the model number: "))]
+        if idx is None:
+            pprint.pprint(files)
+            idx = int(input("Enter the model number: "))
+
+        model_name = files[idx]
 
     if model_name not in os.listdir(CACHE_PATH):
         raise ValueError(f"Model {model_name} not found in {CACHE_PATH}")
@@ -242,6 +249,8 @@ def plot_multiple_reward(stats: dict, window: int=1, ax: plt.Axes=None):
     #
     if ax is None:
         fig, ax = plt.subplots(1, 1, figsize=(20, 5))
+    else:
+        fig = ax.get_figure()
 
     # trial separator
     ax.axhline(0, color="black", alpha=0.3)
@@ -278,6 +287,8 @@ def plot_multiple_reward(stats: dict, window: int=1, ax: plt.Axes=None):
     ax.set_xlim(0, max(x))
 
     plt.show()
+
+    return fig
 
 
 def plot_lr_policy(params: dict):

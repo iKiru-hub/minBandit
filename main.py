@@ -1,5 +1,5 @@
 import numpy as np
-import time, argparse, os
+import time, argparse, os, json
 
 import src.envs as envs
 import src.models as mm
@@ -51,7 +51,8 @@ def main(args) -> dict:
     else:
         # define models
         if args.load:
-            params = utils.load_model()
+            idx = args.idx if args.idx >= 0 else None
+            params = utils.load_model(idx=idx)
             params["K"] = K
 
         else:
@@ -95,7 +96,6 @@ def main(args) -> dict:
     return results
 
 
-
 def main_multiple(args):
 
     # parameters
@@ -124,7 +124,7 @@ def main_multiple(args):
         env = envs.KArmedBanditSmoothII(K=K,
                                 verbose=False,
                                 tau=40,
-                                fix_p=0.7)
+                                fixed_p=0.7)
     else:
         env = envs.KArmedBanditSmooth(K=K,
                                 probabilities_set=probabilities_set,
@@ -136,7 +136,7 @@ def main_multiple(args):
 
     # define models
     if args.load:
-        params = utils.load_model()
+        params = utils.load_model(idx=args.idx)
         params["K"] = K
 
     else:
@@ -180,9 +180,34 @@ def main_multiple(args):
 
     # utils.plot_multiple_regret(results, window=10)
     if args.plot:
-        utils.plot_multiple_reward(results, window=20)
+        fig = utils.plot_multiple_reward(results, window=20)
 
+        # save
+        if args.save:
+            # current time
+            identifier = f"{time.strftime('%Y%m%d_%H%M%S')}"
+            dirname = os.path.join(utils.MEDIA_PATH, identifier)
+            os.makedirs(dirname, exist_ok=True)
 
+            # save figure
+            fig.savefig(f"{dirname}/figure.png")
+
+            # save info
+            info = {
+                "nb_trials": nb_trials,
+                "nb_rounds": nb_rounds,
+                "nb_reps": nb_reps,
+                "K": K,
+                "params": params,
+                "environment": f"{env}",
+            }
+
+            with open(f"{dirname}/info.json", "w") as f:
+                json.dump(info, f)
+
+            logger.info(f"Results saved in {dirname}")
+
+    return results
 
 
 if __name__ == "__main__":
@@ -224,6 +249,12 @@ if __name__ == "__main__":
     parser.add_argument('--visual', action='store_true',
                         help='visualize the trial',
                         default=False)
+    parser.add_argument('--save', action='store_true',
+                        help='save the results in a folder',
+                        default=False)
+    parser.add_argument('--idx', type=int,
+                        help='the index of the model to load',
+                        default=-1)
 
     args = parser.parse_args()
 
