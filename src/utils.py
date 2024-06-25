@@ -7,6 +7,7 @@ import argparse
 from numba import jit
 
 CACHE_PATH = r"/Users/daniekru/Research/lab/minBandit/src/cache"
+CACHE_PATH_2 = r"/home/daniekru/lab/minBandit/src/cache"
 MEDIA_PATH = r"/Users/daniekru/Research/lab/minBandit/media"
 
 
@@ -111,6 +112,10 @@ def load_model(model_name: str=None, idx: int=None, verbose: bool=True):
     model : object
         model object
     """
+
+    # check path
+    if not os.path.exists(CACHE_PATH):
+        CACHE_PATH = CACHE_PATH_2
 
     if model_name is None:
         files = []
