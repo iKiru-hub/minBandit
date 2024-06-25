@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import os, time
+import os, time, json
 from tqdm import tqdm
 
 from scipy.ndimage import convolve1d
@@ -12,6 +12,97 @@ import models as mm
 import utils as utils
 
 logger = utils.setup_logger(__name__)
+
+
+
+""" utilities """
+
+
+class Settings:
+
+    verbose = False
+    rounds = 2
+    trials = 2
+    reps = 10
+    K = 10
+    model = None
+    load = True
+    plot = False
+    env = "simple"
+    multiple = 1
+    visual = False
+    save = True
+    idx = 4
+
+
+def run_main(settings):
+
+    return main_multiple(settings)
+
+
+def calc_reg_smooth(record: dict, ki: int, mi: int) -> float:
+
+    """
+    Calculate regret for a given model and environment `smooth`
+
+    Parameters
+    ----------
+    record : dict
+        record of the simulation
+    ki : int
+        index of the run
+    mi : int
+        index of the model
+
+    Returns
+    -------
+    float
+        regret
+    """
+
+    z = record[f'{ki}']['reward_list'][mi].mean(axis=0).mean(axis=1)
+    upper = record['0']['upper_bound_list'][:, 0]
+    res = relu(upper - z)
+    return res.sum()
+
+
+def calc_reg_simple(record: dict, ki: int, mi: int) -> float:
+
+    """
+    Calculate regret for a given model and environment `simple`
+
+    Parameters
+    ----------
+    record : dict
+        record of the simulation
+    ki : int
+        index of the run
+    mi : int
+        index of the model
+
+    Returns
+    -------
+    float
+        regret
+    """
+
+    # average over repetitions and over trials
+    z = record[f'{ki}']['reward_list'][mi].mean(axis=0).mean(axis=0)
+
+    # upper bound | assuming that it is the same for all trials
+    upper = record['0']['upper_bound_list'][0]
+
+    # calculate element-wise error
+    res = relu(upper - z)
+
+    return res.sum()
+
+
+def relu(x):
+    return x*(x>0).astype(int)
+
+
+""" main functions """
 
 
 def main_multiple(args):
@@ -128,44 +219,14 @@ def main_multiple(args):
 
     return results
 
-class Settings:
 
-    verbose = False
-    rounds = 2
-    trials = 2
-    reps = 10
-    K = 10
-    model = None
-    load = True
-    plot = False
-    env = "simple"
-    multiple = 1
-    visual = False
-    save = True
-    idx = 4
-
-def run_main(settings):
-    return main_multiple(settings)
-
-
-def calc_reg(record, ki, mi):
-    z = record[f'{ki}']['reward_list'][mi].mean(axis=0).mean(axis=1)
-    upper = record['0']['upper_bound_list'][0]
-    res = relu(upper - z)
-    return res.sum()
-
-def relu(x):
-    return x*(x>0).astype(int)
-
-
-
-if __name__ == "__main__":
+def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
+                trials: int, rounds: int):
 
     """ general settings """
 
-    variable = [1, 2, 3]
-    NUM_REP = 2
-    SAVE = True
+    ENV = "simple"
+    RUN_NAME = f"{ENV}_"
 
     """ simulation settings """
 
@@ -173,29 +234,30 @@ if __name__ == "__main__":
 
     NUM_VAR = len(variable)
     for r in variable:
-        settings2 = Settings()
-        settings2.trials = 600
-        settings2.reps = 1
-        settings2.K = 10
-        settings2.rounds = r
+        settings = Settings()
+        settings.trials = trials
+        settings.reps = 1
+        settings.K = r
+        settings.rounds = rounds
 
-        settings_list.append(settings2)
-
+        settings_list.append(settings)
 
     """ run in parallel """
 
-    # define number of processes
-    processes = max((os.cpu_count() - 1), NUM_VAR)
+    # define number of processes (cores)
+    NUM_CORES = min((os.cpu_count() - 1), NUM_VAR)
 
+    logger(f"%{ENV=}")
     logger(f"%{NUM_REP=}")
-    logger(f"%variables={variable}")
-    logger(f"%CORES={processes}")
+    logger(f"%variables={variable} [{NUM_VAR}]")
+    logger(f"%{NUM_CORES=}")
     logger(f"%{SAVE=}")
+    logger(f"%{SHOW=}")
 
     # run
     results = np.zeros((4, NUM_REP, NUM_VAR))
     for rep in tqdm(range(NUM_REP)):
-        with Pool(processes) as p:
+        with Pool(NUM_CORES) as p:
             record = list(tqdm(p.imap(run_main, settings_list),
                                total=len(settings_list), disable=True))
 
@@ -205,7 +267,10 @@ if __name__ == "__main__":
         for mi in range(4):
             res_m = []
             for ki in range(NUM_VAR):
-                res_m += [calc_reg(record, ki, mi)]
+                if ENV == "simple":
+                    res_m += [calc_reg_simple(record, ki, mi)]
+                else:
+                    res_m += [calc_reg_smooth(record, ki, mi)]
 
             #
             results[mi, rep] = res_m
@@ -215,12 +280,97 @@ if __name__ == "__main__":
 
     """ plot """
 
-    fig = plt.figure(figsize=(8, 6))
+    names = record['0']['names']
 
+    fig = plt.figure(figsize=(8, 6))
     colors = plt.cm.tab10(range(4))
     for mi in range(4):
 
-        name = record['0']['names'][mi]
+        name = names[mi]
+        plt.plot(results[mi],
+                 '-o',
+                 color=colors[mi], 
+                 label=name)
+
+    plt.legend(loc="upper right")
+    plt.xticks(range(len(variable)), variable)
+    plt.xlabel("K (#arms)")
+    plt.ylabel("regret")
+
+    plt.title(f"Regret [{NUM_REP}-average] - variant=`slow stochastic`")
+    plt.grid(alpha=0.5)
+
+    if SHOW:
+        plt.show()
+
+    if SAVE:
+        save_run(results=results, variable=variable, RUN_NAME=RUN_NAME, fig=fig)
+
+
+def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
+                trials: int, K: int):
+
+    """ general settings """
+
+    ENV = "smooth2"
+    RUN_NAME = f"{ENV}_"
+
+    """ simulation settings """
+
+    settings_list = []
+
+    NUM_VAR = len(variable)
+    for r in variable:
+        settings = Settings()
+        settings.trials = trials
+        settings.reps = 1
+        settings.K = K
+        settings.rounds = r  # <<<--- 
+
+        settings_list.append(settings)
+
+    """ run in parallel """
+
+    # define number of processes (cores)
+    NUM_CORES = min((os.cpu_count() - 1), NUM_VAR)
+
+    logger(f"%{ENV=}")
+    logger(f"%{NUM_REP=}")
+    logger(f"%variables={variable} [{NUM_VAR}]")
+    logger(f"%{NUM_CORES=}")
+    logger(f"%{SAVE=}")
+    logger(f"%{SHOW=}")
+
+    # run
+    results = np.zeros((4, NUM_REP, NUM_VAR))
+    for rep in tqdm(range(NUM_REP)):
+        with Pool(NUM_CORES) as p:
+            record = list(tqdm(p.imap(run_main, settings_list),
+                               total=len(settings_list), disable=True))
+
+        record = {f"{i}": res for i, res in enumerate(record)}
+
+        # calculate regret
+        for mi in range(4):
+            res_m = []
+            for ki in range(NUM_VAR):
+                res_m += [calc_reg_smooth(record, ki, mi)]
+
+            #
+            results[mi, rep] = res_m
+
+    # average
+    results = results.mean(axis=1)
+
+    """ plot """
+
+    names = record['0']['names']
+
+    fig = plt.figure(figsize=(8, 6))
+    colors = plt.cm.tab10(range(4))
+    for mi in range(4):
+
+        name = names[mi]
         plt.plot(results[mi],
                  '-o',
                  color=colors[mi], 
@@ -230,25 +380,65 @@ if __name__ == "__main__":
     plt.xticks(range(len(variable)), variable)
     plt.xlabel("rounds per trial")
     plt.ylabel("regret")
-    plt.title(f"Regret [{NUM_REP}-average]")
+
+    plt.title(f"Regret [{NUM_REP}-average] - variant=`fast stochastic`")
     plt.grid(alpha=0.5)
-    plt.show()
+
+    if SHOW:
+        plt.show()
 
     if SAVE:
-        name = "plot_" + time.strftime('%H%M%S_%d%m%Y')
+        save_run(results=results, variable=variable, RUN_NAME=RUN_NAME, fig=fig)
+
+
+def save_run(results: np.ndarray, variable: list, RUN_NAME: str, fig: plt.Figure):
+
+        name = RUN_NAME + time.strftime('%d%m%Y_%H%M%S')
 
         # check if `media` directory exists
         if os.path.exists("./media/"):
-            file_path = "./media/" + name
+            folder_path = "./media/" + name
         else:
             logger.warning(f"`./media/` not found [pwd=`{os.getcwd()}`]")
-            file_path = name
+            folder_path = name
 
-        fig.savefig(f"{file_path}.png")
-        logger.info(f"Results saved as {file_path}")
+        # create directory
+        os.makedirs(folder_path, exist_ok=True)
+
+        # convert results into a json file
+        save_results = {
+            "variable": variable,
+            "data": results.tolist()
+        }
+
+        fig_path = os.path.join(folder_path, "figure.png")
+        results_path = os.path.join(folder_path, "results.json")
+
+        fig.savefig(fig_path)
+        with open(results_path, "w") as f:
+            json.dump(save_results, f)
+        logger.info(f"Results saved in `{folder_path}`")
 
 
 
+if __name__ == "__main__":
 
+    run = "smooth"
 
+    # run simple : K
+    if run == "simple":
+        main_simple(variable=[3, 5, 10],  # K
+                    NUM_REP=2,
+                    SAVE=True,
+                    SHOW=False,
+                    trials=10,
+                    rounds=200)
 
+    # run smooth : rounds
+    else:
+        main_smooth(variable=[1, 2, 5],  # rounds
+                    NUM_REP=2,
+                    SAVE=True,
+                    SHOW=False,
+                    trials=200,
+                    K=10)
