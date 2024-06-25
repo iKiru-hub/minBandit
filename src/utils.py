@@ -94,7 +94,7 @@ def tqdm_enumerate(iter, **tqdm_kwargs):
         i += 1
 
 
-def load_model(model_name: str=None, idx: int=None):
+def load_model(model_name: str=None, idx: int=None, verbose: bool=True):
 
     """
     load a model from the models folder
@@ -131,7 +131,8 @@ def load_model(model_name: str=None, idx: int=None):
     with open(os.path.join(CACHE_PATH, model_name), "r") as f:
         model_params = json.load(f)
 
-    logger(f"Model info: {model_params['info']}")
+    if verbose:
+        logger(f"Model info: {model_params['info']}")
 
     return model_params["genome"]
 

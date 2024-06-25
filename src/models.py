@@ -1,8 +1,12 @@
 import numpy as np
+import matplotlib.pyplot as plt
 from numba import jit
 from abc import ABC, abstractmethod
-from src.utils import sigmoid, gaussian_sigmoid, generalized_sigmoid
-import matplotlib.pyplot as plt
+
+try:
+    from src.utils import sigmoid, gaussian_sigmoid, generalized_sigmoid
+except ImportError:
+    from utils import sigmoid, gaussian_sigmoid, generalized_sigmoid
 
 
 

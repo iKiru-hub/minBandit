@@ -67,7 +67,7 @@ print("done")
 
 # %%
 
-def plot(idx, color, m=0, theta=0.0125):
+def plot(idx, color, m=2, theta=0.0125):
 
     # array of mean reward for each round over reps for a given trial
     z = record[f'{m}']['reward_list'][idx][:, 0].mean(axis=0)
@@ -80,24 +80,25 @@ def plot(idx, color, m=0, theta=0.0125):
     res = (z - mu_ref)**2
 
     # 1d convolution over y
-    kc = 80
+    kc = 30
     y = convolve1d(res, np.ones(kc), mode="constant")/kc
 
     # point of stability
     cy_idx = np.where(y<theta)[0].min()
-    # plt.axvline(cy_idx, color=color, alpha=0.5, linestyle='-.',
-    #             label=f"{cy_idx}")
+    plt.axvline(cy_idx, color=color, alpha=0.5, linestyle='-.',
+                label=f"{cy_idx}")
 
     plt.plot(convolve1d(z, np.ones(kc), mode="constant")/kc,
              color=color,
              alpha=0.5, label=f"{name} residuals")
-    # plt.plot(y, alpha=0.5, linestyle='--', color=color,
-    #          label=f"{name} rewards")
+    plt.plot(y, alpha=0.5, linestyle='--', color=color,
+             label=f"{name} rewards")
 
-theta = 0.01
+theta = 0.02
 plt.axhline(y=theta, color='red', alpha=0.5)
-plot(idx=2, color='blue')
-plot(idx=3, color='green')
+plot(idx=1, color='grey', theta=theta)
+plot(idx=2, color='blue', theta=theta)
+plot(idx=3, color='green', theta=theta)
 plt.legend(loc="lower right")
 plt.show()
 
@@ -122,26 +123,28 @@ def calc_stability_points(record, idx):
         res = (z - mu_ref)**2
 
         # 1d convolution over y
-        kc = 50
+        kc = 30
         y = convolve1d(res, np.ones(kc), mode="constant")/kc
 
         # point of stability
-        p = np.where(y<0.015)[0]
-        if len(p) == 0:
-            points += [200]
+        print(y)
+        p = np.where(y<0.02)[0]
+        if len(p) < 2:
+            points += [len(z)]
         else:
             points += [p.min()]
 
     return points, name
 
 
-# %%
 """ make plot """
 
 colors = plt.cm.tab10(range(4))
 for i in range(4):
 
     points, name = calc_stability_points(record, idx=i)
+
+    print(f"{name}: {points}")
 
     plt.plot(points, '-o', color=colors[i], label=name)
 
@@ -150,9 +153,6 @@ plt.legend(loc="upper left")
 plt.xticks(range(len(rounds)), rounds)
 plt.grid()
 plt.show()
-
-# %%
-
 
 
 # %% [markdown]
@@ -164,7 +164,7 @@ plt.show()
 settings2 = Settings()
 settings2.rounds = 1
 settings2.trials = 600
-settings2.reps = 2
+settings2.reps = 10
 settings2.K = 10
 
 # %%
@@ -181,7 +181,58 @@ for i, k in tqdm(zip(range(len(rounds)), rounds)):
 print("done")
 
 # %%
-record.keys()
+record['0']['reward_list'][-1].mean(axis=0).mean(axis=1).shape
 
 
+# %%
+z = record['0']['reward_list'][-1].mean(axis=0).mean(axis=1)
+mu_ref = z[-50:].mean()
+res = (z - mu_ref)**2
+y = convolve1d(res, np.ones(50), mode="constant")/50
+
+kc = 100
+yc = convolve1d(z, np.ones(kc), mode="constant")/kc
+# plt.plot(y)
+plt.plot(yc)
+
+plt.show()
+
+
+# %%
+def relu(x):
+    return x*(x>0).astype(int)
+
+
+# %%
+
+def calc_reg(record, ki, mi):
+    z = record[f'{ki}']['reward_list'][mi].mean(axis=0).mean(axis=1)
+    upper = record['0']['upper_bound_list'][0]
+    res = relu(upper - z)
+    return res.sum()
+
+
+colors = plt.cm.tab10(range(4))
+for i in range(4):
+    res_m = []
+    for ki in range(4):
+        res_m += [calc_reg(record2, ki, i)]
+
+    name = record2['0']['names'][i]
+    plt.plot(res_m, '-o', color=colors[i], 
+             label=name)
+
+plt.legend(loc="upper left")
+plt.xticks(range(4), rounds)
+# plt.ylim(0, 200)
+plt.show()
+
+# %%
+z = record2[f'3']['reward_list'][1].mean(axis=0).mean(axis=1)
+plt.plot(z)
+plt.show()
+
+# %%
+upper = record['0']['upper_bound_list'][0]
+upper.shape
 
