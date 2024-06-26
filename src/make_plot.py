@@ -311,9 +311,11 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
 
             # calculate variance above/below the mean
             # as the 68% value
-            var_above = np.percentile(regret[np.where(regret > mean)], 68)
-            var_below = np.percentile(regret[np.where(regret < mean)], 68)
-            variances[mi, i_var] = [var_above, var_below]
+            # var_above = np.percentile(regret[np.where(regret > mean)], 68)
+            # var_below = np.percentile(regret[np.where(regret < mean)], 68)
+            # variances[mi, i_var] = [var_above, var_below]
+            variances[mi, i_var] = [regret.std(),
+                                    regret.std()]
 
     """ plot """
 
@@ -445,9 +447,11 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
 
             # calculate variance above/below the mean
             # as the 68% value
-            var_above = np.percentile(regret[np.where(regret > mean)], 68)
-            var_below = np.percentile(regret[np.where(regret < mean)], 68)
-            variances[mi, i_var] = [var_above, var_below]
+            # var_above = np.percentile(regret[np.where(regret > mean)], 68)
+            # var_below = np.percentile(regret[np.where(regret < mean)], 68)
+            # variances[mi, i_var] = [var_above, var_below]
+            variances[mi, i_var] = [regret.std(),
+                                    regret.std()]
 
     """ plot """
 
@@ -521,17 +525,23 @@ def save_run(results: np.ndarray, variable: list, RUN_NAME: str, fig: plt.Figure
 if __name__ == "__main__":
 
     run = "simple"
-    SAVE = True
-    SHOW = False
+    SAVE = False
+    SHOW = True
 
     # run simple : K
     if run == "simple":
-        main_simple(variable=[3, 5, 10, 30, 60, 100],  # K
-                    NUM_REP=int(4*128),
+        main_simple(variable=[3, 5, 100],  # K
+                    NUM_REP=int(20),
                     SAVE=SAVE,
                     SHOW=SHOW,
                     trials=3,
                     rounds=300)
+        # main_simple(variable=[3, 5, 10, 30, 60, 100],  # K
+        #             NUM_REP=int(4*128),
+        #             SAVE=SAVE,
+        #             SHOW=SHOW,
+        #             trials=3,
+        #             rounds=300)
 
     # run smooth : rounds
     else:
