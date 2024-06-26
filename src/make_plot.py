@@ -528,7 +528,7 @@ def save_run(results: np.ndarray, variable: list, RUN_NAME: str, fig: plt.Figure
 
 if __name__ == "__main__":
 
-    run = "smooth"
+    run = "simple"
     SAVE = True
     SHOW = False
 
