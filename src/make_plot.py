@@ -525,13 +525,13 @@ def save_run(results: np.ndarray, variable: list, RUN_NAME: str, fig: plt.Figure
 if __name__ == "__main__":
 
     run = "simple"
-    SAVE = False
-    SHOW = True
+    SAVE = True
+    SHOW = False
 
     # run simple : K
     if run == "simple":
-        main_simple(variable=[3, 5, 100],  # K
-                    NUM_REP=int(20),
+        main_simple(variable=[5, 10, 100, 200],  # K
+                    NUM_REP=int(128),
                     SAVE=SAVE,
                     SHOW=SHOW,
                     trials=3,
