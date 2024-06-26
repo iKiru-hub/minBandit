@@ -233,7 +233,7 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
 
     # define number of processes (cores)
     NUM_CORES = min((os.cpu_count() - 1), NUM_REP)
-    NUM_TASKS    = 1
+    NUM_TASKS = 1
 
     # if the total number of cores is less than the number of repetitions
     # defined the maximum number of cores and over-repetitions
@@ -251,6 +251,8 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
         if NUM_REP_new != NUM_REP:
             logger.warning(f"Number of repetitions adjusted to {NUM_REP_new}")
             NUM_REP = NUM_REP_new
+    else:
+        logger.debug(f"Keeping {NUM_REP=}, {NUM_CORES=}, {NUM_TASKS=}")
 
     """ simulation settings """
 
@@ -387,6 +389,8 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
         if NUM_REP_new != NUM_REP:
             logger.warning(f"Number of repetitions adjusted to {NUM_REP_new}")
             NUM_REP = NUM_REP_new
+    else:
+        logger.debug(f"Keeping {NUM_REP=}, {NUM_CORES=}, {NUM_TASKS=}")
 
     """ simulation settings """
 
@@ -524,30 +528,30 @@ def save_run(results: np.ndarray, variable: list, RUN_NAME: str, fig: plt.Figure
 
 if __name__ == "__main__":
 
-    run = "simple"
+    run = "smooth"
     SAVE = True
     SHOW = False
 
     # run simple : K
     if run == "simple":
-        main_simple(variable=[5, 10, 100, 200],  # K
-                    NUM_REP=int(128),
-                    SAVE=SAVE,
-                    SHOW=SHOW,
-                    trials=3,
-                    rounds=300)
-        # main_simple(variable=[3, 5, 10, 30, 60, 100],  # K
-        #             NUM_REP=int(4*128),
+        # main_simple(variable=[5, 200],  # K
+        #             NUM_REP=int(3),
         #             SAVE=SAVE,
         #             SHOW=SHOW,
         #             trials=3,
         #             rounds=300)
+        main_simple(variable=[3, 5, 10, 30, 60, 100, 200],  # K
+                    NUM_REP=int(4*128),
+                    SAVE=SAVE,
+                    SHOW=SHOW,
+                    trials=3,
+                    rounds=300)
 
     # run smooth : rounds
     else:
-        main_smooth(variable=[1, 2, 3, 6, 10],  # rounds
-                    NUM_REP=int(3*128),
+        main_smooth(variable=[1, 2, 3, 5, 10],  # rounds
+                    NUM_REP=int(3),
                     SAVE=SAVE,
                     SHOW=SHOW,
-                    trials=600,
+                    trials=400,
                     K=10)
