@@ -6,6 +6,7 @@ from tqdm import tqdm
 from scipy.ndimage import convolve1d
 from multiprocessing import Pool
 import warnings
+import argparse
 
 import envs as envs
 import models as mm
@@ -338,7 +339,7 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
 
     """ plot """
 
-    fig_reget = plot_regret(means=results, variances=variances,
+    fig_regret = plot_regret(means=results, variances=variances,
                             variable=variable,
                             title=f"Regret [{NUM_REP*NUM_TASKS}-average] - " + \
                                 "variant=`slow stochastic`",
@@ -481,7 +482,7 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
     """ plot """
 
 
-    fig_reget = plot_regret(means=results, variances=variances,
+    fig_regret = plot_regret(means=results, variances=variances,
                             variable=variable,
                             title=f"Regret [{NUM_REP*NUM_TASKS}-average] - " + \
                                 "variant=`fast stochastic`",
@@ -500,7 +501,8 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
         plt.show()
 
     if SAVE:
-        save_run(results=results, variable=variable, RUN_NAME=RUN_NAME, fig=fig)
+        save_run(results=results, variable=variable, RUN_NAME=RUN_NAME,
+                 fig=fig_regret, fig2=fig_reward)
 
 
 def save_run(results: np.ndarray, variable: list, RUN_NAME: str,
@@ -613,36 +615,53 @@ def plot_reward(means: np.ndarray, variances: np.ndarray,
 
 if __name__ == "__main__":
 
-    run = "simple"
-    SAVE = False
-    SHOW = True
+    """ arguments """
+
+    parser = argparse.ArgumentParser(description="Run simulations")
+    parser.add_argument("--run", type=str, default="simple",
+                        help="run type: simple or smooth")
+    parser.add_argument('--save', action='store_true',
+                        help='save',
+                        default=False)
+    parser.add_argument('--show', action='store_true',
+                        help='show', default=False)
+    parser.add_argument('--test', action='store_true',
+                        help='small run', default=False)
+    args = parser.parse_args()
+
+
+    """ run """
 
     # run simple : K
-    if run == "simple":
-        main_simple(variable=[5, 200],  # K
-                    NUM_REP=int(2),
-                    SAVE=SAVE,
-                    SHOW=SHOW,
-                    trials=2,
-                    rounds=5)
-        # main_simple(variable=[3, 6, 12, 25, 50, 100, 200, 400, 600, 1000, 1500, 2100],  # K
-        #             NUM_REP=int(4*128),
-        #             SAVE=SAVE,
-        #             SHOW=SHOW,
-        #             trials=3,
-        #             rounds=300)
+    if args.run == "simple":
+        if args.test:
+            main_simple(variable=[5, 200],  # K
+                        NUM_REP=int(2),
+                        SAVE=args.save,
+                        SHOW=args.show,
+                        trials=2,
+                        rounds=5)
+        else:
+            main_simple(variable=[3, 6, 12, 25, 50, 100, 200, 400, 600, 1000, 1500, 2100],  # K
+                        NUM_REP=int(2*128),
+                        SAVE=args.save,
+                        SHOW=args.show,
+                        trials=3,
+                        rounds=300)
 
     # run smooth : rounds
     else:
-        main_smooth(variable=[1, 2],  # rounds
+        if args.test:
+            main_smooth(variable=[1, 2],  # rounds
                     NUM_REP=int(2),
-                    SAVE=SAVE,
-                    SHOW=SHOW,
+                    SAVE=args.save,
+                    SHOW=args.show,
                     trials=10,
                     K=10)
-        # main_smooth(variable=[1, 2, 3, 4, 5],  # rounds
-        #             NUM_REP=int(4*128),
-        #             SAVE=SAVE,
-        #             SHOW=SHOW,
-        #             trials=800,
-        #             K=10)
+        else:
+            main_smooth(variable=[1, 2, 3, 4, 5, 6],  # rounds
+                        NUM_REP=int(2*128),
+                        SAVE=args.save,
+                        SHOW=args.show,
+                        trials=800,
+                        K=10)
