@@ -279,9 +279,12 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
     logger(f"%{SAVE=}")
     logger(f"%{SHOW=}")
 
-    # run
+    # record
     results = np.zeros((4, NUM_VAR))
     variances = np.zeros((4, NUM_VAR, 2))
+
+    rew_mean = np.zeros((4, NUM_VAR, trials * rounds))
+    rew_std = np.zeros((4, NUM_VAR, trials * rounds, 2))
 
     # loop over the variables
     for i_var in tqdm(range(NUM_VAR)):
@@ -303,59 +306,58 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
 
             # regret over all repetitions
             regret = np.zeros(NUM_REP*NUM_TASKS)
+            rew = np.zeros((NUM_REP*NUM_TASKS, trials * rounds))
             for i_rep in range(NUM_REP*NUM_TASKS):
                 regret[i_rep] = calc_reg_simple(record=record[str(i_rep)],
                                           mi=mi)
 
+                rew[i_rep] = record[str(i_rep)]['reward_list'][mi].mean(axis=0).flatten()
+
             # save average regret
-            mean = regret.mean()
+            mean = regret.mean() / (trials * rounds)
             results[mi, i_var] = mean
+            variances[mi, i_var] = [regret.std() / (trials * rounds),
+                                    regret.std() / (trials * rounds)]
+
+            # save rewards
+            rew_mean[mi, i_var] = rew.mean(axis=0)
+            rew_std[mi, i_var] = np.array([rew.std(axis=0).tolist(),
+                                           rew.std(axis=0).tolist()]).T
 
             # calculate variance above/below the mean
             # as the 68% value
             # var_above = np.percentile(regret[np.where(regret > mean)], 68)
             # var_below = np.percentile(regret[np.where(regret < mean)], 68)
             # variances[mi, i_var] = [var_above, var_below]
-            variances[mi, i_var] = [regret.std(),
-                                    regret.std()]
+            # variances[mi, i_var] = [regret.std() / (trials * rounds),
+            #                         regret.std() / (trials * rounds)]
+
+    #
+    rew_mean = rew_mean.mean(axis=2)
+    rew_std = rew_std.mean(axis=2)
 
     """ plot """
 
-    names = record['0']['names']
+    fig_reget = plot_regret(means=results, variances=variances,
+                            variable=variable,
+                            title=f"Regret [{NUM_REP*NUM_TASKS}-average] - " + \
+                                "variant=`slow stochastic`",
+                            names=record['0']['names'],
+                            xlabel="K (#arms)", ylabel="regret")
 
-    fig = plt.figure(figsize=(8, 6))
-    colors = plt.cm.tab10(range(4))
-    for mi in range(4):
-
-        name = names[mi]
-
-        # plot variances above/below the mean as a shaded area
-        plt.fill_between(range(len(variable)),
-                         results[mi] - variances[mi, :, 1],
-                         results[mi] + variances[mi, :, 0],
-                         color=colors[mi],
-                         alpha=0.15)
-
-        # plot mean
-        plt.plot(results[mi],
-                 '-o',
-                 alpha=0.4,
-                 color=colors[mi], 
-                 label=name)
-
-    plt.legend(loc="upper right")
-    plt.xticks(range(len(variable)), variable)
-    plt.xlabel("K (#arms)")
-    plt.ylabel("regret")
-
-    plt.title(f"Regret [{NUM_REP*NUM_TASKS}-average] - variant=`slow stochastic`")
-    plt.grid(alpha=0.5)
+    fig_reward = plot_reward(means=rew_mean, variances=rew_std,
+                            variable=variable,
+                            title=f"Reward [{NUM_REP*NUM_TASKS}-average] - " + \
+                                "variant=`slow stochastic`",
+                            names=record['0']['names'],
+                            xlabel="K (#arms)", ylabel="reward")
 
     if SHOW:
         plt.show()
 
     if SAVE:
-        save_run(results=results, variable=variable, RUN_NAME=RUN_NAME, fig=fig)
+        save_run(results=results, variable=variable, RUN_NAME=RUN_NAME,
+                 fig=fig_regret, fig2=fig_reward)
 
 
 def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
@@ -421,6 +423,9 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
     results = np.zeros((4, NUM_VAR))
     variances = np.zeros((4, NUM_VAR, 2))
 
+    rew_mean = np.zeros((4, NUM_VAR))
+    rew_std = np.zeros((4, NUM_VAR, 2))
+
     # loop over the variables
     for i_var in tqdm(range(NUM_VAR)):
 
@@ -439,55 +444,57 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
         # calculate regret for all models
         for mi in range(4):
 
+            nb_trials = rep_settings_list[i_var][0].trials
+            nb_rounds = rep_settings_list[i_var][0].rounds
+
             # regret over all repetitions
             regret = np.zeros(NUM_REP*NUM_TASKS)
+            rew = np.zeros((NUM_REP*NUM_TASKS, nb_trials * nb_rounds))
             for i_rep in range(NUM_REP*NUM_TASKS):
                 regret[i_rep] = calc_reg_smooth(record=record[str(i_rep)],
                                           mi=mi)
+                rew[i_rep] = record[str(i_rep)]['reward_list'][mi].mean(axis=0).flatten()
 
             # save average regret
-            mean = regret.mean()
-            results[mi, i_var] = mean
+            results[mi, i_var] = regret.mean() / (nb_trials * nb_rounds)
+            variances[mi, i_var] = [regret.std() / (nb_trials * nb_rounds),
+                                    regret.std() / (nb_trials * nb_rounds)]
+
+            # save rewards
+            logger.info(f"{rew.shape=}")
+            rew_mean[mi, i_var] = rew.mean(axis=0).mean()
+            rew_std[mi, i_var] = [rew.std(axis=0).mean(), 
+                                  rew.std(axis=0).mean()]
 
             # calculate variance above/below the mean
             # as the 68% value
             # var_above = np.percentile(regret[np.where(regret > mean)], 68)
             # var_below = np.percentile(regret[np.where(regret < mean)], 68)
             # variances[mi, i_var] = [var_above, var_below]
-            variances[mi, i_var] = [regret.std(),
-                                    regret.std()]
+            # variances[mi, i_var] = [regret.std(),
+            #                         regret.std()]
+
+    #
+    # rew_mean = rew_mean.mean(axis=1) / (NUM_TASKS * NUM_CORES)
+    # rew_std = rew_std.mean(axis=1) / (NUM_TASKS * NUM_CORES)
 
     """ plot """
 
-    names = record['0']['names']
 
-    fig = plt.figure(figsize=(8, 6))
-    colors = plt.cm.tab10(range(4))
-    for mi in range(4):
+    fig_reget = plot_regret(means=results, variances=variances,
+                            variable=variable,
+                            title=f"Regret [{NUM_REP*NUM_TASKS}-average] - " + \
+                                "variant=`fast stochastic`",
+                            names=record['0']['names'],
+                            xlabel="trials * rounds", ylabel="regret")
 
-        name = names[mi]
+    fig_reward = plot_reward(means=rew_mean, variances=rew_std,
+                            variable=variable,
+                            title=f"Reward [{NUM_REP*NUM_TASKS}-average] - " + \
+                                "variant=`fast stochastic`",
+                            names=record['0']['names'],
+                            xlabel="trials * rounds", ylabel="reward")
 
-        # plot variances above/below the mean as a shaded area
-        plt.fill_between(range(len(variable)),
-                         results[mi] - variances[mi, :, 1],
-                         results[mi] + variances[mi, :, 0],
-                         color=colors[mi],
-                         alpha=0.15)
-
-        # plot mean
-        plt.plot(results[mi],
-                 '-o',
-                 alpha=0.4,
-                 color=colors[mi], 
-                 label=name)
-
-    plt.legend(loc="upper right")
-    plt.xticks(range(len(variable)), variable)
-    plt.xlabel("rounds per trial")
-    plt.ylabel("regret")
-
-    plt.title(f"Regret [{NUM_REP*NUM_TASKS}-average] - variant=`fast stochastic`")
-    plt.grid(alpha=0.5)
 
     if SHOW:
         plt.show()
@@ -496,7 +503,8 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
         save_run(results=results, variable=variable, RUN_NAME=RUN_NAME, fig=fig)
 
 
-def save_run(results: np.ndarray, variable: list, RUN_NAME: str, fig: plt.Figure):
+def save_run(results: np.ndarray, variable: list, RUN_NAME: str,
+             fig: plt.Figure, fig2: plt.Figure):
 
         name = RUN_NAME + time.strftime('%d%m%Y_%H%M%S')
 
@@ -516,42 +524,125 @@ def save_run(results: np.ndarray, variable: list, RUN_NAME: str, fig: plt.Figure
             "data": results.tolist()
         }
 
-        fig_path = os.path.join(folder_path, "figure.png")
+        fig_path = os.path.join(folder_path, "figure_regret.png")
         results_path = os.path.join(folder_path, "results.json")
-
         fig.savefig(fig_path)
+
+        fig_path2 = os.path.join(folder_path, "figure_reward.png")
+        fig2.savefig(fig_path2)
+
         with open(results_path, "w") as f:
             json.dump(save_results, f)
         logger.info(f"Results saved in `{folder_path}`")
+
+
+def plot_regret(means: np.ndarray, variances: np.ndarray,
+                variable: list, title: str,
+                names: list, xlabel: str, ylabel: str):
+
+    fig, ax = plt.subplots(figsize=(8, 6))
+    colors = plt.cm.tab10(range(len(names)))
+
+    for mi in range(4):
+
+        name = names[mi]
+
+        # plot variances above/below the mean as a shaded area
+        ax.fill_between(range(len(variable)),
+                         means[mi] - variances[mi, :, 1],
+                         means[mi] + variances[mi, :, 0],
+                         color=colors[mi],
+                         alpha=0.15)
+
+        # plot mean
+        ax.plot(means[mi],
+                 '-o',
+                 alpha=0.4,
+                 color=colors[mi],
+                 label=name)
+
+    ax.legend(loc="upper right")
+    ax.set_xticks(range(len(variable)), variable)
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+
+    ax.set_title(title)
+    ax.grid(alpha=0.5)
+
+    return fig
+
+
+def plot_reward(means: np.ndarray, variances: np.ndarray,
+                variable: list, title: str,
+                names: list, xlabel: str, ylabel: str):
+
+
+    fig, ax = plt.subplots(figsize=(8, 6))
+    colors = plt.cm.tab10(range(len(names)))
+
+    for mi in range(len(names)):
+
+        name = names[mi]
+
+        # plot mean
+        ax.plot(means[mi],
+                 '-o',
+                 alpha=0.4,
+                 color=colors[mi], 
+                 label=name)
+
+        # plot variances above/below the mean as a shaded area
+        ax.fill_between(range(len(variable)),
+                         means[mi].mean() - variances[mi, :, 1],
+                         means[mi].mean() + variances[mi, :, 0],
+                         color=colors[mi],
+                         alpha=0.15)
+
+    ax.legend(loc="upper right")
+    ax.set_xticks(range(len(variable)), variable)
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+
+    ax.set_title(title)
+    ax.grid(alpha=0.5)
+
+    return fig
+
 
 
 
 if __name__ == "__main__":
 
     run = "simple"
-    SAVE = True
-    SHOW = False
+    SAVE = False
+    SHOW = True
 
     # run simple : K
     if run == "simple":
-        # main_simple(variable=[5, 200],  # K
-        #             NUM_REP=int(3),
+        main_simple(variable=[5, 200],  # K
+                    NUM_REP=int(2),
+                    SAVE=SAVE,
+                    SHOW=SHOW,
+                    trials=2,
+                    rounds=5)
+        # main_simple(variable=[3, 6, 12, 25, 50, 100, 200, 400, 600, 1000, 1500, 2100],  # K
+        #             NUM_REP=int(4*128),
         #             SAVE=SAVE,
         #             SHOW=SHOW,
         #             trials=3,
         #             rounds=300)
-        main_simple(variable=[3, 6, 12, 25, 50, 100, 200, 400, 600, 1000, 1500, 2100],  # K
-                    NUM_REP=int(4*128),
-                    SAVE=SAVE,
-                    SHOW=SHOW,
-                    trials=3,
-                    rounds=300)
 
     # run smooth : rounds
     else:
-        main_smooth(variable=[1, 2, 3, 4, 5],  # rounds
-                    NUM_REP=int(4*128),
+        main_smooth(variable=[1, 2],  # rounds
+                    NUM_REP=int(2),
                     SAVE=SAVE,
                     SHOW=SHOW,
-                    trials=800,
+                    trials=10,
                     K=10)
+        # main_smooth(variable=[1, 2, 3, 4, 5],  # rounds
+        #             NUM_REP=int(4*128),
+        #             SAVE=SAVE,
+        #             SHOW=SHOW,
+        #             trials=800,
+        #             K=10)
