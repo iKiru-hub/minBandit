@@ -528,7 +528,7 @@ def save_run(results: np.ndarray, variable: list, RUN_NAME: str, fig: plt.Figure
 
 if __name__ == "__main__":
 
-    run = "simple"
+    run = "smooth"
     SAVE = True
     SHOW = False
 
@@ -540,7 +540,7 @@ if __name__ == "__main__":
         #             SHOW=SHOW,
         #             trials=3,
         #             rounds=300)
-        main_simple(variable=[3, 5, 10, 30, 60, 100, 200],  # K
+        main_simple(variable=[3, 5, 10, 30, 60, 100, 200, 400, 1000],  # K
                     NUM_REP=int(4*128),
                     SAVE=SAVE,
                     SHOW=SHOW,
@@ -549,8 +549,8 @@ if __name__ == "__main__":
 
     # run smooth : rounds
     else:
-        main_smooth(variable=[1, 2, 3, 5, 10],  # rounds
-                    NUM_REP=int(3),
+        main_smooth(variable=[1, 2, 3, 4, 5, 10],  # rounds
+                    NUM_REP=int(4*128),
                     SAVE=SAVE,
                     SHOW=SHOW,
                     trials=400,
