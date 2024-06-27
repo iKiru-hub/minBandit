@@ -3,7 +3,7 @@
 #SBATCH -p milanq #armq #milanq #fpgaq #milanq # partition (queue)
 #SBATCH -N 1 # number of nodes
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=128
+#SBATCH --cpus-per-task=170
 ##SBATCH --mem-per-cpu=1GB
 #SBATCH --time=0-10:00
 #SBATCH -o /home/daniekru/slurm.column.%j.%N.out # STDOUT
@@ -16,7 +16,7 @@ cd ~/lab/minBandit
 echo "$(pwd)"
 
 #srun python3 evo_main.py --verbose
-srun python3 src/make_plot.py
+srun python3 src/make_plot.py --run "smooth" --save
 echo "finished"
 
 
