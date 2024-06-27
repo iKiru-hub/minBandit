@@ -486,7 +486,7 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
     plt.xlabel("rounds per trial")
     plt.ylabel("regret")
 
-    plt.title(f"Regret [{NUM_REP*NUM_REP}-average] - variant=`fast stochastic`")
+    plt.title(f"Regret [{NUM_REP*NUM_TASKS}-average] - variant=`fast stochastic`")
     plt.grid(alpha=0.5)
 
     if SHOW:
@@ -540,7 +540,7 @@ if __name__ == "__main__":
         #             SHOW=SHOW,
         #             trials=3,
         #             rounds=300)
-        main_simple(variable=[3, 5, 10, 30, 60, 100, 200, 400, 1000],  # K
+        main_simple(variable=[3, 6, 12, 25, 50, 100, 200, 400, 600, 1000, 1500, 2100],  # K
                     NUM_REP=int(4*128),
                     SAVE=SAVE,
                     SHOW=SHOW,
@@ -549,9 +549,9 @@ if __name__ == "__main__":
 
     # run smooth : rounds
     else:
-        main_smooth(variable=[1, 2, 3, 4, 5, 10],  # rounds
+        main_smooth(variable=[1, 2, 3, 4, 5],  # rounds
                     NUM_REP=int(4*128),
                     SAVE=SAVE,
                     SHOW=SHOW,
-                    trials=400,
+                    trials=800,
                     K=10)
