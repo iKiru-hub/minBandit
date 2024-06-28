@@ -16,7 +16,7 @@ cd ~/lab/minBandit
 echo "$(pwd)"
 
 #srun python3 evo_main.py --verbose
-srun python3 src/make_plot.py --run "smooth" --save
+srun python3 src/make_plot.py --run "simple" --save
 echo "finished"
 
 
