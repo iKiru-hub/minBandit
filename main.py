@@ -180,12 +180,12 @@ def main_multiple(args):
 
     # utils.plot_multiple_regret(results, window=10)
     if args.plot:
-        fig = utils.plot_multiple_reward(results, window=20)
+        fig = utils.plot_multiple_reward(results, window=20, title=f" - $K=${K}, $round/trial={nb_rounds}$")
 
         # save
         if args.save:
             # current time
-            identifier = f"{time.strftime('%Y%m%d_%H%M%S')}"
+            identifier = f"{time.strftime('rewards_%Y_%m_%d_%H%M%S')}"
             dirname = os.path.join(utils.MEDIA_PATH, identifier)
             os.makedirs(dirname, exist_ok=True)
 

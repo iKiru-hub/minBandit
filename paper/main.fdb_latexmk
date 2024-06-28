@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1718292852.07548 "main.aux" "main.bbl" "main" 1718292875.51781 0
+["bibtex main"] 1718292852.07548 "main.aux" "main.bbl" "main" 1719587517.32296 0
   "./navmem_refs.bib" 1718292131.35528 141688 deed1e322e68c8d0ade3b530e6320b7e ""
   "/opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/bibtex/bst/base/unsrt.bst" 1710106625 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "main.aux" 1718292875.33041 10180 217e5004b816a4576c4a35cfc5668084 "pdflatex"
+  "main.aux" 1719587517.12049 10180 217e5004b816a4576c4a35cfc5668084 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1718292874.41813 "main.tex" "main.pdf" "main" 1718292875.51797 0
+["pdflatex"] 1719587516.20856 "main.tex" "main.pdf" "main" 1719587517.32311 0
   "/opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/fonts/map/fontname/texfonts.map" 1710106625 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/fonts/map/pdftex/updmap/pdftex.map" 1710106625 5472554 f7861620179a71a79d4bd86251f559d0 ""
   "/opt/homebrew/Cellar/texlive/20240312/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1710106625 1004 54797486969f23fa377b128694d548df ""
@@ -101,15 +101,15 @@
   "figures/hsnn_results_trials_1.png" 1718292082.18255 58144 2f660b98187afbc11b84d116e719c2bf ""
   "figures/lit_models_.png" 1718292082.18327 59354 37db86617b72861331b41a8320a3c9f5 ""
   "figures/minmod_a.png" 1718292082.18399 48783 bb663e3de2e156d1a2f93d2a6951a539 ""
-  "introduction.tex" 1718291143.78412 8759 bdc2ec773a10c00d66ed67125c562881 ""
-  "main.aux" 1718292875.33041 10180 217e5004b816a4576c4a35cfc5668084 "pdflatex"
+  "introduction.tex" 1719587418.66597 8763 f5a40225293d9fe576f22face4ff7682 ""
+  "main.aux" 1719587517.12049 10180 217e5004b816a4576c4a35cfc5668084 "pdflatex"
   "main.bbl" 1718292852.14134 15942 cf6494767adb63e2f2f7668d5162bb43 "bibtex main"
-  "main.out" 1718292875.33424 1370 4ba6026b431d837c653fa7b470bbe460 "pdflatex"
-  "main.tex" 1718292140.49904 720 8881f48c0aa25457796e8368009d7295 ""
-  "main.toc" 1718292875.33475 836 9ffbbd17da72d959e4388fbb24013c2f "pdflatex"
+  "main.out" 1719587517.12427 1370 4ba6026b431d837c653fa7b470bbe460 "pdflatex"
+  "main.tex" 1718386110.90087 720 8881f48c0aa25457796e8368009d7295 ""
+  "main.toc" 1719587517.12472 836 9ffbbd17da72d959e4388fbb24013c2f "pdflatex"
   "methods.tex" 1718291255.81361 15895 51c01f8d28f67bbfb864f023de9648c6 ""
-  "minmodel.tex" 1718292873.77738 4779 24f058c2428c3a74bca58c39504e3ae5 ""
-  "results.tex" 1718291143.78667 2619 09a52782b118fc407ed101472488b8a7 ""
+  "minmodel.tex" 1719587487.29312 4776 7e0c2ba83ccf15be165b58957a437fea ""
+  "results.tex" 1719587515.57241 2617 b51365993c0b8d74d87b5b80f4eb2534 ""
   (generated)
   "main.aux"
   "main.log"

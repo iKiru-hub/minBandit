@@ -475,9 +475,9 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
             nb_rounds = rep_settings_list[i_var][0].rounds
 
             # regret over all repetitions
-            regret = np.zeros(NUM_REP*NUM_TASKS)
-            rew = np.zeros((NUM_REP*NUM_TASKS, nb_trials))
-            for i_rep in range(NUM_REP*NUM_TASKS):
+            regret = np.zeros(NUM_CORES*NUM_TASKS)
+            rew = np.zeros((NUM_CORES*NUM_TASKS, nb_trials))
+            for i_rep in range(NUM_CORES*NUM_TASKS):
                 regret[i_rep] = calc_reg_smooth(
                     record=record[str(i_rep)],
                     mi=mi)
@@ -502,7 +502,7 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
             # variances[mi, i_var] = [regret.std(),
             #                         regret.std()]
 
-    #
+
     # rew_mean = rew_mean.mean(axis=1) / (NUM_TASKS * NUM_CORES)
     # rew_std = rew_std.mean(axis=1) / (NUM_TASKS * NUM_CORES)
 
@@ -759,17 +759,17 @@ if __name__ == "__main__":
     else:
         if args.test:
             main_smooth(variable=[1, 2],  # rounds
-                    NUM_REP=int(10),
+                    NUM_REP=int(4),
                     SAVE=args.save,
                     SHOW=args.show,
                     MAX_CORES=args.max_cores,
                     trials=400,
                     K=10)
         else:
-            main_smooth(variable=[1, 2, 3, 4, 5, 6],  # rounds
-                        NUM_REP=int(3*128),
+            main_smooth(variable=[1, 2, 3],  # rounds
+                        NUM_REP=int(2*128),
                         SAVE=args.save,
                         SHOW=args.show,
                         MAX_CORES=args.max_cores,
-                        trials=800,
+                        trials=600,
                         K=10)
