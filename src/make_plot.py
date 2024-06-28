@@ -18,6 +18,16 @@ logger = utils.setup_logger(__name__)
 
 """ utilities """
 
+ax_dict = {
+    2: (2, 1),
+    3: (3, 1),
+    4: (2, 2),
+    5: (3, 2),
+    6: (3, 2),
+    7: (4, 2),
+    8: (4, 2),
+}
+
 
 class Settings:
 
@@ -222,7 +232,7 @@ def main_multiple(args):
 
 
 def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
-                trials: int, rounds: int):
+                trials: int, rounds: int, MAX_CORES: int=None):
 
     """ general settings """
 
@@ -234,6 +244,7 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
 
     # define number of processes (cores)
     NUM_CORES = min((os.cpu_count() - 1), NUM_REP)
+    NUM_CORES = min(NUM_CORES, MAX_CORES) if MAX_CORES is not None else NUM_CORES
     NUM_TASKS = 1
 
     # if the total number of cores is less than the number of repetitions
@@ -269,6 +280,7 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
         settings.reps = 1
         settings.K = r
         settings.rounds = rounds
+        settings.env = "simple"
 
         rep_settings_list += [[settings for _ in range(NUM_REP)]]
 
@@ -285,7 +297,7 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
     variances = np.zeros((4, NUM_VAR, 2))
 
     rew_mean = np.zeros((4, NUM_VAR, trials * rounds))
-    rew_std = np.zeros((4, NUM_VAR, trials * rounds, 2))
+    rew_std = np.zeros((4, NUM_VAR, trials * rounds))
 
     # loop over the variables
     for i_var in tqdm(range(NUM_VAR)):
@@ -296,8 +308,9 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
         # split each cpu over tasks
         for _ in range(NUM_TASKS):
             with Pool(NUM_CORES) as p:
-                record += list(tqdm(p.imap(run_main, rep_settings_list[i_var]),
-                                   total=NUM_REP, disable=True))
+                record += list(tqdm(p.imap(run_main,
+                                rep_settings_list[i_var]),
+                                total=NUM_REP, disable=True))
 
         # make dict out of the repetitions
         record = {f"{i}": res for i, res in enumerate(record)}
@@ -309,8 +322,9 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
             regret = np.zeros(NUM_REP*NUM_TASKS)
             rew = np.zeros((NUM_REP*NUM_TASKS, trials * rounds))
             for i_rep in range(NUM_REP*NUM_TASKS):
-                regret[i_rep] = calc_reg_simple(record=record[str(i_rep)],
-                                          mi=mi)
+                regret[i_rep] = calc_reg_simple(
+                    record=record[str(i_rep)],
+                    mi=mi)
 
                 rew[i_rep] = record[str(i_rep)]['reward_list'][mi].mean(axis=0).flatten()
 
@@ -322,8 +336,7 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
 
             # save rewards
             rew_mean[mi, i_var] = rew.mean(axis=0)
-            rew_std[mi, i_var] = np.array([rew.std(axis=0).tolist(),
-                                           rew.std(axis=0).tolist()]).T
+            rew_std[mi, i_var] = rew.std(axis=0)
 
             # calculate variance above/below the mean
             # as the 68% value
@@ -334,10 +347,20 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
             #                         regret.std() / (trials * rounds)]
 
     #
-    rew_mean = rew_mean.mean(axis=2)
-    rew_std = rew_std.mean(axis=2)
+    # rew_mean = rew_mean.mean(axis=2)
+    # rew_std = rew_std.mean(axis=2)
 
     """ plot """
+
+    fig_reward = plot_multiple_reward(
+                    means=rew_mean, variances=rew_std,
+                    variable=variable,
+                    title=f"Reward [{NUM_REP*NUM_TASKS}-" + \
+                        "average] - variant=`slow stochastic`",
+                    ax_title="arms",
+                    names=record['0']['names'],
+                    xlabel="all rounds",
+                    ylabel="reward")
 
     fig_regret = plot_regret(means=results, variances=variances,
                             variable=variable,
@@ -346,12 +369,12 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
                             names=record['0']['names'],
                             xlabel="K (#arms)", ylabel="regret")
 
-    fig_reward = plot_reward(means=rew_mean, variances=rew_std,
-                            variable=variable,
-                            title=f"Reward [{NUM_REP*NUM_TASKS}-average] - " + \
-                                "variant=`slow stochastic`",
-                            names=record['0']['names'],
-                            xlabel="K (#arms)", ylabel="reward")
+    # fig_reward = plot_reward(means=rew_mean, variances=rew_std,
+    #                         variable=variable,
+    #                         title=f"Reward [{NUM_REP*NUM_TASKS}-average] - " + \
+    #                             "variant=`slow stochastic`",
+    #                         names=record['0']['names'],
+    #                         xlabel="K (#arms)", ylabel="reward")
 
     if SHOW:
         plt.show()
@@ -362,7 +385,7 @@ def main_simple(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
 
 
 def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
-                trials: int, K: int):
+                trials: int, K: int, MAX_CORES: int=None):
 
     """ general settings """
 
@@ -374,6 +397,7 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
 
     # define number of processes (cores)
     NUM_CORES = min((os.cpu_count() - 1), NUM_REP)
+    NUM_CORES = min(NUM_CORES, MAX_CORES) if MAX_CORES is not None else NUM_CORES
     NUM_TASKS    = 1
 
     # if the total number of cores is less than the number of repetitions
@@ -409,6 +433,7 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
         settings.reps = 1
         settings.K = K
         settings.rounds = r  # <<<--- 
+        settings.env = "smooth2"
 
         rep_settings_list += [[settings for _ in range(NUM_REP)]]
 
@@ -424,8 +449,8 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
     results = np.zeros((4, NUM_VAR))
     variances = np.zeros((4, NUM_VAR, 2))
 
-    rew_mean = np.zeros((4, NUM_VAR))
-    rew_std = np.zeros((4, NUM_VAR, 2))
+    rew_mean = np.zeros((4, NUM_VAR, trials))
+    rew_std = np.zeros((4, NUM_VAR, trials))
 
     # loop over the variables
     for i_var in tqdm(range(NUM_VAR)):
@@ -436,7 +461,8 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
         # split each cpu over tasks
         for _ in range(NUM_TASKS):
             with Pool(NUM_CORES) as p:
-                record += list(tqdm(p.imap(run_main, rep_settings_list[i_var]),
+                record += list(tqdm(p.imap(run_main,
+                                    rep_settings_list[i_var]),
                                    total=NUM_REP, disable=True))
 
         # make dict out of the repetitions
@@ -450,11 +476,13 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
 
             # regret over all repetitions
             regret = np.zeros(NUM_REP*NUM_TASKS)
-            rew = np.zeros((NUM_REP*NUM_TASKS, nb_trials * nb_rounds))
+            rew = np.zeros((NUM_REP*NUM_TASKS, nb_trials))
             for i_rep in range(NUM_REP*NUM_TASKS):
-                regret[i_rep] = calc_reg_smooth(record=record[str(i_rep)],
-                                          mi=mi)
-                rew[i_rep] = record[str(i_rep)]['reward_list'][mi].mean(axis=0).flatten()
+                regret[i_rep] = calc_reg_smooth(
+                    record=record[str(i_rep)],
+                    mi=mi)
+                # print(record[str(i_rep)]['reward_list'][mi].shape)
+                rew[i_rep] = record[str(i_rep)]['reward_list'][mi].mean(axis=0).mean(axis=1)
 
             # save average regret
             results[mi, i_var] = regret.mean() / (nb_trials * nb_rounds)
@@ -462,10 +490,9 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
                                     regret.std() / (nb_trials * nb_rounds)]
 
             # save rewards
-            logger.info(f"{rew.shape=}")
-            rew_mean[mi, i_var] = rew.mean(axis=0).mean()
-            rew_std[mi, i_var] = [rew.std(axis=0).mean(), 
-                                  rew.std(axis=0).mean()]
+            rew_mean[mi, i_var, :] = rew.mean(axis=0)
+            rew_std[mi, i_var, :] = rew.std(axis=0)
+                                  # rew.std(axis=0)]
 
             # calculate variance above/below the mean
             # as the 68% value
@@ -481,27 +508,40 @@ def main_smooth(variable: list, NUM_REP: int, SAVE: bool, SHOW: bool,
 
     """ plot """
 
+    fig_reward = plot_multiple_reward(
+                    means=rew_mean, variances=rew_std,
+                    variable=variable,
+                    title=f"Reward [{NUM_REP*NUM_TASKS}-" + \
+                        "average] - variant=`fast stochastic`",
+                    ax_title="round/trial",
+                    names=record['0']['names'],
+                    xlabel="trial (round average)",
+                    ylabel="reward")
 
-    fig_regret = plot_regret(means=results, variances=variances,
-                            variable=variable,
-                            title=f"Regret [{NUM_REP*NUM_TASKS}-average] - " + \
-                                "variant=`fast stochastic`",
-                            names=record['0']['names'],
-                            xlabel="trials * rounds", ylabel="regret")
+    fig_regret = plot_regret(
+                    means=results, variances=variances,
+                    variable=variable,
+                    title=f"Regret [{NUM_REP*NUM_TASKS}-" + \
+                        "average] - variant=`fast stochastic`",
+                    names=record['0']['names'],
+                    xlabel="trials * rounds",
+                    ylabel="regret")
 
-    fig_reward = plot_reward(means=rew_mean, variances=rew_std,
-                            variable=variable,
-                            title=f"Reward [{NUM_REP*NUM_TASKS}-average] - " + \
-                                "variant=`fast stochastic`",
-                            names=record['0']['names'],
-                            xlabel="trials * rounds", ylabel="reward")
+#     fig_reward = plot_reward(means=rew_mean, variances=rew_std,
+#                             variable=variable,
+#                             title=f"Reward [{NUM_REP*NUM_TASKS}-average] - " + \
+#                                 "variant=`fast stochastic`",
+#                             names=record['0']['names'],
+#                             xlabel="trials * rounds", ylabel="reward")
 
 
     if SHOW:
         plt.show()
 
     if SAVE:
-        save_run(results=results, variable=variable, RUN_NAME=RUN_NAME,
+        save_run(results=results,
+                 variable=variable,
+                 RUN_NAME=RUN_NAME,
                  fig=fig_regret, fig2=fig_reward)
 
 
@@ -567,6 +607,7 @@ def plot_regret(means: np.ndarray, variances: np.ndarray,
     ax.set_xticks(range(len(variable)), variable)
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
+    ax.set_ylim(0, 1.01)
 
     ax.set_title(title)
     ax.grid(alpha=0.5)
@@ -590,7 +631,7 @@ def plot_reward(means: np.ndarray, variances: np.ndarray,
         ax.plot(means[mi],
                  '-o',
                  alpha=0.4,
-                 color=colors[mi], 
+                 color=colors[mi],
                  label=name)
 
         # plot variances above/below the mean as a shaded area
@@ -611,6 +652,67 @@ def plot_reward(means: np.ndarray, variances: np.ndarray,
     return fig
 
 
+def plot_multiple_reward(means: np.ndarray, variances: np.ndarray,
+                         variable: list, title: str, ax_title: str,
+                        names: list, xlabel: str, ylabel: str):
+
+    assert (means.shape[0], means.shape[1]) == (len(names), len(variable)), \
+        "Shape of means does not match the number of models and variables"
+
+    tot = means.shape[1]
+    x_size = means.shape[2]
+
+    rows, cols = ax_dict[tot]
+
+    fig, ax = plt.subplots(rows, cols, figsize=(8*cols, 6*rows),
+                           sharex=True, sharey=True)
+    ax = ax.flatten()
+    colors = plt.cm.tab10(range(len(names)))
+
+    k_average = 50
+
+    for i in range(tot):
+
+        # top reward
+        ax[i].axhline(0.9, color="black", linestyle="--", alpha=0.35,
+                      label="upper bound")
+
+        for mi in range(len(names)):
+
+            name = names[mi]
+
+            # plot mean
+            m = convolve1d(means[mi, i], np.ones(k_average), mode="constant")/k_average
+            ax[i].plot(m,
+                     '-',
+                     alpha=0.4,
+                     color=colors[mi],
+                     label=name)
+
+            # plot variances above/below the mean as a shaded area
+            v1 = convolve1d(means[mi, i] - variances[mi, i],
+                                np.ones(k_average), mode="constant")/k_average
+            v2 = convolve1d(means[mi, i] + variances[mi, i],
+                                np.ones(k_average), mode="constant")/k_average
+            ax[i].fill_between(range(x_size),
+                               v1, v2,
+                             color=colors[mi],
+                             alpha=0.15)
+
+        if i == 0:
+            ax[i].legend(loc="upper right")
+            ax[i].set_xlabel(xlabel)
+        ax[i].set_ylabel("$R$")
+        ax[i].set_title(f"{ax_title}={variable[i]}")
+        ax[i].grid(alpha=0.5)
+
+    fig.suptitle(title)
+
+    return fig
+
+
+
+
 
 
 if __name__ == "__main__":
@@ -627,6 +729,8 @@ if __name__ == "__main__":
                         help='show', default=False)
     parser.add_argument('--test', action='store_true',
                         help='small run', default=False)
+    parser.add_argument('--max_cores', type=int, default=None,
+                        help='maximum number of cores')
     args = parser.parse_args()
 
 
@@ -636,32 +740,36 @@ if __name__ == "__main__":
     if args.run == "simple":
         if args.test:
             main_simple(variable=[5, 200],  # K
-                        NUM_REP=int(2),
+                        NUM_REP=int(4),
                         SAVE=args.save,
                         SHOW=args.show,
+                        MAX_CORES=args.max_cores,
                         trials=2,
-                        rounds=5)
+                        rounds=1500)
         else:
             main_simple(variable=[3, 6, 12, 25, 50, 100, 200, 400, 600, 1000, 1500, 2100],  # K
-                        NUM_REP=int(2*128),
+                        NUM_REP=int(3*128),
                         SAVE=args.save,
                         SHOW=args.show,
+                        MAX_CORES=args.max_cores,
                         trials=3,
-                        rounds=300)
+                        rounds=3000)
 
     # run smooth : rounds
     else:
         if args.test:
             main_smooth(variable=[1, 2],  # rounds
-                    NUM_REP=int(2),
+                    NUM_REP=int(10),
                     SAVE=args.save,
                     SHOW=args.show,
-                    trials=10,
+                    MAX_CORES=args.max_cores,
+                    trials=400,
                     K=10)
         else:
             main_smooth(variable=[1, 2, 3, 4, 5, 6],  # rounds
-                        NUM_REP=int(2*128),
+                        NUM_REP=int(3*128),
                         SAVE=args.save,
                         SHOW=args.show,
+                        MAX_CORES=args.max_cores,
                         trials=800,
                         K=10)
