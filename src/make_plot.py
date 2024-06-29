@@ -739,13 +739,13 @@ if __name__ == "__main__":
     # run simple : K
     if args.run == "simple":
         if args.test:
-            main_simple(variable=[5, 200],  # K
+            main_simple(variable=[5, 700],  # K
                         NUM_REP=int(4),
                         SAVE=args.save,
                         SHOW=args.show,
                         MAX_CORES=args.max_cores,
                         trials=2,
-                        rounds=1500)
+                        rounds=3000)
         else:
             main_simple(variable=[3, 6, 12, 25, 50, 100, 200, 400, 600, 1000, 1500, 2100],  # K
                         NUM_REP=int(3*128),

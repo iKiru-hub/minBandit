@@ -96,7 +96,7 @@ def main(args) -> dict:
     return results
 
 
-def main_multiple(args):
+def main_multiple(args, **kwargs) -> dict:
 
     # parameters
     K = args.K
@@ -136,7 +136,8 @@ def main_multiple(args):
 
     # define models
     if args.load:
-        params = utils.load_model(idx=args.idx)
+        params = utils.load_model(idx=args.idx,
+                                  verbose=verbose)
         params["K"] = K
 
     else:
@@ -180,17 +181,33 @@ def main_multiple(args):
 
     # utils.plot_multiple_regret(results, window=10)
     if args.plot:
-        fig = utils.plot_multiple_reward(results, window=20, title=f" - $K=${K}, $round/trial={nb_rounds}$")
+        fig = utils.plot_multiple_reward(
+            stats=results,
+            window=20,
+            title=f" - $K=${K}, $round/trial={nb_rounds}$",
+            show=args.show,
+        )
 
         # save
         if args.save:
-            # current time
-            identifier = f"{time.strftime('rewards_%Y_%m_%d_%H%M%S')}"
-            dirname = os.path.join(utils.MEDIA_PATH, identifier)
-            os.makedirs(dirname, exist_ok=True)
+
+            if kwargs.get("dirpath", None) is None and \
+                kwargs.get("run_id", None) is None:
+
+                # current time
+                identifier = f"{time.strftime('rewards_%Y_%m_%d_%H%M%S')}"
+                dirname = os.path.join(utils.MEDIA_PATH, identifier)
+                os.makedirs(dirname, exist_ok=True)
+                run_id = ""
+
+            else:
+                assert os.path.exists(kwargs["dirpath"]), "The provided directory does not exist"
+                assert kwargs.get("run_id", None) is not None, "Please provide a 'run_id'"
+                dirname = kwargs["dirpath"]
+                run_id = kwargs["run_id"]
 
             # save figure
-            fig.savefig(f"{dirname}/figure.png")
+            fig.savefig(f"{dirname}/figure{run_id}.png")
 
             # save info
             info = {
@@ -202,18 +219,69 @@ def main_multiple(args):
                 "environment": f"{env}",
             }
 
-            with open(f"{dirname}/info.json", "w") as f:
+            # make dict of the results
+            save_results = {
+                "rewards": results["reward_list"].tolist(),
+                "names": tuple(results["names"]),
+                "scores": results["scores"].tolist(),
+                "chance": results["chance_list"].tolist(),
+                "upper": results["upper_bound_list"].tolist(),
+            }
+
+            with open(f"{dirname}/info{run_id}.json", "w") as f:
                 json.dump(info, f)
 
-            logger.info(f"Results saved in {dirname}")
+                json.dump(save_results, f)
+
+            if verbose:
+                logger.info(f"Results saved in {dirname}")
 
     return results
+
+
+def multiple_main_multiple(args):
+
+    logger.info("Running multiple simulations with " + \
+        "different parameters")
+
+    # define variables to vary
+    variables = [3, 5, 10]
+    args.save = True
+    args.plot = True
+    args.verbose = False
+    args.show = False
+
+    # make folder
+    if args.save:
+        identifier = f"{args.env}_{time.strftime('%Y_%m_%d_%H%M%S')}"
+        dirpath = os.path.join(utils.MEDIA_PATH, identifier)
+        os.makedirs(dirpath, exist_ok=True)
+        logger.info(f"Results will be saved in `{dirpath}`")
+
+    # run
+    for i, var in enumerate(variables):
+
+        logger.info(f"running `var={var}`...")
+
+        # update the arguments
+        if args.env == "simple":
+            args.K = var
+        else:
+            args.rounds = var
+
+        args.idx = i
+
+        # run
+        _ = main_multiple(args, dirpath=dirpath, run_id=f"_{var}")
+
+    logger.info("<<< done >>>")
 
 
 if __name__ == "__main__":
 
 
-    parser = argparse.ArgumentParser(description='Navigation memory')
+    parser = argparse.ArgumentParser(
+        description='Navigation memory')
     parser.add_argument('--verbose', action='store_true',
                         help='verbose',
                         default=False)
@@ -240,6 +308,9 @@ if __name__ == "__main__":
     parser.add_argument('--plot', action='store_true',
                         help='plot at the end of the simulation',
                         default=False)
+    parser.add_argument('--show', action='store_true',
+                        help='whether to show the plot or not',
+                        default=False)
     parser.add_argument('--env', type=str,
                         help='type of environment: `simple`, `smooth`',
                         default="simple")
@@ -260,6 +331,8 @@ if __name__ == "__main__":
 
     if args.multiple == 1:
         main_multiple(args=args)
+    elif args.multiple == 2:
+        multiple_main_multiple(args=args)
     else:
         main(args=args)
 

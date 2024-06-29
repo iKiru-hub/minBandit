@@ -237,7 +237,9 @@ def plot_multiple_regret(stats: dict, window: int=1, ax: plt.Axes=None):
     plt.show()
 
 
-def plot_multiple_reward(stats: dict, window: int=1, ax: plt.Axes=None, title: str=""):
+def plot_multiple_reward(stats: dict, window: int=1,
+                         ax: plt.Axes=None, title: str="",
+                         show: bool=False):
 
     """
     plot all trials with for all models
@@ -292,7 +294,8 @@ def plot_multiple_reward(stats: dict, window: int=1, ax: plt.Axes=None, title: s
     ax.set_ylim(-0.1, 1.3)
     ax.set_xlim(0, max(x))
 
-    plt.show()
+    if show:
+        plt.show()
 
     return fig
 
