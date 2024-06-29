@@ -5,7 +5,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=170
 ##SBATCH --mem-per-cpu=1GB
-#SBATCH --time=0-10:00
+#SBATCH --time=1-10:00
 #SBATCH -o /home/daniekru/slurm.column.%j.%N.out # STDOUT
 #SBATCH -e /home/daniekru/slurm.column.%j.%N.err # STDERR
 
@@ -16,7 +16,7 @@ cd ~/lab/minBandit
 echo "$(pwd)"
 
 #srun python3 evo_main.py --verbose
-srun python3 src/make_plot.py --run "simple" --save
+srun python3 src/make_plot.py --run "smooth" --save
 echo "finished"
 
 
