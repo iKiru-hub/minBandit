@@ -245,7 +245,7 @@ def multiple_main_multiple(args):
         "different parameters")
 
     # define variables to vary
-    variables = [3, 5, 10]
+    variables = [1, 2, 3, 5, 7, 10]
     args.save = True
     args.plot = True
     args.verbose = False
