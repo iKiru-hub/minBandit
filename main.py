@@ -196,9 +196,15 @@ def main_multiple(args, **kwargs) -> dict:
 
                 # current time
                 identifier = f"{time.strftime('rewards_%Y_%m_%d_%H%M%S')}"
-                dirname = os.path.join(utils.MEDIA_PATH, identifier)
+                # dirname = os.path.join(utils.MEDIA_PATH, identifier)
                 # os.makedirs(dirname, exist_ok=True)
-                os.system(f"mkdir {dirname}")
+                try:
+                    dirname = os.path.join(utils.MEDIA_PATH, identifier)
+                    os.makedirs(dirname, exist_ok=True)
+                except:
+                    dirname = os.path.join(utils.MEDIA_PATH_2, f"{identifier}_1")
+                    os.makedirs(dirname, exist_ok=True)
+                # os.system(f"mkdir {dirname}")
                 run_id = ""
 
             else:
@@ -255,8 +261,12 @@ def multiple_main_multiple(args):
     # make folder
     if args.save:
         identifier = f"{args.env}_{time.strftime('%Y_%m_%d_%H%M%S')}"
-        dirpath = os.path.join(utils.MEDIA_PATH, identifier)
-        os.makedirs(dirpath, exist_ok=True)
+        try:
+            dirpath = os.path.join(utils.MEDIA_PATH, identifier)
+            os.makedirs(dirpath, exist_ok=True)
+        except:
+            dirpath = os.path.join(utils.MEDIA_PATH_2, f"{identifier}_1")
+            os.makedirs(dirpath, exist_ok=True)
         logger.info(f"Results will be saved in `{dirpath}`")
 
     # run
