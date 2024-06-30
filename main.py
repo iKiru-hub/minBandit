@@ -197,7 +197,8 @@ def main_multiple(args, **kwargs) -> dict:
                 # current time
                 identifier = f"{time.strftime('rewards_%Y_%m_%d_%H%M%S')}"
                 dirname = os.path.join(utils.MEDIA_PATH, identifier)
-                os.makedirs(dirname, exist_ok=True)
+                # os.makedirs(dirname, exist_ok=True)
+                os.system(f"mkdir {dirname}")
                 run_id = ""
 
             else:
