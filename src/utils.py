@@ -9,7 +9,7 @@ from numba import jit
 CACHE_PATH = r"/Users/daniekru/Research/lab/minBandit/src/cache"
 CACHE_PATH_2 = r"/home/daniekru/lab/minBandit/src/cache"
 MEDIA_PATH = r"/Users/daniekru/Research/lab/minBandit/media"
-MEDIA_PATH_2 = r"/home/daniekru/Research/lab/minBandit/media"
+MEDIA_PATH_2 = r"/home/daniekru/lab/minBandit/media"
 
 
 DEBUG = False
