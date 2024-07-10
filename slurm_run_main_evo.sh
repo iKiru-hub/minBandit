@@ -18,7 +18,7 @@ echo "$(pwd)"
 #srun python3 evo_main.py --verbose
 # srun python3 src/make_plot.py --run "smooth" --save
 #srun python3 main.py --verbose --trials 600 --rounds 1 --K 10 --reps 10 --plot --env "smooth" --load --save --idx 4 --multiple 2
-srun python3 main.py --verbose --trials 2 --rounds 6000 --K 800 --reps 20 --plot --env "simple" --load --save --idx 4 --multiple 2
+srun python3 main.py --verbose --trials 600 --rounds 3 --K 200 --reps 20 --plot --env "smooth" --load --save --idx 4 --multiple 1
 
 echo "finished"
 
