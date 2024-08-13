@@ -35,7 +35,10 @@ The regret is a measure of the performance of the agent, and it is often used to
 \textbf{Goal} \\
 \noindent The setting we consider in this work is a non-stationary environment with Binomial rewards. In particular, the agent is evaluated over a number $T_{\text{trials}}$ of \textit{trials}, each composed by an arbitrary number $T$ of \textit{rounds}; each \textit{trial} is characterized by a different
 reward distribution $\mathbf{p}\sim\mathcal{U}(0,1)^{K}$ (although in practice the bounds have been set to $(0.1, 0.8)$ such that the distributions are less trivial). \\
-\noindent Our goal in this work is to investigate the performance of the agent in a non-stationary environment with Binomial reward distributions, meaning that its underlying distribution changes over time. We choose this setting as it resembles an ecological scenario in which an animal has to forage in a patchy environment, where the reward of a given patch can change over time. We will consider two types of non-stationarity: abrupt and gradual. In the abrupt case, the reward distribution changes at a given time step, while in the gradual case, the reward distribution changes gradually over time. We will investigate the performance of the agent in both cases, and compare it to the stationary case, where the reward distribution remains constant over time.
+\noindent Our goal in this work is to investigate the performance of the agent in a non-stationary environment with Binomial reward distributions, meaning that its underlying distribution changes over time. We choose this setting as it resembles an ecological scenario in which an animal has to forage in a patchy environment, where the reward of a given patch can change over time.
+We will consider two types of non-stationarity: \textit{zero} and $\epsilon$-steps. In the first case, the reward distribution changes at a given time step. In the second case instead, the reward distribution changes gradually over time; in practice, it tends to a target distribution
+$\pi_{\text{trg}}$ which is changed once the distance is below a threshold as $\vert \pi_{\text{trg}} - \pi_{t}\vert < \epsilon$.
+We will investigate the performance of the model in both settings, and compare it to the common benchmark algorithms.
 
 % review of previous work
 

@@ -4,8 +4,7 @@
 \contentsline {subsection}{\numberline {2.2}Binomial K-armed bandit problem}{5}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Model description}{7}{subsection.2.3}%
 \contentsline {section}{\numberline {3}Results}{9}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Stationary environment}{9}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Non-stationary environment}{9}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Policy}{9}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Discussion}{10}{section.4}%
+\contentsline {subsection}{\numberline {3.1}Zero-steps distribution shift}{9}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Epsilon-steps distribution shift}{10}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Discussion}{11}{section.4}%
 \contentsline {section}{\numberline {5}Appendix}{17}{section.5}%

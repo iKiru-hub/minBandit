@@ -73,20 +73,17 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Binomial K-armed bandit problem}{5}{subsection.2.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Model description}{7}{subsection.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3}Results}{9}{section.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Stationary environment}{9}{subsection.3.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \textsc  {Cumulative reward over trials - }\textit  {For each round: the dashed line represents the maximum cumulative reward obtainable by receiving 1 at each round; the black solid line represents the expected cumulative reward for the greediest strategy, i.e. always choosing the arm with the highest expected reward; the green solid line represents the cumulative reward obtained by the agent; in red the expected cumuluative reward obtained by a random agent.}}}{9}{figure.caption.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Zero-steps distribution shift}{9}{subsection.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \textsc  {Performance with variable number of arms} - \textit  {each plot is an average of 50 simulations with K numbers of arms, the x-axis are rounds, the central vertical line signals the start of the second trial, the y-axis is the reward fraction. The shaded area is the reasonable reward range, where the lower bound is the chance level and the upper bound the best reward (following the optimal policy). The model performance is in red, while Upper-Confidence Bound green, Thompson Sampling blue, and Epsilon-Greedy orange. }}}{9}{figure.caption.2}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:results_trials_1}{{1}{9}{\textsc {Cumulative reward over trials - }\textit {For each round: the dashed line represents the maximum cumulative reward obtainable by receiving 1 at each round; the black solid line represents the expected cumulative reward for the greediest strategy, i.e. always choosing the arm with the highest expected reward; the green solid line represents the cumulative reward obtained by the agent; in red the expected cumuluative reward obtained by a random agent.}}{figure.caption.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Non-stationary environment}{9}{subsection.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Policy}{9}{subsection.3.3}\protected@file@percent }
+\newlabel{fig:zero_1}{{1}{9}{\textsc {Performance with variable number of arms} - \textit {each plot is an average of 50 simulations with K numbers of arms, the x-axis are rounds, the central vertical line signals the start of the second trial, the y-axis is the reward fraction. The shaded area is the reasonable reward range, where the lower bound is the chance level and the upper bound the best reward (following the optimal policy). The model performance is in red, while Upper-Confidence Bound green, Thompson Sampling blue, and Epsilon-Greedy orange. }}{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Epsilon-steps distribution shift}{10}{subsection.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces \textsc  {Performance with variable number of arms} - \textit  {each plot is a simulation with K-numbers of arms, and the rest is also the same as before in \ref {fig:zero_1}}}}{10}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:eps_1}{{2}{10}{\textsc {Performance with variable number of arms} - \textit {each plot is a simulation with K-numbers of arms, and the rest is also the same as before in \ref {fig:zero_1}}}{figure.caption.3}{}}
 \citation{steyversBayesianAnalysisHuman2009a}
 \citation{schulzFindingStructureMultiarmed2020}
 \citation{zhangForgetfulBayesMyopic2013}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces \textsc  {Regret over rounds for each trial - }\textit  {Each line represents the cumulative regret normalized by number of rounds.}}}{10}{figure.caption.3}\protected@file@percent }
-\newlabel{fig:results_regret_1}{{2}{10}{\textsc {Regret over rounds for each trial - }\textit {Each line represents the cumulative regret normalized by number of rounds.}}{figure.caption.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces \textsc  {Performance of known algorithms - }\textit  {Comparison of various models taked from the literature.}}}{10}{figure.caption.4}\protected@file@percent }
-\newlabel{fig.lit_models_1}{{3}{10}{\textsc {Performance of known algorithms - }\textit {Comparison of various models taked from the literature.}}{figure.caption.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Discussion}{10}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Discussion}{11}{section.4}\protected@file@percent }
 \bibdata{navmem_refs}
 \bibcite{millerIntegrativeTheoryPrefrontal2001a}{1}
 \bibcite{sheynikhovichLongtermMemorySynaptic2023}{2}
@@ -98,8 +95,6 @@
 \bibcite{dardenneRolePrefrontalCortex2012}{8}
 \bibcite{cohenTemporalDynamicsBrain1997}{9}
 \bibcite{constantinidisPersistentSpikingActivity2018}{10}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces \textsc  {Option selected over rounds for each trial} \textit  {The red dots are choices made randomly, the black dots are intentional selections}}}{11}{figure.caption.5}\protected@file@percent }
-\newlabel{fig:results_minmod_a}{{4}{11}{\textsc {Option selected over rounds for each trial}\\\textit {The red dots are choices made randomly, the black dots are intentional selections}}{figure.caption.5}{}}
 \bibcite{zylberbergMechanismsPersistentActivity2017}{11}
 \bibcite{laraRolePrefrontalCortex2015}{12}
 \bibcite{frankAnatomyDecisionStriatoorbitofrontal2006}{13}
