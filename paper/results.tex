@@ -9,23 +9,25 @@ In this first setting, as the end of a trial $i$ the arm distribution changes im
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.65\textwidth]{figures/drawing.png}
-    \caption{\textsc{Performance with variable number of arms} - \textit{each plot is an average of 50 simulations with K numbers of arms, the x-axis are rounds, the central vertical line signals the start of the second trial, the y-axis is the reward fraction.
+    \caption{\textsc{Performance with variable number of arms} - \textit{each plot is a simulation with K numbers of arms, the x-axis are rounds, the central vertical line signals the start of the second trial, the y-axis is the reward fraction.
             The shaded area is the reasonable reward
     range, where the lower bound is the chance level and the upper bound the best reward (following the optimal policy). The model performance is in red, while Upper-Confidence Bound green, Thompson Sampling blue, and Epsilon-Greedy orange. }}
 \label{fig:zero_1}
 \end{figure}
 
 
-\noindent In Figure \ref{fig:zero_1} above, it is reported the average
+\noindent From figure \ref{fig:zero_1} above, it is clear the ability of the model (in red) to reach almost always the optimal reward policy (\textit{i.e.} the greediest) for all trials, even after the distribution shift.
+In comparison, the other algorithms start to struggle when the arms are more $100$ and the distribution changes.
 
 
-\newpage
 \subsection{Epsilon-steps distribution shift}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/drawing2.png}
-    \caption{\textsc{Performance with variable number of arms} - \textit{each plot is a simulation with K-numbers of arms, and the rest is also the same as before in \ref{fig:zero_1}}}
+    \caption{\textsc{Performance with variable number of arms} - \textit{each plot is a simulation with K-numbers of arms, and the rest is also the same as before in \ref{fig:zero_1}}. Each trial has 3 rounds, meaning that every three steps the distribution change.}
     \label{fig:eps_1}
 \end{figure}
+
+\noindent In the setting with a smooth distribution shift the difficulty of the problem is increased, especially since short-sighted greedy behaviours are easily sub-optimal. The model (always in red) is capable of reaching and maintaining a successful profile, even with many arms available.
 

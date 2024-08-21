@@ -25,8 +25,8 @@ The function $\Phi_v$ is a chosen to be a sum of a generalized sigmoid and a Gau
 \noindent The motivation behind this choice is to express a function that possesses a bounded region (depending on $\mu,\,\sigma$) at a high/low peak (depeding on the value of $\gamma_{2}$), and a continuous transition to a constant value (depending on the steepness of the sigmoid $\beta$, shift
 $\alpha$, and intensity $\gamma_{1}$).
 
-\hfill \break
-\textbf{Option selection} \\
+% \hfill \break
+\subsubsection{Option selection}
 The decision-making process within a single round is structured in two distinct phases. Initially, the model receives a constant external input targeting all neurons in the memory population \textit{M} equally.
 During this phase, $I_{\text{ext}}$ works as an equilibrium value while the reciprocal interactions with population \textit{P} push $\textbf{u}$ to different values, depending on the current policy encoded in $\textbf{z}$. However, in the early rounds the weights $\textbf{W}^{MP}$ are zero, and thus
 the contribution from \textit{P} is null. After a fixed amount of time $\sim 5 \text{s}$, the second phase begins. Here, the external input is removed and the model is left to evolve autonomously, and since there are no recurrent connections in neither population the dynamics is entirely driven by their coupling. \\
@@ -44,8 +44,7 @@ A selection $\hat{k}$ is sampled after another fixed amount of time $\sim 5 \tex
 
 \noindent The selection rule is simple: if the value representation $\textbf{v}$ is in agreement with the memory trace $\textbf{u}$, then the option with the highest value is selected. Otherwise, a random option is chosen. This rule is a way to express the exploration-exploitation trade-off, and it is dependent on the current policy $\textbf{z}$.
 
-\hfill \break
-\textbf{Learning} \\
+\subsection{Learning}
 Given a selected option, the environment (bandit) samples and returns a reward $R\in [0, 1]$.
 Then, the connections $\textbf{W}^{MP}$ for the neuron corresponding to the option $k$ are updated according to the following plasticity rule:
 
@@ -58,3 +57,9 @@ Where $W^{+}$ is a constant value that sets the upper bound for the synaptic wei
 different parameters.
 
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/selections_1.png}
+    \caption{\textsc{Selection evolution over rounds}}
+    \label{fig:sel1}
+\end{figure}

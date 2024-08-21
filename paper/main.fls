@@ -166,6 +166,12 @@ INPUT ./minmodel.tex
 INPUT minmodel.tex
 INPUT /opt/homebrew/Cellar/texlive/20240312_1/share/texmf-dist/fonts/tfm/public/cm/cmti7.tfm
 INPUT /opt/homebrew/Cellar/texlive/20240312_1/share/texmf-dist/fonts/tfm/public/cm/cmti7.tfm
+INPUT ./figures/selections_1.png
+INPUT ./figures/selections_1.png
+INPUT ./figures/selections_1.png
+INPUT ./figures/selections_1.png
+INPUT ./figures/selections_1.png
+INPUT /opt/homebrew/Cellar/texlive/20240312_1/share/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
 INPUT ./results.tex
 INPUT ./results.tex
 INPUT ./results.tex
@@ -176,7 +182,6 @@ INPUT ./figures/drawing.png
 INPUT ./figures/drawing.png
 INPUT ./figures/drawing.png
 INPUT ./figures/drawing.png
-INPUT /opt/homebrew/Cellar/texlive/20240312_1/share/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
 INPUT ./figures/drawing2.png
 INPUT ./figures/drawing2.png
 INPUT ./figures/drawing2.png

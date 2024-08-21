@@ -31,13 +31,19 @@ Another important concept in multi-armed bandit problems is the \textit{regret}.
 \noindent where $R^{*}$ is the reward obtained by always choosing the lever with the highest expected reward $R^{*}=T\max_{k}\{p_{k}\}$, and $R_{t}$ is the empirical reward obtained up to time $t$ by following policy $\pi$ as $R_{t}=\sum^{T}_{t=1}\pi_{\theta}(t)$.
 The regret is a measure of the performance of the agent, and it is often used to compare different algorithms. The goal of the agent is to minimize the regret, and thus maximize the total reward.
 
-\hfill \break
-\textbf{Goal} \\
+% \hfill \break
+\subsubsection{Non-stationary environment}
+% \textbf{Goal} \\
 \noindent The setting we consider in this work is a non-stationary environment with Binomial rewards. In particular, the agent is evaluated over a number $T_{\text{trials}}$ of \textit{trials}, each composed by an arbitrary number $T$ of \textit{rounds}; each \textit{trial} is characterized by a different
 reward distribution $\mathbf{p}\sim\mathcal{U}(0,1)^{K}$ (although in practice the bounds have been set to $(0.1, 0.8)$ such that the distributions are less trivial). \\
-\noindent Our goal in this work is to investigate the performance of the agent in a non-stationary environment with Binomial reward distributions, meaning that its underlying distribution changes over time. We choose this setting as it resembles an ecological scenario in which an animal has to forage in a patchy environment, where the reward of a given patch can change over time.
-We will consider two types of non-stationarity: \textit{zero} and $\epsilon$-steps. In the first case, the reward distribution changes at a given time step. In the second case instead, the reward distribution changes gradually over time; in practice, it tends to a target distribution
-$\pi_{\text{trg}}$ which is changed once the distance is below a threshold as $\vert \pi_{\text{trg}} - \pi_{t}\vert < \epsilon$.
+\noindent Our goal in this work is to investigate the performance of the agent in a non-stationary environment with Binomial reward distributions, meaning that its underlying distribution changes over time.
+We choose this setting as it resembles an ecological scenario in which an animal has to forage in a patchy environment, where the reward of a given patch can change over time.
+
+\noindent In particular, we consider two different types of non-stationarity.\\
+\textbf{zero-steps distribution shift}: the reward distribution changes immediately at the end of a trial $i$ to a new one $i+1$ as $\mathbf{\pi}_{i} \to \mathbf{\pi}_{i+1}$.
+
+\noindent \textbf{epsilon-steps distribution shift}: the reward distribution $\pi_{t}$ at time $t$ changes gradually over time, and it tends to a target distribution $\hat{\pi}_{i}$ as $\tau_{\pi}\dot{\pi}_{t}=\hat{\pi}_{i}-\pi_{t}$. Once distance is below a threshold $\epsilon$ as $\vert \hat{\pi}_{i} - \pi_{t}\vert < \epsilon$, the target distribution is changed to a new one $\hat{\pi}_{i}\to\hat{\pi}_{i+1}$.
+
 We will investigate the performance of the model in both settings, and compare it to the common benchmark algorithms.
 
 % review of previous work
