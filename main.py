@@ -22,7 +22,7 @@ def main(args) -> dict:
     # define proababilities set
     probabilities_set = utils.make_probability_set(K=K,
                                                    nb_trials=nb_trials,
-                                                   fixed_p=None,
+                                                   fixed_p=0.9,
                                                    normalize=False)
     # define the environment
     if env_type == "simple":
@@ -82,9 +82,13 @@ def main(args) -> dict:
 
     # run
     if visual:
+        logger.info("%visual trial")
         envs.visual_trial(model=model,
                           environment=env,
-                          nb_rounds=nb_rounds)
+                          nb_rounds=nb_rounds,
+                          nb_trials=nb_trials,
+                          t_update=200,
+                          style="choice")
         results = None
     else:
         results = envs.trial(model=model,

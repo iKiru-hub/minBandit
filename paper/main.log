@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Homebrew) (preloaded format=pdflatex 2024.7.14)  21 AUG 2024 02:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Homebrew) (preloaded format=pdflatex 2024.7.14)  22 AUG 2024 02:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -319,24 +319,33 @@ Package hyperref Info: Link coloring OFF on input line 17.
 \openout4 = `main.toc'.
 
  [2] (./introduction.tex [3]) (./methods.tex [4] [5]) [6] (./minmodel.tex [7]
-<figures/selections_1.png, id=235, 1075.3776pt x 622.2447pt>
+<figures/selections_1.png, id=236, 1075.3776pt x 622.2447pt>
 File: figures/selections_1.png Graphic file (type png)
 <use figures/selections_1.png>
-Package pdftex.def Info: figures/selections_1.png  used on input line 62.
-(pdftex.def)             Requested size: 327.74895pt x 189.64668pt.
-) [8 <./figures/selections_1.png>] (./results.tex
-<figures/drawing.png, id=245, 523.20468pt x 712.16063pt>
+Package pdftex.def Info: figures/selections_1.png  used on input line 51.
+(pdftex.def)             Requested size: 310.4979pt x 179.66777pt.
+) (./results.tex [8 <./figures/selections_1.png>]
+<figures/drawing.png, id=246, 523.20468pt x 712.16063pt>
 File: figures/drawing.png Graphic file (type png)
 <use figures/drawing.png>
 Package pdftex.def Info: figures/drawing.png  used on input line 11.
 (pdftex.def)             Requested size: 224.2479pt x 305.23424pt.
  [9 <./figures/drawing.png>]
-<figures/drawing2.png, id=253, 596.98032pt x 273.27094pt>
+<figures/selections_many.png, id=255, 533.3526pt x 622.2447pt>
+File: figures/selections_many.png Graphic file (type png)
+<use figures/selections_many.png>
+Package pdftex.def Info: figures/selections_many.png  used on input line 26.
+(pdftex.def)             Requested size: 310.4979pt x 362.25043pt.
+<figures/drawing2.png, id=258, 596.98032pt x 273.27094pt>
 File: figures/drawing2.png Graphic file (type png)
 <use figures/drawing2.png>
-Package pdftex.def Info: figures/drawing2.png  used on input line 27.
+Package pdftex.def Info: figures/drawing2.png  used on input line 36.
 (pdftex.def)             Requested size: 276.00105pt x 126.33995pt.
-) [10 <./figures/drawing2.png>] (./discussion.tex) [11] (./main.bbl [12] [13] [14] [15]) [16] (./appendix.tex) [17] (./main.aux)
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[10 <./figures/selections_many.png>]) [11 <./figures/drawing2.png>] (./discussion.tex) [12] (./main.bbl [13] [14] [15] [16]) [17] (./appendix.tex) [18] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -345,18 +354,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: CDC5B851FC970559A45C2821B3E12D2E;1803.
  ) 
 Here is how much of TeX's memory you used:
- 10895 strings out of 474116
- 179275 string characters out of 5732613
+ 10905 strings out of 474116
+ 179545 string characters out of 5732613
  1938187 words of memory out of 5000000
- 33029 multiletter control sequences out of 15000+600000
+ 33037 multiletter control sequences out of 15000+600000
  565416 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,11n,79p,667b,562s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </opt/homebrew/Cellar/texlive/20240312_1/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></opt/homebrew/Cellar/texlive/20240312_1/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></opt/homebrew/Cellar/texlive/20240312_1/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></opt/homebrew/Cellar/texlive/20240312_1/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></opt/homebrew/Cellar/texlive/20240312_1/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></opt/homebrew/Cellar/texlive/20240312_1/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></opt/homebrew/Cellar/texlive/20240312_1/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></opt/homebrew/Cellar/texlive/20240312_1/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></opt/homebrew/Cellar/texlive/20240312_1/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></opt/homebrew/Cellar/texlive/20240312_1/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></opt/homebrew/Cellar/texlive/20240312_1/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/homebrew/Cellar/texlive/20240312_1/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></opt/homebrew/Cellar/texlive/20240312_1/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on main.pdf (17 pages, 701972 bytes).
+Output written on main.pdf (18 pages, 744611 bytes).
 PDF statistics:
- 378 PDF objects out of 1000 (max. 8388607)
- 322 compressed objects within 4 object streams
- 98 named destinations out of 1000 (max. 500000)
- 120 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 389 PDF objects out of 1000 (max. 8388607)
+ 329 compressed objects within 4 object streams
+ 100 named destinations out of 1000 (max. 500000)
+ 125 words of extra memory for PDF output out of 10000 (max. 10000000)
 

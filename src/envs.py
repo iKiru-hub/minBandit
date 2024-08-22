@@ -571,7 +571,14 @@ def trial_multi_model(models: list, environment: KArmedBandit,
     return stats
 
 
-def visual_trial(model: object, environment: object, nb_rounds: int):
+def visual_trial(model: object,
+                 environment: object,
+                 nb_rounds: int,
+                 nb_trials: int,
+                 t_update: int=100,
+                 style: str="tape",
+                 plot: bool=True,
+                 online: bool=True):
 
     """
     Visualize the trial
@@ -584,6 +591,17 @@ def visual_trial(model: object, environment: object, nb_rounds: int):
         The environment
     nb_rounds : int
         The number of rounds
+    nb_trials : int
+        The number of trials
+    t_update : int, optional
+        The time to wait before updating the plot.
+        Default 100[ms].
+    style : str, optional
+        The style of the plot.
+        Default "3d"
+    plot : bool, optional
+        Display the plot.
+        Default True
     """
 
     logger.info("%visual trial")
@@ -594,30 +612,131 @@ def visual_trial(model: object, environment: object, nb_rounds: int):
 
     if K != 3:
         warnings.warn("The visual trial is only available for K=3")
-        return
+        # return
 
     # 3D plot
-    fig = plt.figure()
-    fig.suptitle(f"{environment.probabilities}")
-    ax = fig.add_subplot(111, projection='3d')
 
-    total_rewards = 0
+    p = environment.probabilities
+    idx_p = np.argmax(p) + 1
+    if online:
+        fig = plt.figure()
+        if len(p) < 7:
+            fig.suptitle("$\mathbf{\pi}=$" + \
+                f"{environment.probabilities} [$i=${idx_p}]")
+        else:
+            fig.suptitle("$\mathbf{\pi}_{\\text{max}}=$" + \
+                f"{environment.probabilities.max()} [$i=${idx_p}]")
+
+        if style == "3d":
+            ax = fig.add_subplot(111, projection='3d')
+        else:
+            ax = fig.add_subplot(111)
+    else:
+        ax = None
+
+    all_choices = np.zeros((nb_trials * nb_rounds, K))
+    all_top = []
+    total_reward = 0.
 
     # run
-    for round_i in tqdm(range(nb_rounds)):
+    for trial_i in tqdm(range(nb_trials)):
 
-        # select an arm
-        k = model.select_arm(visualize=round_i > 0,
-                             ax=ax)
+        # env
+        environment.update()
+        p = environment.probabilities
+        all_top += [p.argmax()]
 
-        # sample the reward
-        reward = environment.sample(k=k)
-        total_rewards += reward
+        idx_p = np.argmax(p) + 1
+        if online:
+            if len(p) < 7:
+                fig.suptitle("$\mathbf{\pi}=$" + \
+                    f"{environment.probabilities} [$i=${idx_p}]")
+            else:
+                fig.suptitle("$\mathbf{\pi}_{\\text{max}}=$" + \
+                    f"{environment.probabilities.max()} [$i=${idx_p}]")
 
-        # update the model
-        model.update(k=k, reward=reward)
+        #
+        model.reset(complete=True)
+        reward_round = 0.
+        for round_i in tqdm(range(nb_rounds)):
+
+            title = f" [{round_i+1}/{trial_i+1}] - "
+            title += "$\\tilde{R}=$"
+            title += f"{reward_round/(round_i+1):.3f}"
+
+            # select an arm
+            k = model.select_arm(visualize=round_i % 20 == 0 and online,
+                                 ax=ax,
+                                 t_update=t_update,
+                                 style=style,
+                                 title=title)
+
+            # sample the reward
+            reward = environment.sample(k=k)
+            reward_round += reward
+            all_choices[trial_i * nb_rounds + round_i, k] = 1
+
+            # update the model
+            model.update(k=k, reward=reward)
+
+        #
+        total_reward = reward_round / nb_rounds
+
+    # ---------------------------- #
+    plt.close()
+
+    if plot:
+        plot_choices(all_choices=all_choices, all_top=all_top,
+                     nb_rounds=nb_rounds, nb_trials=nb_trials, K=K,
+                     title=f"Model: {model}, Environment: {environment}")
+    else:
+        return all_choices, all_top, total_reward
 
 
+def plot_choices(all_choices: np.ndarray, all_top: list,
+                 nb_rounds: int, nb_trials: int, K: int,
+                 ax: object=None, title: str="",
+                 show: bool=True,
+                 xlab: bool=True):
+
+    if ax is None:
+        fig = plt.figure()
+        ax = fig.add_subplot(111)
+
+    ax.imshow(all_choices.T, cmap="Greys",
+               aspect="auto", interpolation="None",
+               label="selections")
+    ax.set_yticks(range(K))
+    ax.set_yticklabels(range(1, K+1))
+    ax.set_ylabel("arms", fontsize=15)
+    if xlab:
+        ax.set_xlabel("rounds", fontsize=15)
+
+    for i in range(nb_trials):
+
+        if i == 0:
+            ax.plot([i * nb_rounds, (i+1) * nb_rounds],
+                     [all_top[i], all_top[i]], 'r',
+                     label="best")
+            continue
+        ax.plot([i * nb_rounds, (i+1) * nb_rounds],
+                 [all_top[i], all_top[i]], 'r')
+
+        if i == 1:
+            ax.axvline(i * nb_rounds, color="grey",
+                        linestyle="--", linewidth=1.,
+                        label="trial onset")
+            continue
+        ax.axvline(i * nb_rounds, color="grey",
+                    linestyle="--", linewidth=1.)
+
+    # plt.title(f"Selections over time", fontsize=15)
+    if xlab:
+        ax.legend(loc="lower right", fontsize=15)
+    ax.set_title(title, fontsize=15)
+
+    if show:
+        plt.show()
 
 
 """ other functions """

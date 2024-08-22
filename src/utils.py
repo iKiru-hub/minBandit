@@ -168,13 +168,16 @@ def make_probability_set(K: int, nb_trials: int,
         set of probabilities
     """
 
-
     probabilities_set = []
+    idx_set = np.random.choice(list(range(K)), nb_trials,
+                               replace=False)
     for i in range(nb_trials):
 
         if fixed_p:
             p = np.around(np.random.uniform(0.05, 0.3, K), 2)
-            p[i%K] = fixed_p
+            # p[i%K] = fixed_p
+            p[idx_set[i%K]] = 0.9
+            logger.warning(f"# Fixed probability: {p}")
         else:
             p = np.around(np.random.uniform(0.05, 0.95, K), 2)
 
@@ -357,6 +360,116 @@ def plot_activation_function(params: dict):
     ax.set_ylabel("activation")
     ax.grid()
     plt.show()
+
+
+def plot_online_3d(ax: plt.Axes, t: int, U: np.ndarray,
+                   V: np.ndarray, u: np.ndarray, v: np.ndarray,
+                   title: str=""):
+
+        ax.clear()
+        # plot U as a black line in 3D
+        ax.plot(U[:t, 0], U[:t, 1], U[:t, 2], 'k-',
+                alpha=0.5)
+        # plot V as a red line in 3D
+        ax.plot(V[:t, 0], V[:t, 1], V[:t, 2], 'r-',
+                alpha=0.5)
+        # plot the current point in 3D
+        ax.plot([self._u[0]], [self._u[1]], [self._u[2]],
+                'ko', label="u")
+        ax.plot([self._v[0]], [self._v[1]], [self._v[2]],
+                'ro', label="v")
+        ax.set_title(title)
+
+        ax.set_xlim(0., 2.)
+        ax.set_ylim(0., 2.)
+        ax.set_zlim(0., 2.)
+
+        ax.set_xticks([0., 2.])
+        ax.set_yticks([0., 2.])
+        ax.set_zticks([0., 2.])
+
+        ax.set_xlabel("A")
+        ax.set_ylabel("B")
+        ax.set_zlabel("C")
+
+        ax.grid(False)
+
+        ax.legend()
+
+
+def plot_online_2d(ax: plt.Axes, t: int, U: np.ndarray,
+                   V: np.ndarray, u: np.ndarray, v: np.ndarray,
+                   title: str=""):
+
+    ax.clear()
+    ax.plot(U[:t, 0], U[:t, 1], 'k-', alpha=0.5)
+    ax.plot(V[:t, 0], V[:t, 1], 'r-', alpha=0.5)
+    ax.plot([u[0]], [u[1]], 'ko', label="u")
+    ax.plot([v[0]], [v[1]], 'ro', label="v")
+    ax.set_title(title)
+    ax.set_xlim(0., 2.)
+    ax.set_ylim(0., 2.)
+    ax.set_xticks([0., 2.])
+    ax.set_yticks([0., 2.])
+    ax.set_xlabel("A")
+    ax.set_ylabel("B")
+    ax.grid(False)
+    ax.legend()
+
+
+def plot_online_tape(ax: plt.Axes, x: np.ndarray,
+                     shape: tuple=(1, -1),
+                     title: str="",
+                     lsty: str="o-"):
+
+    ax.clear()
+    # ax.imshow(x.reshape(shape), cmap="Greys",
+    #           vmin=0., vmax=2., aspect="auto")
+    ax.plot(x.flatten(), lsty, color="black", lw=2,
+            alpha=0.8 if lsty == "o-" else 0.3)
+    ax.set_xlim(0, x.size-1)
+    ax.set_ylim(0, 2.1)
+    ax.set_aspect("auto")
+    ax.set_title(title)
+    ax.set_yticks([])
+    if len(x) < 10:
+        ax.set_xticks(range(x.size))
+        ax.set_xticklabels(np.arange(1, x.size+1).astype(int))
+    else:
+        ax.set_xticks(np.linspace(0, x.size, 10).astype(int))
+        ax.set_xticklabels(np.linspace(1, x.size, 10).astype(int))
+    # ax.set_axis_off()
+
+
+def plot_online_choices(ax: plt.Axes, K: int, choices: list, 
+                        title: str=""):
+
+    ax.clear()
+    # ax.plot(choices, 'ko', markersize=5)
+
+    length = min((100, len(choices)))
+    z = np.zeros((length, K))
+    z[np.arange(length), choices[-length:]] = 1
+
+    ax.set_title(title)
+    ax.set_ylim(-1, K)
+    ax.set_ylabel(f"{K} arms")
+    ax.grid(True)
+    # if K < 10:
+    ax.set_yticks(range(0, K))
+    ax.set_yticklabels(np.arange(1, K+1).astype(str))
+    # else:
+    #     ax.set_yticks(np.linspace(0, K, 10).astype(int))
+    #     ax.set_yticklabels(np.linspace(1, K+1, 10).astype(int).astype(str))
+
+    ax.set_xticks([])
+    ax.set_xlabel("rounds")
+
+    ax.imshow(z.T, cmap="Greys", alpha=0.8,
+              aspect="auto", interpolation="nearest")
+    # ax.set_axis_off()
+
+
 
 
 

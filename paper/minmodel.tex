@@ -42,7 +42,18 @@ A selection $\hat{k}$ is sampled after another fixed amount of time $\sim 5 \tex
     \right.
 \end{equation*}
 
-\noindent The selection rule is simple: if the value representation $\textbf{v}$ is in agreement with the memory trace $\textbf{u}$, then the option with the highest value is selected. Otherwise, a random option is chosen. This rule is a way to express the exploration-exploitation trade-off, and it is dependent on the current policy $\textbf{z}$.
+\noindent The selection rule is simple: if the value representation $\textbf{v}$ is in agreement with the memory trace $\textbf{u}$, then the option with the highest value is selected. Otherwise, a random option is chosen. This rule is a way to express the exploration-exploitation trade-off, and it
+is dependent on the current policy $\textbf{z}$. \\ In figure \ref{fig:sel1} it is shown the history of selections over multiple trials. In particular, it can noted how the policy adopted by the model encounters period of exploration and successive settling over an explotative strategy, which can be
+reverted in case of a change in the environment's reward distribution.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/selections_1.png}
+    \caption{\textsc{Selection evolution over rounds} - \textit{the x-axis represents the available arms, while the y-axis the number of rounds, with the dotted vertical lines indicating the start of a new trial with 150 rounds each. The model selections are the black vertical lines for an arm and a
+    round. The red horizontal lines signal the arm with the highest reward probability, thus representing the best (and greediest) selection.}}
+    \label{fig:sel1}
+\end{figure}
+
 
 \subsection{Learning}
 Given a selected option, the environment (bandit) samples and returns a reward $R\in [0, 1]$.
@@ -57,9 +68,4 @@ Where $W^{+}$ is a constant value that sets the upper bound for the synaptic wei
 different parameters.
 
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.95\textwidth]{figures/selections_1.png}
-    \caption{\textsc{Selection evolution over rounds}}
-    \label{fig:sel1}
-\end{figure}
+

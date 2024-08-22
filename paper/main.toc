@@ -8,6 +8,6 @@
 \contentsline {subsection}{\numberline {2.4}Learning}{8}{subsection.2.4}%
 \contentsline {section}{\numberline {3}Results}{9}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Zero-steps distribution shift}{9}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Epsilon-steps distribution shift}{10}{subsection.3.2}%
-\contentsline {section}{\numberline {4}Discussion}{11}{section.4}%
-\contentsline {section}{\numberline {5}Appendix}{17}{section.5}%
+\contentsline {subsection}{\numberline {3.2}Epsilon-steps distribution shift}{11}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Discussion}{12}{section.4}%
+\contentsline {section}{\numberline {5}Appendix}{18}{section.5}%

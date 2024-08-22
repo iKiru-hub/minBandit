@@ -19,6 +19,15 @@ In this first setting, as the end of a trial $i$ the arm distribution changes im
 \noindent From figure \ref{fig:zero_1} above, it is clear the ability of the model (in red) to reach almost always the optimal reward policy (\textit{i.e.} the greediest) for all trials, even after the distribution shift.
 In comparison, the other algorithms start to struggle when the arms are more $100$ and the distribution changes.
 
+Next, it has been enquired how the model selection policy evolves over time and in comparison with the other algorithms, and the results are visualized in figure \ref{fig:sel2}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/selections_many.png}
+    \caption{\textsc{Selection evolution over rounds for multiple models} - \textit{the individual plots follow the same schema of \ref{fig:sel1}, with the model name and reward per round fraction}}
+    \label{fig:sel2}
+\end{figure}
+
 
 \subsection{Epsilon-steps distribution shift}
 

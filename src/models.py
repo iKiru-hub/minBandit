@@ -4,7 +4,7 @@ from numba import jit
 from abc import ABC, abstractmethod
 
 try:
-    from src.utils import sigmoid, gaussian_sigmoid, generalized_sigmoid
+    from src.utils import sigmoid, gaussian_sigmoid, generalized_sigmoid, plot_online_3d, plot_online_2d, plot_online_tape, plot_online_choices
 except ImportError:
     from utils import sigmoid, gaussian_sigmoid, generalized_sigmoid
 
@@ -94,6 +94,9 @@ class Model(MBsolver):
         self._sigma_lr = sigma_lr
         self._r_lr = r_lr
 
+        # record
+        self.choices = []
+
     def __str__(self):
         return "`Model`"
 
@@ -118,6 +121,8 @@ class Model(MBsolver):
         else:
             self._choice = np.random.choice(self._options)
             self.is_random = True
+
+        self.choices.append(self._choice)
 
         return self._choice
 
@@ -158,10 +163,28 @@ class Model(MBsolver):
                             Iext) / self._tau_u
         self._v += (- self._v + self._value_function() * self._u) / self._tau_v
 
-    def _visualize_selection(self, ax: plt.Axes=None):
+    def _visualize_selection(self, ax: plt.Axes=None,
+                             t_update: int=1, title: str="",
+                             style: str="3d"):
 
         """
         Visualize the selection made by the model
+
+        Parameters
+        ----------
+        ax: plt.Axes
+            the axis to plot on (3D).
+            Default is None
+        t_update: int
+            the time interval to update the plot
+            Default is 1
+        title: str
+            the title of the plot
+            Default is ""
+        style: str
+            the style of the plot,
+            "3d", "2d", "tape"
+            Default is "3d"
         """
 
         Iext = np.ones((self._K, 1))
@@ -171,8 +194,12 @@ class Model(MBsolver):
 
         # figure
         if ax is None:
-            fig = plt.figure()
-            ax = fig.add_subplot(111, projection='3d')
+            if style == "3d":
+                fig = plt.figure()
+                ax = fig.add_subplot(111, projection='3d')
+            else:
+                fig, ax = plt.subplots()
+                # ax = fig.add_subplot(111)
 
         # pre-decision period
         for t in range(self._dur_pre):
@@ -180,32 +207,24 @@ class Model(MBsolver):
             U[t] = self._u.flatten()
             V[t] = self._v.flatten()
 
-            if t % 20 != 0:
+            if t % t_update != 0:
                 continue
 
             # plot
-            ax.clear()
-            # plot U as a black line in 3D
-            ax.plot(U[:t, 0], U[:t, 1], U[:t, 2], 'k-',
-                    alpha=0.5)
-            # plot V as a red line in 3D
-            ax.plot(V[:t, 0], V[:t, 1], V[:t, 2], 'r-',
-                    alpha=0.5)
-            # plot the current point in 3D
-            ax.plot([self._u[0]], [self._u[1]], [self._u[2]], 'ko', label="u")
-            ax.plot([self._v[0]], [self._v[1]], [self._v[2]], 'ro', label="v")
-            ax.set_title(f"Pre - t={t}ms")
-
-            ax.set_xlim(0., 2.)
-            ax.set_ylim(0., 2.)
-            ax.set_zlim(0., 2.)
-
-            ax.set_xlabel("1")
-            ax.set_ylabel("2")
-            ax.set_zlabel("3")
-
-            ax.legend()
-
+            if style == "3d":
+                plot_online_3d(ax=ax, t=t, U=U, V=V,
+                               u=self._u, v=self._v,
+                               title=f"Pre - t={t}ms" + title)
+            elif style == "2d":
+                plot_online_2d(ax=ax, t=t, U=U, V=V,
+                               u=self._u, v=self._v,
+                               title=f"Pre - t={t}ms" + title)
+            elif style == "tape":
+                plot_online_tape(ax=ax,
+                                 x=self._u,
+                                 title="$u_{pre}$"+\
+                                 f" - t={t}ms" + title,
+                                 lsty="o--")
             plt.pause(0.001)
 
         # post-decision period
@@ -215,37 +234,37 @@ class Model(MBsolver):
             U[t] = self._u.flatten()
             V[t] = self._v.flatten()
 
-            if t % 20 != 0:
+            if t % t_update != 0:
                 continue
 
             # plot
-            ax.clear()
-            # plot U as a black line in 3D
-            ax.plot(U[:t, 0], U[:t, 1], U[:t, 2], 'k-',
-                    alpha=0.5)
-            # plot V as a red line in 3D
-            ax.plot(V[:t, 0], V[:t, 1], V[:t, 2], 'r-',
-                    alpha=0.5)
-            # plot the current point in 3D
-            ax.plot([self._u[0]], [self._u[1]], [self._u[2]], 'ko', label="u")
-            ax.plot([self._v[0]], [self._v[1]], [self._v[2]], 'ro', label="v")
-            ax.set_title(f"Post - t={t}ms")
+            if style == "3d":
+                plot_online_3d(ax=ax, t=t, U=U, V=V,
+                               u=self._u, v=self._v,
+                               title=f"Post - t={t}ms" + title)
+            elif style == "2d":
+                plot_online_2d(ax=ax, t=t, U=U, V=V,
+                               u=self._u, v=self._v,
+                               title=f"Post - t={t}ms" + title)
+            elif style == "tape":
+                plot_online_tape(ax=ax,
+                                 x=self._u,
+                                 title="$u_{post}$"+\
+                                 f" - t={t}ms" + title,
+                                 lsty="o-")
 
-            ax.set_xlim(0., 2.)
-            ax.set_ylim(0., 2.)
-            ax.set_zlim(0., 2.)
-
-            ax.set_xlabel("1")
-            ax.set_ylabel("2")
-            ax.set_zlabel("3")
-
-            ax.legend()
+        if style == "choice":
+            plot_online_choices(ax=ax, K=self._K,
+                                choices=self.choices,
+                                title=title)
 
             plt.pause(0.001)
 
-
     def select_arm(self, visualize: bool=False,
-                   ax: plt.Axes=None) -> int:
+                   ax: plt.Axes=None,
+                   style: str="3d",
+                   t_update: int=20,
+                   title: str="") -> int:
 
         """
         Rollout the model and obtain a response
@@ -258,6 +277,16 @@ class Model(MBsolver):
         ax: plt.Axes
             the axis to plot on (3D).
             Default is None
+        t_update: int
+            the time interval to update the plot
+            Default is 20
+        titile: str
+            the text to display in the plot
+            Default ""
+        style: str
+            the style of the plot,
+            "3d", "2d", "tape"
+            Default is "3d"
 
         Returns
         -------
@@ -268,7 +297,10 @@ class Model(MBsolver):
         self.reset()
 
         if visualize:
-            self._visualize_selection(ax=ax)
+            self._visualize_selection(ax=ax,
+                                      t_update=t_update,
+                                      title=title,
+                                      style=style)
         else:
             Iext = np.ones((self._K, 1))
 
@@ -313,11 +345,14 @@ class Model(MBsolver):
 
         return self._u.flatten().copy(), self._v.flatten().copy()
 
-    def reset(self):
+    def reset(self, complete: bool=False):
 
         self._u = np.zeros((self._K, 1))
         self._v = np.zeros((self._K, 1))
         self._choice = None
+
+        if complete:
+            self.choices = []
 
 
 
@@ -346,7 +381,7 @@ class ThompsonSampling(MBsolver):
     def __str__(self):
         return "`Thompson Sampling`"
 
-    def select_arm(self) -> int:
+    def select_arm(self, **kwargs) -> int:
 
         """
         Sample an arm from the bandit.
@@ -376,7 +411,7 @@ class ThompsonSampling(MBsolver):
         self.alpha[k] += reward
         self.beta[k] += 1 - reward
 
-    def reset(self):
+    def reset(self, **kwargs):
 
         """
         Reset the parameters of the bandit.
@@ -411,7 +446,7 @@ class EpsilonGreedy(MBsolver):
     def __str__(self):
         return f"`Epsilon-Greedy`"
 
-    def select_arm(self) -> int:
+    def select_arm(self, **kwargs) -> int:
 
         """
         Sample an arm from the bandit.
@@ -442,7 +477,7 @@ class EpsilonGreedy(MBsolver):
         self.n[k] += 1
         self.q[k] += (reward - self.q[k]) / self.n[k]
 
-    def reset(self):
+    def reset(self, **kwargs):
 
         """
         Reset the parameters of the bandit.
@@ -475,7 +510,7 @@ class UCB1(MBsolver):
     def __str__(self):
         return "`UCB1`"
 
-    def select_arm(self) -> int:
+    def select_arm(self, **kwargs) -> int:
 
         """
         Sample an arm from the bandit.
@@ -509,7 +544,7 @@ class UCB1(MBsolver):
         self.q[k] += (reward - self.q[k]) / self.n[k]
         self.t += 1
 
-    def reset(self):
+    def reset(self, **kwargs):
 
         """
         Reset the parameters of the bandit.
