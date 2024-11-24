@@ -163,6 +163,21 @@ Michel Tokic and G{\"u}nther Palm.
 \newblock Value-{{Difference Based Exploration}}: {{Adaptive Control}} between {{Epsilon-Greedy}} and {{Softmax}}.
 \newblock In Joscha Bach and Stefan Edelkamp, editors, {\em {{KI}} 2011: {{Advances}} in {{Artificial Intelligence}}}, volume 7006, pages 335--346. Springer Berlin Heidelberg, Berlin, Heidelberg, 2011.
 
+\bibitem{agrawalAnalysisThompsonSampling2012}
+Shipra Agrawal and Navin Goyal.
+\newblock Analysis of {{Thompson Sampling}} for the {{Multi-armed Bandit Problem}}.
+\newblock In {\em Proceedings of the 25th {{Annual Conference}} on {{Learning Theory}}}, pages 39.1--39.26. {JMLR Workshop and Conference Proceedings}, June 2012.
+
+\bibitem{auerFinitetimeAnalysisMultiarmed2002}
+Peter Auer and Nicolo {Cesa-Bianchi}.
+\newblock Finite-time {{Analysis}} of the {{Multiarmed Bandit Problem}}.
+\newblock {\em Machine Learning}, 2002.
+
+\bibitem{dayanDecisionTheoryReinforcement2008}
+Peter Dayan and Nathaniel~D. Daw.
+\newblock Decision theory, reinforcement learning, and the brain.
+\newblock {\em Cognitive, Affective, \& Behavioral Neuroscience}, 8(4):429--453, December 2008.
+
 \bibitem{garivierUpperConfidenceBoundPolicies2008}
 Aur{\'e}lien Garivier and Eric Moulines.
 \newblock On {{Upper-Confidence Bound Policies}} for {{Non-Stationary Bandit Problems}}, May 2008.
@@ -259,21 +274,6 @@ Jose~M. {Esnaola-Acebes}, Alex Roxin, and Klaus Wimmer.
 Mojtaba Madadi~Asl, Abdol-Hossein Vahabie, and Alireza Valizadeh.
 \newblock Dopaminergic {{Modulation}} of {{Synaptic Plasticity}}, {{Its Role}} in {{Neuropsychiatric Disorders}}, and {{Its Computational Modeling}}.
 \newblock {\em Basic and Clinical Neuroscience}, 10(1):1--12, 2019.
-
-\bibitem{agrawalAnalysisThompsonSampling2012}
-Shipra Agrawal and Navin Goyal.
-\newblock Analysis of {{Thompson Sampling}} for the {{Multi-armed Bandit Problem}}.
-\newblock In {\em Proceedings of the 25th {{Annual Conference}} on {{Learning Theory}}}, pages 39.1--39.26. {JMLR Workshop and Conference Proceedings}, June 2012.
-
-\bibitem{auerFinitetimeAnalysisMultiarmed2002}
-Peter Auer and Nicolo {Cesa-Bianchi}.
-\newblock Finite-time {{Analysis}} of the {{Multiarmed Bandit Problem}}.
-\newblock {\em Machine Learning}, 2002.
-
-\bibitem{dayanDecisionTheoryReinforcement2008}
-Peter Dayan and Nathaniel~D. Daw.
-\newblock Decision theory, reinforcement learning, and the brain.
-\newblock {\em Cognitive, Affective, \& Behavioral Neuroscience}, 8(4):429--453, December 2008.
 
 \bibitem{steyversBayesianAnalysisHuman2009a}
 Mark Steyvers, Michael~D. Lee, and Eric-Jan Wagenmakers.

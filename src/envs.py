@@ -98,7 +98,7 @@ class KArmedBandit:
 
         self.probabilities_set = self._probabilities_set_or
         self.probabilities = self.probabilities_set[0]
-        self.trg_probabilities = self.probabilities_set[1]
+        # self.trg_probabilities = self.probabilities_set[1]
         self.counter = 0
 
         self.chance_level = np.mean(self.probabilities)
@@ -547,8 +547,8 @@ def trial_multi_model(models: list, environment: KArmedBandit,
         if verbose and nb_reps < 2:
             logger.info("")
             logger.info(f"trial {trial_i}")
-            logger.info(f">>> upper : {upper_bound_list[trial_i]:.3f}")
-            logger.info(f">>> chance: {chance_list[trial_i]:.3f}")
+            logger.info(f">>> upper : {upper_bound_list[trial_i].item():.3f}")
+            logger.info(f">>> chance: {chance_list[trial_i].item():.3f}")
             for i, name in enumerate(names):
                 logger.info(f">>> {name} : {score_list[i, rep_i].mean():.3f}")
 

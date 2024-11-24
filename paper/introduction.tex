@@ -31,8 +31,21 @@ Other options are \textit{input matching}, where social cues are considered, and
 The agent has to learn to choose the action that maximizes the expected reward by repeatedly selecting actions and observing the rewards obtained.
 This problem has been extensively studied in the context of reinforcement learning, and it is considered a fundamental building block for more complex tasks \cite{suttonReinforcementLearningProblem1998}.
 
+
 % short overview of the literature
 Extensive research has been conducted on the topic, and several algorithms have been proposed, such as Thompson sampling, $\epsilon$-greedy, UCB1, VDBE, alongside convergence proofs for specific settings \cite{gittinsBanditProcessesDynamic1979, kaufmannThompsonSamplingAsymptotically2012, banMultifacetContextualBandits2021, tokicAdaptiveEGreedyExploration2010, tokicValueDifferenceBasedExploration2011}.
+
+% brief introduction of the k-armed bandit problem and previous algorithms.
+\subsection{Related work}
+% overview of the main solutions proposed in the literature from a computational perspective.
+There exists various flavours of this problem, with the simplest having a stationary reward distribution, while the more challening ones have have \textit{concept drift}, where the reward distribution changes over time.
+Over the years, several algorithms have been proposed, alongside with their theoretical guarantees. In this regard, Thompson sampling is a popular algorithm that has been shown to achieve near-optimal regret bounds in the stochastic setting \cite{agrawalAnalysisThompsonSampling2012}, which 
+a Bayesian approach  the idea of maintaining a posterior distribution over the reward probabilities of the actions, and selecting actions according to the posterior distribution. Another popular algorithm is the Upper Confidence Bound (UCB) algorithm, which has been shown to achieve near-optimal
+regret bounds in the adversarial setting \cite{auerFinitetimeAnalysisMultiarmed2002}. The algorithm is based on the idea of maintaining an upper confidence bound on the reward probabilities of the actions, and selecting actions according to the upper confidence bound.
+\\
+% outline of lack of bio-realism and what we currently know about how the brain might solve this task.
+Despite the success of these algorithms in solving the k-armed bandit problem, they lack biological plausibility. In contrast, the brain has evolved a complex network of interconnected regions that work together to solve this task. In particular, the dopamine-acetylcholine system has been shown to
+play a crucial role in learning and decision making \cite{dayanDecisionTheoryReinforcement2008}.
 
 % aim of the work
 In this work, we focus on a stochastic bandit problem, a more challenging variant of the original task endowed with \textit{concept drift}, where the reward distribution changes over time \cite{garivierUpperConfidenceBoundPolicies2008, besbesStochasticMultiArmedBanditProblem2014, cavenaghiNonStationaryMultiArmed2021}.
