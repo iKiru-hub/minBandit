@@ -4,6 +4,7 @@ from numba import jit
 from tqdm import tqdm
 import time, warnings
 from abc import ABC, abstractmethod
+from statistics import mode
 
 try:
     from src.utils import tqdm_enumerate, setup_logger
@@ -97,15 +98,15 @@ class KAB(ABC):
 
     @property
     def chance_level(self) -> float:
-        return np.mean(self.probabilities)
+        return np.mean(self.chance_level_list)
 
     @property
     def upper_bound(self) -> float:
-        return np.mean(self.probabilities)
+        return np.mean(self.upper_bound_list)
 
     @property
     def best_arm(self) -> int:
-        return np.mean(self.probabilities)
+        return mode(self.best_arm_list)
 
     def get_info(self):
 
@@ -313,6 +314,7 @@ class KABsinv0(KAB):
 
     def __init__(self, K: int, frequencies: list,
                  phases: list=None,
+                 constants: list=[],
                  normalize: bool=True,
                  verbose: bool=False):
     
@@ -345,12 +347,16 @@ class KABsinv0(KAB):
         else:
             self._phases = np.zeros(K)
 
+        self.constants = constants
+        self.num_constants = len(constants)
+
         self.update()
         self.counter = 0
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self.K}," + \
-            f" frequencies={self._frequencies})"
+            f" frequencies={self._frequencies}, " + \
+            f"const={self.num_constants})"
 
     def update(self):
 
@@ -360,13 +366,16 @@ class KABsinv0(KAB):
 
         # update the probabilities
         self.probabilities = 0.5*np.sin(2 * np.pi * \
-            self._frequencies * self.counter / 1000 + self._phases) + 0.5
+            self._frequencies * self.counter / 100 + self._phases) + 0.5
 
         if self._normalize:
             if self.probabilities.sum() == 0:
                 self.probabilities = np.ones(self.K) / self.K
             else:
                 self.probabilities /= self.probabilities.sum()
+
+        # set some to constant values
+        self.probabilities[:self.num_constants] = self.constants
 
         # update record
         self._update_record()
@@ -685,13 +694,13 @@ def visual_trial(model: object,
         # env
         environment.update()
         p = environment.probabilities
-        all_top += [p.argmax()]
+        # all_top += [p.argmax()]
 
         idx_p = np.argmax(p) + 1
         if online:
             if len(p) < 7:
                 fig.suptitle("$\mathbf{\pi}=$" + \
-                    f"{environment.probabilities} [$i=${idx_p}]")
+                    f"{np.around(environment.probabilities, 2)} [$i=${idx_p}]")
             else:
                 fig.suptitle("$\mathbf{\pi}_{\\text{max}}=$" + \
                     f"{environment.probabilities.max()} [$i=${idx_p}]")
@@ -700,6 +709,8 @@ def visual_trial(model: object,
         model.reset(complete=True)
         reward_round = 0.
         for round_i in tqdm(range(nb_rounds)):
+
+            all_top += [environment.best_arm]
 
             title = f" [{round_i+1}/{trial_i+1}] - "
             title += "$\\tilde{R}=$"
@@ -719,6 +730,7 @@ def visual_trial(model: object,
 
             # update the model
             model.update(k=k, reward=reward)
+            environment.update()
 
         #
         total_reward = reward_round / nb_rounds
@@ -756,12 +768,24 @@ def plot_choices(all_choices: np.ndarray, all_top: list,
     for i in range(nb_trials):
 
         if i == 0:
-            ax.plot([i * nb_rounds, (i+1) * nb_rounds],
-                     [all_top[i], all_top[i]], 'r',
-                     label="best")
+            for t in range(nb_rounds):
+                if t == 0:
+                    ax.plot(t, all_top[t], 'r', marker="v",
+                            markersize=5, label="best")
+                    continue
+                ax.plot(t, all_top[t], 'r', marker="v",
+                        markersize=5)
+
+            # ax.plot([i * nb_rounds, (i+1) * nb_rounds],
+            #          [all_top[i], all_top[i]], 'r',
+            #          label="best")
             continue
-        ax.plot([i * nb_rounds, (i+1) * nb_rounds],
-                 [all_top[i], all_top[i]], 'r')
+
+        for t in range(nb_rounds):
+            ax.plot(i * nb_rounds + t, all_top[t], 'r', marker="v",
+                    markersize=5)
+        # ax.plot([i * nb_rounds, (i+1) * nb_rounds],
+        #          [all_top[i], all_top[i]], 'r')
 
         if i == 1:
             ax.axvline(i * nb_rounds, color="grey",

@@ -16,7 +16,7 @@ The first equation tracks the evolution of the neural activity $\textbf{u}$ of p
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/minb_architecture.png}
+    \includegraphics[width=0.6\textwidth]{figures/minb_architecture.png}
     \caption{\textsc{Model architecture} - \textit{The model is composed of a layer $M$ (blue), receiving a feedfoward input $I_{\text{ext}}$, a layer $V$ (orange), and connections $\textbf{W}^{MV}$ and $\textbf{W}^{VM}$. Additionally, two indexes $k_{M}, k_{V}$  can be extracted from the layers and
     corresponds to the selection made by the two populations as $k_{M}=\text{argmax}_{k} \{\textbf{u}\}$, $k_{V}=\text{argmax}_{k} \{\textbf{v}\}$.}}
     \label{fig:main_architecture}
@@ -25,7 +25,6 @@ The first equation tracks the evolution of the neural activity $\textbf{u}$ of p
 \noindent Importantly, the two layers are not fully connected and the matrices are diagonal. Further, the weight matrix $W^{VM}$ is simply the identity, while $\tilde{\textbf{W}}^{MV}$ is a function of the actual weights $\Phi_{v}(\textbf{W}^{MV})$ and it represents the contribution of the active options $\textbf{u}$ to the value representation $\textbf{v}$.
 The function $\Phi_{v}$ is a chosen to be a sum of a generalized sigmoid and a Gaussian, such that the values have a peak followed or preceeded by a constant (\#improve). See more in the appendinx \ref{sec:appendix}.
 
-% \hfill \break
 \subsubsection{Option selection}
 The decision-making process within a single round is structured in two distinct phases. Initially, the model receives a constant external input targeting all neurons in the memory population \textit{M} equally.
 During this phase, $\textbf{I}_{\text{ext}}$ works as an equilibrium value while the reciprocal interactions with population \textit{V} push $\textbf{u}$ to different values, depending on the current policy encoded in $\tilde{\textbf{W}}^{MV}$. However, in the early rounds the weights $\textbf{W}^{MV}$ are zero, and thus
@@ -44,6 +43,7 @@ the contribution from \textit{V} is null. After a fixed amount of time $\sim 5 \
 \noindent The selection rule is simple: if the value representation $\textbf{v}$ is in agreement with the memory trace $\textbf{u}$, then the option with the highest value is selected. Otherwise, a random option is chosen. This rule is a way to express the exploration-exploitation trade-off, and it
 is dependent on the current policy $\tilde{\textbf{W}}^{MV}$. \\ In figure \ref{fig:sel1} it is shown the history of selections over multiple trials. In particular, it can noted how the policy adopted by the model encounters period of exploration and successive settling over an explotative strategy, which can be reverted in case of a change in the environment's reward distribution.
 
+\hfill \break
 % --- ALGORITHM
 \begin{algorithm}[H]
 \caption{Two-phases option selection process}

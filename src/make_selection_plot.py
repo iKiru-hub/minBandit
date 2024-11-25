@@ -15,11 +15,11 @@ except ModuleNotFoundError:
 logger = utils.setup_logger(__name__)
 
 """ settings """
-K = 3
+K = 5
 nb_rounds = 300
-nb_trials = 3
-env_type = "simple"
-verbose = True
+nb_trials = 2
+env_type = "sinv0"
+verbose = True 
 
 """ environment """
 # define proababilities set
@@ -43,8 +43,10 @@ def make_current_env(kind: str, probabilities_set: list):
                               fixed_p=0.9)
     elif env_type == "sinv0":
         frequencies = np.arange(1, K+1)
+        phases = np.random.uniform(0, 2*np.pi, K)
         env = envs.KABsinv0(K=K,
                             frequencies=frequencies,
+                            phases=phases,
                             normalize=True,
                             verbose=verbose)
     else:
@@ -68,15 +70,21 @@ logger(f"%{model}")
 
 # run
 env = make_current_env(env_type, probabilities_set)
-choices, tops, reward = envs.visual_trial(
+out = envs.visual_trial(
                   model=model,
                   environment=env,
                   nb_rounds=nb_rounds,
                   nb_trials=nb_trials,
                   t_update=200,
                   style="choice",
-                  online=True,
+                  online=False,
                   plot=True)
+
+if out is not None:
+    choices, tops, reward = out
+else:
+    import sys
+    sys.exit(0)
 
 record = {"Model": [choices, tops, reward]}
 

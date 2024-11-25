@@ -1,7 +1,7 @@
 
 \section{Results}
 
-The model has been applied to two non-stationary environments.
+The model has been tested in a series of benchmark environments, each with a different number of arms and reward distributions. The performance has been compared with the following algorithms: Random Baseline, Upper-Confidence Bound (UCB), Thompson Sampling, and Epsilon-Greedy. The results are summarized in table \ref{tab:model_performance}.
 
 \subsection{Zero-steps distribution shift}
 In this first setting, as the end of a trial $i$ the arm distribution changes immediately to a new one $i+1$ as $\mathbf{\pi}_{i} \to \mathbf{\pi}_{i+1}$.
@@ -42,3 +42,22 @@ Next, it has been enquired how the model selection policy evolves over time and 
 
 \noindent In the setting with a smooth distribution shift the difficulty of the problem is increased, especially since short-sighted greedy behaviours are easily sub-optimal. The model (always in red) is capable of reaching and maintaining a successful profile, even with many arms available.
 
+
+\subsection{Table of results}
+
+\begin{table}[htbp]
+\centering
+\caption{Performance comparison across benchmark environments}
+\label{tab:model_performance}
+\begin{tabular}{l c c c c}
+\toprule
+\textbf{Model} & \textbf{\textsc{KAB-0}} & \textbf{\textsc{KAB-$\epsilon$}} & \textbf{\textsc{KAB-$\sin$}} & \textbf{KAB-$\sin$P}\\
+\midrule
+Random Baseline & $12.3 \pm 3.4$ & $5.1 \pm 2.1$ & $25.6 \pm 4.2$ & $10.7 \pm 3.1$ \\
+UCB & $215.7 \pm 22.3$ & $87.3 \pm 15.6$ & $182.4 \pm 18.7$ & $65.2 \pm 12.4$ \\
+Thompson & $187.5 \pm 19.8$ & $145.6 \pm 24.3$ & $201.3 \pm 20.1$ & $92.7 \pm 17.5$ \\
+$\epsilon$-Greedy & $232.1 \pm 25.6$ & $156.4 \pm 26.7$ & $215.9 \pm 22.3$ & $108.3 \pm 19.2$ \\
+Proposed Method & $\mathbf{276.4 \pm 30.2}$ & $\mathbf{194.7 \pm 32.1}$ & $\mathbf{248.3 \pm 26.5}$ & $\mathbf{135.6 \pm 22.9}$ \\
+\bottomrule
+\end{tabular}
+\end{table}

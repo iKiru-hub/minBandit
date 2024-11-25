@@ -6,7 +6,7 @@ from abc import ABC, abstractmethod
 try:
     from src.utils import sigmoid, gaussian_sigmoid, generalized_sigmoid, plot_online_3d, plot_online_2d, plot_online_tape, plot_online_choices
 except ImportError:
-    from utils import sigmoid, gaussian_sigmoid, generalized_sigmoid
+    from utils import sigmoid, gaussian_sigmoid, generalized_sigmoid, plot_online_3d, plot_online_2d, plot_online_tape, plot_online_choices
 
 
 
@@ -250,6 +250,8 @@ class Model(MBsolver):
                                  title="$u_{post}$"+\
                                  f" - t={t}ms" + title,
                                  lsty="o-")
+
+            plt.pause(0.001)
 
         if style == "choice":
             plot_online_choices(ax=ax, K=self._K,

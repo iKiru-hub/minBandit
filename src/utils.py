@@ -374,9 +374,9 @@ def plot_online_3d(ax: plt.Axes, t: int, U: np.ndarray,
         ax.plot(V[:t, 0], V[:t, 1], V[:t, 2], 'r-',
                 alpha=0.5)
         # plot the current point in 3D
-        ax.plot([self._u[0]], [self._u[1]], [self._u[2]],
+        ax.plot([u[0]], [u[1]], [u[2]],
                 'ko', label="u")
-        ax.plot([self._v[0]], [self._v[1]], [self._v[2]],
+        ax.plot([v[0]], [v[1]], [v[2]],
                 'ro', label="v")
         ax.set_title(title)
 

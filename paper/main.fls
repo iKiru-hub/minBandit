@@ -109,6 +109,10 @@ INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/ifoddpa
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/relsize/relsize.sty
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/relsize/relsize.sty
+INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/booktabs/booktabs.sty
+INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/booktabs/booktabs.sty
+INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/tools/array.sty
+INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/tools/array.sty
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT ./main.aux
@@ -169,6 +173,7 @@ INPUT ./methods.tex
 INPUT methods.tex
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/tfm/public/cm/cmbx7.tfm
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/tfm/public/cm/cmbx5.tfm
+INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
 INPUT ./minmodel.tex
 INPUT ./minmodel.tex
 INPUT ./minmodel.tex
@@ -179,7 +184,6 @@ INPUT ./figures/minb_architecture.png
 INPUT ./figures/minb_architecture.png
 INPUT ./figures/minb_architecture.png
 INPUT ./figures/minb_architecture.png
-INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/tfm/public/cm/cmcsc10.tfm
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/tfm/public/cm/cmti7.tfm
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/tfm/public/cm/cmti7.tfm
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/tfm/public/cm/cmbxti10.tfm

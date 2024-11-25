@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Homebrew) (preloaded format=pdflatex 2024.10.6)  25 NOV 2024 19:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Homebrew) (preloaded format=pdflatex 2024.10.6)  25 NOV 2024 23:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -316,44 +316,72 @@ Package: relsize 2013/03/29 ver 4.1
 \c@algocf=\count313
 \algocf@algoframe=\box61
 \algocf@algobox=\box62
+) (/opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen170
+\lightrulewidth=\dimen171
+\cmidrulewidth=\dimen172
+\belowrulesep=\dimen173
+\belowbottomsep=\dimen174
+\aboverulesep=\dimen175
+\abovetopsep=\dimen176
+\cmidrulesep=\dimen177
+\cmidrulekern=\dimen178
+\defaultaddspace=\dimen179
+\@cmidla=\count314
+\@cmidlb=\count315
+\@aboverulesep=\dimen180
+\@belowrulesep=\dimen181
+\@thisruleclass=\count316
+\@lastruleclass=\count317
+\@thisrulewidth=\dimen182
+) (/opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/tools/array.sty
+Package: array 2023/10/16 v2.5g Tabular extension package (FMi)
+\col@sep=\dimen183
+\ar@mcellbox=\box63
+\extrarowheight=\dimen184
+\NC@list=\toks25
+\extratabsurround=\skip73
+\backup@length=\skip74
+\ar@cellbox=\box64
 ) (/opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count314
-\l__pdf_internal_box=\box63
+\l__color_backend_stack_int=\count318
+\l__pdf_internal_box=\box65
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
  (/opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count315
-\scratchdimen=\dimen170
-\scratchbox=\box64
-\nofMPsegments=\count316
-\nofMParguments=\count317
-\everyMPshowfont=\toks25
-\MPscratchCnt=\count318
-\MPscratchDim=\dimen171
-\MPnumerator=\count319
-\makeMPintoPDFobject=\count320
-\everyMPtoPDFconversion=\toks26
+\scratchcounter=\count319
+\scratchdimen=\dimen185
+\scratchbox=\box66
+\nofMPsegments=\count320
+\nofMParguments=\count321
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count322
+\MPscratchDim=\dimen186
+\MPnumerator=\count323
+\makeMPintoPDFobject=\count324
+\everyMPtoPDFconversion=\toks27
 ) (/opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -364,7 +392,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 21.
+Package hyperref Info: Link coloring OFF on input line 27.
  (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
@@ -375,25 +403,24 @@ Package hyperref Info: Link coloring OFF on input line 21.
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
- [2] (./introduction.tex [3] [4]) (./methods.tex [5]) [6] (./minmodel.tex
-<figures/minb_architecture.png, id=239, 611.28375pt x 491.8375pt>
+ [2] (./introduction.tex [3] [4]) (./methods.tex [5]) [6] [7] (./minmodel.tex
+<figures/minb_architecture.png, id=250, 1528.71124pt x 1230.5975pt>
 File: figures/minb_architecture.png Graphic file (type png)
 <use figures/minb_architecture.png>
 Package pdftex.def Info: figures/minb_architecture.png  used on input line 19.
-(pdftex.def)             Requested size: 276.00105pt x 222.0678pt.
- [7 <./figures/minb_architecture.png>]
-<figures/selections_1.png, id=256, 1075.3776pt x 622.2447pt>
+(pdftex.def)             Requested size: 207.0021pt x 166.63048pt.
+ [8 <./figures/minb_architecture.png>]
+<figures/selections_1.png, id=265, 1075.3776pt x 622.2447pt>
 File: figures/selections_1.png Graphic file (type png)
 <use figures/selections_1.png>
 Package pdftex.def Info: figures/selections_1.png  used on input line 79.
 (pdftex.def)             Requested size: 310.4979pt x 179.66777pt.
- [8] [9 <./figures/selections_1.png>] [10]) (./results.tex
-<figures/drawing.png, id=275, 523.20468pt x 712.16063pt>
+ [9] [10 <./figures/selections_1.png>]) (./results.tex
+<figures/drawing.png, id=281, 523.20468pt x 712.16063pt>
 File: figures/drawing.png Graphic file (type png)
 <use figures/drawing.png>
 Package pdftex.def Info: figures/drawing.png  used on input line 11.
 (pdftex.def)             Requested size: 224.2479pt x 305.23424pt.
- [11 <./figures/drawing.png>]
 <figures/selections_many.png, id=284, 533.3526pt x 622.2447pt>
 File: figures/selections_many.png Graphic file (type png)
 <use figures/selections_many.png>
@@ -404,33 +431,47 @@ File: figures/drawing2.png Graphic file (type png)
 <use figures/drawing2.png>
 Package pdftex.def Info: figures/drawing2.png  used on input line 38.
 (pdftex.def)             Requested size: 276.00105pt x 126.33995pt.
- [12 <./figures/selections_many.png>]) [13 <./figures/drawing2.png>] (./discussion.tex) [14] (./main.bbl [15] [16] [17] [18] [19]) [20] (./appendix.tex
-<figures/gaussian_sigmoid.png, id=350, 466.8642pt x 295.8252pt>
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
+(Font)              using `OT1/cmr/bx/n' instead on input line 54.
+
+
+Overfull \hbox (24.83246pt too wide) in paragraph at lines 52--63
+ [][] 
+ []
+
+) [11] (./discussion.tex) [12] (./main.bbl [13] [14] [15] [16] [17]) [18] (./appendix.tex
+<figures/gaussian_sigmoid.png, id=344, 466.8642pt x 295.8252pt>
 File: figures/gaussian_sigmoid.png Graphic file (type png)
 <use figures/gaussian_sigmoid.png>
 Package pdftex.def Info: figures/gaussian_sigmoid.png  used on input line 17.
 (pdftex.def)             Requested size: 276.00105pt x 174.89194pt.
- [21 <./figures/gaussian_sigmoid.png>]) (./main.aux)
+ [19 <./figures/gaussian_sigmoid.png>]) [20 <./figures/drawing.png>] [21 <./figures/selections_many.png>] [22 <./figures/drawing2.png>] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B6FF7687AE3CC1E1E0477B9EE66DE1DA;2125.
+(rerunfilecheck)             Checksum: 8DC3E8DD4E645407E0A91AD16BC8FFD1;2269.
  ) 
 Here is how much of TeX's memory you used:
- 12028 strings out of 474116
- 198820 string characters out of 5732613
- 1937187 words of memory out of 5000000
- 34131 multiletter control sequences out of 15000+600000
+ 12173 strings out of 474116
+ 201194 string characters out of 5732613
+ 1939187 words of memory out of 5000000
+ 34267 multiletter control sequences out of 15000+600000
  566661 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,13n,79p,668b,564s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,13n,79p,668b,566s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (21 pages, 876039 bytes).
+Output written on main.pdf (22 pages, 909368 bytes).
 PDF statistics:
- 451 PDF objects out of 1000 (max. 8388607)
- 378 compressed objects within 4 object streams
- 109 named destinations out of 1000 (max. 500000)
- 151 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 462 PDF objects out of 1000 (max. 8388607)
+ 388 compressed objects within 4 object streams
+ 112 named destinations out of 1000 (max. 500000)
+ 159 words of extra memory for PDF output out of 10000 (max. 10000000)
 
