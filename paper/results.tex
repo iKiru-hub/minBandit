@@ -6,7 +6,7 @@ The model has been applied to two non-stationary environments.
 \subsection{Zero-steps distribution shift}
 In this first setting, as the end of a trial $i$ the arm distribution changes immediately to a new one $i+1$ as $\mathbf{\pi}_{i} \to \mathbf{\pi}_{i+1}$.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.65\textwidth]{figures/drawing.png}
     \caption{\textsc{Performance with variable number of arms} - \textit{each plot is a simulation with K numbers of arms, the x-axis are rounds, the central vertical line signals the start of the second trial, the y-axis is the reward fraction.
@@ -21,7 +21,7 @@ In comparison, the other algorithms start to struggle when the arms are more $10
 
 Next, it has been enquired how the model selection policy evolves over time and in comparison with the other algorithms, as visualized in figure \ref{fig:sel2}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/selections_many.png}
     \caption{\textsc{Selection evolution over rounds for multiple models} - \textit{the individual plots follow the same schema of \ref{fig:sel1}, with the model name and reward per round fraction}}

@@ -552,25 +552,48 @@ def generalized_sigmoid(x: np.ndarray, gain: float, threshold: float) -> np.ndar
 
 
 
+def render_func():
+
+    x = np.arange(-10, 10, 0.01)
+    y = gaussian_sigmoid(x, alpha=1, beta=10,
+                         mu=1, sigma=1, r=0.5)
+ 
+
+    fig, ax = plt.subplots(figsize=(3, 5))
+    fig.suptitle("Gaussian Sigmoid function",
+                 fontsize=19)
+    ax.plot(x, y)
+    ax.set_xlabel("$x$", fontsize=15)
+    ax.set_ylabel("$y$", fontsize=15)
+    ax.grid()
+    plt.show()
+
+    fig.savefig("../paper/figures/gaussian_sigmoid.png",
+                dpi=300, bbox_inches="tight")
+    print("saved")
+
+
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser(description="plotting functions")
-    parser.add_argument("--policy", type=str, default=None,
-                        help="plot one of the policies: lr, value, activation")
-    args = parser.parse_args()
+    render_func()
+
+    # parser = argparse.ArgumentParser(description="plotting functions")
+    # parser.add_argument("--policy", type=str, default=None,
+    #                     help="plot one of the policies: lr, value, activation")
+    # args = parser.parse_args()
 
 
-    # load model
-    model_params = load_model()
+    # # load model
+    # model_params = load_model()
 
-    if args.policy == "lr":
-        plot_lr_policy(model_params)
-    elif args.policy == "value":
-        plot_value_function(model_params)
-    elif args.policy == "activation":
-        plot_activation_function(model_params)
-    else:
-        raise ValueError("Invalid policy")
+    # if args.policy == "lr":
+    #     plot_lr_policy(model_params)
+    # elif args.policy == "value":
+    #     plot_value_function(model_params)
+    # elif args.policy == "activation":
+    #     plot_activation_function(model_params)
+    # else:
+    #     raise ValueError("Invalid policy")
 
 

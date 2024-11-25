@@ -6,7 +6,6 @@
 \noindent The section is organized as follows. First, we introduce a formalization of general problem setting, together with the variants considered in this work. Then, we outline the architecture of the our model and how it can be mapped to neurobiology. Finally, we describe the learning procedure,
 and showcase its dynamics in a simple example.
 
-
 % mathematical formulation of the k-armed bandit problem.
 \subsection{Binomial K-armed bandit problem}
 \hfill \break
@@ -38,4 +37,5 @@ We choose this setting as it resembles an ecological scenario in which an animal
 \noindent \textbf{epsilon-steps distribution shift}: the reward distribution $\pi_{t}$ at time $t$ changes gradually over time, and it tends to a target distribution $\hat{\pi}_{i}$ as $\tau_{\pi}\dot{\pi}_{t}=\hat{\pi}_{i}-\pi_{t}$. Once distance is below a threshold $\epsilon$ as $\vert \hat{\pi}_{i} - \pi_{t}\vert < \epsilon$, the target distribution is changed to a new one $\hat{\pi}_{i}\to\hat{\pi}_{i+1}$.
 
 We will investigate the performance of the model in both settings, and compare it to the common benchmark algorithms.
+
 
