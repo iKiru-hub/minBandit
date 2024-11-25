@@ -25,20 +25,27 @@ def main(args) -> dict:
                                                    fixed_p=0.9,
                                                    normalize=False)
     # define the environment
-    if env_type == "simple":
-        env = envs.KArmedBandit(K=K,
-                                probabilities_set=probabilities_set,
-                                verbose=False)
-    elif env_type == "smooth":
-        env = envs.KArmedBanditSmooth(K=K,
-                                probabilities_set=probabilities_set,
-                                verbose=False,
-                                tau=5)
+    if env_type == "driftv0":
+        env = envs.KABdriftv0(K=K,
+                              probabilities_set=probabilities_set,
+                              verbose=verbose,
+                              tau=5)
+    elif env_type == "driftv1":
+        env = envs.KABdriftv1(K=K,
+                              verbose=verbose,
+                              tau=100,
+                              normalize=True,
+                              fixed_p=0.9)
+    elif env_type == "sinv0":
+        frequencies = np.arange(1, K+1)
+        env = envs.KABsinv0(K=K,
+                            frequencies=frequencies,
+                            normalize=True,
+                            verbose=verbose)
     else:
-        env = envs.KArmedBanditSmoothII(K=K,
-                                verbose=False,
-                                tau=100,
-                                fix_p=0.9)
+        env = envs.KABv0(K=K,
+                         probabilities_set=probabilities_set,
+                         verbose=verbose)
 
     # define the model
     model_name = args.model
@@ -120,28 +127,39 @@ def main_multiple(args, **kwargs) -> dict:
     probabilities_set = np.array(probabilities_set)
 
     # define the environment
-    if args.env == "simple":
-        env = envs.KArmedBandit(K=K,
-                                probabilities_set=probabilities_set,
-                                verbose=False)
-    elif args.env == "smooth2":
-        env = envs.KArmedBanditSmoothII(K=K,
-                                verbose=False,
-                                tau=40,
-                                fixed_p=0.7)
+    if env_type == "driftv0":
+        env = envs.KABdriftv0(K=K,
+                              probabilities_set=probabilities_set,
+                              verbose=verbose,
+                              tau=5)
+    elif env_type == "driftv1":
+        env = envs.KABdriftv1(K=K,
+                              verbose=verbose,
+                              tau=100,
+                              normalize=True,
+                              fixed_p=0.9)
+    elif env_type == "sinv0":
+        frequencies = np.arange(1, K+1)
+        env = envs.KABsinv0(K=K,
+                            frequencies=frequencies,
+                            normalize=True,
+                            verbose=verbose)
     else:
-        env = envs.KArmedBanditSmooth(K=K,
-                                probabilities_set=probabilities_set,
-                                verbose=False,
-                                tau=40)
+        env = envs.KABv0(K=K,
+                         probabilities_set=probabilities_set,
+                         verbose=verbose)
 
     if verbose:
         logger.info(f"%env: {env}")
 
     # define models
     if args.load:
-        params = utils.load_model(idx=args.idx,
-                                  verbose=verbose)
+        # params = utils.load_model(idx=args.idx,
+        #                           verbose=verbose)
+
+        idx = args.idx if args.idx >= 0 else None
+        params = utils.load_model(idx=idx)
+        # params["K"] = K
         params["K"] = K
 
     else:
@@ -175,7 +193,7 @@ def main_multiple(args, **kwargs) -> dict:
     ]
 
     # run
-    results = envs.trial_multi_model(
+    results = envs.trial_multiple_models(
                          models=models,
                          environment=env,
                          nb_trials=nb_trials,
@@ -250,7 +268,7 @@ def main_multiple(args, **kwargs) -> dict:
     return results
 
 
-def multiple_main_multiple(args):
+def main_multiple_v2(args):
 
     logger.info("Running multiple simulations with " + \
         "different parameters")
@@ -335,7 +353,9 @@ if __name__ == "__main__":
                         help='whether to show the plot or not',
                         default=False)
     parser.add_argument('--env', type=str,
-                        help='type of environment: `simple`, `smooth`',
+                        help='type of environment:' + \
+                        f' `driftv0`, `driftv1`, `sinv0`,' + \
+                        ' or nothing for `v0`',
                         default="simple")
     parser.add_argument('--multiple', type=int,
                         help='run multiple models: 0 (single) or 1 (multiple)',
@@ -355,7 +375,7 @@ if __name__ == "__main__":
     if args.multiple == 1:
         main_multiple(args=args)
     elif args.multiple == 2:
-        multiple_main_multiple(args=args)
+        main_multiple_v2(args=args)
     else:
         main(args=args)
 

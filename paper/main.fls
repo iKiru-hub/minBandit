@@ -101,6 +101,14 @@ INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/generic/uniqu
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/float/float.sty
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/float/float.sty
+INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
+INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
+INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/base/ifthen.sty
+INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/base/ifthen.sty
+INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/relsize/relsize.sty
+INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/relsize/relsize.sty
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT ./main.aux
@@ -177,6 +185,7 @@ INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/tfm/public/
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/tfm/public/cm/cmbxti10.tfm
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/tfm/public/cm/cmbxti10.tfm
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/tfm/public/cm/cmbxti10.tfm
+INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT ./figures/selections_1.png
 INPUT ./figures/selections_1.png
 INPUT ./figures/selections_1.png
@@ -238,3 +247,4 @@ INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/publi
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb
+INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb

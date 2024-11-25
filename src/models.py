@@ -112,7 +112,6 @@ class Model(MBsolver):
         """
 
         self._u = np.around(self._u, 3)
-
         choice = np.argmax(self._u)
 
         if choice == np.argmax(self._v) and self._u[choice] > 0.:
@@ -123,7 +122,6 @@ class Model(MBsolver):
             self.is_random = True
 
         self.choices.append(self._choice)
-
         return self._choice
 
     def _value_function(self):

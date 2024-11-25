@@ -10,15 +10,15 @@ The first equation tracks the evolution of the neural activity $\textbf{u}$ of p
     % \tau \dot{\textbf{v}}&= -\textbf{v} + \textbf{z} \odot\textbf{u}
     \tau \dot{\textbf{v}}&= -\textbf{v} + \tilde{\textbf{W}}^{MV}\textbf{u}
 \end{aligned}
-\end{equation}
+\end{equation}\label{eq:main}
 
 \noindent The external input $\textbf{I}_{\text{ext}}$ is a constant input that is used to set the initial conditions of the neural activity $\textbf{u}$. 
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/minb_architecture.png}
-    \caption{\textsc{Model architecture} - \textit{The model is composed of a layer $M$ (blue), receiving a feedfoward input $I_{\text{ext}}$, a layer $V$ (orange), and connections $\textbf{W}^{MV}$ and $\textbf{W}^{VM}$. Additionally, two indexes $k_{M}, k_{V}$,  can be extracted from the layers,
-    corresponding to the selection made by the two populations.}}
+    \caption{\textsc{Model architecture} - \textit{The model is composed of a layer $M$ (blue), receiving a feedfoward input $I_{\text{ext}}$, a layer $V$ (orange), and connections $\textbf{W}^{MV}$ and $\textbf{W}^{VM}$. Additionally, two indexes $k_{M}, k_{V}$  can be extracted from the layers and
+    corresponds to the selection made by the two populations as $k_{M}=\text{argmax}_{k} \{\textbf{u}\}$, $k_{V}=\text{argmax}_{k} \{\textbf{v}\}$.}}
     \label{fig:main_architecture}
 \end{figure}
 
@@ -28,12 +28,11 @@ The function $\Phi_{v}$ is a chosen to be a sum of a generalized sigmoid and a G
 % \hfill \break
 \subsubsection{Option selection}
 The decision-making process within a single round is structured in two distinct phases. Initially, the model receives a constant external input targeting all neurons in the memory population \textit{M} equally.
-During this phase, $I_{\text{ext}}$ works as an equilibrium value while the reciprocal interactions with population \textit{V} push $\textbf{u}$ to different values, depending on the current policy encoded in $\textbf{z}$. However, in the early rounds the weights $\textbf{W}^{MP}$ are zero, and thus
-the contribution from \textit{V} is null. After a fixed amount of time $\sim 5 \text{s}$, the second phase begins. Here, the external input is removed and the model is left to evolve autonomously, and since there are no recurrent connections in neither population the dynamics is entirely driven by their coupling. \\
-A selection $\hat{k}$ is sampled after another fixed amount of time $\sim 5 \text{s}$, and it is defined according to the following rule:
+During this phase, $\textbf{I}_{\text{ext}}$ works as an equilibrium value while the reciprocal interactions with population \textit{V} push $\textbf{u}$ to different values, depending on the current policy encoded in $\tilde{\textbf{W}}^{MV}$. However, in the early rounds the weights $\textbf{W}^{MV}$ are zero, and thus
+the contribution from \textit{V} is null. After a fixed amount of time $\sim 5 \text{s}$, the second phase begins. Here, the external input is removed and the model is left to evolve autonomously, and since there are no recurrent connections in neither population the dynamics are entirely driven by their coupling. A selection $k$ is sampled after another fixed amount of time $\sim 5 \text{s}$, and it is defined according to the following rule:
 
 \begin{equation*}
-    \hat{k} =
+    k =
     \left\{
         \begin{array}{ll}
             \text{argmax}_{k}\{\textbf{v}\} & \text{\textit{if}}\; \text{argmax}_{k} \{\textbf{v}\} = \text{argmax}_{k} \{\textbf{u}\} \\
@@ -43,9 +42,38 @@ A selection $\hat{k}$ is sampled after another fixed amount of time $\sim 5 \tex
 \end{equation*}
 
 \noindent The selection rule is simple: if the value representation $\textbf{v}$ is in agreement with the memory trace $\textbf{u}$, then the option with the highest value is selected. Otherwise, a random option is chosen. This rule is a way to express the exploration-exploitation trade-off, and it
-is dependent on the current policy $\textbf{z}$. \\ In figure \ref{fig:sel1} it is shown the history of selections over multiple trials. In particular, it can noted how the policy adopted by the model encounters period of exploration and successive settling over an explotative strategy, which can be
-reverted in case of a change in the environment's reward distribution.
+is dependent on the current policy $\tilde{\textbf{W}}^{MV}$. \\ In figure \ref{fig:sel1} it is shown the history of selections over multiple trials. In particular, it can noted how the policy adopted by the model encounters period of exploration and successive settling over an explotative strategy, which can be reverted in case of a change in the environment's reward distribution.
 
+% --- ALGORITHM
+\begin{algorithm}[H]
+\caption{Two-phases option selection process}
+\label{alg:decision}
+\SetAlgoLined
+\KwIn{External input $\textbf{I}_{\text{ext}}$, memory population $\textbf{u}$, value population $\textbf{v}$, policy weights $\tilde{\textbf{W}}^{MV}$}
+\KwOut{Selected action $k$}
+
+\SetKwComment{Comment}{// }{ }
+
+\textbf{Phase 1:} \textit{external input} \Comment*[r]{Duration: $\sim$5s}
+Define constant $\textbf{I}_{\text{ext}}$\;
+Update populations $\textbf{u}, \textbf{v}$ according to \ref{eq:main}\;
+
+\textbf{Phase 2:} \textit{autonomous evolution} \Comment*[r]{Duration: $\sim$5s}
+Remove external input $\textbf{I}_{\text{ext}}$\;
+Let system evolve through population coupling according to \ref{eq:main}\;
+
+\textbf{Selection process:}\;
+$k_{u} \gets \text{argmax}_{k}\{\textbf{u}\}$\;
+$k_{v} \gets \text{argmax}_{k}\{\textbf{v}\}$\;
+\eIf{$k_{u} = k_{v}$}{
+    $k \gets k_{v}$ \Comment*[r]{Exploitation}
+}{
+    $k \gets \text{random}(K)$ \Comment*[r]{Exploration}
+}
+\Return $k$
+\end{algorithm}
+
+%
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/selections_1.png}
@@ -55,7 +83,7 @@ reverted in case of a change in the environment's reward distribution.
 \end{figure}
 
 \subsection{Learning}
-Given a selected option, the environment (bandit) samples and returns a reward $R\in [0, 1]$.
+Given a selected option $k$, the environment (set of bandits) samples and returns a reward $R\in [0, 1]$ with probability $p_{k}$.
 Then, the connections $\textbf{W}^{MV}$ for the neuron corresponding to the option $k$ are updated according to the following plasticity rule:
 
 \begin{equation}

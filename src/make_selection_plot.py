@@ -15,7 +15,7 @@ except ModuleNotFoundError:
 logger = utils.setup_logger(__name__)
 
 """ settings """
-K = 10
+K = 3
 nb_rounds = 300
 nb_trials = 3
 env_type = "simple"
@@ -30,20 +30,27 @@ probabilities_set = utils.make_probability_set(K=K,
 # define the environment
 def make_current_env(kind: str, probabilities_set: list):
 
-    if env_type == "simple":
-        env = envs.KArmedBandit(K=K,
-                                probabilities_set=probabilities_set,
-                                verbose=False)
-    elif env_type == "smooth":
-        env = envs.KArmedBanditSmooth(K=K,
-                                probabilities_set=probabilities_set,
-                                verbose=False,
-                                tau=5)
+    if env_type == "driftv0":
+        env = envs.KABdriftv0(K=K,
+                              probabilities_set=probabilities_set,
+                              verbose=verbose,
+                              tau=5)
+    elif env_type == "driftv1":
+        env = envs.KABdriftv1(K=K,
+                              verbose=verbose,
+                              tau=100,
+                              normalize=True,
+                              fixed_p=0.9)
+    elif env_type == "sinv0":
+        frequencies = np.arange(1, K+1)
+        env = envs.KABsinv0(K=K,
+                            frequencies=frequencies,
+                            normalize=True,
+                            verbose=verbose)
     else:
-        env = envs.KArmedBanditSmoothII(K=K,
-                                verbose=False,
-                                tau=100,
-                                fix_p=0.9)
+        env = envs.KABv0(K=K,
+                         probabilities_set=probabilities_set,
+                         verbose=verbose)
 
     return env
 
@@ -68,8 +75,8 @@ choices, tops, reward = envs.visual_trial(
                   nb_trials=nb_trials,
                   t_update=200,
                   style="choice",
-                  online=False,
-                  plot=False)
+                  online=True,
+                  plot=True)
 
 record = {"Model": [choices, tops, reward]}
 
