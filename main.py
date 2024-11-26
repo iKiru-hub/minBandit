@@ -9,7 +9,8 @@ logger = utils.setup_logger(__name__)
 
 
 
-def main(args) -> dict:
+def main(args, return_model: bool=False,
+         env: object=None) -> dict:
 
     # parameters
     K = args.K
@@ -25,27 +26,28 @@ def main(args) -> dict:
                                                    fixed_p=0.9,
                                                    normalize=False)
     # define the environment
-    if env_type == "driftv0":
-        env = envs.KABdriftv0(K=K,
-                              probabilities_set=probabilities_set,
-                              verbose=verbose,
-                              tau=5)
-    elif env_type == "driftv1":
-        env = envs.KABdriftv1(K=K,
-                              verbose=verbose,
-                              tau=100,
-                              normalize=True,
-                              fixed_p=0.9)
-    elif env_type == "sinv0":
-        frequencies = np.arange(1, K+1)
-        env = envs.KABsinv0(K=K,
-                            frequencies=frequencies,
-                            normalize=True,
-                            verbose=verbose)
-    else:
-        env = envs.KABv0(K=K,
-                         probabilities_set=probabilities_set,
-                         verbose=verbose)
+    if env is None:
+        if env_type == "driftv0":
+            env = envs.KABdriftv0(K=K,
+                                  probabilities_set=probabilities_set,
+                                  verbose=verbose,
+                                  tau=10)
+        elif env_type == "driftv1":
+            env = envs.KABdriftv1(K=K,
+                                  verbose=verbose,
+                                  tau=100,
+                                  normalize=True,
+                                  fixed_p=0.9)
+        elif env_type == "sinv0":
+            frequencies = np.linspace(0, 1, K)
+            env = envs.KABsinv0(K=K,
+                                frequencies=frequencies,
+                                normalize=True,
+                                verbose=verbose)
+        else:
+            env = envs.KABv0(K=K,
+                             probabilities_set=probabilities_set,
+                             verbose=verbose)
 
     # define the model
     model_name = args.model
@@ -104,6 +106,9 @@ def main(args) -> dict:
                              nb_rounds=nb_rounds,
                              verbose=verbose)
 
+    if return_model:
+        return results, model
+
     return results
 
 
@@ -115,6 +120,7 @@ def main_multiple(args, **kwargs) -> dict:
     nb_trials = args.trials
     nb_reps = args.reps
     verbose = args.verbose
+    env_type = args.env
 
     # define proababilities set
     probabilities_set = []
@@ -139,7 +145,7 @@ def main_multiple(args, **kwargs) -> dict:
                               normalize=True,
                               fixed_p=0.9)
     elif env_type == "sinv0":
-        frequencies = np.arange(1, K+1)
+        frequencies = np.linspace(0, 1, K)
         env = envs.KABsinv0(K=K,
                             frequencies=frequencies,
                             normalize=True,

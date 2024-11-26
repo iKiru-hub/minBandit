@@ -1,0 +1,64 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    python_version: 3.11.10
+    cli_version: 0.17.8
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1732583199
+    t:
+      1:
+      - 55
+      2:
+      - 55
+      3:
+      - 2
+      - 23
+      - 37
+      4: 3.11.10
+      5: 0.17.8
+      8:
+      - 4
+      - 5
+      13: darwin-arm64
+alpha:
+  desc: null
+  value: -1.1120671685961838
+alpha_lr:
+  desc: null
+  value: -0.8087955750733213
+beta:
+  desc: null
+  value: 1.2366169455100489
+beta_lr:
+  desc: null
+  value: 0.380942412473115
+gain:
+  desc: null
+  value: 22.467031756981036
+lr:
+  desc: null
+  value: 9.905634380474844
+mu:
+  desc: null
+  value: 2.5647267886854284
+mu_lr:
+  desc: null
+  value: 1.3160248976764546
+r:
+  desc: null
+  value: 0.23925551484223065
+r_lr:
+  desc: null
+  value: 0.35616516084339556
+sigma:
+  desc: null
+  value: 6.607809631264442
+sigma_lr:
+  desc: null
+  value: 5.869664076200909
+threshold:
+  desc: null
+  value: 3.889392428079347

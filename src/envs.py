@@ -387,16 +387,24 @@ class KABsinv0(KAB):
             logger.info(f"%chance level: {self.chance_level:.3f}")
             logger.info(f"%upper bound: {self.upper_bound:.3f}")
 
+    def reset(self):
+        self.counter = 0
+        self.chance_level_list = [np.mean(self.probabilities)]
+        self.upper_bound_list = [np.max(self.probabilities)]
+        self.best_arm_list = [np.argmax(self.probabilities)]
+
 
 """ Trial """
 
 
 def trial(model: object, environment: KAB,
           nb_trials: int, nb_rounds: int,
-          verbose: bool=False) -> dict:
+          verbose: bool=False,
+          disable: bool=False) -> dict:
 
     """
     Run a trial of the k-armed bandit problem with the given model
+    and a given environement
 
     Parameters
     ----------
@@ -410,6 +418,8 @@ def trial(model: object, environment: KAB,
         The number of rounds
     verbose : bool, optional
         Display information, by default False
+    disable : bool, optional
+        Disable the progress bar, by default False
 
     Returns
     -------
@@ -424,9 +434,11 @@ def trial(model: object, environment: KAB,
     rewards_list = []
     chance_list = []
     upper_bound_list = []
+    selection_list = []
     score = 0.
     chance = 0.
     upper_bound = 0.
+    weights = np.zeros((model._K, nb_trials * nb_rounds))
 
     #
     if verbose:
@@ -436,7 +448,7 @@ def trial(model: object, environment: KAB,
         logger.info(f"K-armed bandit: {environment}")
 
     # loop over trials
-    for trial_i in tqdm(range(nb_trials)):
+    for trial_i in tqdm(range(nb_trials), disable=disable):
 
         # renew the reward distribution
         if trial_i > 0:
@@ -446,6 +458,7 @@ def trial(model: object, environment: KAB,
         rewards = np.zeros(nb_rounds)
         chances = np.zeros(nb_rounds)
         upper_bounds = np.zeros(nb_rounds)
+        selections = np.zeros(nb_rounds)
 
         # loop over rounds
         for round_i in range(nb_rounds):
@@ -463,12 +476,15 @@ def trial(model: object, environment: KAB,
             rewards[round_i] = reward
             chances[round_i] = environment.chance_level
             upper_bounds[round_i] = environment.upper_bound
+            selections[round_i] = k
+            weights[:, (trial_i+1)*round_i] = model._W.flatten()
 
         # ---------------------------- #
 
         rewards_list.append(rewards.tolist())
         chance_list.append(chances.tolist())
         upper_bound_list.append(upper_bounds.tolist())
+        selection_list.append(selections.tolist())
 
         score += np.sum(rewards) / nb_rounds / nb_trials
         chance += environment.chance_level / nb_trials
@@ -488,7 +504,9 @@ def trial(model: object, environment: KAB,
         "optimal_list": upper_bound_list,
         "score": score,
         "chance": chance,
-        "upper_bound": upper_bound
+        "upper_bound": upper_bound,
+        "selection_list": selection_list,
+        "weights": weights.tolist()
     }
 
     return stats
@@ -845,6 +863,15 @@ def eval_prediction_jit(K: int, prediction: np.ndarray,
     return bool(np.random.binomial(1, probabilities[predicted_k]))
 
 
+def parse_results_to_regret(results: dict):
+
+    """
+    extract measures and calculates regret
+    """
+
+    return (np.array(results["optimal_list"]) - \
+        np.array(results["rewards_list"])).mean()
+
 
 
 if __name__ == "__main__":
@@ -854,7 +881,8 @@ if __name__ == "__main__":
     Np = 3
     probabilities_set = np.random.uniform(0, 1, size=(Np, K)).tolist()
 
-    mab = KArmedBandit(K=K, probabilities_set=probabilities_set, verbose=False)
+    mab = KArmedBandit(K=K, probabilities_set=probabilities_set,
+                       verbose=False)
     # mab = KArmedBanditSmooth(K=K,
     #                          probabilities_set=probabilities_set,
     #                          tau=100,

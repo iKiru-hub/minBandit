@@ -25,7 +25,8 @@ def test_v0():
     N = 3
     tau = 40
     probabilities_set = np.random.rand(N, K)
-    probabilities_set = probabilities_set / np.sum(probabilities_set, axis=1)[:, None]
+    probabilities_set = probabilities_set / np.sum(probabilities_set,
+                                                   axis=1)[:, None]
 
     # --- v0
     env1 = envs.KABv0(K=K,
