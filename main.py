@@ -39,7 +39,7 @@ def main(args, return_model: bool=False,
                                   normalize=True,
                                   fixed_p=0.9)
         elif env_type == "sinv0":
-            frequencies = np.linspace(0, 1, K)
+            frequencies = np.linspace(0.1, 0.4, K)
             env = envs.KABsinv0(K=K,
                                 frequencies=frequencies,
                                 normalize=True,
