@@ -78,41 +78,43 @@ sweep_configuration = {
 
 # define the environment
 def make_env(K: int,
-             kind: str,
+             env_type: str,
              probabilities_set: list,
-             tau: int):
+             tau: int,
+             normalize=True):
 
     if env_type == "driftv0":
         env = envs.KABdriftv0(K=K,
                               probabilities_set=probabilities_set,
-                              verbose=verbose,
+                              verbose=False,
                               tau=tau)
     elif env_type == "driftv1":
         env = envs.KABdriftv1(K=K,
-                              verbose=verbose,
+                              verbose=False,
                               tau=tau,
-                              normalize=True,
+                              normalize=normalize,
                               fixed_p=0.9)
     elif env_type == "sinv0":
-        frequencies = np.arange(1, K+1)
+        frequencies = np.linspace(0.1, 0.4, K)
         phases = np.random.uniform(0, 2*np.pi, K)
         env = envs.KABsinv0(K=K,
                             frequencies=frequencies,
                             phases=phases,
-                            normalize=True,
-                            verbose=verbose)
+                            normalize=normalize,
+                            verbose=False)
     else:
         env = envs.KABv0(K=K,
                          probabilities_set=probabilities_set,
-                         verbose=verbose)
+                         verbose=False)
 
     return env
 
 
 def train_model(model_params: dict,
-                env_list: list,
+                envs_list: list,
                 nb_trials: int,
-                nb_rounds: int) -> float:
+                nb_rounds: int,
+                nb_reps: int) -> float:
 
     """
     train a model over multiple environments
@@ -121,17 +123,18 @@ def train_model(model_params: dict,
 
     regret = 0.
 
-    for env in env_list:
-        model = models.Model(**model_params)
-        results = envs.trial(model=model,
-                             environment=env,
-                             nb_trials=nb_trials,
-                             nb_rounds=nb_rounds,
-                             verbose=False,
-                             disable=True)
-        regret += envs.parse_results_to_regret(results=results)
+    for _ in range(nb_reps):
+        for env in envs_list:
+            model = models.Model(**model_params)
+            results = envs.trial(model=model,
+                                 environment=env,
+                                 nb_trials=nb_trials,
+                                 nb_rounds=nb_rounds,
+                                 verbose=False,
+                                 disable=True)
+            regret += envs.parse_results_to_regret(results=results)
 
-    return regret / len(env_list)
+    return regret / (len(envs_list) * nb_reps)
 
 
 """ training """
@@ -142,10 +145,9 @@ def main():
 
     # --- settings ---
     K = 5
-    N = 3
-    tau = 40
-    nb_trials = N
+    nb_trials = 2
     nb_rounds = 400
+    nb_reps = 2
 
     # --- environment ---
     probabilities_set = utils.make_probability_set(K=K,
@@ -153,10 +155,22 @@ def main():
                                                    fixed_p=0.9,
                                                    normalize=False)
     envs_list = [
+            # make_env(K=K,
+            #          kind="v0",
+            #          probabilities_set=probabilities_set,
+            #          tau=None),
             make_env(K=K,
-                     kind="v0",
+                     env_type="driftv0",
                      probabilities_set=probabilities_set,
-                     tau=tau)
+                     tau=10),
+            # make_env(K=K,
+            #          kind="driftv1",
+            #          probabilities_set=probabilities_set,
+            #          tau=100),
+            make_env(K=K,
+                     env_type="sinv0",
+                     probabilities_set=probabilities_set,
+                     tau=None),
     ]
 
     names = ""
@@ -193,10 +207,11 @@ def main():
     }
 
     # model
-    results = train_model(model_params=model_params,
-                          env_list=env_list,
-                          nb_trials=nb_trials,
-                          nb_rounds=nb_rounds)
+    regret = train_model(model_params=model_params,
+                         envs_list=envs_list,
+                         nb_trials=nb_trials,
+                         nb_rounds=nb_rounds,
+                         nb_reps=nb_reps)
 
     logger(f"regret: {regret:.3f}")
     wandb.log({"regret": regret})
