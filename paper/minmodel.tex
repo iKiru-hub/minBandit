@@ -66,12 +66,12 @@ Let system evolve through population coupling according to \ref{eq:main}\;
 $k_{u} \gets \text{argmax}_{k}\{\textbf{u}\}$\;
 $k_{v} \gets \text{argmax}_{k}\{\textbf{v}\}$\;
 \eIf{$k_{u} = k_{v}$}{
-    $k \gets k_{v}$ \Comment*[r]{Exploitation}
-}{
+    $k \gets k_{v}$ \Comment*[r]{Exploitation}}{
     $k \gets \text{random}(K)$ \Comment*[r]{Exploration}
 }
 \Return $k$
 \end{algorithm}
+
 
 %
 \begin{figure}[ht]

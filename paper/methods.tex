@@ -14,6 +14,7 @@ and showcase its dynamics in a simple example.
 $\sum^{T}_{t} R_{t}$, after a certain number $T$ of trials. Importantly, the agent is unaware of the true reward probability distribution, and thus has to make its decisions following a certain policy, usually denoted as $\omega$. In the reinforcement learning literature, the policy is often defined as
 a distribution over the actions, here the levers $K$, given the current state, which in this case can be the history of past actions and rewards up to time $t\leq T$. Given the inherent stochasticity of the feedbacks from the environment, the definition of the policy is affected by the so-called
 exploration-exploitation trade-off, which here is phrased as the contrast between the option of the lever with the known highest expected reward versus the option to explore other levers, so to gather more information. A common approach is the $\epsilon-$greedy policy, where the choice to explore is
+
 selected with a probability $\epsilon$. Moreover, it is often preferable to have a more explorative behaviour early during the training, with the intent to have a good sample size for the empirical reward distribution, which can be later exploited for maximizing reward.\\
 Another important concept in multi-armed bandit problems is the \textit{regret}. Intuitively, it is defined as the deviation of the total reward obtained by the agent from the optimal reward that could have been obtained by always choosing the lever with the highest expected reward. Formally, the regret is defined as:
 \begin{equation}
@@ -23,21 +24,4 @@ Another important concept in multi-armed bandit problems is the \textit{regret}.
 \noindent where $R^{*}$ is the reward obtained by always choosing the lever with the highest expected reward $R^{*}=T\max_{k}\{p_{k}\}$, and $R_{t}$ is the empirical reward obtained up to time $t$ by following policy $\omega$ as $R_{t}=\sum^{T}_{t=1}\omega_{\theta}(t)$.
 The regret is a measure of the performance of the agent, and it is often used to compare different algorithms. The goal of the agent is to minimize the regret, and thus maximize the total reward.
 
-% Description of the environments
-\subsubsection{Non-stationary environment}
-\noindent The setting we consider in this work is a non-stationary environment with Binomial rewards. In particular, the agent is evaluated over a number $T_{\text{trials}}$ of \textit{trials}, each composed by an arbitrary number $T_{\text{rounds}}$ of \textit{rounds}; each \textit{trial} is characterized by a different
-reward distribution $\mathbf{p}\sim\mathcal{U}(0,1)^{K}$ (although in practice the bounds have been set to $(0.1, 0.9)$ such that the distributions are less trivial). Our goal in this work is to investigate the performance of the agent in a non-stationary environment with Binomial reward distributions, meaning that its underlying distribution changes over time.
-We choose this setting as it resembles an ecological scenario in which an animal has to forage in a patchy environment, where the reward of a given patch can change over time. \\
-In particular, we consider four different types of non-stationarity.\\
-\textbf{Zero-steps distribution shift} [\textsc{KAB-0}]: the reward distribution changes immediately at the end of a trial $i$ to a new one $i+1$ as $\mathbf{\omega}_{i} \to \mathbf{\omega}_{i+1}$.
-
-\noindent  \textbf{Epsilon-steps distribution shift} [\textsc{KAB-$\epsilon$}]: the reward distribution $\omega$ changes gradually over rounds, tracked as time $t$, such that its shape tends towards a target distribution $\hat{\omega}_{i}$ as $\tau_{\omega}\dot{\omega}_{t}=\hat{\omega}_{i}-\omega_{t}$. Once distance is below a threshold $\epsilon$ as $\vert \hat{\omega}_{i} - \omega_{t}\vert < \epsilon$, the target distribution is changed to a new one $\hat{\omega}_{i}\to\hat{\omega}_{i+1}$.
-
-\noindent \textbf{Sinusoidal distribution shift} [\textsc{KAB-$\sin$}]: the reward distribution changes over rounds, with the probability of each arm following a sine wave with a specific frequency $\lambda_{k}$ and amplitude $1$. At any given time $t$, the distribution is $\omega_{t}=\{sin(2\pi f t)\}$ and it is
-normalized as $\omega_{t} = \omega_{t}(\sum_{k} \omega_{t,i})^{-1}$ such that it sums to $1$.
-
-\noindent \textbf{Partial sinusoidal distribution shift} [\textsc{KAB-$\sin$P}]: identical to the sinusoidal distribution shift, but only a subset of the arms changes sinusoidally while the rest keep a constant value.
-
-
-\hfill \break
-We will investigate the performance of the model in both settings, and compare it to the common benchmark algorithms.
+\input{minmodel}

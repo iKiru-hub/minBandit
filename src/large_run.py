@@ -14,7 +14,11 @@ import src.envs as envs
 logger = setup_logger(__name__,
                       level=2)
 
-PATH = r"/Users/daniekru/Research/lab/minBandit/src/data"
+main_PATH = r"/Users/daniekru/Research/lab/minBandit/src/data"
+pigeon_PATH = r"/Users/daniekru/Research/lab/pigeon/data"
+main_PATH_cl = r"/home/daniekru/lab/minBandit/src/data"
+pigeon_PATH_cl = r"/home/daniekru/lab/pigeon/data"
+PATH = pigeon_PATH
 
 # from a sweep
 model_params = {
@@ -43,7 +47,7 @@ model_params = {
 """ settings """
 
 
-NB_ROUNDS = 2000
+NB_ROUNDS = 200
 NB_TRIALS = 2
 NB_REPS = 1
 
