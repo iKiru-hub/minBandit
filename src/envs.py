@@ -565,7 +565,7 @@ def trial_multiple_models(models: list, environment: KAB,
     score_list = np.zeros((len(models), nb_reps, nb_trials))
     mean_score_list = np.zeros((len(models), nb_reps, nb_trials))
 
-    entropy_list = np.zeros((len(models), nb_reps, nb_trials, nb_rounds-bin_size))
+    # entropy_list = np.zeros((len(models), nb_reps, nb_trials, nb_rounds-bin_size))
 
     #
     if verbose:
@@ -613,16 +613,16 @@ def trial_multiple_models(models: list, environment: KAB,
 
             # ---------------------------- #
             score_list[:, rep_i, trial_i] = reward_list[:, rep_i, trial_i, -int(nb_rounds/10):].mean(axis=1)
-            mean_score_list[:, rep_i, trial_i] = reward_list[:, rep_i, trial_i].mean(axis=1)
+            # mean_score_list[:, rep_i, trial_i] = reward_list[:, rep_i, trial_i].mean(axis=1)
 
         # ---------------------------- #
 
         # calculate entropy for the trial
-        for i, m in enumerate(models):
-            arms = arm_list[i, rep_i, trial_i]
-            entropy = np.zeros(nb_rounds-bin_size)
-            for l in range(0, nb_rounds-bin_size):
-                entropy_list[i, rep_i, trial_i, l] = calc_entropy(arms[l: l+bin_size].sum(axis=0))
+        # for i, m in enumerate(models):
+        #     arms = arm_list[i, rep_i, trial_i]
+        #     entropy = np.zeros(nb_rounds-bin_size)
+        #     for l in range(0, nb_rounds-bin_size):
+        #         entropy_list[i, rep_i, trial_i, l] = calc_entropy(arms[l: l+bin_size].sum(axis=0))
 
         if verbose and nb_reps < 2:
             logger.info("")
@@ -644,8 +644,8 @@ def trial_multiple_models(models: list, environment: KAB,
         "arm_list": arm_list,
         "scores": scores,
         "score_list": score_list,
-        "mean_scores": mean_score_list,
-        "entropy_list": entropy_list,
+        # "mean_scores": mean_score_list,
+        # "entropy_list": entropy_list,
         "names": names
     }
 

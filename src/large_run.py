@@ -18,7 +18,7 @@ main_PATH = r"/Users/daniekru/Research/lab/minBandit/src/data"
 pigeon_PATH = r"/Users/daniekru/Research/lab/pigeon/data"
 main_PATH_cl = r"/home/daniekru/lab/minBandit/src/data"
 pigeon_PATH_cl = r"/home/daniekru/lab/pigeon/data"
-PATH = pigeon_PATH
+PATH = pigeon_PATH_cl
 
 # from a sweep
 model_params = {
@@ -196,7 +196,7 @@ if __name__ == "__main__":
     """ settings """
 
     # K_list = [5, 10, 50, 100, 200, 500, 1000, 1500]
-    K_list = [3, 5]
+    K_list = [5]
 
     """ run """
 

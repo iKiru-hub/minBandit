@@ -10,18 +10,20 @@ More specifically, we used four different variants:
 
 \noindent \textbf{Zero-steps distribution shift} [\textsc{KAB-0}]: the reward distribution changes immediately at the end of a trial $i$ to a new one $i+1$ as $\mathbf{\omega}_{i} \to \mathbf{\omega}_{i+1}$. 
 
-\noindent \textbf{Epsilon-steps distribution shift} [\textsc{KAB-$\epsilon$}]: the reward distribution $\omega$ changes gradually over rounds, tracked as time $t$, such that its shape tends towards a target distribution $\hat{\omega}_{i}$ as $\tau_{\omega}\dot{\omega}_{t}=\hat{\omega}_{i}-\omega_{t}$. Once distance is below a threshold $\epsilon$ as $\vert \hat{\omega}_{i} - \omega_{t}\vert < \epsilon$, the target distribution is changed to a new one $\hat{\omega}_{i}\to\hat{\omega}_{i+1}$.
+\noindent \textbf{Epsilon-steps distribution shift} [\textsc{KAB-$\epsilon$}]: the reward distribution $\omega$ changes gradually over rounds, tracked as time $t$, such that its shape tends towards a target distribution $\bar{\omega}_{i}$ as
+$\tau_{\omega}\dot{\omega}_{t}=\bar{\omega}_{i}-\omega_{t}$. Once distance is below a threshold $\epsilon$ as $\vert \bar{\omega}_{i} - \omega_{t}\vert < \epsilon$, the target distribution is changed to a new one $\bar{\omega}_{i}\to\bar{\omega}_{i+1}$.
 
-\noindent \textbf{Sinusoidal distribution shift} [\textsc{KAB-$\sin$}]: the reward distribution changes over rounds, with the probability of each arm following a sine wave with a specific frequency $\lambda_{k}$ and amplitude $1$. At any given time $t$, the distribution is $\omega_{t}=\{sin(2\pi f t)\}$ and it is
+\noindent \textbf{Sinusoidal distribution shift} [\textsc{KAB-$\sin$}]: the reward distribution changes over rounds, with the probability of each arm following a sine wave with a specific frequency $f_{k}$ and amplitude $1$. At any given time $t$, the distribution is $\omega_{t}=\{\sin(2\pi f_{k}
+t)\text{  for }k=1\ldots K\}$ and it is
 normalized as $\omega_{t} = \omega_{t}(\sum_{k} \omega_{t,i})^{-1}$ such that it sums to $1$.
 
-\noindent \textbf{Partial sinusoidal distribution shift} [\textsc{KAB-$\sin$P}]: identical to the sinusoidal distribution shift, but only a subset of the arms changes sinusoidally while the rest keep a constant value.
+\noindent \textbf{Partial sinusoidal distribution shift} [\textsc{KAB-$\sin$P}]: identical to the sinusoidal distribution shift, but only a subset of the arms changes sinusoidally while the rest is kept at a constant value.
 
 
-
+% Results: scores and brief discussion
 \subsection{Table of results}
 
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Performance comparison across benchmark environments}
 \label{tab:model_performance}
@@ -37,3 +39,12 @@ Proposed Method & $\mathbf{276.4 \pm 30.2}$ & $\mathbf{194.7 \pm 32.1}$ & $\math
 \bottomrule
 \end{tabular}
 \end{table}
+
+
+
+\subsection{Decision-making dynamics}
+
+
+\subsection{Robustness and parameter sensitivity}
+
+

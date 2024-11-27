@@ -18,8 +18,8 @@ logger = utils.setup_logger(__name__)
 K = 5
 nb_rounds = 300
 nb_trials = 2
-env_type = "sinv0"
-verbose = True 
+env_type = "v0"
+verbose = True
 
 """ environment """
 # define proababilities set
@@ -75,9 +75,9 @@ out = envs.visual_trial(
                   environment=env,
                   nb_rounds=nb_rounds,
                   nb_trials=nb_trials,
-                  t_update=200,
-                  style="choice",
-                  online=False,
+                  t_update=20,
+                  style="3d",
+                  online=True,
                   plot=True)
 
 if out is not None:
