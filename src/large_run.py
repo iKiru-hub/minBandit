@@ -39,15 +39,18 @@ model_params = {
     "lr_function": "gaussian",
 }
 
+
 """ settings """
+
 
 NB_ROUNDS = 2000
 NB_TRIALS = 2
-NB_REPS = 1
+NB_REPS = 100
+
 
 """ some local functions """
 
-# define the environment
+
 def make_env(K: int,
              env_type: str,
              probabilities_set: list,
@@ -79,7 +82,6 @@ def make_env(K: int,
                          verbose=False)
 
     return env
-
 
 
 def run_for_one_k(K: int):
@@ -154,6 +156,7 @@ def sanitize_for_json(data: dict):
 
     return data
 
+
 def save(path: str, data: dict, name: str):
     with open(f"{path}/{name}.json", "w") as f:
         json.dump(data, f)
@@ -163,6 +166,7 @@ def save(path: str, data: dict, name: str):
 def process_k(K):
     logger(f"running for K={K}...")
     return K, run_for_one_k(K=K)  # Return a tuple (K, result) for aggregation
+
 
 def run_for_all_k(K_list: list):
 
@@ -187,9 +191,10 @@ if __name__ == "__main__":
 
     """ settings """
 
-    K_list = [3, 5]
+    K_list = [5, 10, 50, 100, 200, 500, 1000]
 
     """ run """
+
     run_for_all_k(K_list=K_list)
     logger("done.")
 
