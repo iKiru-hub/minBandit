@@ -1,5 +1,4 @@
-#!/bin/bash
-#SBATCH --job-name="mkbwb"
+#!/bin/bash #SBATCH --job-name="mkbwb"
 #SBATCH -p ipuq #milanq #armq #milanq #fpgaq #milanq # partition (queue)
 #SBATCH -N 1 # number of nodes
 #SBATCH --ntasks=1
@@ -15,8 +14,13 @@ echo "%ecl1 activated"
 cd ~/lab/minBandit/src
 echo "%in $(pwd)"
 
-srun time python3 param_search.py --count 2
+srun large_run.py
 
-echo "%finished"
+git add .
+git commit -m "large run from ex3"
+git push
+
+echo " "
+echo "%finished%"
 
 
