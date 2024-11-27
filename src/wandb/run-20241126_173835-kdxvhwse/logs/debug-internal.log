@@ -1,0 +1,17 @@
+{"time":"2024-11-26T17:38:35.150685+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-26T17:38:35.150761+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241126_173835-kdxvhwse/logs/debug-core.log"}
+{"time":"2024-11-26T17:38:35.262762+01:00","level":"INFO","msg":"created new stream","id":"kdxvhwse"}
+{"time":"2024-11-26T17:38:35.262805+01:00","level":"INFO","msg":"stream: started","id":"kdxvhwse"}
+{"time":"2024-11-26T17:38:35.262814+01:00","level":"INFO","msg":"handler: started","stream_id":"kdxvhwse"}
+{"time":"2024-11-26T17:38:35.262855+01:00","level":"INFO","msg":"sender: started","stream_id":"kdxvhwse"}
+{"time":"2024-11-26T17:38:35.262949+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"kdxvhwse"}
+{"time":"2024-11-26T17:38:35.488436+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-26T17:39:32.279437+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-26T17:39:32.280145+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-26T17:39:33.286944+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading config.yaml","runtime_seconds":0.500846875,"progress":"913B/913B"},{"desc":"uploading output.log","runtime_seconds":0.500821333}],"total_operations":2}}
+{"time":"2024-11-26T17:39:33.506217+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-26T17:39:34.790231+01:00","level":"INFO","msg":"stream: closing","id":"kdxvhwse"}
+{"time":"2024-11-26T17:39:34.790275+01:00","level":"INFO","msg":"handler: closed","stream_id":"kdxvhwse"}
+{"time":"2024-11-26T17:39:34.790299+01:00","level":"INFO","msg":"sender: closed","stream_id":"kdxvhwse"}
+{"time":"2024-11-26T17:39:34.790292+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"kdxvhwse"}
+{"time":"2024-11-26T17:39:34.790637+01:00","level":"INFO","msg":"stream: closed","id":"kdxvhwse"}

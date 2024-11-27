@@ -1,0 +1,17 @@
+{"time":"2024-11-26T23:11:03.02788+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-26T23:11:03.02797+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241126_231103-vmzzo3jr/logs/debug-core.log"}
+{"time":"2024-11-26T23:11:03.136883+01:00","level":"INFO","msg":"created new stream","id":"vmzzo3jr"}
+{"time":"2024-11-26T23:11:03.136932+01:00","level":"INFO","msg":"stream: started","id":"vmzzo3jr"}
+{"time":"2024-11-26T23:11:03.136954+01:00","level":"INFO","msg":"handler: started","stream_id":"vmzzo3jr"}
+{"time":"2024-11-26T23:11:03.136999+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"vmzzo3jr"}
+{"time":"2024-11-26T23:11:03.136979+01:00","level":"INFO","msg":"sender: started","stream_id":"vmzzo3jr"}
+{"time":"2024-11-26T23:11:03.357311+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-26T23:11:39.457351+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-26T23:11:39.458047+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-26T23:11:40.462833+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading config.yaml","runtime_seconds":0.469306916,"progress":"913B/913B"}],"total_operations":1}}
+{"time":"2024-11-26T23:11:40.631828+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-26T23:11:41.910945+01:00","level":"INFO","msg":"stream: closing","id":"vmzzo3jr"}
+{"time":"2024-11-26T23:11:41.910974+01:00","level":"INFO","msg":"handler: closed","stream_id":"vmzzo3jr"}
+{"time":"2024-11-26T23:11:41.910994+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"vmzzo3jr"}
+{"time":"2024-11-26T23:11:41.911535+01:00","level":"INFO","msg":"sender: closed","stream_id":"vmzzo3jr"}
+{"time":"2024-11-26T23:11:41.911726+01:00","level":"INFO","msg":"stream: closed","id":"vmzzo3jr"}

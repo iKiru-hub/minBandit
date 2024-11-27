@@ -1,0 +1,17 @@
+{"time":"2024-11-26T17:44:53.844662+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-26T17:44:53.844758+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241126_174453-bpenkwc4/logs/debug-core.log"}
+{"time":"2024-11-26T17:44:53.956593+01:00","level":"INFO","msg":"created new stream","id":"bpenkwc4"}
+{"time":"2024-11-26T17:44:53.956631+01:00","level":"INFO","msg":"stream: started","id":"bpenkwc4"}
+{"time":"2024-11-26T17:44:53.956675+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"bpenkwc4"}
+{"time":"2024-11-26T17:44:53.956707+01:00","level":"INFO","msg":"sender: started","stream_id":"bpenkwc4"}
+{"time":"2024-11-26T17:44:53.95676+01:00","level":"INFO","msg":"handler: started","stream_id":"bpenkwc4"}
+{"time":"2024-11-26T17:44:54.198084+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-26T17:45:50.753977+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-26T17:45:50.754393+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-26T17:45:51.760249+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"saving job artifact","runtime_seconds":0.516367708},{"desc":"uploading output.log","runtime_seconds":0.314157125}],"total_operations":2}}
+{"time":"2024-11-26T17:45:51.820445+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-26T17:45:53.161293+01:00","level":"INFO","msg":"stream: closing","id":"bpenkwc4"}
+{"time":"2024-11-26T17:45:53.161344+01:00","level":"INFO","msg":"handler: closed","stream_id":"bpenkwc4"}
+{"time":"2024-11-26T17:45:53.161378+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"bpenkwc4"}
+{"time":"2024-11-26T17:45:53.162278+01:00","level":"INFO","msg":"sender: closed","stream_id":"bpenkwc4"}
+{"time":"2024-11-26T17:45:53.162445+01:00","level":"INFO","msg":"stream: closed","id":"bpenkwc4"}

@@ -1,0 +1,17 @@
+{"time":"2024-11-26T17:12:20.136041+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-26T17:12:20.136126+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241126_171220-ethikmt9/logs/debug-core.log"}
+{"time":"2024-11-26T17:12:20.247166+01:00","level":"INFO","msg":"created new stream","id":"ethikmt9"}
+{"time":"2024-11-26T17:12:20.247204+01:00","level":"INFO","msg":"stream: started","id":"ethikmt9"}
+{"time":"2024-11-26T17:12:20.24722+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"ethikmt9"}
+{"time":"2024-11-26T17:12:20.247266+01:00","level":"INFO","msg":"sender: started","stream_id":"ethikmt9"}
+{"time":"2024-11-26T17:12:20.247321+01:00","level":"INFO","msg":"handler: started","stream_id":"ethikmt9"}
+{"time":"2024-11-26T17:12:20.464625+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-26T17:13:16.598762+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-26T17:13:16.599332+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-26T17:13:17.523138+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-26T17:13:17.604999+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading history, summary","runtime_seconds":0.081343875}],"total_operations":1}}
+{"time":"2024-11-26T17:13:18.753483+01:00","level":"INFO","msg":"stream: closing","id":"ethikmt9"}
+{"time":"2024-11-26T17:13:18.753536+01:00","level":"INFO","msg":"handler: closed","stream_id":"ethikmt9"}
+{"time":"2024-11-26T17:13:18.753569+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"ethikmt9"}
+{"time":"2024-11-26T17:13:18.753953+01:00","level":"INFO","msg":"sender: closed","stream_id":"ethikmt9"}
+{"time":"2024-11-26T17:13:18.753979+01:00","level":"INFO","msg":"stream: closed","id":"ethikmt9"}

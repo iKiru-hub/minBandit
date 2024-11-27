@@ -240,6 +240,28 @@ def make_probability_set(K: int, nb_trials: int,
     return np.array(probabilities_set)
 
 
+def calc_entropy(z: np.ndarray) -> float:
+
+    """
+    calculate the entropy of a distribution
+
+    Parameters
+    ----------
+    z : np.ndarray
+        the distribution
+
+    Returns
+    -------
+    entropy : float
+        the entropy of the distribution
+    """
+
+    # make probabilities
+    z = z / z.sum()
+    p = z[z > 0]
+    return -np.sum(p * np.log(p))
+
+
 
 """ visualization """
 

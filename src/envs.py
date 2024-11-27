@@ -7,9 +7,9 @@ from abc import ABC, abstractmethod
 from statistics import mode
 
 try:
-    from src.utils import tqdm_enumerate, setup_logger
+    from src.utils import tqdm_enumerate, setup_logger, calc_entropy
 except ModuleNotFoundError:
-    from utils import tqdm_enumerate, setup_logger
+    from utils import tqdm_enumerate, setup_logger, calc_entropy
 
 
 logger = setup_logger(__name__)
@@ -301,9 +301,9 @@ class KABdriftv1(KAB):
         self.trg_probabilities = self._new_distribution()
         self.counter = 0
 
-        self.chance_level = [np.mean(self.probabilities)]
-        self.upper_bound = [np.max(self.probabilities)]
-        self.best_arm = [np.argmax(self.probabilities)]
+        self.chance_level_list = [np.mean(self.probabilities)]
+        self.upper_bound_list = [np.max(self.probabilities)]
+        self.best_arm_list = [np.argmax(self.probabilities)]
 
 
 class KABsinv0(KAB):
@@ -513,8 +513,9 @@ def trial(model: object, environment: KAB,
 
 
 def trial_multiple_models(models: list, environment: KAB,
-                      nb_trials: int, nb_rounds: int, nb_reps: int=1,
-                      verbose: bool=False) -> list:
+                          nb_trials: int, nb_rounds: int, nb_reps: int=1,
+                          bin_size: int=20,
+                          verbose: bool=False) -> list:
 
     """
     Run a trial of the k-armed bandit problem with the given model
@@ -563,6 +564,8 @@ def trial_multiple_models(models: list, environment: KAB,
     arm_list = np.zeros((len(models), nb_reps, nb_trials, nb_rounds, K))
     score_list = np.zeros((len(models), nb_reps, nb_trials))
     mean_score_list = np.zeros((len(models), nb_reps, nb_trials))
+
+    entropy_list = np.zeros((len(models), nb_reps, nb_trials, nb_rounds-bin_size))
 
     #
     if verbose:
@@ -613,6 +616,14 @@ def trial_multiple_models(models: list, environment: KAB,
             mean_score_list[:, rep_i, trial_i] = reward_list[:, rep_i, trial_i].mean(axis=1)
 
         # ---------------------------- #
+
+        # calculate entropy for the trial
+        for i, m in enumerate(models):
+            arms = arm_list[i, rep_i, trial_i]
+            entropy = np.zeros(nb_rounds-bin_size)
+            for l in range(0, nb_rounds-bin_size):
+                entropy_list[i, rep_i, trial_i, l] = calc_entropy(arms[l: l+bin_size].sum(axis=0))
+
         if verbose and nb_reps < 2:
             logger.info("")
             logger.info(f"trial {trial_i}")
@@ -623,7 +634,7 @@ def trial_multiple_models(models: list, environment: KAB,
 
     # ---------------------------- #
     # calculate averages over all simulations
-    score_list = score_list.mean(axis=2).mean(axis=1)
+    scores = score_list.mean(axis=2).mean(axis=1)
 
     stats = {
         "reward_list": reward_list,
@@ -631,8 +642,10 @@ def trial_multiple_models(models: list, environment: KAB,
         "upper_bound_list": upper_bound_list,
         "best_arm_list": best_arm_list,
         "arm_list": arm_list,
-        "scores": score_list,
+        "scores": scores,
+        "score_list": score_list,
         "mean_scores": mean_score_list,
+        "entropy_list": entropy_list,
         "names": names
     }
 

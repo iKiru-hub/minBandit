@@ -144,7 +144,7 @@ def main():
     logger("<<< ---------------------- >>>")
 
     # --- settings ---
-    K = 5
+    K = 100
     nb_trials = 2
     nb_rounds = 400
     nb_reps = 2
@@ -155,22 +155,22 @@ def main():
                                                    fixed_p=0.9,
                                                    normalize=False)
     envs_list = [
-            # make_env(K=K,
-            #          kind="v0",
-            #          probabilities_set=probabilities_set,
-            #          tau=None),
             make_env(K=K,
-                     env_type="driftv0",
+                     env_type="v0",
                      probabilities_set=probabilities_set,
-                     tau=10),
+                     tau=None),
+            # make_env(K=K,
+            #          env_type="driftv0",
+            #          probabilities_set=probabilities_set,
+            #          tau=10),
             # make_env(K=K,
             #          kind="driftv1",
             #          probabilities_set=probabilities_set,
             #          tau=100),
-            make_env(K=K,
-                     env_type="sinv0",
-                     probabilities_set=probabilities_set,
-                     tau=None),
+            # make_env(K=K,
+            #          env_type="sinv0",
+            #          probabilities_set=probabilities_set,
+                     # tau=None),
     ]
 
     names = ""
@@ -211,7 +211,7 @@ def main():
                          envs_list=envs_list,
                          nb_trials=nb_trials,
                          nb_rounds=nb_rounds,
-                         nb_reps=nb_reps)
+                          nb_reps=nb_reps)
 
     logger(f"regret: {regret:.3f}")
     wandb.log({"regret": regret})

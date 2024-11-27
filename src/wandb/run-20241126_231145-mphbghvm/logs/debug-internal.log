@@ -1,0 +1,17 @@
+{"time":"2024-11-26T23:11:45.31946+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-26T23:11:45.319548+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241126_231145-mphbghvm/logs/debug-core.log"}
+{"time":"2024-11-26T23:11:45.429843+01:00","level":"INFO","msg":"created new stream","id":"mphbghvm"}
+{"time":"2024-11-26T23:11:45.429886+01:00","level":"INFO","msg":"stream: started","id":"mphbghvm"}
+{"time":"2024-11-26T23:11:45.429892+01:00","level":"INFO","msg":"handler: started","stream_id":"mphbghvm"}
+{"time":"2024-11-26T23:11:45.429901+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"mphbghvm"}
+{"time":"2024-11-26T23:11:45.430008+01:00","level":"INFO","msg":"sender: started","stream_id":"mphbghvm"}
+{"time":"2024-11-26T23:11:45.6341+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-26T23:12:23.29978+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-26T23:12:23.300165+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-26T23:12:24.305773+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"saving job artifact","runtime_seconds":0.448412542},{"desc":"uploading config.yaml","runtime_seconds":0.243716125,"progress":"910B/910B"},{"desc":"uploading output.log","runtime_seconds":0.243676375}],"total_operations":3}}
+{"time":"2024-11-26T23:12:24.43123+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-26T23:12:25.670554+01:00","level":"INFO","msg":"stream: closing","id":"mphbghvm"}
+{"time":"2024-11-26T23:12:25.6706+01:00","level":"INFO","msg":"handler: closed","stream_id":"mphbghvm"}
+{"time":"2024-11-26T23:12:25.670629+01:00","level":"INFO","msg":"sender: closed","stream_id":"mphbghvm"}
+{"time":"2024-11-26T23:12:25.670617+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"mphbghvm"}
+{"time":"2024-11-26T23:12:25.671476+01:00","level":"INFO","msg":"stream: closed","id":"mphbghvm"}
