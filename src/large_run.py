@@ -45,7 +45,7 @@ model_params = {
 
 NB_ROUNDS = 2000
 NB_TRIALS = 2
-NB_REPS = 100
+NB_REPS = 1
 
 
 """ some local functions """
@@ -191,7 +191,8 @@ if __name__ == "__main__":
 
     """ settings """
 
-    K_list = [5, 10, 50, 100, 200, 500, 1000, 1500]
+    # K_list = [5, 10, 50, 100, 200, 500, 1000, 1500]
+    K_list = [3, 5]
 
     """ run """
 
