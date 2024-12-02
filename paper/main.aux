@@ -76,16 +76,19 @@
 \newlabel{fig:perf_plot}{{3}{10}{\textsc {Performance comparison for different values of $K$ and game variants} \textit {The model is compared with Thompson Sampling, Epsilon-Greedy, and UCB. The performance is measured as the average reward obtained by the agent over a number of trials.}}{figure.caption.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Decision-making dynamics}{10}{subsection.3.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Entropy analysis}{10}{subsubsection.3.3.1}\protected@file@percent }
+\newlabel{sec:entropy}{{3.3.1}{10}{Entropy analysis}{subsubsection.3.3.1}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces \textsc  {Decision-making dynamics for different models} \textit  {Each plot display the results from one model obtained from average over 20 iterations. The raster plots (black dots) show arm selected at each round. The red lines represent the entropy level, calculated from the distribution of selections over the preceding 20 rounds; the line is then smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy over all trials are also reported.}}}{12}{figure.caption.6}\protected@file@percent }
 \newlabel{fig:entropy_fig1}{{4}{12}{\textsc {Decision-making dynamics for different models} \textit {Each plot display the results from one model obtained from average over 20 iterations. The raster plots (black dots) show arm selected at each round. The red lines represent the entropy level, calculated from the distribution of selections over the preceding 20 rounds; the line is then smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy over all trials are also reported.}}{figure.caption.6}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}Weight update dynamics}{12}{subsubsection.3.3.2}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces \textsc  {Weight update developement for the model} \textit  {The plot displays the weight update quantity $\Delta W_{k}^{MV}$ for each round (blue line), smoothed as a 20-steps moving average. It is also reported the average reward in a window of 30 rounds (golden line). The results have been obtained averaging over 20 iterations.}}}{13}{figure.caption.7}\protected@file@percent }
 \newlabel{fig:rew_update}{{5}{13}{\textsc {Weight update developement for the model} \textit {The plot displays the weight update quantity $\Delta W_{k}^{MV}$ for each round (blue line), smoothed as a 20-steps moving average. It is also reported the average reward in a window of 30 rounds (golden line). The results have been obtained averaging over 20 iterations.}}{figure.caption.7}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Robustness}{13}{subsubsection.3.3.3}\protected@file@percent }
+\newlabel{fig:entropy_distr}{{3.3.3}{13}{Robustness}{figure.caption.8}{}}
 \citation{steyversBayesianAnalysisHuman2009a}
 \citation{schulzFindingStructureMultiarmed2020}
 \citation{zhangForgetfulBayesMyopic2013}
 \citation{suttonReinforcementLearningProblem1998}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Entropy analysis for the model in a stationary setting}}{14}{figure.caption.8}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {4}Discussion}{14}{section.4}\protected@file@percent }
 \bibdata{mkb_bibliography}
 \bibcite{millerIntegrativeTheoryPrefrontal2001a}{1}
@@ -134,24 +137,24 @@
 \bibcite{steyversBayesianAnalysisHuman2009a}{44}
 \bibcite{schulzFindingStructureMultiarmed2020}{45}
 \bibcite{zhangForgetfulBayesMyopic2013}{46}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Appendix}{19}{section.5}\protected@file@percent }
-\newlabel{sec:appendix}{{5}{19}{Appendix}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Activation function}{19}{subsection.5.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces \textsc  {Activation function $\Phi _{v}$} - \textit  {Parameters $\beta =10$, $\alpha =1$, $\mu =1$, $\sigma =1$, and $r=0.5$.}}}{19}{figure.caption.9}\protected@file@percent }
-\newlabel{fig:gau_sigm}{{6}{19}{\textsc {Activation function $\Phi _{v}$} - \textit {Parameters $\beta =10$, $\alpha =1$, $\mu =1$, $\sigma =1$, and $r=0.5$.}}{figure.caption.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Reward distribution entropy}{19}{subsection.5.2}\protected@file@percent }
-\newlabel{sec:appendix_entropy}{{5.2}{19}{Reward distribution entropy}{subsection.5.2}{}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Reward Probability Distribution Generation}}{20}{algocf.2}\protected@file@percent }
-\newlabel{alg:reward_distribution}{{2}{20}{Reward distribution entropy}{algocf.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Table of results}{20}{subsection.5.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Performance comparison for $K=5$}}{20}{table.caption.11}\protected@file@percent }
-\newlabel{tab:k5}{{1}{20}{Performance comparison for $K=5$}{table.caption.11}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Performance comparison for $K=10$}}{20}{table.caption.12}\protected@file@percent }
-\newlabel{tab:k10}{{2}{20}{Performance comparison for $K=10$}{table.caption.12}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Performance comparison for $K=100$}}{21}{table.caption.13}\protected@file@percent }
-\newlabel{tab:k100}{{3}{21}{Performance comparison for $K=100$}{table.caption.13}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Performance comparison for $K=100$}}{21}{table.caption.14}\protected@file@percent }
-\newlabel{tab:k200}{{4}{21}{Performance comparison for $K=100$}{table.caption.14}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Performance comparison for $K=100$}}{21}{table.caption.15}\protected@file@percent }
-\newlabel{tab:k1000}{{5}{21}{Performance comparison for $K=100$}{table.caption.15}{}}
-\gdef \@abspage@last{21}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Appendix}{20}{section.5}\protected@file@percent }
+\newlabel{sec:appendix}{{5}{20}{Appendix}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Activation function}{20}{subsection.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces \textsc  {Activation function $\Phi _{v}$} - \textit  {Parameters $\beta =10$, $\alpha =1$, $\mu =1$, $\sigma =1$, and $r=0.5$.}}}{20}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:gau_sigm}{{7}{20}{\textsc {Activation function $\Phi _{v}$} - \textit {Parameters $\beta =10$, $\alpha =1$, $\mu =1$, $\sigma =1$, and $r=0.5$.}}{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Reward distribution entropy}{20}{subsection.5.2}\protected@file@percent }
+\newlabel{sec:appendix_entropy}{{5.2}{20}{Reward distribution entropy}{subsection.5.2}{}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Reward Probability Distribution Generation}}{21}{algocf.2}\protected@file@percent }
+\newlabel{alg:reward_distribution}{{2}{21}{Reward distribution entropy}{algocf.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Table of results}{21}{subsection.5.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Performance comparison for $K=5$}}{21}{table.caption.12}\protected@file@percent }
+\newlabel{tab:k5}{{1}{21}{Performance comparison for $K=5$}{table.caption.12}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Performance comparison for $K=10$}}{21}{table.caption.13}\protected@file@percent }
+\newlabel{tab:k10}{{2}{21}{Performance comparison for $K=10$}{table.caption.13}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Performance comparison for $K=100$}}{22}{table.caption.14}\protected@file@percent }
+\newlabel{tab:k100}{{3}{22}{Performance comparison for $K=100$}{table.caption.14}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Performance comparison for $K=100$}}{22}{table.caption.15}\protected@file@percent }
+\newlabel{tab:k200}{{4}{22}{Performance comparison for $K=100$}{table.caption.15}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Performance comparison for $K=100$}}{22}{table.caption.16}\protected@file@percent }
+\newlabel{tab:k1000}{{5}{22}{Performance comparison for $K=100$}{table.caption.16}{}}
+\gdef \@abspage@last{22}

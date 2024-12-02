@@ -40,7 +40,7 @@ normalized as $\mathbf{p}_{t} = \mathbf{p}_{t}(\sum_{k} \mathbf{p}_{t,i})^{-1}$ 
 \subsection{Decision-making dynamics}
 
 % entropy over rounds
-\subsubsection{Entropy analysis}
+\subsubsection{Entropy analysis}\label{sec:entropy}
 \noindent For a better understanding of the qualitative differences between the models, we analyzed the progress over the rounds and tracked the selected arms in the simplest case of zero-steps distribution shift. Additionally, in order to quantify the variability of the decision policy at a given time and highlight the particularity of each
 decision-making behaviour, we calculated the entropy of the distribution of chosen
 arms over a time window of 20 rounds as $H=-\sum^{K}_{i} p_{i}\log(p_{i})$. In figure \ref{fig:entropy_fig1}, it is plotted for each model the raster plot of selected arms together with its level of entropy. As expected, the over shape of the changes in the entropy over time are rather specific to
@@ -87,9 +87,13 @@ This behaviour is consistent with the low entropy levels observed in the previou
 
 % robustness
 \noindent Then, we sought to investigate the robustness of the model.
-This was accomplished by evaluating the performances in a stationary setting with $K=10$ and increasing levels of entropy in the reward distribution; see the \ref{sec:appendix_entropy} for more details.
+This was accomplished by evaluating the performances in a stationary setting with $K=10$ and increasing levels of entropy in the reward distribution. For the details of calculation of the reward distribution see the appendix \ref{sec:appendix_entropy}.
 
-
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1.\textwidth]{figures/entropy_performance_plot.pdf}
+    \caption{Entropy analysis for the model in a stationary setting} Top plot: \textit{average reward obtained by each model for for increasing levels of entropy in the reward distribution.} Bottom plot: \textit{average entropy of the selections (as calculated in \ref{sec:entropy}) for increasing levels of entropy in the reward distribution.}
+\end{figure}\label{fig:entropy_distr}
 
 
 

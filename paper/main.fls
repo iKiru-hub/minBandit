@@ -219,6 +219,11 @@ INPUT ./figures/reward_update_plot.pdf
 INPUT ./figures/reward_update_plot.pdf
 INPUT ./figures/reward_update_plot.pdf
 INPUT ./figures/reward_update_plot.pdf
+INPUT ./figures/entropy_performance_plot.pdf
+INPUT ./figures/entropy_performance_plot.pdf
+INPUT ./figures/entropy_performance_plot.pdf
+INPUT ./figures/entropy_performance_plot.pdf
+INPUT ./figures/entropy_performance_plot.pdf
 INPUT ./discussion.tex
 INPUT ./discussion.tex
 INPUT ./discussion.tex

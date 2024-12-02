@@ -24,12 +24,6 @@ $\alpha$, and intensity $\gamma_{1}$).
 
 \noindent The calculation of a set of $N$ reward probability distribution $\mathbf{p}_{i}\text{  for  } i\ldots N$ for $K$ values with a progressively decreasing levels of entropy $\mathbf{h}_{i}\text{  for  } i\ldots N$ has been obtained by the following algorithm:
 
-- start with a random vector in $\mathbf{z}=(0,1)^{K}$
-- set one random entry to $1.$
-- define a set of values $B=\{1.5^{x}\;\vert\;\text{  for  }x=1\ldots 7\}$
-- construct a set of probability distributions $\mathbf{p}_{i}$ by passing $\mathbf{z}$ through a softmax function with temperature $\beta_{i}\sim B$ as $\mathbf{p}_{i}\leftarrow \exp(\beta_{i}\mathbf{v})\left(\sum_{j}\exp(\beta_{i}\mathbf{v}_{j})\right)^{-1}$
-
-
 \begin{algorithm}[ht]
 \caption{Reward Probability Distribution Generation}
 \label{alg:reward_distribution}
