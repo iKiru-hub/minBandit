@@ -28,31 +28,37 @@ This problem has been extensively studied in the context of reinforcement learni
 % brief introduction of the k-armed bandit problem and previous algorithms.
 \subsection{Related work}
 % overview of the main solutions proposed in the literature from a computational perspective.
-There exists various flavours of this problem, with the simplest having a stationary reward distribution, while the more challening ones have have \textit{concept drift}, where the reward distribution changes over time.
-Over the years, several algorithms have been proposed, alongside with their theoretical guarantees. In this regard, Thompson sampling is a popular algorithm that has been shown to achieve near-optimal regret bounds in the stochastic setting \cite{agrawalAnalysisThompsonSampling2012}, which 
-a Bayesian approach  the idea of maintaining a posterior distribution over the reward probabilities of the actions, and selecting actions according to the posterior distribution. Another popular algorithm is the Upper Confidence Bound (UCB) algorithm, which has been shown to achieve near-optimal
-regret bounds in the adversarial setting \cite{auerFinitetimeAnalysisMultiarmed2002}. The algorithm is based on the idea of maintaining an upper confidence bound on the reward probabilities of the actions, and selecting actions according to the upper confidence bound.
-\\
+There exists various flavours of this problem, with the simplest having a stationary reward distributione.
+
+Over the years, several algorithms have been proposed, alongside with their theoretical guarantees.
+In this regard, Thompson sampling is a popular algorithm that has been shown to achieve near-optimal regret bounds in the stochastic setting \cite{agrawalAnalysisThompsonSampling2012, kaufmannThompsonSamplingAsymptotically2012}.
+This approach relies on Bayesian optimization, where the goal is to maintain a posterior distribution over the reward probabilities of the actions, and selecting actions accordingly.
+Another popular algorithm is Upper Confidence Bound (UCB), which has been shown to achieve near-optimal regret bounds in the adversarial setting \cite{auerFinitetimeAnalysisMultiarmed2002}.
+The approach is based on the idea of maintaining an upper limit on the reward probabilities of the actions, and selecting actions accordingly. 
+Other successful algorithms are $\epsilon$-greedy and VDBE \cite{gittinsBanditProcessesDynamic1979, , banMultifacetContextualBandits2021, tokicAdaptiveEGreedyExploration2010, tokicValueDifferenceBasedExploration2011}.\\
+
 % outline of lack of bio-realism and what we currently know about how the brain might solve this task.
-Despite the success of these algorithms in solving the k-armed bandit problem, they lack biological plausibility. In contrast, the brain has evolved a complex network of interconnected regions that work together to solve this task. In particular, the dopamine-acetylcholine system has been shown to
-play a crucial role in learning and decision making \cite{dayanDecisionTheoryReinforcement2008}.
+Despite the success of these algorithms in solving the k-armed bandit problem, they lack biological plausibility.
+The brain has evolved a complex network of interconnected regions that work together to solve this task.
 
 % aim of the work
-In this work, we focus on a stochastic bandit problem, a more challenging variant of the original task endowed with \textit{concept drift}, where the reward distribution changes over time \cite{garivierUpperConfidenceBoundPolicies2008, besbesStochasticMultiArmedBanditProblem2014, cavenaghiNonStationaryMultiArmed2021}.
-We propose a biologically plausible model using spiking neural networks (SNN), obtaining good performance over an arbitrary number of bandit trials.
-Its architecture is composed of two parts. The first is a working memory component, whose scope is to maintain an active representation of the current stimulus, and it is inspired by the functionality of the dorsolateral PFC. Several previous studies have proposed bio-realistic models of WM
-\cite{barakWorkingModelsWorking2014}, including focus on synaptic facilitation \cite{barakNeuronalPopulationCoding2010}, random connectivity \cite{bouchacourtFlexibleModelWorking2019}, excitation-inhibition balance (E-I)
-\cite{brunelEffectsNeuromodulationCortical2001, vogelsGatingMultipleSignals2009}, and echo state networks \cite{pascanuNeurodynamicalModelWorking2011, fetteShortTermMemory2005}. Here in particular, we used a three-population SNN exploiting the E-I balance to maintain the stimulus trace, similarly to
-\cite{chenSpikingNeuralNetwork2023}.
-The second component is a one-layer hybrid network, and it is where a pre-defined architectural policy assign a subjective value to the available options \textit{i.e.} the bandits.
-This component is modeled after the interaction between the OFC and the basal ganglia, in particular the striatum
-\cite{bariDynamicDecisionMaking2021, frankAnatomyDecisionStriatoorbitofrontal2006}, given the role of the frontal lobe in reversal learning \cite{bartoloPrefrontalCortexPredicts2020},
-various network models of the PFC and BG for decision-making have been proposed, centered on the role of dopamine in the basal ganglia \cite{bastonBiologicallyInspiredComputational2015}, spike-time dependent plasticity (STPD) \cite{kannanUnsupervisedSpikingNeural2023}, cortico-striatal interaction
-\cite{frankInteractionsFrontalCortex2001}, and task switching processes \cite{zhaoBrainInspiredDecisionMakingSpiking2018, herdNeuralNetworkModel2014}.
+In this work, we focuses on stochastic bandit problems, more challenging variant of the original task endowed with \textit{concept drift}, where the reward distribution changes over time \cite{garivierUpperConfidenceBoundPolicies2008, besbesStochasticMultiArmedBanditProblem2014, cavenaghiNonStationaryMultiArmed2021}.
 
-Regarding our model, the novelty relies in two main elements. The first is the decision making process itself, implemented as a dynamic population interaction between the neural traces active in working memory and the values represented in the hybrid network, similarly to bump attractor networks for
-perceptual computations \cite{carrollEncodingCertaintyBump2014, esnaola-acebesBumpAttractorDynamics2021}.
-The second is learning, which is applied to the hybrid network, and it is based on a neuromodulated Hebbian-like synaptic plasticity rule with special weight-dependent kernels for long-term potentiation (LTP) and long-term depression (LTD).
-This choice is motivated by the asymmetry of the dopamine signal in supporting LTP or LTD \cite{schultzNeuralSubstratePrediction1997, toblerAdaptiveCodingReward2005, reynoldsDopaminedependentPlasticityCorticostriatal2002, madadiaslDopaminergicModulationSynaptic2019}.
+% brief overview of the model
+We propose a biologically plausible model using rate neurons, obtaining good performance even with settings with a large amount of arms.
+Its architecture is composed of two connected neuronal layers, both with as many neurons as the arm of the bandit task.
+The first layer is inspired by the functionality of the OFC, and its scope is to maintain an active representation of the arms weighted by the input from the second layer.
+The second, modeled after the ACC, is meant to represent the value of the arms, and its input connections are updated through a learning rule dependant on the reward history and current connectivity pattern.
 
 
+% main motivations
+Our models features two important aspects of brain decision making. Firstly, the decision making process itself is implemented as a dynamical interaction between neural populations, similarly to bump attractor networks for perceptual computations \cite{carrollEncodingCertaintyBump2014, esnaola-acebesBumpAttractorDynamics2021}.
+The final choice of the arm is achieved by the agreement or disagreement between the two populations, and it depends on their underlying value representation \cite{bariDynamicDecisionMaking2021, houstonMatchingBehavioursRewards2021}.
+Secondly, plasticity is based on a non-associative learning rule, endowed with a non-linear kernel for the weight update quantity.
+Importantly, the specific values of a parametrization of the kernel has been optimized through an evolutionary algorithm.
+Behind this design choice there is our hypothesis that the scale of neural synaptic updates should vary according to its magnitudeand with a non-linear shape of its scaling function represent a better choice that a constant one.
+This considerations align with the idea that the brain is able to adapt its learning rate according to the context, and that the learning rate is not constant across neurons within the same network.
+This approach has been already adopted in several computational architectures, for instance using spiking neurons \cite{inglisModulationDopamineAdaptive2021} and synaptic metaplasticity \cite{iigayaAdaptiveLearningDecisionmaking2016}.
+Lastly, there is experimental evidence that this function of adaptive plasticity might be covered by dopamine \cite{toblerAdaptiveCodingReward2005}.
+Indeed, it is role in prediction error and reward signaling is well established \cite{schultzNeuralSubstratePrediction1997}, together with its importance in modulating processes in the PFC \cite{didomenicoDopaminergicModulationPrefrontal2023, lohaniDopamineModulationPrefrontal2019,
+dardenneRolePrefrontalCortex2012}. 

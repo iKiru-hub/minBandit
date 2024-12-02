@@ -132,3 +132,43 @@ roeschDopamineNeuronsEncode2007}.
 % short overview of the literature
 Extensive research has been conducted on the topic, and several algorithms have been proposed, such as Thompson sampling, $\epsilon$-greedy, UCB1, VDBE, alongside convergence proofs for specific settings \cite{gittinsBanditProcessesDynamic1979, kaufmannThompsonSamplingAsymptotically2012, banMultifacetContextualBandits2021, tokicAdaptiveEGreedyExploration2010, tokicValueDifferenceBasedExploration2011}.
 
+\subsection{Zero-steps distribution shift}
+In this first setting, as the end of a trial $i$ the arm distribution changes immediately to a new one $i+1$ as $\mathbf{\pi}_{i} \to \mathbf{\pi}_{i+1}$.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.65\textwidth]{figures/drawing.png}
+    \caption{\textsc{Performance with variable number of arms} - \textit{each plot is a simulation with K numbers of arms, the x-axis are rounds, the central vertical line signals the start of the second trial, the y-axis is the reward fraction.
+            The shaded area is the reasonable reward
+    range, where the lower bound is the chance level and the upper bound the best reward (following the optimal policy). The model performance is in red, while Upper-Confidence Bound green, Thompson Sampling blue, and Epsilon-Greedy orange. }}
+\label{fig:zero_1}
+\end{figure}
+
+
+\noindent From figure \ref{fig:zero_1} above, it is clear the ability of the model (in red) to reach almost always the optimal reward policy (\textit{i.e.} the greediest) for all trials, even after the distribution shift.
+In comparison, the other algorithms start to struggle when the arms are more $100$ and the distribution changes.
+
+Next, it has been enquired how the model selection policy evolves over time and in comparison with the other algorithms, as visualized in figure \ref{fig:sel2}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/selections_many.png}
+    \caption{\textsc{Selection evolution over rounds for multiple models} - \textit{the individual plots follow the same schema of \ref{fig:sel1}, with the model name and reward per round fraction}}
+    \label{fig:sel2}
+\end{figure}
+
+\noindent The principal distinction is the model's strictly greedy behaviour once a good arm is found. Only in the case of a meaningful decrease in reward the exploration is resumed, in contrast with the other approaches in which occasional sub-optimal choices are made.
+
+
+\subsection{Epsilon-steps distribution shift}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/drawing2.png}
+    \caption{\textsc{Performance with variable number of arms} - \textit{each plot is a simulation with K-numbers of arms, and the rest is also the same as before in \ref{fig:zero_1}}. Each trial has 3 rounds, meaning that every three steps the distribution change.}
+    \label{fig:eps_1}
+\end{figure}
+
+\noindent In the setting with a smooth distribution shift the difficulty of the problem is increased, especially since short-sighted greedy behaviours are easily sub-optimal. The model (always in red) is capable of reaching and maintaining a successful profile, even with many arms available.
+
+

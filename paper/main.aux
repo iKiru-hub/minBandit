@@ -23,35 +23,29 @@
 \citation{houstonMatchingBehavioursRewards2021}
 \citation{averbeckTheoryChoiceBandit2015}
 \citation{suttonReinforcementLearningProblem1998}
-\citation{agrawalAnalysisThompsonSampling2012}
-\citation{auerFinitetimeAnalysisMultiarmed2002}
-\citation{dayanDecisionTheoryReinforcement2008}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{3}{section.1}\protected@file@percent }
+\citation{agrawalAnalysisThompsonSampling2012}
+\citation{kaufmannThompsonSamplingAsymptotically2012}
+\citation{auerFinitetimeAnalysisMultiarmed2002}
+\citation{gittinsBanditProcessesDynamic1979}
+\citation{}
+\citation{banMultifacetContextualBandits2021}
+\citation{tokicAdaptiveEGreedyExploration2010}
+\citation{tokicValueDifferenceBasedExploration2011}
 \citation{garivierUpperConfidenceBoundPolicies2008}
 \citation{besbesStochasticMultiArmedBanditProblem2014}
 \citation{cavenaghiNonStationaryMultiArmed2021}
-\citation{barakWorkingModelsWorking2014}
-\citation{barakNeuronalPopulationCoding2010}
-\citation{bouchacourtFlexibleModelWorking2019}
-\citation{brunelEffectsNeuromodulationCortical2001}
-\citation{vogelsGatingMultipleSignals2009}
-\citation{pascanuNeurodynamicalModelWorking2011}
-\citation{fetteShortTermMemory2005}
-\citation{chenSpikingNeuralNetwork2023}
-\citation{bariDynamicDecisionMaking2021}
-\citation{frankAnatomyDecisionStriatoorbitofrontal2006}
-\citation{bartoloPrefrontalCortexPredicts2020}
-\citation{bastonBiologicallyInspiredComputational2015}
-\citation{kannanUnsupervisedSpikingNeural2023}
-\citation{frankInteractionsFrontalCortex2001}
-\citation{zhaoBrainInspiredDecisionMakingSpiking2018}
-\citation{herdNeuralNetworkModel2014}
 \citation{carrollEncodingCertaintyBump2014}
 \citation{esnaola-acebesBumpAttractorDynamics2021}
-\citation{schultzNeuralSubstratePrediction1997}
+\citation{bariDynamicDecisionMaking2021}
+\citation{houstonMatchingBehavioursRewards2021}
+\citation{inglisModulationDopamineAdaptive2021}
+\citation{iigayaAdaptiveLearningDecisionmaking2016}
 \citation{toblerAdaptiveCodingReward2005}
-\citation{reynoldsDopaminedependentPlasticityCorticostriatal2002}
-\citation{madadiaslDopaminergicModulationSynaptic2019}
+\citation{schultzNeuralSubstratePrediction1997}
+\citation{didomenicoDopaminergicModulationPrefrontal2023}
+\citation{lohaniDopamineModulationPrefrontal2019}
+\citation{dardenneRolePrefrontalCortex2012}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Related work}{4}{subsection.1.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {2}Methods}{5}{section.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Binomial K-armed bandit problem}{5}{subsection.2.1}\protected@file@percent }
@@ -60,10 +54,6 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \textsc  {Model architecture} - \textit  {The model is composed of a layer $M$ (blue), receiving a feedfoward input $I_{\text  {ext}}$, a layer $V$ (orange), and connections $\textbf  {W}^{MV}$ and $\textbf  {W}^{VM}$. Additionally, two indexes $k_{M}, k_{V}$ can be extracted from the layers and corresponds to the selection made by the two populations as $k_{M}=\text  {argmax}_{k} \{\textbf  {u}\}$, $k_{V}=\text  {argmax}_{k} \{\textbf  {v}\}$.}}}{6}{figure.caption.2}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:main_architecture}{{1}{6}{\textsc {Model architecture} - \textit {The model is composed of a layer $M$ (blue), receiving a feedfoward input $I_{\text {ext}}$, a layer $V$ (orange), and connections $\textbf {W}^{MV}$ and $\textbf {W}^{VM}$. Additionally, two indexes $k_{M}, k_{V}$ can be extracted from the layers and corresponds to the selection made by the two populations as $k_{M}=\text {argmax}_{k} \{\textbf {u}\}$, $k_{V}=\text {argmax}_{k} \{\textbf {v}\}$.}}{figure.caption.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}Option selection}{7}{subsubsection.2.2.1}\protected@file@percent }
-\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Two-phases option selection process}}{7}{algocf.1}\protected@file@percent }
-\newlabel{alg:decision}{{1}{7}{Option selection}{algocf.1}{}}
-\newlabel{alg:decision1}{{2.2.1}{7}{Option selection}{algocf.1}{}}
 \citation{lukChoiceCodingFrontal2013}
 \citation{kennerleyDecisionMakingReward2011a}
 \citation{funahashiPrefrontalContributionDecisionMaking2017}
@@ -71,34 +61,31 @@
 \citation{balewskiValueDynamicsAffect2023}
 \citation{backmanEffectsWorkingMemoryTraining2011}
 \citation{enelStableDynamicRepresentations2020}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces \textsc  {Selection evolution over rounds} - \textit  {the x-axis represents the available arms, while the y-axis the number of rounds, with the dotted vertical lines indicating the start of a new trial with 150 rounds each. The model selections are the black vertical lines for an arm and a round. The red horizontal lines signal the arm with the highest reward probability, thus representing the best (and greediest) selection.}}}{8}{figure.caption.3}\protected@file@percent }
-\newlabel{fig:sel1}{{2}{8}{\textsc {Selection evolution over rounds} - \textit {the x-axis represents the available arms, while the y-axis the number of rounds, with the dotted vertical lines indicating the start of a new trial with 150 rounds each. The model selections are the black vertical lines for an arm and a round. The red horizontal lines signal the arm with the highest reward probability, thus representing the best (and greediest) selection.}}{figure.caption.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Learning}{8}{subsection.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Bio-inspired features}{9}{subsection.2.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}Results}{9}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}Option selection}{7}{subsubsection.2.2.1}\protected@file@percent }
+\newlabel{alg:decision1}{{2.2.1}{7}{Option selection}{algocf.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Learning}{7}{subsection.2.3}\protected@file@percent }
+\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Two-phases option selection process}}{8}{algocf.1}\protected@file@percent }
+\newlabel{alg:decision}{{1}{8}{Option selection}{algocf.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Bio-inspired features}{8}{subsection.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Results}{8}{section.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces \textsc  {Selection evolution over rounds} - \textit  {the x-axis represents the available arms, while the y-axis the number of rounds, with the dotted vertical lines indicating the start of a new trial with 150 rounds each. The model selections are the black vertical lines for an arm and a round. The red horizontal lines signal the arm with the highest reward probability, thus representing the best (and greediest) selection.}}}{9}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:sel1}{{2}{9}{\textsc {Selection evolution over rounds} - \textit {the x-axis represents the available arms, while the y-axis the number of rounds, with the dotted vertical lines indicating the start of a new trial with 150 rounds each. The model selections are the black vertical lines for an arm and a round. The red horizontal lines signal the arm with the highest reward probability, thus representing the best (and greediest) selection.}}{figure.caption.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Game variants}{9}{subsection.3.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Performance comparison}{10}{subsection.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces \textsc  {Performance comparison for different values of $K$ and game variants} \textit  {The model is compared with Thompson Sampling, Epsilon-Greedy, and UCB. The performance is measured as the average reward obtained by the agent over a number of trials.}}}{10}{figure.caption.4}\protected@file@percent }
-\newlabel{fig:perf_plot}{{3}{10}{\textsc {Performance comparison for different values of $K$ and game variants} \textit {The model is compared with Thompson Sampling, Epsilon-Greedy, and UCB. The performance is measured as the average reward obtained by the agent over a number of trials.}}{figure.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces \textsc  {Performance comparison for different values of $K$ and game variants} \textit  {The model is compared with Thompson Sampling, Epsilon-Greedy, and UCB. The performance is measured as the average reward obtained by the agent over a number of trials.}}}{10}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:perf_plot}{{3}{10}{\textsc {Performance comparison for different values of $K$ and game variants} \textit {The model is compared with Thompson Sampling, Epsilon-Greedy, and UCB. The performance is measured as the average reward obtained by the agent over a number of trials.}}{figure.caption.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Decision-making dynamics}{10}{subsection.3.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Entropy analysis}{10}{subsubsection.3.3.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces \textsc  {Decision-making dynamics for different models} \textit  {Each plot display the results from one model obtained from average over 20 iterations. The raster plots (black dots) show arm selected at each round. The red lines represent the entropy level, calculated from the distribution of selections over the preceding 20 rounds; the line is then smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy over all trials are also reported.}}}{12}{figure.caption.5}\protected@file@percent }
-\newlabel{fig:entropy_fig1}{{4}{12}{\textsc {Decision-making dynamics for different models} \textit {Each plot display the results from one model obtained from average over 20 iterations. The raster plots (black dots) show arm selected at each round. The red lines represent the entropy level, calculated from the distribution of selections over the preceding 20 rounds; the line is then smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy over all trials are also reported.}}{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces \textsc  {Decision-making dynamics for different models} \textit  {Each plot display the results from one model obtained from average over 20 iterations. The raster plots (black dots) show arm selected at each round. The red lines represent the entropy level, calculated from the distribution of selections over the preceding 20 rounds; the line is then smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy over all trials are also reported.}}}{12}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:entropy_fig1}{{4}{12}{\textsc {Decision-making dynamics for different models} \textit {Each plot display the results from one model obtained from average over 20 iterations. The raster plots (black dots) show arm selected at each round. The red lines represent the entropy level, calculated from the distribution of selections over the preceding 20 rounds; the line is then smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy over all trials are also reported.}}{figure.caption.6}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}Weight update dynamics}{12}{subsubsection.3.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces \textsc  {Weight update developement for the model} \textit  {The plot displays the weight update quantity $\Delta W_{k}^{MV}$ for each round (blue line), smoothed as a 20-steps moving average. It is also reported the average reward in a window of 30 rounds (golden line). The results have been obtained averaging over 20 iterations.}}}{13}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:rew_update}{{5}{13}{\textsc {Weight update developement for the model} \textit {The plot displays the weight update quantity $\Delta W_{k}^{MV}$ for each round (blue line), smoothed as a 20-steps moving average. It is also reported the average reward in a window of 30 rounds (golden line). The results have been obtained averaging over 20 iterations.}}{figure.caption.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Robustness and parameter sensitivity}{13}{subsection.3.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces \textsc  {Weight update developement for the model} \textit  {The plot displays the weight update quantity $\Delta W_{k}^{MV}$ for each round (blue line), smoothed as a 20-steps moving average. It is also reported the average reward in a window of 30 rounds (golden line). The results have been obtained averaging over 20 iterations.}}}{13}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:rew_update}{{5}{13}{\textsc {Weight update developement for the model} \textit {The plot displays the weight update quantity $\Delta W_{k}^{MV}$ for each round (blue line), smoothed as a 20-steps moving average. It is also reported the average reward in a window of 30 rounds (golden line). The results have been obtained averaging over 20 iterations.}}{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Robustness}{13}{subsubsection.3.3.3}\protected@file@percent }
 \citation{steyversBayesianAnalysisHuman2009a}
 \citation{schulzFindingStructureMultiarmed2020}
 \citation{zhangForgetfulBayesMyopic2013}
-\citation{schulzFindingStructureMultiarmed2020}
-\citation{reynoldsDopaminedependentPlasticityCorticostriatal2002}
-\citation{frankAnatomyDecisionStriatoorbitofrontal2006}
-\citation{nivEvolutionReinforcementLearning2002}
 \citation{suttonReinforcementLearningProblem1998}
-\citation{besbesStochasticMultiArmedBanditProblem2014}
-\citation{coolsChemistryAdaptiveMind2019}
-\citation{dayanDecisionTheoryReinforcement2008}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Discussion}{14}{section.4}\protected@file@percent }
 \bibdata{mkb_bibliography}
 \bibcite{millerIntegrativeTheoryPrefrontal2001a}{1}
@@ -120,64 +107,51 @@
 \bibcite{houstonMatchingBehavioursRewards2021}{17}
 \bibcite{averbeckTheoryChoiceBandit2015}{18}
 \bibcite{agrawalAnalysisThompsonSampling2012}{19}
-\bibcite{auerFinitetimeAnalysisMultiarmed2002}{20}
-\bibcite{dayanDecisionTheoryReinforcement2008}{21}
-\bibcite{garivierUpperConfidenceBoundPolicies2008}{22}
-\bibcite{besbesStochasticMultiArmedBanditProblem2014}{23}
-\bibcite{cavenaghiNonStationaryMultiArmed2021}{24}
-\bibcite{barakWorkingModelsWorking2014}{25}
-\bibcite{barakNeuronalPopulationCoding2010}{26}
-\bibcite{bouchacourtFlexibleModelWorking2019}{27}
-\bibcite{brunelEffectsNeuromodulationCortical2001}{28}
-\bibcite{vogelsGatingMultipleSignals2009}{29}
-\bibcite{pascanuNeurodynamicalModelWorking2011}{30}
-\bibcite{fetteShortTermMemory2005}{31}
-\bibcite{chenSpikingNeuralNetwork2023}{32}
-\bibcite{bartoloPrefrontalCortexPredicts2020}{33}
-\bibcite{bastonBiologicallyInspiredComputational2015}{34}
-\bibcite{kannanUnsupervisedSpikingNeural2023}{35}
-\bibcite{frankInteractionsFrontalCortex2001}{36}
-\bibcite{zhaoBrainInspiredDecisionMakingSpiking2018}{37}
-\bibcite{herdNeuralNetworkModel2014}{38}
-\bibcite{carrollEncodingCertaintyBump2014}{39}
-\bibcite{esnaola-acebesBumpAttractorDynamics2021}{40}
-\bibcite{schultzNeuralSubstratePrediction1997}{41}
-\bibcite{toblerAdaptiveCodingReward2005}{42}
-\bibcite{reynoldsDopaminedependentPlasticityCorticostriatal2002}{43}
-\bibcite{madadiaslDopaminergicModulationSynaptic2019}{44}
-\bibcite{lukChoiceCodingFrontal2013}{45}
-\bibcite{kennerleyDecisionMakingReward2011a}{46}
-\bibcite{funahashiPrefrontalContributionDecisionMaking2017}{47}
-\bibcite{marcosDeterminingMonkeyFree2016}{48}
-\bibcite{balewskiValueDynamicsAffect2023}{49}
-\bibcite{backmanEffectsWorkingMemoryTraining2011}{50}
-\bibcite{enelStableDynamicRepresentations2020}{51}
-\bibcite{steyversBayesianAnalysisHuman2009a}{52}
-\bibcite{schulzFindingStructureMultiarmed2020}{53}
-\bibcite{zhangForgetfulBayesMyopic2013}{54}
-\bibcite{coolsChemistryAdaptiveMind2019}{55}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Appendix}{20}{section.5}\protected@file@percent }
-\newlabel{sec:appendix}{{5}{20}{Appendix}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Activation function}{20}{subsection.5.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces \textsc  {Activation function $\Phi _{v}$} - \textit  {Parameters $\beta =10$, $\alpha =1$, $\mu =1$, $\sigma =1$, and $r=0.5$.}}}{20}{figure.caption.8}\protected@file@percent }
-\newlabel{fig:gau_sigm}{{6}{20}{\textsc {Activation function $\Phi _{v}$} - \textit {Parameters $\beta =10$, $\alpha =1$, $\mu =1$, $\sigma =1$, and $r=0.5$.}}{figure.caption.8}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Zero-steps distribution shift}{20}{subsection.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Epsilon-steps distribution shift}{21}{subsection.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Table of results}{21}{subsection.5.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Performance comparison for $K=5$}}{21}{table.caption.12}\protected@file@percent }
-\newlabel{tab:k5}{{1}{21}{Performance comparison for $K=5$}{table.caption.12}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Performance comparison for $K=10$}}{21}{table.caption.13}\protected@file@percent }
-\newlabel{tab:k10}{{2}{21}{Performance comparison for $K=10$}{table.caption.13}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Performance comparison for $K=100$}}{22}{table.caption.14}\protected@file@percent }
-\newlabel{tab:k100}{{3}{22}{Performance comparison for $K=100$}{table.caption.14}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Performance comparison for $K=100$}}{22}{table.caption.15}\protected@file@percent }
-\newlabel{tab:k200}{{4}{22}{Performance comparison for $K=100$}{table.caption.15}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Performance comparison for $K=100$}}{22}{table.caption.16}\protected@file@percent }
-\newlabel{tab:k1000}{{5}{22}{Performance comparison for $K=100$}{table.caption.16}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces \textsc  {Performance with variable number of arms} - \textit  {each plot is a simulation with K numbers of arms, the x-axis are rounds, the central vertical line signals the start of the second trial, the y-axis is the reward fraction. The shaded area is the reasonable reward range, where the lower bound is the chance level and the upper bound the best reward (following the optimal policy). The model performance is in red, while Upper-Confidence Bound green, Thompson Sampling blue, and Epsilon-Greedy orange. }}}{23}{figure.caption.9}\protected@file@percent }
-\newlabel{fig:zero_1}{{7}{23}{\textsc {Performance with variable number of arms} - \textit {each plot is a simulation with K numbers of arms, the x-axis are rounds, the central vertical line signals the start of the second trial, the y-axis is the reward fraction. The shaded area is the reasonable reward range, where the lower bound is the chance level and the upper bound the best reward (following the optimal policy). The model performance is in red, while Upper-Confidence Bound green, Thompson Sampling blue, and Epsilon-Greedy orange. }}{figure.caption.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces \textsc  {Selection evolution over rounds for multiple models} - \textit  {the individual plots follow the same schema of \ref {fig:sel1}, with the model name and reward per round fraction}}}{24}{figure.caption.10}\protected@file@percent }
-\newlabel{fig:sel2}{{8}{24}{\textsc {Selection evolution over rounds for multiple models} - \textit {the individual plots follow the same schema of \ref {fig:sel1}, with the model name and reward per round fraction}}{figure.caption.10}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces \textsc  {Performance with variable number of arms} - \textit  {each plot is a simulation with K-numbers of arms, and the rest is also the same as before in \ref {fig:zero_1}}. Each trial has 3 rounds, meaning that every three steps the distribution change.}}{25}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:eps_1}{{9}{25}{\textsc {Performance with variable number of arms} - \textit {each plot is a simulation with K-numbers of arms, and the rest is also the same as before in \ref {fig:zero_1}}. Each trial has 3 rounds, meaning that every three steps the distribution change}{figure.caption.11}{}}
-\gdef \@abspage@last{25}
+\bibcite{kaufmannThompsonSamplingAsymptotically2012}{20}
+\bibcite{auerFinitetimeAnalysisMultiarmed2002}{21}
+\bibcite{gittinsBanditProcessesDynamic1979}{22}
+\bibcite{banMultifacetContextualBandits2021}{23}
+\bibcite{tokicAdaptiveEGreedyExploration2010}{24}
+\bibcite{tokicValueDifferenceBasedExploration2011}{25}
+\bibcite{garivierUpperConfidenceBoundPolicies2008}{26}
+\bibcite{besbesStochasticMultiArmedBanditProblem2014}{27}
+\bibcite{cavenaghiNonStationaryMultiArmed2021}{28}
+\bibcite{carrollEncodingCertaintyBump2014}{29}
+\bibcite{esnaola-acebesBumpAttractorDynamics2021}{30}
+\bibcite{inglisModulationDopamineAdaptive2021}{31}
+\bibcite{iigayaAdaptiveLearningDecisionmaking2016}{32}
+\bibcite{toblerAdaptiveCodingReward2005}{33}
+\bibcite{schultzNeuralSubstratePrediction1997}{34}
+\bibcite{didomenicoDopaminergicModulationPrefrontal2023}{35}
+\bibcite{lohaniDopamineModulationPrefrontal2019}{36}
+\bibcite{lukChoiceCodingFrontal2013}{37}
+\bibcite{kennerleyDecisionMakingReward2011a}{38}
+\bibcite{funahashiPrefrontalContributionDecisionMaking2017}{39}
+\bibcite{marcosDeterminingMonkeyFree2016}{40}
+\bibcite{balewskiValueDynamicsAffect2023}{41}
+\bibcite{backmanEffectsWorkingMemoryTraining2011}{42}
+\bibcite{enelStableDynamicRepresentations2020}{43}
+\bibcite{steyversBayesianAnalysisHuman2009a}{44}
+\bibcite{schulzFindingStructureMultiarmed2020}{45}
+\bibcite{zhangForgetfulBayesMyopic2013}{46}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Appendix}{19}{section.5}\protected@file@percent }
+\newlabel{sec:appendix}{{5}{19}{Appendix}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Activation function}{19}{subsection.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces \textsc  {Activation function $\Phi _{v}$} - \textit  {Parameters $\beta =10$, $\alpha =1$, $\mu =1$, $\sigma =1$, and $r=0.5$.}}}{19}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:gau_sigm}{{6}{19}{\textsc {Activation function $\Phi _{v}$} - \textit {Parameters $\beta =10$, $\alpha =1$, $\mu =1$, $\sigma =1$, and $r=0.5$.}}{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Reward distribution entropy}{19}{subsection.5.2}\protected@file@percent }
+\newlabel{sec:appendix_entropy}{{5.2}{19}{Reward distribution entropy}{subsection.5.2}{}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces Reward Probability Distribution Generation}}{20}{algocf.2}\protected@file@percent }
+\newlabel{alg:reward_distribution}{{2}{20}{Reward distribution entropy}{algocf.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Table of results}{20}{subsection.5.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Performance comparison for $K=5$}}{20}{table.caption.11}\protected@file@percent }
+\newlabel{tab:k5}{{1}{20}{Performance comparison for $K=5$}{table.caption.11}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Performance comparison for $K=10$}}{20}{table.caption.12}\protected@file@percent }
+\newlabel{tab:k10}{{2}{20}{Performance comparison for $K=10$}{table.caption.12}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Performance comparison for $K=100$}}{21}{table.caption.13}\protected@file@percent }
+\newlabel{tab:k100}{{3}{21}{Performance comparison for $K=100$}{table.caption.13}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Performance comparison for $K=100$}}{21}{table.caption.14}\protected@file@percent }
+\newlabel{tab:k200}{{4}{21}{Performance comparison for $K=100$}{table.caption.14}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Performance comparison for $K=100$}}{21}{table.caption.15}\protected@file@percent }
+\newlabel{tab:k1000}{{5}{21}{Performance comparison for $K=100$}{table.caption.15}{}}
+\gdef \@abspage@last{21}

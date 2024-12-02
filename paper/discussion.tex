@@ -3,22 +3,19 @@
 
 
 % work on the k-armed bandit problem and neuroscience
-In the context of human behaviour, it has been observed that the adopted policies vary considerably \cite{steyversBayesianAnalysisHuman2009a}. However, the subjects seems able to integrate environmental uncertainty and trial generalization in their strategy, and Bayesian algorithms are generally a good fit for the observed behaviour \cite{schulzFindingStructureMultiarmed2020, zhangForgetfulBayesMyopic2013}.
-
+The process of making decision in uncertain settings is a remarkable aspect of cognition. For instance, such behaviour is implemented in animals during foraging and matching behaviour.
+In the context of humans, it has been observed that the pool of adopted policies vary considerably \cite{steyversBayesianAnalysisHuman2009a}. However, the subjects seems able to integrate environmental uncertainty and trial generalization in their strategy, and Bayesian algorithms are generally a
+good fit for the observed choices \cite{schulzFindingStructureMultiarmed2020, zhangForgetfulBayesMyopic2013}.
+A useful formalization of such tasks is the multi-armed bandit problem, which has been extensively studied in the context of reinforcement learning \cite{suttonReinforcementLearningProblem1998}.
+Although several algorithms have been proposed to solve the problem with robust theoretical guarentees, there is a general lack of biological plausibility of the architecture and dynamics.
 
 %
-In this work, we introduced a model based on rate neural networks that leverages multi-stable network manifolds and Hebbian-like synaptic plasticity to address the binomial K-armed bandit problem in a non-stationary environment. Our results prove the model's robustness and adaptability in dynamic settings where reward distributions change unpredictably.
+In this work, we introduced a rate neural networks to address the binomial K-armed bandit problem in a non-stationary environment.
+The results obtained from our model show that it is able to effectively adapt to changing reward distributions and maintain a greedy policy over time, on par with the standard algorithms.
 
-The observed efficiency of our  model can be attributed to the interplay of distinct structures at with different timescales \cite{schulzFindingStructureMultiarmed2020, reynoldsDopaminedependentPlasticityCorticostriatal2002, frankAnatomyDecisionStriatoorbitofrontal2006}, who emphasize the significant role of striato-orbitofrontal interactions in decision-making and learning.
+The observed efficiency of our model can be attributed to that attractor dynamics and a non-associative synaptic plasticity rule.
 
-Moreover, the dynamics of our model echo real-world decision-making processes observed in humans and other animals, where decision-making strategies shall adapt to changing environmental conditions \cite{nivEvolutionReinforcementLearning2002}. This adaptability is replicated in the performance of
-our model, which effectively handles the zero-steps and epsilon-steps distribution shifts, there the probabilities change with within a variable number of steps.
-
-Furthermore, the use of a Hebbian-like rule for synaptic updates in our model introduces a level of flexibility and responsiveness that is not commonly found in traditional reinforcement learning algorithms, which often rely on fixed learning rates or reward probabilities
-\cite{suttonReinforcementLearningProblem1998}. This approach may explain the superior performance of our model in environments where adaptability is critical \cite{besbesStochasticMultiArmedBanditProblem2014}.
-
-In summary, the results of our study not only support the feasibility of using s for complex decision-making tasks but also highlight the potential of neuromodulatory systems to enhance the adaptability and efficiency of artificial neural networks. Future work could explore the integration of
-additional biological elements, such as the role of other neuromodulators like serotonin and acetylcholine, to further improve the model's performance and biological fidelity \cite{coolsChemistryAdaptiveMind2019, dayanDecisionTheoryReinforcement2008}.
+These architectural choices were inspired by real-world decision-making processes observed in humans and other animals.
 
 
 

@@ -43,13 +43,12 @@ the contribution from \textit{V} is null. After a fixed amount of time $\sim 5 \
 \noindent The selection rule is simple: if the value representation $\textbf{v}$ is in agreement with the memory trace $\textbf{u}$, then the option with the highest value is selected. Otherwise, a random option is chosen. This rule is a way to express the exploration-exploitation trade-off, and it
 is dependent on the current policy $\tilde{\textbf{W}}^{MV}$. \\ Below \ref{alg:decision1}, is reported the pseudo-code for algorithm behind the selection process.
 
-\hfill \break
 % --- ALGORITHM
-\begin{algorithm}[H]
+\begin{algorithm}[ht]
 \caption{Two-phases option selection process}
 \label{alg:decision}
 \SetAlgoLined
-\KwIn{External input $\textbf{I}_{\text{ext}}$, memory population $\textbf{u}$, value population $\textbf{v}$, policy weights $\tilde{\textbf{W}}^{MV}$}
+\KwIn{External input $\textbf{I}_{\text{ext}}$, population $\textbf{u}$, population $\textbf{v}$, weights $\tilde{\textbf{W}}^{MV}$}
 \KwOut{Selected action $k$}
 
 \SetKwComment{Comment}{// }{ }
@@ -72,17 +71,17 @@ $k_{v} \gets \text{argmax}_{k}\{\textbf{v}\}$\;
 \Return $k$
 \end{algorithm}\label{alg:decision1}
 
-\[\textit{maybe place this directly in the results?}\]
 \noindent In figure \ref{fig:sel1} it is shown the history of selections over three trials. The initial rounds features higher variability. In particular, it can noted how the policy adopted by the model encounters period of exploration and successive settling over an explotative strategy, which can be reverted in case of a change in the environment's reward distribution.
 
 % selections over time
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/selections_1.png}
-    \caption{\textsc{Selection evolution over rounds} - \textit{the x-axis represents the available arms, while the y-axis the number of rounds, with the dotted vertical lines indicating the start of a new trial with 150 rounds each. The model selections are the black vertical lines for an arm and a
-    round. The red horizontal lines signal the arm with the highest reward probability, thus representing the best (and greediest) selection.}}
+    \caption{\textsc{Selection evolution over rounds} - \textit{the x-axis represents the available arms, while the y-axis the number of rounds, with the dotted vertical lines indicating the start of a new trial with 150 rounds each.
+The model selections are the black vertical lines for an arm and a round. The red horizontal lines signal the arm with the highest reward probability, thus representing the best (and greediest) selection.}}
     \label{fig:sel1}
 \end{figure}
+
 
 \subsection{Learning}
 Given a selected option $k$, the environment (set of bandits) samples and returns a reward $R\in [0, 1]$ with probability $p_{k}$.
@@ -95,6 +94,7 @@ Then, the connections $\textbf{W}^{MV}$ for the neuron corresponding to the opti
 \noindent
 Where $W^{+}$ is a constant value that sets the upper bound for the synaptic weights, and it is set to $W^{+} = 5$, while $\tilde{\eta}_{k}$ is the learning rate for the option $k$ determined by a function of the current weights $\textbf{W}^{MV}_{k}$ and its shape is the same as $\Phi_{v}$, but with
 different parameters.
+
 
 \subsection{Bio-inspired features}
 

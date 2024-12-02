@@ -95,15 +95,33 @@ Shipra Agrawal and Navin Goyal.
 \newblock Analysis of {{Thompson Sampling}} for the {{Multi-armed Bandit Problem}}.
 \newblock In {\em Proceedings of the 25th {{Annual Conference}} on {{Learning Theory}}}, pages 39.1--39.26. {JMLR Workshop and Conference Proceedings}, June 2012.
 
+\bibitem{kaufmannThompsonSamplingAsymptotically2012}
+Emilie Kaufmann, Nathaniel Korda, and R{\'e}mi Munos.
+\newblock Thompson {{Sampling}}: {{An Asymptotically Optimal Finite Time Analysis}}, July 2012.
+
 \bibitem{auerFinitetimeAnalysisMultiarmed2002}
 Peter Auer and Nicolo {Cesa-Bianchi}.
 \newblock Finite-time {{Analysis}} of the {{Multiarmed Bandit Problem}}.
 \newblock {\em Machine Learning}, 2002.
 
-\bibitem{dayanDecisionTheoryReinforcement2008}
-Peter Dayan and Nathaniel~D. Daw.
-\newblock Decision theory, reinforcement learning, and the brain.
-\newblock {\em Cognitive, Affective, \& Behavioral Neuroscience}, 8(4):429--453, December 2008.
+\bibitem{gittinsBanditProcessesDynamic1979}
+J.~C. Gittins.
+\newblock Bandit {{Processes}} and {{Dynamic Allocation Indices}}.
+\newblock {\em Journal of the Royal Statistical Society. Series B (Methodological)}, 41(2):148--177, 1979.
+
+\bibitem{banMultifacetContextualBandits2021}
+Yikun Ban, Jingrui He, and Curtiss~B. Cook.
+\newblock Multi-facet {{Contextual Bandits}}: {{A Neural Network Perspective}}, June 2021.
+
+\bibitem{tokicAdaptiveEGreedyExploration2010}
+Michel Tokic.
+\newblock Adaptive {$\varepsilon$}-{{Greedy Exploration}} in {{Reinforcement Learning Based}} on {{Value Differences}}.
+\newblock In R{\"u}diger Dillmann, J{\"u}rgen Beyerer, Uwe~D. Hanebeck, and Tanja Schultz, editors, {\em {{KI}} 2010: {{Advances}} in {{Artificial Intelligence}}}, volume 6359, pages 203--210. Springer Berlin Heidelberg, Berlin, Heidelberg, 2010.
+
+\bibitem{tokicValueDifferenceBasedExploration2011}
+Michel Tokic and G{\"u}nther Palm.
+\newblock Value-{{Difference Based Exploration}}: {{Adaptive Control}} between {{Epsilon-Greedy}} and {{Softmax}}.
+\newblock In Joscha Bach and Stefan Edelkamp, editors, {\em {{KI}} 2011: {{Advances}} in {{Artificial Intelligence}}}, volume 7006, pages 335--346. Springer Berlin Heidelberg, Berlin, Heidelberg, 2011.
 
 \bibitem{garivierUpperConfidenceBoundPolicies2008}
 Aur{\'e}lien Garivier and Eric Moulines.
@@ -119,75 +137,6 @@ Emanuele Cavenaghi, Gabriele Sottocornola, Fabio Stella, and Markus Zanker.
 \newblock Non {{Stationary Multi-Armed Bandit}}: {{Empirical Evaluation}} of a {{New Concept Drift-Aware Algorithm}}.
 \newblock {\em Entropy}, 23(3):380, March 2021.
 
-\bibitem{barakWorkingModelsWorking2014}
-Omri Barak and Misha Tsodyks.
-\newblock Working models of working memory.
-\newblock {\em Current Opinion in Neurobiology}, 25:20--24, April 2014.
-
-\bibitem{barakNeuronalPopulationCoding2010}
-Omri Barak, Misha Tsodyks, and Ranulfo Romo.
-\newblock Neuronal {{Population Coding}} of {{Parametric Working Memory}}.
-\newblock {\em Journal of Neuroscience}, 30(28):9424--9430, July 2010.
-
-\bibitem{bouchacourtFlexibleModelWorking2019}
-Flora Bouchacourt and Timothy~J. Buschman.
-\newblock A {{Flexible Model}} of {{Working Memory}}.
-\newblock {\em Neuron}, 103(1):147--160.e8, July 2019.
-
-\bibitem{brunelEffectsNeuromodulationCortical2001}
-Nicolas Brunel and Xiao-Jing Wang.
-\newblock Effects of {{Neuromodulation}} in a {{Cortical Network Model}} of {{Object Working Memory Dominated}} by {{Recurrent Inhibition}}.
-\newblock {\em Journal of Computational Neuroscience}, 11(1):63--85, July 2001.
-
-\bibitem{vogelsGatingMultipleSignals2009}
-Tim~P. Vogels and L.~F. Abbott.
-\newblock Gating multiple signals through detailed balance of excitation and inhibition in spiking networks.
-\newblock {\em Nature Neuroscience}, 12(4):483--491, April 2009.
-
-\bibitem{pascanuNeurodynamicalModelWorking2011}
-Razvan Pascanu and Herbert Jaeger.
-\newblock A neurodynamical model for working memory.
-\newblock {\em Neural Networks}, 24(2):199--207, March 2011.
-
-\bibitem{fetteShortTermMemory2005}
-Georg Fette and Julian Eggert.
-\newblock Short {{Term Memory}} and {{Pattern Matching}} with {{Simple Echo State Networks}}.
-\newblock In W{\l}odzis{\l}aw Duch, Janusz Kacprzyk, Erkki Oja, and S{\l}awomir Zadro{\.z}ny, editors, {\em Artificial {{Neural Networks}}: {{Biological Inspirations}} -- {{ICANN}} 2005}, pages 13--18, Berlin, Heidelberg, 2005. Springer.
-
-\bibitem{chenSpikingNeuralNetwork2023}
-Yi~Chen, Hanwen Liu, Kexin Shi, Malu Zhang, and Hong Qu.
-\newblock Spiking neural network with working memory can integrate and rectify spatiotemporal features.
-\newblock {\em Frontiers in Neuroscience}, 17, June 2023.
-
-\bibitem{bartoloPrefrontalCortexPredicts2020}
-Ramon Bartolo and Bruno~B. Averbeck.
-\newblock Prefrontal {{Cortex Predicts State Switches}} during {{Reversal Learning}}.
-\newblock {\em Neuron}, 106(6):1044--1054.e4, June 2020.
-
-\bibitem{bastonBiologicallyInspiredComputational2015}
-Chiara Baston and Mauro Ursino.
-\newblock A {{Biologically Inspired Computational Model}} of {{Basal Ganglia}} in {{Action Selection}}.
-\newblock {\em Computational Intelligence and Neuroscience}, 2015:e187417, November 2015.
-
-\bibitem{kannanUnsupervisedSpikingNeural2023}
-Ashwin~Viswanathan Kannan, Goutam Mylavarapu, and Johnson~P. Thomas.
-\newblock Unsupervised {{Spiking Neural Network Model}} of {{Prefrontal Cortex}} to study {{Task Switching}} with {{Synaptic}} deficiency, May 2023.
-
-\bibitem{frankInteractionsFrontalCortex2001}
-M.~J. Frank, B.~Loughry, and R.~C. O'Reilly.
-\newblock Interactions between frontal cortex and basal ganglia in working memory: {{A}} computational model.
-\newblock {\em Cognitive, Affective, \& Behavioral Neuroscience}, 1(2):137--160, June 2001.
-
-\bibitem{zhaoBrainInspiredDecisionMakingSpiking2018}
-Feifei Zhao, Yi~Zeng, and Bo~Xu.
-\newblock A {{Brain-Inspired Decision-Making Spiking Neural Network}} and {{Its Application}} in {{Unmanned Aerial Vehicle}}.
-\newblock {\em Frontiers in Neurorobotics}, 12, September 2018.
-
-\bibitem{herdNeuralNetworkModel2014}
-Seth~A. Herd, Randall~C. O'Reilly, Tom~E. Hazy, Christopher~H. Chatham, Angela~M. Brant, and Naomi~P. Friedman.
-\newblock A neural network model of individual differences in task switching abilities.
-\newblock {\em Neuropsychologia}, 62:375--389, September 2014.
-
 \bibitem{carrollEncodingCertaintyBump2014}
 Sam Carroll, Kre{\v s}imir Josi{\'c}, and Zachary~P. Kilpatrick.
 \newblock Encoding certainty in bump attractors.
@@ -197,25 +146,35 @@ Sam Carroll, Kre{\v s}imir Josi{\'c}, and Zachary~P. Kilpatrick.
 Jose~M. {Esnaola-Acebes}, Alex Roxin, and Klaus Wimmer.
 \newblock Bump attractor dynamics underlying stimulus integration in perceptual estimation tasks, March 2021.
 
-\bibitem{schultzNeuralSubstratePrediction1997}
-Wolfram Schultz, Peter Dayan, and P.~Read Montague.
-\newblock A {{Neural Substrate}} of {{Prediction}} and {{Reward}}.
-\newblock {\em Science}, 275(5306):1593--1599, March 1997.
+\bibitem{inglisModulationDopamineAdaptive2021}
+Jeffrey~B. Inglis, Vivian~V. Valentin, and F.~Gregory Ashby.
+\newblock Modulation of {{Dopamine}} for {{Adaptive Learning}}: {{A Neurocomputational Model}}.
+\newblock {\em Computational brain \& behavior}, 4(1):34--52, March 2021.
+
+\bibitem{iigayaAdaptiveLearningDecisionmaking2016}
+Kiyohito Iigaya.
+\newblock Adaptive learning and decision-making under uncertainty by metaplastic synapses guided by a surprise detection system.
+\newblock {\em eLife}, 5:e18073, August 2016.
 
 \bibitem{toblerAdaptiveCodingReward2005}
 Philippe~N. Tobler, Christopher~D. Fiorillo, and Wolfram Schultz.
 \newblock Adaptive {{Coding}} of {{Reward Value}} by {{Dopamine Neurons}}.
 \newblock {\em Science}, 307(5715):1642--1645, March 2005.
 
-\bibitem{reynoldsDopaminedependentPlasticityCorticostriatal2002}
-John~N.J Reynolds and Jeffery~R Wickens.
-\newblock Dopamine-dependent plasticity of corticostriatal synapses.
-\newblock {\em Neural Networks}, 15(4-6):507--521, June 2002.
+\bibitem{schultzNeuralSubstratePrediction1997}
+Wolfram Schultz, Peter Dayan, and P.~Read Montague.
+\newblock A {{Neural Substrate}} of {{Prediction}} and {{Reward}}.
+\newblock {\em Science}, 275(5306):1593--1599, March 1997.
 
-\bibitem{madadiaslDopaminergicModulationSynaptic2019}
-Mojtaba Madadi~Asl, Abdol-Hossein Vahabie, and Alireza Valizadeh.
-\newblock Dopaminergic {{Modulation}} of {{Synaptic Plasticity}}, {{Its Role}} in {{Neuropsychiatric Disorders}}, and {{Its Computational Modeling}}.
-\newblock {\em Basic and Clinical Neuroscience}, 10(1):1--12, 2019.
+\bibitem{didomenicoDopaminergicModulationPrefrontal2023}
+Danila Di~Domenico and Lisa Mapelli.
+\newblock Dopaminergic {{Modulation}} of {{Prefrontal Cortex Inhibition}}.
+\newblock {\em Biomedicines}, 11(5):1276, May 2023.
+
+\bibitem{lohaniDopamineModulationPrefrontal2019}
+Sweyta Lohani, Adria~K. Martig, Karl Deisseroth, Ilana~B. Witten, and Bita Moghaddam.
+\newblock Dopamine {{Modulation}} of {{Prefrontal Cortex Activity Is Manifold}} and {{Operates}} at {{Multiple Temporal}} and {{Spatial Scales}}.
+\newblock {\em Cell Reports}, 27(1):99--114.e6, April 2019.
 
 \bibitem{lukChoiceCodingFrontal2013}
 Chung-Hay Luk and Jonathan~D. Wallis.
@@ -266,10 +225,5 @@ Eric Schulz, Nicholas~T. Franklin, and Samuel~J. Gershman.
 Shunan Zhang and Angela~J Yu.
 \newblock Forgetful {{Bayes}} and myopic planning: {{Human}} learning and decision-making in a bandit setting.
 \newblock In {\em Advances in {{Neural Information Processing Systems}}}, volume~26. Curran Associates, Inc., 2013.
-
-\bibitem{coolsChemistryAdaptiveMind2019}
-Roshan Cools.
-\newblock Chemistry of the {{Adaptive Mind}}: {{Lessons}} from {{Dopamine}}.
-\newblock {\em Neuron}, 104(1):113--131, October 2019.
 
 \end{thebibliography}
