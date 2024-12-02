@@ -1,0 +1,17 @@
+{"time":"2024-11-30T09:26:30.77464+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-30T09:26:30.774769+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241130_092630-9amt6pbu/logs/debug-core.log"}
+{"time":"2024-11-30T09:26:30.890092+01:00","level":"INFO","msg":"created new stream","id":"9amt6pbu"}
+{"time":"2024-11-30T09:26:30.890147+01:00","level":"INFO","msg":"stream: started","id":"9amt6pbu"}
+{"time":"2024-11-30T09:26:30.890169+01:00","level":"INFO","msg":"handler: started","stream_id":"9amt6pbu"}
+{"time":"2024-11-30T09:26:30.890198+01:00","level":"INFO","msg":"sender: started","stream_id":"9amt6pbu"}
+{"time":"2024-11-30T09:26:30.890287+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"9amt6pbu"}
+{"time":"2024-11-30T09:26:31.09296+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-30T09:31:56.943753+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-30T09:31:56.944976+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-30T09:31:57.881389+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-30T09:31:57.950334+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading history, summary","runtime_seconds":0.068338458}],"total_operations":1}}
+{"time":"2024-11-30T09:31:59.125347+01:00","level":"INFO","msg":"stream: closing","id":"9amt6pbu"}
+{"time":"2024-11-30T09:31:59.125425+01:00","level":"INFO","msg":"handler: closed","stream_id":"9amt6pbu"}
+{"time":"2024-11-30T09:31:59.125475+01:00","level":"INFO","msg":"sender: closed","stream_id":"9amt6pbu"}
+{"time":"2024-11-30T09:31:59.125456+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"9amt6pbu"}
+{"time":"2024-11-30T09:31:59.125959+01:00","level":"INFO","msg":"stream: closed","id":"9amt6pbu"}

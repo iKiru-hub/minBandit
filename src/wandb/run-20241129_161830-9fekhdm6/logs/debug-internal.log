@@ -1,0 +1,18 @@
+{"time":"2024-11-29T16:18:30.637042+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-29T16:18:30.637079+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241129_161830-9fekhdm6/logs/debug-core.log"}
+{"time":"2024-11-29T16:18:30.745618+01:00","level":"INFO","msg":"created new stream","id":"9fekhdm6"}
+{"time":"2024-11-29T16:18:30.745663+01:00","level":"INFO","msg":"stream: started","id":"9fekhdm6"}
+{"time":"2024-11-29T16:18:30.745713+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"9fekhdm6"}
+{"time":"2024-11-29T16:18:30.745738+01:00","level":"INFO","msg":"handler: started","stream_id":"9fekhdm6"}
+{"time":"2024-11-29T16:18:30.745806+01:00","level":"INFO","msg":"sender: started","stream_id":"9fekhdm6"}
+{"time":"2024-11-29T16:18:30.991556+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-29T16:22:31.55689+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/ikiru-university-of-oslo/minBandit/9fekhdm6/file_stream\": read tcp 193.157.168.210:58478->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2024-11-29T16:24:09.27741+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-29T16:24:09.278065+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-29T16:24:10.122044+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-29T16:24:10.282724+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading history, summary","runtime_seconds":0.160551834}],"total_operations":1}}
+{"time":"2024-11-29T16:24:11.340626+01:00","level":"INFO","msg":"stream: closing","id":"9fekhdm6"}
+{"time":"2024-11-29T16:24:11.340644+01:00","level":"INFO","msg":"handler: closed","stream_id":"9fekhdm6"}
+{"time":"2024-11-29T16:24:11.340652+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"9fekhdm6"}
+{"time":"2024-11-29T16:24:11.340691+01:00","level":"INFO","msg":"sender: closed","stream_id":"9fekhdm6"}
+{"time":"2024-11-29T16:24:11.340825+01:00","level":"INFO","msg":"stream: closed","id":"9fekhdm6"}

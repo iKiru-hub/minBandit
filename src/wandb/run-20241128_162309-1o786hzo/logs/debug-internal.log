@@ -1,0 +1,19 @@
+{"time":"2024-11-28T16:23:09.770213+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-28T16:23:09.77038+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241128_162309-1o786hzo/logs/debug-core.log"}
+{"time":"2024-11-28T16:23:09.887005+01:00","level":"INFO","msg":"created new stream","id":"1o786hzo"}
+{"time":"2024-11-28T16:23:09.887052+01:00","level":"INFO","msg":"stream: started","id":"1o786hzo"}
+{"time":"2024-11-28T16:23:09.887072+01:00","level":"INFO","msg":"handler: started","stream_id":"1o786hzo"}
+{"time":"2024-11-28T16:23:09.887115+01:00","level":"INFO","msg":"sender: started","stream_id":"1o786hzo"}
+{"time":"2024-11-28T16:23:09.88714+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"1o786hzo"}
+{"time":"2024-11-28T16:23:10.118828+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-28T16:24:10.700528+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/ikiru-university-of-oslo/minBandit/1o786hzo/file_stream\": read tcp 172.26.0.232:57386->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2024-11-28T16:24:12.768445+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/ikiru-university-of-oslo/minBandit/1o786hzo/file_stream\": read tcp 172.26.0.232:57389->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2024-11-28T16:28:28.845617+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-28T16:28:28.846189+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-28T16:28:29.738358+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-28T16:28:29.846578+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading history, summary","runtime_seconds":0.108120125}],"total_operations":1}}
+{"time":"2024-11-28T16:28:30.969534+01:00","level":"INFO","msg":"stream: closing","id":"1o786hzo"}
+{"time":"2024-11-28T16:28:30.969554+01:00","level":"INFO","msg":"handler: closed","stream_id":"1o786hzo"}
+{"time":"2024-11-28T16:28:30.969563+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"1o786hzo"}
+{"time":"2024-11-28T16:28:30.96957+01:00","level":"INFO","msg":"sender: closed","stream_id":"1o786hzo"}
+{"time":"2024-11-28T16:28:30.969735+01:00","level":"INFO","msg":"stream: closed","id":"1o786hzo"}

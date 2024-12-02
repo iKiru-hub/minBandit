@@ -1,0 +1,33 @@
+2024-11-29 15:39:19,540 INFO    Thread-12 (_run_job):65837 [wandb_setup.py:_flush():79] Current SDK version is 0.18.7
+2024-11-29 15:39:19,540 INFO    Thread-12 (_run_job):65837 [wandb_setup.py:_flush():79] Configure stats pid to 65837
+2024-11-29 15:39:19,540 INFO    Thread-12 (_run_job):65837 [wandb_setup.py:_flush():79] Loading settings from /Users/daniekru/.config/wandb/settings
+2024-11-29 15:39:19,540 INFO    Thread-12 (_run_job):65837 [wandb_setup.py:_flush():79] Loading settings from /Users/daniekru/Research/lab/minBandit/src/wandb/settings
+2024-11-29 15:39:19,540 INFO    Thread-12 (_run_job):65837 [wandb_setup.py:_flush():79] Loading settings from environment variables: {'project': 'minBandit', 'entity': 'ikiru-university-of-oslo', 'root_dir': '/Users/daniekru/Research/lab/minBandit/src', 'run_id': '1c6wpdmq', 'sweep_param_path': '/Users/daniekru/Research/lab/minBandit/src/wandb/sweep-fxq23mi2/config-1c6wpdmq.yaml', 'sweep_id': 'fxq23mi2'}
+2024-11-29 15:39:19,540 INFO    Thread-12 (_run_job):65837 [wandb_setup.py:_flush():79] Applying setup settings: {'mode': None, '_disable_service': None}
+2024-11-29 15:39:19,540 INFO    Thread-12 (_run_job):65837 [wandb_setup.py:_flush():79] Inferring run settings from compute environment: {'program_relpath': 'src/param_search.py', 'program_abspath': '/Users/daniekru/Research/lab/minBandit/src/param_search.py', 'program': '/Users/daniekru/Research/lab/minBandit/src/param_search.py'}
+2024-11-29 15:39:19,540 INFO    Thread-12 (_run_job):65837 [wandb_setup.py:_flush():79] Applying login settings: {}
+2024-11-29 15:39:19,541 INFO    Thread-12 (_run_job):65837 [wandb_init.py:_log_setup():533] Logging user logs to /Users/daniekru/Research/lab/minBandit/src/wandb/run-20241129_153919-1c6wpdmq/logs/debug.log
+2024-11-29 15:39:19,541 INFO    Thread-12 (_run_job):65837 [wandb_init.py:_log_setup():534] Logging internal logs to /Users/daniekru/Research/lab/minBandit/src/wandb/run-20241129_153919-1c6wpdmq/logs/debug-internal.log
+2024-11-29 15:39:19,541 INFO    Thread-12 (_run_job):65837 [wandb_init.py:init():619] calling init triggers
+2024-11-29 15:39:19,541 INFO    Thread-12 (_run_job):65837 [wandb_init.py:init():626] wandb.init called with sweep_config: {'alpha': -0.4076746252672248, 'alpha_lr': 0.11717855459692172, 'beta': 8.446536754704564, 'beta_lr': 2.038132080083093, 'gain': 17.25007922859669, 'lr': 5.6305940854687355, 'mu': 1.7053301646320218, 'mu_lr': -1.6270748396559132, 'r': 0.5387037177273747, 'r_lr': 0.6516398821452797, 'sigma': 5.184998066205075, 'sigma_lr': 7.774889297574329, 'threshold': 6.685824061981926, 'w_max': 0.4608762727491332}
+config: {}
+2024-11-29 15:39:19,541 INFO    Thread-12 (_run_job):65837 [wandb_init.py:init():669] starting backend
+2024-11-29 15:39:19,541 INFO    Thread-12 (_run_job):65837 [wandb_init.py:init():673] sending inform_init request
+2024-11-29 15:39:19,547 INFO    Thread-12 (_run_job):65837 [backend.py:_multiprocessing_setup():104] multiprocessing start_methods=spawn,fork,forkserver, using: spawn
+2024-11-29 15:39:19,547 INFO    Thread-12 (_run_job):65837 [wandb_init.py:init():686] backend started and connected
+2024-11-29 15:39:19,556 INFO    Thread-12 (_run_job):65837 [wandb_run.py:_config_callback():1387] config_cb None None {'alpha': -0.4076746252672248, 'alpha_lr': 0.11717855459692172, 'beta': 8.446536754704564, 'beta_lr': 2.038132080083093, 'gain': 17.25007922859669, 'lr': 5.6305940854687355, 'mu': 1.7053301646320218, 'mu_lr': -1.6270748396559132, 'r': 0.5387037177273747, 'r_lr': 0.6516398821452797, 'sigma': 5.184998066205075, 'sigma_lr': 7.774889297574329, 'threshold': 6.685824061981926, 'w_max': 0.4608762727491332}
+2024-11-29 15:39:19,558 INFO    Thread-12 (_run_job):65837 [wandb_init.py:init():781] updated telemetry
+2024-11-29 15:39:19,576 INFO    Thread-12 (_run_job):65837 [wandb_init.py:init():814] communicating run to backend with 90.0 second timeout
+2024-11-29 15:39:19,866 INFO    Thread-12 (_run_job):65837 [wandb_init.py:init():867] starting run threads in backend
+2024-11-29 15:39:20,011 INFO    Thread-12 (_run_job):65837 [wandb_run.py:_console_start():2456] atexit reg
+2024-11-29 15:39:20,011 INFO    Thread-12 (_run_job):65837 [wandb_run.py:_redirect():2305] redirect: wrap_raw
+2024-11-29 15:39:20,011 INFO    Thread-12 (_run_job):65837 [wandb_run.py:_redirect():2370] Wrapping output streams.
+2024-11-29 15:39:20,011 INFO    Thread-12 (_run_job):65837 [wandb_run.py:_redirect():2395] Redirects installed.
+2024-11-29 15:39:20,011 INFO    Thread-12 (_run_job):65837 [wandb_init.py:init():911] run started, returning control to user process
+2024-11-29 15:44:37,180 INFO    Thread-12 (_run_job):65837 [wandb_run.py:_finish():2155] finishing run ikiru-university-of-oslo/minBandit/1c6wpdmq
+2024-11-29 15:44:37,181 INFO    Thread-12 (_run_job):65837 [wandb_run.py:_atexit_cleanup():2420] got exitcode: 0
+2024-11-29 15:44:37,181 INFO    Thread-12 (_run_job):65837 [wandb_run.py:_restore():2402] restore
+2024-11-29 15:44:37,182 INFO    Thread-12 (_run_job):65837 [wandb_run.py:_restore():2408] restore done
+2024-11-29 15:44:39,289 INFO    Thread-12 (_run_job):65837 [wandb_run.py:_footer_history_summary_info():3960] rendering history
+2024-11-29 15:44:39,289 INFO    Thread-12 (_run_job):65837 [wandb_run.py:_footer_history_summary_info():3992] rendering summary
+2024-11-29 15:44:39,298 INFO    Thread-12 (_run_job):65837 [wandb_run.py:_footer_sync_info():3921] logging synced files

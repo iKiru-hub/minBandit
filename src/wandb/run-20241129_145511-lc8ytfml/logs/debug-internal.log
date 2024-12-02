@@ -1,0 +1,18 @@
+{"time":"2024-11-29T14:55:11.822218+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-29T14:55:11.822322+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241129_145511-lc8ytfml/logs/debug-core.log"}
+{"time":"2024-11-29T14:55:11.935237+01:00","level":"INFO","msg":"created new stream","id":"lc8ytfml"}
+{"time":"2024-11-29T14:55:11.935291+01:00","level":"INFO","msg":"stream: started","id":"lc8ytfml"}
+{"time":"2024-11-29T14:55:11.935295+01:00","level":"INFO","msg":"handler: started","stream_id":"lc8ytfml"}
+{"time":"2024-11-29T14:55:11.935318+01:00","level":"INFO","msg":"sender: started","stream_id":"lc8ytfml"}
+{"time":"2024-11-29T14:55:11.93534+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"lc8ytfml"}
+{"time":"2024-11-29T14:55:12.01671+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": read tcp 193.157.168.210:51055->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2024-11-29T14:55:14.667478+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-29T15:00:40.30775+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-29T15:00:40.308467+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-29T15:00:41.213115+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-29T15:00:41.313141+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading history, summary","runtime_seconds":0.099932292}],"total_operations":1}}
+{"time":"2024-11-29T15:00:42.433259+01:00","level":"INFO","msg":"stream: closing","id":"lc8ytfml"}
+{"time":"2024-11-29T15:00:42.433286+01:00","level":"INFO","msg":"handler: closed","stream_id":"lc8ytfml"}
+{"time":"2024-11-29T15:00:42.433295+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"lc8ytfml"}
+{"time":"2024-11-29T15:00:42.433326+01:00","level":"INFO","msg":"sender: closed","stream_id":"lc8ytfml"}
+{"time":"2024-11-29T15:00:42.433402+01:00","level":"INFO","msg":"stream: closed","id":"lc8ytfml"}

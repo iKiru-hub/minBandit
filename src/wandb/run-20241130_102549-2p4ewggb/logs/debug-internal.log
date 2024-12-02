@@ -1,0 +1,17 @@
+{"time":"2024-11-30T10:25:49.846942+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-30T10:25:49.847041+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241130_102549-2p4ewggb/logs/debug-core.log"}
+{"time":"2024-11-30T10:25:49.96326+01:00","level":"INFO","msg":"created new stream","id":"2p4ewggb"}
+{"time":"2024-11-30T10:25:49.963309+01:00","level":"INFO","msg":"stream: started","id":"2p4ewggb"}
+{"time":"2024-11-30T10:25:49.963327+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"2p4ewggb"}
+{"time":"2024-11-30T10:25:49.963341+01:00","level":"INFO","msg":"handler: started","stream_id":"2p4ewggb"}
+{"time":"2024-11-30T10:25:49.96342+01:00","level":"INFO","msg":"sender: started","stream_id":"2p4ewggb"}
+{"time":"2024-11-30T10:25:50.170716+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-30T10:31:08.633463+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-30T10:31:08.634007+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-30T10:31:09.645159+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"saving job artifact","runtime_seconds":0.620197791},{"desc":"uploading wandb-summary.json","runtime_seconds":0.586411125,"progress":"123B/123B"},{"desc":"uploading config.yaml","runtime_seconds":0.390353208,"progress":"917B/917B"},{"desc":"uploading output.log","runtime_seconds":0.390295292}],"total_operations":4}}
+{"time":"2024-11-30T10:31:09.89911+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-30T10:31:11.238122+01:00","level":"INFO","msg":"stream: closing","id":"2p4ewggb"}
+{"time":"2024-11-30T10:31:11.238175+01:00","level":"INFO","msg":"handler: closed","stream_id":"2p4ewggb"}
+{"time":"2024-11-30T10:31:11.238197+01:00","level":"INFO","msg":"sender: closed","stream_id":"2p4ewggb"}
+{"time":"2024-11-30T10:31:11.238198+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"2p4ewggb"}
+{"time":"2024-11-30T10:31:11.238595+01:00","level":"INFO","msg":"stream: closed","id":"2p4ewggb"}

@@ -1,0 +1,17 @@
+{"time":"2024-11-30T09:58:55.349609+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-30T09:58:55.349734+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241130_095855-t580idhe/logs/debug-core.log"}
+{"time":"2024-11-30T09:58:55.468167+01:00","level":"INFO","msg":"created new stream","id":"t580idhe"}
+{"time":"2024-11-30T09:58:55.468213+01:00","level":"INFO","msg":"stream: started","id":"t580idhe"}
+{"time":"2024-11-30T09:58:55.468267+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"t580idhe"}
+{"time":"2024-11-30T09:58:55.468313+01:00","level":"INFO","msg":"handler: started","stream_id":"t580idhe"}
+{"time":"2024-11-30T09:58:55.468411+01:00","level":"INFO","msg":"sender: started","stream_id":"t580idhe"}
+{"time":"2024-11-30T09:58:55.700069+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-30T10:04:11.180581+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-30T10:04:11.181129+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-30T10:04:12.192666+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"saving job artifact","runtime_seconds":0.491346667}],"total_operations":1}}
+{"time":"2024-11-30T10:04:12.27651+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-30T10:04:13.558322+01:00","level":"INFO","msg":"stream: closing","id":"t580idhe"}
+{"time":"2024-11-30T10:04:13.558432+01:00","level":"INFO","msg":"handler: closed","stream_id":"t580idhe"}
+{"time":"2024-11-30T10:04:13.558456+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"t580idhe"}
+{"time":"2024-11-30T10:04:13.558928+01:00","level":"INFO","msg":"sender: closed","stream_id":"t580idhe"}
+{"time":"2024-11-30T10:04:13.558951+01:00","level":"INFO","msg":"stream: closed","id":"t580idhe"}

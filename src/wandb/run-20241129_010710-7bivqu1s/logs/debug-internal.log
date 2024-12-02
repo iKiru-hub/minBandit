@@ -1,0 +1,22 @@
+{"time":"2024-11-29T01:07:10.859531+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-29T01:07:10.859645+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241129_010710-7bivqu1s/logs/debug-core.log"}
+{"time":"2024-11-29T01:07:10.976082+01:00","level":"INFO","msg":"created new stream","id":"7bivqu1s"}
+{"time":"2024-11-29T01:07:10.976132+01:00","level":"INFO","msg":"stream: started","id":"7bivqu1s"}
+{"time":"2024-11-29T01:07:10.976157+01:00","level":"INFO","msg":"handler: started","stream_id":"7bivqu1s"}
+{"time":"2024-11-29T01:07:10.976233+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"7bivqu1s"}
+{"time":"2024-11-29T01:07:10.976179+01:00","level":"INFO","msg":"sender: started","stream_id":"7bivqu1s"}
+{"time":"2024-11-29T01:07:10.97879+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-29T01:07:13.221275+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-29T01:07:17.259061+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-29T01:10:23.194329+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-29T01:10:42.032757+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-29T01:34:55.736958+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-29T01:42:45.047438+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-29T01:42:45.048036+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-29T01:42:46.050729+01:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2024-11-29T01:42:46.088844+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-29T01:42:47.32529+01:00","level":"INFO","msg":"stream: closing","id":"7bivqu1s"}
+{"time":"2024-11-29T01:42:47.325371+01:00","level":"INFO","msg":"handler: closed","stream_id":"7bivqu1s"}
+{"time":"2024-11-29T01:42:47.325403+01:00","level":"INFO","msg":"sender: closed","stream_id":"7bivqu1s"}
+{"time":"2024-11-29T01:42:47.325394+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"7bivqu1s"}
+{"time":"2024-11-29T01:42:47.325856+01:00","level":"INFO","msg":"stream: closed","id":"7bivqu1s"}

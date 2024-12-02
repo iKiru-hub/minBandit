@@ -1,0 +1,26 @@
+{"time":"2024-11-29T00:42:04.960391+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-29T00:42:04.960505+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241129_004204-fdf8lmgf/logs/debug-core.log"}
+{"time":"2024-11-29T00:42:05.072536+01:00","level":"INFO","msg":"created new stream","id":"fdf8lmgf"}
+{"time":"2024-11-29T00:42:05.072575+01:00","level":"INFO","msg":"stream: started","id":"fdf8lmgf"}
+{"time":"2024-11-29T00:42:05.072593+01:00","level":"INFO","msg":"sender: started","stream_id":"fdf8lmgf"}
+{"time":"2024-11-29T00:42:05.072611+01:00","level":"INFO","msg":"handler: started","stream_id":"fdf8lmgf"}
+{"time":"2024-11-29T00:42:05.072681+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"fdf8lmgf"}
+{"time":"2024-11-29T00:42:05.274492+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-29T00:48:26.470616+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/ikiru-university-of-oslo/minBandit/fdf8lmgf/file_stream\": read tcp 172.26.0.232:65161->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2024-11-29T01:01:34.434537+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/ikiru-university-of-oslo/minBandit/fdf8lmgf/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-29T01:02:30.787411+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/ikiru-university-of-oslo/minBandit/fdf8lmgf/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-29T01:03:10.012674+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/ikiru-university-of-oslo/minBandit/fdf8lmgf/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-29T01:03:12.440821+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/ikiru-university-of-oslo/minBandit/fdf8lmgf/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-29T01:03:16.794606+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/ikiru-university-of-oslo/minBandit/fdf8lmgf/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-29T01:03:27.834192+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": read tcp 172.26.0.232:65137->35.186.228.49:443: read: can't assign requested address"}
+{"time":"2024-11-29T01:05:23.345332+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/ikiru-university-of-oslo/minBandit/fdf8lmgf/file_stream\": read tcp 193.157.184.151:65256->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2024-11-29T01:06:09.624386+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-29T01:06:09.624798+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-29T01:06:10.632846+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"updating run config","runtime_seconds":0.614006209}],"total_operations":1}}
+{"time":"2024-11-29T01:06:27.022949+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/ikiru-university-of-oslo/minBandit/fdf8lmgf/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-29T01:06:28.558158+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-29T01:06:30.91134+01:00","level":"INFO","msg":"stream: closing","id":"fdf8lmgf"}
+{"time":"2024-11-29T01:06:30.91143+01:00","level":"INFO","msg":"handler: closed","stream_id":"fdf8lmgf"}
+{"time":"2024-11-29T01:06:30.911461+01:00","level":"INFO","msg":"sender: closed","stream_id":"fdf8lmgf"}
+{"time":"2024-11-29T01:06:30.911454+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"fdf8lmgf"}
+{"time":"2024-11-29T01:06:30.91189+01:00","level":"INFO","msg":"stream: closed","id":"fdf8lmgf"}

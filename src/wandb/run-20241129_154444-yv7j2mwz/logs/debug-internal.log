@@ -1,0 +1,18 @@
+{"time":"2024-11-29T15:44:44.244956+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-29T15:44:44.24504+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241129_154444-yv7j2mwz/logs/debug-core.log"}
+{"time":"2024-11-29T15:44:44.360656+01:00","level":"INFO","msg":"created new stream","id":"yv7j2mwz"}
+{"time":"2024-11-29T15:44:44.360687+01:00","level":"INFO","msg":"stream: started","id":"yv7j2mwz"}
+{"time":"2024-11-29T15:44:44.360695+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"yv7j2mwz"}
+{"time":"2024-11-29T15:44:44.360715+01:00","level":"INFO","msg":"sender: started","stream_id":"yv7j2mwz"}
+{"time":"2024-11-29T15:44:44.360808+01:00","level":"INFO","msg":"handler: started","stream_id":"yv7j2mwz"}
+{"time":"2024-11-29T15:44:44.567602+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-29T15:46:00.223373+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/ikiru-university-of-oslo/minBandit/yv7j2mwz/file_stream\": read tcp 193.157.168.210:65423->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2024-11-29T15:50:04.877785+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-29T15:50:04.878435+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-29T15:50:05.782113+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-29T15:50:05.884406+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading history, summary","runtime_seconds":0.101775375}],"total_operations":1}}
+{"time":"2024-11-29T15:50:07.070226+01:00","level":"INFO","msg":"stream: closing","id":"yv7j2mwz"}
+{"time":"2024-11-29T15:50:07.070272+01:00","level":"INFO","msg":"handler: closed","stream_id":"yv7j2mwz"}
+{"time":"2024-11-29T15:50:07.0703+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"yv7j2mwz"}
+{"time":"2024-11-29T15:50:07.070606+01:00","level":"INFO","msg":"sender: closed","stream_id":"yv7j2mwz"}
+{"time":"2024-11-29T15:50:07.070626+01:00","level":"INFO","msg":"stream: closed","id":"yv7j2mwz"}

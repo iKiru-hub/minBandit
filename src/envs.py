@@ -352,9 +352,17 @@ class KABsinv0(KAB):
 
         self.update()
         self.counter = 0
+        if self.num_constants > 0:
+            self._name = "KABsinv1"
+        else:
+            self._name = "KABsinv0"
+
+
+    def __str__(self) -> str:
+        return f"{self._name}"
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}({self.K}," + \
+        return f"{self._name}({self.K}," + \
             f" frequencies={self._frequencies}, " + \
             f"const={self.num_constants})"
 
@@ -400,6 +408,7 @@ class KABsinv0(KAB):
 def trial(model: object, environment: KAB,
           nb_trials: int, nb_rounds: int,
           verbose: bool=False,
+          score_only: bool=False,
           disable: bool=False) -> dict:
 
     """
@@ -474,21 +483,29 @@ def trial(model: object, environment: KAB,
 
             # record
             rewards[round_i] = reward
+
+            if score_only:
+                continue
+
             chances[round_i] = environment.chance_level
             upper_bounds[round_i] = environment.upper_bound
             selections[round_i] = k
             weights[:, (trial_i+1)*round_i] = model._W.flatten()
 
-        # ---------------------------- #
+       # ---------------------------- #
+
+        score += np.sum(rewards) / nb_rounds / nb_trials
+
+        if score_only:
+            continue
+        chance += environment.chance_level / nb_trials
+        upper_bound += environment.upper_bound / nb_trials
 
         rewards_list.append(rewards.tolist())
         chance_list.append(chances.tolist())
         upper_bound_list.append(upper_bounds.tolist())
         selection_list.append(selections.tolist())
 
-        score += np.sum(rewards) / nb_rounds / nb_trials
-        chance += environment.chance_level / nb_trials
-        upper_bound += environment.upper_bound / nb_trials
 
     # ---------------------------- #
 
@@ -497,6 +514,9 @@ def trial(model: object, environment: KAB,
         logger.info(f">>> upper : {upper_bound:.3f}")
         logger.info(f">>> chance: {chance:.3f}")
         logger.info(f">>> score : {score:.3f}")
+
+    if score_only:
+        return {"scores": score}
 
     stats = {
         "rewards_list": rewards_list,
@@ -515,6 +535,7 @@ def trial(model: object, environment: KAB,
 def trial_multiple_models(models: list, environment: KAB,
                           nb_trials: int, nb_rounds: int, nb_reps: int=1,
                           bin_size: int=20,
+                          entropy_calc: bool=False,
                           verbose: bool=False) -> list:
 
     """
@@ -565,7 +586,9 @@ def trial_multiple_models(models: list, environment: KAB,
     score_list = np.zeros((len(models), nb_reps, nb_trials))
     mean_score_list = np.zeros((len(models), nb_reps, nb_trials))
 
-    # entropy_list = np.zeros((len(models), nb_reps, nb_trials, nb_rounds-bin_size))
+    if entropy_calc:
+        entropy_list = np.zeros((len(models), nb_reps,
+                                 nb_trials, nb_rounds-bin_size))
 
     #
     if verbose:
@@ -615,15 +638,16 @@ def trial_multiple_models(models: list, environment: KAB,
             score_list[:, rep_i, trial_i] = reward_list[:, rep_i, trial_i, -int(nb_rounds/10):].mean(axis=1)
             # mean_score_list[:, rep_i, trial_i] = reward_list[:, rep_i, trial_i].mean(axis=1)
 
+            # calculate entropy for the trial
+            if entropy_calc:
+                for i, m in enumerate(models):
+                    arms = arm_list[i, rep_i, trial_i]
+                    entropy = np.zeros(nb_rounds-bin_size)
+                    for l in range(0, nb_rounds-bin_size):
+                        entropy_list[i, rep_i, trial_i, l] = calc_entropy(
+                            arms[l: l+bin_size].sum(axis=0))
+
         # ---------------------------- #
-
-        # calculate entropy for the trial
-        # for i, m in enumerate(models):
-        #     arms = arm_list[i, rep_i, trial_i]
-        #     entropy = np.zeros(nb_rounds-bin_size)
-        #     for l in range(0, nb_rounds-bin_size):
-        #         entropy_list[i, rep_i, trial_i, l] = calc_entropy(arms[l: l+bin_size].sum(axis=0))
-
         if verbose and nb_reps < 2:
             logger.info("")
             logger.info(f"trial {trial_i}")
@@ -648,6 +672,9 @@ def trial_multiple_models(models: list, environment: KAB,
         # "entropy_list": entropy_list,
         "names": names
     }
+
+    if entropy_calc:
+        stats["entropy_list"] = entropy_list
 
     return stats
 
@@ -884,6 +911,15 @@ def parse_results_to_regret(results: dict):
 
     return (np.array(results["optimal_list"]) - \
         np.array(results["rewards_list"])).mean()
+
+
+def parse_results_to_reward(results: dict):
+
+    """
+    extract measures and calculates regret
+    """
+
+    return np.array(results["scores"]).mean()
 
 
 

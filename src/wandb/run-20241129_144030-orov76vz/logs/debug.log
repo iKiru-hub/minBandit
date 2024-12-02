@@ -1,0 +1,33 @@
+2024-11-29 14:40:30,128 INFO    Thread-2 (_run_job):57730 [wandb_setup.py:_flush():79] Current SDK version is 0.18.7
+2024-11-29 14:40:30,129 INFO    Thread-2 (_run_job):57730 [wandb_setup.py:_flush():79] Configure stats pid to 57730
+2024-11-29 14:40:30,129 INFO    Thread-2 (_run_job):57730 [wandb_setup.py:_flush():79] Loading settings from /Users/daniekru/.config/wandb/settings
+2024-11-29 14:40:30,129 INFO    Thread-2 (_run_job):57730 [wandb_setup.py:_flush():79] Loading settings from /Users/daniekru/Research/lab/minBandit/src/wandb/settings
+2024-11-29 14:40:30,129 INFO    Thread-2 (_run_job):57730 [wandb_setup.py:_flush():79] Loading settings from environment variables: {'project': 'minBandit', 'entity': 'ikiru-university-of-oslo', 'root_dir': '/Users/daniekru/Research/lab/minBandit/src', 'sweep_id': 'emh4qtid', 'run_id': 'orov76vz', 'sweep_param_path': '/Users/daniekru/Research/lab/minBandit/src/wandb/sweep-emh4qtid/config-orov76vz.yaml'}
+2024-11-29 14:40:30,129 INFO    Thread-2 (_run_job):57730 [wandb_setup.py:_flush():79] Applying setup settings: {'mode': None, '_disable_service': None}
+2024-11-29 14:40:30,129 INFO    Thread-2 (_run_job):57730 [wandb_setup.py:_flush():79] Inferring run settings from compute environment: {'program_relpath': 'src/param_search.py', 'program_abspath': '/Users/daniekru/Research/lab/minBandit/src/param_search.py', 'program': '/Users/daniekru/Research/lab/minBandit/src/param_search.py'}
+2024-11-29 14:40:30,129 INFO    Thread-2 (_run_job):57730 [wandb_setup.py:_flush():79] Applying login settings: {}
+2024-11-29 14:40:30,129 INFO    Thread-2 (_run_job):57730 [wandb_init.py:_log_setup():533] Logging user logs to /Users/daniekru/Research/lab/minBandit/src/wandb/run-20241129_144030-orov76vz/logs/debug.log
+2024-11-29 14:40:30,130 INFO    Thread-2 (_run_job):57730 [wandb_init.py:_log_setup():534] Logging internal logs to /Users/daniekru/Research/lab/minBandit/src/wandb/run-20241129_144030-orov76vz/logs/debug-internal.log
+2024-11-29 14:40:30,130 INFO    Thread-2 (_run_job):57730 [wandb_init.py:init():619] calling init triggers
+2024-11-29 14:40:30,130 INFO    Thread-2 (_run_job):57730 [wandb_init.py:init():626] wandb.init called with sweep_config: {'alpha': -1.1861963482126754, 'alpha_lr': -0.8694682122118405, 'beta': 8.617184163094207, 'beta_lr': 0.7105604931586064, 'gain': 25.61269181989044, 'lr': 9.603327167570503, 'mu': -2.6167781716507994, 'mu_lr': -0.9595706645888936, 'r': 0.6710880916895685, 'r_lr': 0.6799516198341029, 'sigma': 3.784136057097924, 'sigma_lr': 3.067355439735835, 'threshold': 8.788148159282574, 'w_max': 0.6397383849640338}
+config: {}
+2024-11-29 14:40:30,130 INFO    Thread-2 (_run_job):57730 [wandb_init.py:init():669] starting backend
+2024-11-29 14:40:30,130 INFO    Thread-2 (_run_job):57730 [wandb_init.py:init():673] sending inform_init request
+2024-11-29 14:40:30,138 INFO    Thread-2 (_run_job):57730 [backend.py:_multiprocessing_setup():104] multiprocessing start_methods=spawn,fork,forkserver, using: spawn
+2024-11-29 14:40:30,142 INFO    Thread-2 (_run_job):57730 [wandb_init.py:init():686] backend started and connected
+2024-11-29 14:40:30,153 INFO    Thread-2 (_run_job):57730 [wandb_run.py:_config_callback():1387] config_cb None None {'alpha': -1.1861963482126754, 'alpha_lr': -0.8694682122118405, 'beta': 8.617184163094207, 'beta_lr': 0.7105604931586064, 'gain': 25.61269181989044, 'lr': 9.603327167570503, 'mu': -2.6167781716507994, 'mu_lr': -0.9595706645888936, 'r': 0.6710880916895685, 'r_lr': 0.6799516198341029, 'sigma': 3.784136057097924, 'sigma_lr': 3.067355439735835, 'threshold': 8.788148159282574, 'w_max': 0.6397383849640338}
+2024-11-29 14:40:30,155 INFO    Thread-2 (_run_job):57730 [wandb_init.py:init():781] updated telemetry
+2024-11-29 14:40:30,184 INFO    Thread-2 (_run_job):57730 [wandb_init.py:init():814] communicating run to backend with 90.0 second timeout
+2024-11-29 14:40:30,531 INFO    Thread-2 (_run_job):57730 [wandb_init.py:init():867] starting run threads in backend
+2024-11-29 14:40:30,646 INFO    Thread-2 (_run_job):57730 [wandb_run.py:_console_start():2456] atexit reg
+2024-11-29 14:40:30,646 INFO    Thread-2 (_run_job):57730 [wandb_run.py:_redirect():2305] redirect: wrap_raw
+2024-11-29 14:40:30,647 INFO    Thread-2 (_run_job):57730 [wandb_run.py:_redirect():2370] Wrapping output streams.
+2024-11-29 14:40:30,647 INFO    Thread-2 (_run_job):57730 [wandb_run.py:_redirect():2395] Redirects installed.
+2024-11-29 14:40:30,648 INFO    Thread-2 (_run_job):57730 [wandb_init.py:init():911] run started, returning control to user process
+2024-11-29 14:41:50,716 INFO    Thread-2 (_run_job):57730 [wandb_run.py:_finish():2155] finishing run ikiru-university-of-oslo/minBandit/orov76vz
+2024-11-29 14:41:50,717 INFO    Thread-2 (_run_job):57730 [wandb_run.py:_atexit_cleanup():2420] got exitcode: 1
+2024-11-29 14:41:50,717 INFO    Thread-2 (_run_job):57730 [wandb_run.py:_restore():2402] restore
+2024-11-29 14:41:50,717 INFO    Thread-2 (_run_job):57730 [wandb_run.py:_restore():2408] restore done
+2024-11-29 14:41:52,839 INFO    Thread-2 (_run_job):57730 [wandb_run.py:_footer_history_summary_info():3960] rendering history
+2024-11-29 14:41:52,839 INFO    Thread-2 (_run_job):57730 [wandb_run.py:_footer_history_summary_info():3992] rendering summary
+2024-11-29 14:41:52,843 INFO    Thread-2 (_run_job):57730 [wandb_run.py:_footer_sync_info():3921] logging synced files

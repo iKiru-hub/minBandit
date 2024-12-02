@@ -48,7 +48,8 @@ class Model(MBsolver):
                  r_lr: float=1., gain: float=1.,
                  threshold: float=0.,
                  value_function: str="gaussian",
-                 lr_function: str="none"):
+                 lr_function: str="none",
+                 track_weights: bool=False):
 
         super().__init__(K)
 
@@ -96,6 +97,8 @@ class Model(MBsolver):
 
         # record
         self.choices = []
+        self.dw_record = []
+        self.track_weights = track_weights
 
     def __str__(self):
         return "`Model`"
@@ -327,8 +330,12 @@ class Model(MBsolver):
             the reward received by the model
         """
 
-        self._W[self._choice] += self._lr_function()[self._choice] * \
+        dw = self._lr_function()[self._choice] * \
             (self._w_max * reward - self._W[self._choice])
+        self._W[self._choice] += dw
+
+        if self.track_weights:
+            self.dw_record.append(dw.item())
 
     def get_values(self) -> np.ndarray:
 
@@ -344,6 +351,14 @@ class Model(MBsolver):
         """
 
         return self._u.flatten().copy(), self._v.flatten().copy()
+
+    def get_delta_record(self) -> np.ndarray:
+
+        """
+        Get the record of the delta weights
+        """
+
+        return np.array(self.dw_record)
 
     def reset(self, complete: bool=False):
 

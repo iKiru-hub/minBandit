@@ -1,0 +1,12 @@
+{"time":"2024-11-29T14:43:27.663323+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-29T14:43:27.663372+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241129_144327-hcl8d97u/logs/debug-core.log"}
+{"time":"2024-11-29T14:43:27.773119+01:00","level":"INFO","msg":"created new stream","id":"hcl8d97u"}
+{"time":"2024-11-29T14:43:27.773166+01:00","level":"INFO","msg":"stream: started","id":"hcl8d97u"}
+{"time":"2024-11-29T14:43:27.773172+01:00","level":"INFO","msg":"handler: started","stream_id":"hcl8d97u"}
+{"time":"2024-11-29T14:43:27.773173+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"hcl8d97u"}
+{"time":"2024-11-29T14:43:27.773222+01:00","level":"INFO","msg":"sender: started","stream_id":"hcl8d97u"}
+{"time":"2024-11-29T14:43:28.008087+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-29T14:43:29.049822+01:00","level":"INFO","msg":"stream: closing","id":"hcl8d97u"}
+{"time":"2024-11-29T14:43:29.049855+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-29T14:43:29.050233+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-29T14:43:29.813219+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}

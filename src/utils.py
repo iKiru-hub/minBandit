@@ -147,7 +147,8 @@ def tqdm_enumerate(iter, **tqdm_kwargs):
         i += 1
 
 
-def load_model(model_name: str=None, idx: int=None, verbose: bool=True, CACHE_PATH=CACHE_PATH):
+def load_model(model_name: str=None, idx: int=None,
+               verbose: bool=True, CACHE_PATH=CACHE_PATH):
 
     """
     load a model from the models folder
@@ -183,9 +184,11 @@ def load_model(model_name: str=None, idx: int=None, verbose: bool=True, CACHE_PA
         model_name = files[idx]
 
     if model_name not in os.listdir(CACHE_PATH):
-        raise ValueError(f"Model {model_name} not found in {CACHE_PATH}")
+        raise ValueError(f"Model {model_name} not found" + \
+            f" in {CACHE_PATH}")
 
-    with open(os.path.join(CACHE_PATH, model_name), "r") as f:
+    with open(os.path.join(CACHE_PATH, model_name),
+              "r") as f:
         model_params = json.load(f)
 
     if verbose:

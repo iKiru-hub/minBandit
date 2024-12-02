@@ -1,0 +1,17 @@
+{"time":"2024-11-30T03:03:12.10083+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-30T03:03:12.100953+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241130_030312-gdhb3lgl/logs/debug-core.log"}
+{"time":"2024-11-30T03:03:12.215415+01:00","level":"INFO","msg":"created new stream","id":"gdhb3lgl"}
+{"time":"2024-11-30T03:03:12.215464+01:00","level":"INFO","msg":"stream: started","id":"gdhb3lgl"}
+{"time":"2024-11-30T03:03:12.215496+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"gdhb3lgl"}
+{"time":"2024-11-30T03:03:12.215528+01:00","level":"INFO","msg":"handler: started","stream_id":"gdhb3lgl"}
+{"time":"2024-11-30T03:03:12.215502+01:00","level":"INFO","msg":"sender: started","stream_id":"gdhb3lgl"}
+{"time":"2024-11-30T03:03:12.445972+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-30T03:08:30.363704+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-30T03:08:30.364204+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-30T03:08:31.370507+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading config.yaml","runtime_seconds":0.491092209,"progress":"912B/912B"},{"desc":"uploading output.log","runtime_seconds":0.491052417}],"total_operations":2}}
+{"time":"2024-11-30T03:08:31.584424+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-30T03:08:32.858105+01:00","level":"INFO","msg":"stream: closing","id":"gdhb3lgl"}
+{"time":"2024-11-30T03:08:32.858148+01:00","level":"INFO","msg":"handler: closed","stream_id":"gdhb3lgl"}
+{"time":"2024-11-30T03:08:32.858171+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"gdhb3lgl"}
+{"time":"2024-11-30T03:08:32.858187+01:00","level":"INFO","msg":"sender: closed","stream_id":"gdhb3lgl"}
+{"time":"2024-11-30T03:08:32.85848+01:00","level":"INFO","msg":"stream: closed","id":"gdhb3lgl"}

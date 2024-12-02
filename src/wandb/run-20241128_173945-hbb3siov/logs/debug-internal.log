@@ -1,0 +1,17 @@
+{"time":"2024-11-28T17:39:45.3053+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-28T17:39:45.305417+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241128_173945-hbb3siov/logs/debug-core.log"}
+{"time":"2024-11-28T17:39:45.42001+01:00","level":"INFO","msg":"created new stream","id":"hbb3siov"}
+{"time":"2024-11-28T17:39:45.420055+01:00","level":"INFO","msg":"stream: started","id":"hbb3siov"}
+{"time":"2024-11-28T17:39:45.420084+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"hbb3siov"}
+{"time":"2024-11-28T17:39:45.4201+01:00","level":"INFO","msg":"sender: started","stream_id":"hbb3siov"}
+{"time":"2024-11-28T17:39:45.420141+01:00","level":"INFO","msg":"handler: started","stream_id":"hbb3siov"}
+{"time":"2024-11-28T17:39:45.664808+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-28T17:45:05.569947+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-28T17:45:05.570516+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-28T17:45:06.576217+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"saving job artifact","runtime_seconds":0.498081416}],"total_operations":1}}
+{"time":"2024-11-28T17:45:06.677347+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-28T17:45:07.937053+01:00","level":"INFO","msg":"stream: closing","id":"hbb3siov"}
+{"time":"2024-11-28T17:45:07.937133+01:00","level":"INFO","msg":"handler: closed","stream_id":"hbb3siov"}
+{"time":"2024-11-28T17:45:07.937166+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"hbb3siov"}
+{"time":"2024-11-28T17:45:07.937759+01:00","level":"INFO","msg":"sender: closed","stream_id":"hbb3siov"}
+{"time":"2024-11-28T17:45:07.937816+01:00","level":"INFO","msg":"stream: closed","id":"hbb3siov"}

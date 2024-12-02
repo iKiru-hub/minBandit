@@ -90,29 +90,6 @@ Bruno~B. Averbeck.
 \newblock Theory of {{Choice}} in {{Bandit}}, {{Information Sampling}} and {{Foraging Tasks}}.
 \newblock {\em PLoS Computational Biology}, 11(3):e1004164, March 2015.
 
-\bibitem{gittinsBanditProcessesDynamic1979}
-J.~C. Gittins.
-\newblock Bandit {{Processes}} and {{Dynamic Allocation Indices}}.
-\newblock {\em Journal of the Royal Statistical Society. Series B (Methodological)}, 41(2):148--177, 1979.
-
-\bibitem{kaufmannThompsonSamplingAsymptotically2012}
-Emilie Kaufmann, Nathaniel Korda, and R{\'e}mi Munos.
-\newblock Thompson {{Sampling}}: {{An Asymptotically Optimal Finite Time Analysis}}, July 2012.
-
-\bibitem{banMultifacetContextualBandits2021}
-Yikun Ban, Jingrui He, and Curtiss~B. Cook.
-\newblock Multi-facet {{Contextual Bandits}}: {{A Neural Network Perspective}}, June 2021.
-
-\bibitem{tokicAdaptiveEGreedyExploration2010}
-Michel Tokic.
-\newblock Adaptive {$\varepsilon$}-{{Greedy Exploration}} in {{Reinforcement Learning Based}} on {{Value Differences}}.
-\newblock In R{\"u}diger Dillmann, J{\"u}rgen Beyerer, Uwe~D. Hanebeck, and Tanja Schultz, editors, {\em {{KI}} 2010: {{Advances}} in {{Artificial Intelligence}}}, volume 6359, pages 203--210. Springer Berlin Heidelberg, Berlin, Heidelberg, 2010.
-
-\bibitem{tokicValueDifferenceBasedExploration2011}
-Michel Tokic and G{\"u}nther Palm.
-\newblock Value-{{Difference Based Exploration}}: {{Adaptive Control}} between {{Epsilon-Greedy}} and {{Softmax}}.
-\newblock In Joscha Bach and Stefan Edelkamp, editors, {\em {{KI}} 2011: {{Advances}} in {{Artificial Intelligence}}}, volume 7006, pages 335--346. Springer Berlin Heidelberg, Berlin, Heidelberg, 2011.
-
 \bibitem{agrawalAnalysisThompsonSampling2012}
 Shipra Agrawal and Navin Goyal.
 \newblock Analysis of {{Thompson Sampling}} for the {{Multi-armed Bandit Problem}}.

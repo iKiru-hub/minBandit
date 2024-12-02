@@ -7,7 +7,7 @@ from multiprocessing import Pool
 
 # set the path to the src directory
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from src.utils import setup_logger, make_probability_set
+from src.utils import setup_logger, make_probability_set, load_model
 import src.models as mm
 import src.envs as envs
 
@@ -18,38 +18,43 @@ main_PATH = r"/Users/daniekru/Research/lab/minBandit/src/data"
 pigeon_PATH = r"/Users/daniekru/Research/lab/pigeon/data"
 main_PATH_cl = r"/home/daniekru/lab/minBandit/src/data"
 pigeon_PATH_cl = r"/home/daniekru/lab/pigeon/data"
-PATH = pigeon_PATH_cl
+# PATH = pigeon_PATH_cl
+PATH = main_PATH
 
 # from a sweep
 model_params = {
-    "K": None,
-    "dur_pre": 2000,
-    "dur_post": 2000,
-    "lr": 2.62773,
-    "gain": 0.83687,
-    "threshold": 0.5,
-    "alpha": 2.53669,
-    "beta": 9.18994,
-    "mu": -2.66142,
-    "sigma": 4.57933,
-    "r": 0.55691,
-    "alpha_lr": -0.25916,
-    "beta_lr": 2.16108,
-    "mu_lr": -2.91196,
-    "sigma_lr": 0.81556,
-    "r_lr": 0.77974,
-    "w_max": 4.38612,
-    "value_function": "gaussian",
-    "lr_function": "gaussian",
-}
+"alpha":0.4450195718988339,
+"alpha_lr":-2.958221399416473,
+"beta":7.391580370882872,
+"beta_lr":0.9526338245859882,
+"gain":47.86910588825282,
+"lr":0.2773642826170334,
+"mu":2.6713225228884383,
+"mu_lr":-0.6084876849578418,
+"r":0.5161936304182647,
+"r_lr":0.044296190220556864,
+"sigma":0.5450255193262612,
+"sigma_lr":4.463404997440599,
+"threshold":0.3842711049268154,
+"w_max":2.461390370832377,
+"K": None,
+"dur_pre": 2000,
+"dur_post": 2000,
+"value_function": "gaussian",
+"lr_function": "gaussian"}
+
+# from evolution
+model_params = load_model(idx=4) # 1
 
 
 """ settings """
 
 
-NB_ROUNDS = 200
+NB_ROUNDS = 2000
 NB_TRIALS = 2
-NB_REPS = 1
+NB_REPS = 2
+
+entropy_calc = True
 
 
 """ some local functions """
@@ -79,6 +84,16 @@ def make_env(K: int,
                             frequencies=frequencies,
                             phases=phases,
                             normalize=normalize,
+                            verbose=False)
+    elif env_type == "sinv1":
+        frequencies = np.linspace(0.1, 0.4, K)
+        phases = np.random.uniform(0, 2*np.pi, K)
+        constants = np.random.uniform(0.1, 0.7, int(K/2))
+        env = envs.KABsinv0(K=K,
+                            frequencies=frequencies,
+                            phases=phases,
+                            normalize=normalize,
+                            constants=constants,
                             verbose=False)
     else:
         env = envs.KABv0(K=K,
@@ -110,18 +125,18 @@ def run_for_one_k(K: int):
                      probabilities_set=probabilities_set,
                      tau=10),
             make_env(K=K,
-                     env_type="driftv1",
-                     probabilities_set=probabilities_set,
-                     tau=100),
-            make_env(K=K,
                      env_type="sinv0",
+                     probabilities_set=probabilities_set,
+                     tau=None),
+            make_env(K=K,
+                     env_type="sinv1",
                      probabilities_set=probabilities_set,
                      tau=None),
     ]
  
     # run
     all_results = {}
-    for env in envs_list:
+    for env in tqdm(envs_list):
 
         # define models
         model_list = [
@@ -138,7 +153,8 @@ def run_for_one_k(K: int):
                              nb_trials=NB_TRIALS,
                              nb_rounds=NB_ROUNDS,
                              nb_reps=NB_REPS,
-                             bin_size=2,
+                             bin_size=20,
+                             entropy_calc=entropy_calc,
                              verbose=False)
 
         all_results[str(env)] = results
@@ -196,11 +212,19 @@ if __name__ == "__main__":
     """ settings """
 
     # K_list = [5, 10, 50, 100, 200, 500, 1000, 1500]
-    K_list = [5]
+    # K_list = [5, 10, 100]
 
-    """ run """
+    # run_for_all_k(K_list=K_list)
+    # logger(f"{K_list} done.")
+
+    # import time
+    # time.sleep(180)
+    # print("\n\n\n")
+
+    # K_list = [200, 1000, 2000]
+    K_list = [50]
 
     run_for_all_k(K_list=K_list)
-    logger("done.")
+    logger(f"{K_list} done.")
 
 

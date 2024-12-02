@@ -1,0 +1,17 @@
+{"time":"2024-11-30T09:48:48.116692+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-30T09:48:48.116795+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241130_094848-znfcxhtv/logs/debug-core.log"}
+{"time":"2024-11-30T09:48:48.23086+01:00","level":"INFO","msg":"created new stream","id":"znfcxhtv"}
+{"time":"2024-11-30T09:48:48.230927+01:00","level":"INFO","msg":"stream: started","id":"znfcxhtv"}
+{"time":"2024-11-30T09:48:48.230939+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"znfcxhtv"}
+{"time":"2024-11-30T09:48:48.230956+01:00","level":"INFO","msg":"handler: started","stream_id":"znfcxhtv"}
+{"time":"2024-11-30T09:48:48.231058+01:00","level":"INFO","msg":"sender: started","stream_id":"znfcxhtv"}
+{"time":"2024-11-30T09:48:48.847476+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-30T09:58:42.370892+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-30T09:58:42.371433+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-30T09:58:43.377501+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading wandb-summary.json","runtime_seconds":0.616185666,"progress":"121B/121B"},{"desc":"uploading config.yaml","runtime_seconds":0.459738,"progress":"915B/915B"}],"total_operations":2}}
+{"time":"2024-11-30T09:58:43.38773+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-30T09:58:44.648886+01:00","level":"INFO","msg":"stream: closing","id":"znfcxhtv"}
+{"time":"2024-11-30T09:58:44.648956+01:00","level":"INFO","msg":"handler: closed","stream_id":"znfcxhtv"}
+{"time":"2024-11-30T09:58:44.648975+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"znfcxhtv"}
+{"time":"2024-11-30T09:58:44.64899+01:00","level":"INFO","msg":"sender: closed","stream_id":"znfcxhtv"}
+{"time":"2024-11-30T09:58:44.64935+01:00","level":"INFO","msg":"stream: closed","id":"znfcxhtv"}

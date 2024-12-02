@@ -1,0 +1,30 @@
+wandb_version: 1
+
+alpha:
+  value: 0.5279421435978335
+alpha_lr:
+  value: -1.312081708893935
+beta:
+  value: 0.5368248101742884
+beta_lr:
+  value: 0.7946835256023222
+gain:
+  value: 18.339684668348283
+lr:
+  value: 5.853548281874074
+mu:
+  value: -1.6792684744825703
+mu_lr:
+  value: 1.998604141907622
+r:
+  value: 0.4540504463474587
+r_lr:
+  value: 0.8628217379907723
+sigma:
+  value: 5.613567973433752
+sigma_lr:
+  value: 1.6359195539053062
+threshold:
+  value: 6.069604923216353
+w_max:
+  value: 0.8126920718354195

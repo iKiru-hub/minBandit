@@ -1,0 +1,17 @@
+{"time":"2024-11-30T10:31:15.621776+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-30T10:31:15.621876+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241130_103115-ceawtn80/logs/debug-core.log"}
+{"time":"2024-11-30T10:31:15.736286+01:00","level":"INFO","msg":"created new stream","id":"ceawtn80"}
+{"time":"2024-11-30T10:31:15.736329+01:00","level":"INFO","msg":"stream: started","id":"ceawtn80"}
+{"time":"2024-11-30T10:31:15.73634+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"ceawtn80"}
+{"time":"2024-11-30T10:31:15.736387+01:00","level":"INFO","msg":"sender: started","stream_id":"ceawtn80"}
+{"time":"2024-11-30T10:31:15.736482+01:00","level":"INFO","msg":"handler: started","stream_id":"ceawtn80"}
+{"time":"2024-11-30T10:31:15.944554+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-30T10:36:37.674267+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-30T10:36:37.674994+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-30T10:36:38.685775+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"saving job artifact","runtime_seconds":0.655090917},{"desc":"uploading config.yaml","runtime_seconds":0.460379,"progress":"914B/914B"},{"desc":"uploading output.log","runtime_seconds":0.460317625}],"total_operations":3}}
+{"time":"2024-11-30T10:36:38.933746+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-30T10:36:40.196203+01:00","level":"INFO","msg":"stream: closing","id":"ceawtn80"}
+{"time":"2024-11-30T10:36:40.196244+01:00","level":"INFO","msg":"handler: closed","stream_id":"ceawtn80"}
+{"time":"2024-11-30T10:36:40.196263+01:00","level":"INFO","msg":"sender: closed","stream_id":"ceawtn80"}
+{"time":"2024-11-30T10:36:40.196259+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"ceawtn80"}
+{"time":"2024-11-30T10:36:40.196622+01:00","level":"INFO","msg":"stream: closed","id":"ceawtn80"}

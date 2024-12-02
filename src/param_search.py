@@ -20,8 +20,8 @@ sweep_configuration = {
     "method": "bayes",
     "name": "param_search minb",
     "metric": {
-        "goal": "minimize",
-        "name": "regret"
+        "goal": "maximize",
+        "name": "reward"
     },
 
     "parameters": {
@@ -95,7 +95,7 @@ def make_env(K: int,
                               normalize=normalize,
                               fixed_p=0.9)
     elif env_type == "sinv0":
-        frequencies = np.linspace(0.1, 0.4, K)
+        frequencies = np.linspace(0.02, 0.4, K)
         phases = np.random.uniform(0, 2*np.pi, K)
         env = envs.KABsinv0(K=K,
                             frequencies=frequencies,
@@ -121,7 +121,7 @@ def train_model(model_params: dict,
     and return the average regret
     """
 
-    regret = 0.
+    reward = 0.
 
     for _ in range(nb_reps):
         for env in envs_list:
@@ -130,11 +130,14 @@ def train_model(model_params: dict,
                                  environment=env,
                                  nb_trials=nb_trials,
                                  nb_rounds=nb_rounds,
+                                 score_only=True,
                                  verbose=False,
                                  disable=True)
-            regret += envs.parse_results_to_regret(results=results)
+            # regret += envs.parse_results_to_regret(results=results)
+            reward += envs.parse_results_to_reward(results=results)
 
-    return regret / (len(envs_list) * nb_reps)
+    return reward / (len(envs_list) * nb_reps)
+    # return regret / (len(envs_list) * nb_reps)
 
 
 """ training """
@@ -144,9 +147,9 @@ def main():
     logger("<<< ---------------------- >>>")
 
     # --- settings ---
-    K = 100
+    K = 50
     nb_trials = 2
-    nb_rounds = 400
+    nb_rounds = 2000
     nb_reps = 2
 
     # --- environment ---
@@ -163,10 +166,10 @@ def main():
             #          env_type="driftv0",
             #          probabilities_set=probabilities_set,
             #          tau=10),
-            # make_env(K=K,
-            #          kind="driftv1",
-            #          probabilities_set=probabilities_set,
-            #          tau=100),
+            make_env(K=K,
+                     env_type="driftv1",
+                     probabilities_set=probabilities_set,
+                     tau=200),
             # make_env(K=K,
             #          env_type="sinv0",
             #          probabilities_set=probabilities_set,
@@ -207,14 +210,14 @@ def main():
     }
 
     # model
-    regret = train_model(model_params=model_params,
+    reward = train_model(model_params=model_params,
                          envs_list=envs_list,
                          nb_trials=nb_trials,
                          nb_rounds=nb_rounds,
-                          nb_reps=nb_reps)
+                         nb_reps=nb_reps)
 
-    logger(f"regret: {regret:.3f}")
-    wandb.log({"regret": regret})
+    logger(f"reward: {reward:.3f}")
+    wandb.log({"reward": reward})
 
 
 

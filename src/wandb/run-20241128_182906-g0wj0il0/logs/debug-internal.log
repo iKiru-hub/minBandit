@@ -1,0 +1,21 @@
+{"time":"2024-11-28T18:29:06.83282+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-28T18:29:06.832851+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241128_182906-g0wj0il0/logs/debug-core.log"}
+{"time":"2024-11-28T18:29:06.938813+01:00","level":"INFO","msg":"created new stream","id":"g0wj0il0"}
+{"time":"2024-11-28T18:29:06.938854+01:00","level":"INFO","msg":"stream: started","id":"g0wj0il0"}
+{"time":"2024-11-28T18:29:06.938885+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"g0wj0il0"}
+{"time":"2024-11-28T18:29:06.938958+01:00","level":"INFO","msg":"handler: started","stream_id":"g0wj0il0"}
+{"time":"2024-11-28T18:29:06.938916+01:00","level":"INFO","msg":"sender: started","stream_id":"g0wj0il0"}
+{"time":"2024-11-28T18:29:07.178615+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-28T18:33:39.065156+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/ikiru-university-of-oslo/minBandit/g0wj0il0/file_stream\": read tcp 172.26.0.232:63523->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2024-11-28T18:37:02.486055+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/ikiru-university-of-oslo/minBandit/g0wj0il0/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-28T18:37:04.511713+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/ikiru-university-of-oslo/minBandit/g0wj0il0/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-28T18:37:47.917021+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/ikiru-university-of-oslo/minBandit/g0wj0il0/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-28T18:44:40.494676+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-28T18:44:40.495249+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-28T18:44:41.359432+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-28T18:44:41.506399+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading history, summary","runtime_seconds":0.146528709}],"total_operations":1}}
+{"time":"2024-11-28T18:44:42.618848+01:00","level":"INFO","msg":"stream: closing","id":"g0wj0il0"}
+{"time":"2024-11-28T18:44:42.618932+01:00","level":"INFO","msg":"handler: closed","stream_id":"g0wj0il0"}
+{"time":"2024-11-28T18:44:42.618973+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"g0wj0il0"}
+{"time":"2024-11-28T18:44:42.619177+01:00","level":"INFO","msg":"sender: closed","stream_id":"g0wj0il0"}
+{"time":"2024-11-28T18:44:42.619532+01:00","level":"INFO","msg":"stream: closed","id":"g0wj0il0"}

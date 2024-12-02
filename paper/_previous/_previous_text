@@ -129,3 +129,6 @@ and helping value encoding \cite{sheynikhovichLongtermMemorySynaptic2023, didome
 roeschDopamineNeuronsEncode2007}.
 
 
+% short overview of the literature
+Extensive research has been conducted on the topic, and several algorithms have been proposed, such as Thompson sampling, $\epsilon$-greedy, UCB1, VDBE, alongside convergence proofs for specific settings \cite{gittinsBanditProcessesDynamic1979, kaufmannThompsonSamplingAsymptotically2012, banMultifacetContextualBandits2021, tokicAdaptiveEGreedyExploration2010, tokicValueDifferenceBasedExploration2011}.
+

@@ -1,0 +1,109 @@
+2024-11-29 17:14:35,707 INFO    Thread-60 (_run_job):65837 [wandb_setup.py:_flush():79] Current SDK version is 0.18.7
+2024-11-29 17:14:35,708 INFO    Thread-60 (_run_job):65837 [wandb_setup.py:_flush():79] Configure stats pid to 65837
+2024-11-29 17:14:35,708 INFO    Thread-60 (_run_job):65837 [wandb_setup.py:_flush():79] Loading settings from /Users/daniekru/.config/wandb/settings
+2024-11-29 17:14:35,708 INFO    Thread-60 (_run_job):65837 [wandb_setup.py:_flush():79] Loading settings from /Users/daniekru/Research/lab/minBandit/src/wandb/settings
+2024-11-29 17:14:35,708 INFO    Thread-60 (_run_job):65837 [wandb_setup.py:_flush():79] Loading settings from environment variables: {'project': 'minBandit', 'entity': 'ikiru-university-of-oslo', 'root_dir': '/Users/daniekru/Research/lab/minBandit/src', 'run_id': 'spj98o1y', 'sweep_param_path': '/Users/daniekru/Research/lab/minBandit/src/wandb/sweep-fxq23mi2/config-spj98o1y.yaml', 'sweep_id': 'fxq23mi2'}
+2024-11-29 17:14:35,708 INFO    Thread-60 (_run_job):65837 [wandb_setup.py:_flush():79] Applying setup settings: {'mode': None, '_disable_service': None}
+2024-11-29 17:14:35,708 INFO    Thread-60 (_run_job):65837 [wandb_setup.py:_flush():79] Inferring run settings from compute environment: {'program_relpath': 'src/param_search.py', 'program_abspath': '/Users/daniekru/Research/lab/minBandit/src/param_search.py', 'program': '/Users/daniekru/Research/lab/minBandit/src/param_search.py'}
+2024-11-29 17:14:35,708 INFO    Thread-60 (_run_job):65837 [wandb_setup.py:_flush():79] Applying login settings: {}
+2024-11-29 17:14:35,709 INFO    Thread-60 (_run_job):65837 [wandb_init.py:_log_setup():533] Logging user logs to /Users/daniekru/Research/lab/minBandit/src/wandb/run-20241129_171435-spj98o1y/logs/debug.log
+2024-11-29 17:14:35,709 INFO    Thread-60 (_run_job):65837 [wandb_init.py:_log_setup():534] Logging internal logs to /Users/daniekru/Research/lab/minBandit/src/wandb/run-20241129_171435-spj98o1y/logs/debug-internal.log
+2024-11-29 17:14:35,709 INFO    Thread-60 (_run_job):65837 [wandb_init.py:init():619] calling init triggers
+2024-11-29 17:14:35,709 INFO    Thread-60 (_run_job):65837 [wandb_init.py:init():626] wandb.init called with sweep_config: {'alpha': -1.2352917611163472, 'alpha_lr': -0.02341375760996467, 'beta': 9.554697960610076, 'beta_lr': 7.662979328372282, 'gain': 5.205502560718739, 'lr': 2.7205740545193224, 'mu': -2.2304809076337877, 'mu_lr': 0.5517949822623058, 'r': 0.2727673105604056, 'r_lr': 0.38576203580431256, 'sigma': 8.27120576028437, 'sigma_lr': 4.069288291682482, 'threshold': 3.3642058026100727, 'w_max': 4.933335163118616}
+config: {}
+2024-11-29 17:14:35,709 INFO    Thread-60 (_run_job):65837 [wandb_init.py:init():669] starting backend
+2024-11-29 17:14:35,709 INFO    Thread-60 (_run_job):65837 [wandb_init.py:init():673] sending inform_init request
+2024-11-29 17:14:35,719 INFO    Thread-60 (_run_job):65837 [backend.py:_multiprocessing_setup():104] multiprocessing start_methods=spawn,fork,forkserver, using: spawn
+2024-11-29 17:14:35,719 INFO    Thread-60 (_run_job):65837 [wandb_init.py:init():686] backend started and connected
+2024-11-29 17:14:35,730 INFO    Thread-60 (_run_job):65837 [wandb_run.py:_config_callback():1387] config_cb None None {'alpha': -1.2352917611163472, 'alpha_lr': -0.02341375760996467, 'beta': 9.554697960610076, 'beta_lr': 7.662979328372282, 'gain': 5.205502560718739, 'lr': 2.7205740545193224, 'mu': -2.2304809076337877, 'mu_lr': 0.5517949822623058, 'r': 0.2727673105604056, 'r_lr': 0.38576203580431256, 'sigma': 8.27120576028437, 'sigma_lr': 4.069288291682482, 'threshold': 3.3642058026100727, 'w_max': 4.933335163118616}
+2024-11-29 17:14:35,732 INFO    Thread-60 (_run_job):65837 [wandb_init.py:init():781] updated telemetry
+2024-11-29 17:14:35,766 INFO    Thread-60 (_run_job):65837 [wandb_init.py:init():814] communicating run to backend with 90.0 second timeout
+2024-11-29 17:14:36,064 INFO    Thread-60 (_run_job):65837 [wandb_init.py:init():867] starting run threads in backend
+2024-11-29 17:14:36,183 INFO    Thread-60 (_run_job):65837 [wandb_run.py:_console_start():2456] atexit reg
+2024-11-29 17:14:36,183 INFO    Thread-60 (_run_job):65837 [wandb_run.py:_redirect():2305] redirect: wrap_raw
+2024-11-29 17:14:36,183 INFO    Thread-60 (_run_job):65837 [wandb_run.py:_redirect():2370] Wrapping output streams.
+2024-11-29 17:14:36,183 INFO    Thread-60 (_run_job):65837 [wandb_run.py:_redirect():2395] Redirects installed.
+2024-11-29 17:14:36,183 INFO    Thread-60 (_run_job):65837 [wandb_init.py:init():911] run started, returning control to user process
+2024-11-29 17:16:53,270 INFO    Thread-1 (_heartbeat):65837 [retry.py:__call__():172] Retry attempt failed:
+Traceback (most recent call last):
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/urllib3/connection.py", line 203, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.10/Frameworks/Python.framework/Versions/3.11/lib/python3.11/socket.py", line 974, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/urllib3/connectionpool.py", line 790, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/urllib3/connectionpool.py", line 491, in _make_request
+    raise new_e
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/urllib3/connectionpool.py", line 467, in _make_request
+    self._validate_conn(conn)
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/urllib3/connectionpool.py", line 1092, in _validate_conn
+    conn.connect()
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/urllib3/connection.py", line 611, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/urllib3/connection.py", line 210, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x14f407f10>: Failed to resolve 'api.wandb.ai' ([Errno 8] nodename nor servname provided, or not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/urllib3/connectionpool.py", line 844, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/urllib3/util/retry.py", line 515, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x14f407f10>: Failed to resolve 'api.wandb.ai' ([Errno 8] nodename nor servname provided, or not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/wandb/sdk/lib/retry.py", line 131, in __call__
+    result = self._call_fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/wandb/sdk/internal/internal_api.py", line 400, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/wandb/sdk/lib/gql_request.py", line 58, in execute
+    request = self.session.post(self.url, **post_args)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/requests/sessions.py", line 637, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/daniekru/Research/codebase/myenvs/env_cl1/lib/python3.11/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.wandb.ai', port=443): Max retries exceeded with url: /graphql (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x14f407f10>: Failed to resolve 'api.wandb.ai' ([Errno 8] nodename nor servname provided, or not known)"))
+2024-11-29 21:09:10,980 INFO    Thread-60 (_run_job):65837 [wandb_run.py:_finish():2155] finishing run ikiru-university-of-oslo/minBandit/spj98o1y
+2024-11-29 21:09:10,981 INFO    Thread-60 (_run_job):65837 [wandb_run.py:_atexit_cleanup():2420] got exitcode: 0
+2024-11-29 21:09:10,981 INFO    Thread-60 (_run_job):65837 [wandb_run.py:_restore():2402] restore
+2024-11-29 21:09:10,981 INFO    Thread-60 (_run_job):65837 [wandb_run.py:_restore():2408] restore done
+2024-11-29 21:09:17,342 INFO    Thread-60 (_run_job):65837 [wandb_run.py:_footer_history_summary_info():3960] rendering history
+2024-11-29 21:09:17,344 INFO    Thread-60 (_run_job):65837 [wandb_run.py:_footer_history_summary_info():3992] rendering summary
+2024-11-29 21:09:17,362 INFO    Thread-60 (_run_job):65837 [wandb_run.py:_footer_sync_info():3921] logging synced files

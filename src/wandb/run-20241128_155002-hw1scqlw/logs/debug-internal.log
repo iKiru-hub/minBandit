@@ -1,0 +1,18 @@
+{"time":"2024-11-28T15:50:02.123611+01:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-28T15:50:02.123741+01:00","level":"INFO","msg":"created symlink","path":"/Users/daniekru/Research/lab/minBandit/src/wandb/run-20241128_155002-hw1scqlw/logs/debug-core.log"}
+{"time":"2024-11-28T15:50:02.238192+01:00","level":"INFO","msg":"created new stream","id":"hw1scqlw"}
+{"time":"2024-11-28T15:50:02.23824+01:00","level":"INFO","msg":"stream: started","id":"hw1scqlw"}
+{"time":"2024-11-28T15:50:02.238261+01:00","level":"INFO","msg":"sender: started","stream_id":"hw1scqlw"}
+{"time":"2024-11-28T15:50:02.238293+01:00","level":"INFO","msg":"handler: started","stream_id":"hw1scqlw"}
+{"time":"2024-11-28T15:50:02.238277+01:00","level":"INFO","msg":"writer: Do: started","stream_id":"hw1scqlw"}
+{"time":"2024-11-28T15:50:02.474882+01:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-28T15:53:48.120665+01:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/ikiru-university-of-oslo/minBandit/hw1scqlw/file_stream\": read tcp 172.26.0.232:56215->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2024-11-28T15:55:22.922856+01:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-28T15:55:22.923409+01:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-28T15:55:23.828261+01:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-28T15:55:23.928612+01:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading history, summary","runtime_seconds":0.0999745}],"total_operations":1}}
+{"time":"2024-11-28T15:55:25.082502+01:00","level":"INFO","msg":"stream: closing","id":"hw1scqlw"}
+{"time":"2024-11-28T15:55:25.082559+01:00","level":"INFO","msg":"handler: closed","stream_id":"hw1scqlw"}
+{"time":"2024-11-28T15:55:25.082583+01:00","level":"INFO","msg":"sender: closed","stream_id":"hw1scqlw"}
+{"time":"2024-11-28T15:55:25.082576+01:00","level":"INFO","msg":"writer: Close: closed","stream_id":"hw1scqlw"}
+{"time":"2024-11-28T15:55:25.082878+01:00","level":"INFO","msg":"stream: closed","id":"hw1scqlw"}
