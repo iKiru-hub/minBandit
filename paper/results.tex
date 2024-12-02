@@ -1,6 +1,7 @@
 \section{Results}
 
-The model has been tested in a series of benchmark environments, each with a different number of arms and reward distributions. The performance has been compared with the following algorithms: Random Baseline, Upper-Confidence Bound (UCB), Thompson Sampling, and Epsilon-Greedy. The results are summarized in table \ref{tab:model_performance}.
+The model has been tested in a series of benchmark environments, each with a different number of arms and reward distributions. The performance has been compared with the following algorithms: Random Baseline, Upper-Confidence Bound (UCB), Thompson Sampling, and Epsilon-Greedy. The results are
+summarized in table \ref{fig:perf_plot}.
 
 % Description of the environments
 \subsection{Game variants}
@@ -8,7 +9,7 @@ The model has been tested in a series of benchmark environments, each with a dif
 We choose this setting as it resembles an ecological scenario in which an animal has to forage in a patchy environment, where the reward of a given patch can change over time.
 More specifically, we used four different variants:
 
-\noindent \textbf{Zero-steps distribution shift} [\textsc{KAB-0}]: the reward distribution changes immediately at the end of a trial $i$ to a new one $i+1$ as $\mathbf{\omega}_{i} \to \mathbf{\omega}_{i+1}$. 
+\noindent \textbf{Zero-steps distribution shift} [\textsc{KAB-0}]: the reward distribution changes immediately at the end of a trial $i$ to a new one $i+1$ as $\mathbf{\omega}_{i} \to \mathbf{\omega}_{i+1}$.
 
 \noindent \textbf{Epsilon-steps distribution shift} [\textsc{KAB-$\epsilon$}]: the reward distribution $\omega$ changes gradually over rounds, tracked as time $t$, such that its shape tends towards a target distribution $\bar{\omega}_{i}$ as
 $\tau_{\omega}\dot{\omega}_{t}=\bar{\omega}_{i}-\omega_{t}$. Once distance is below a threshold $\epsilon$ as $\vert \bar{\omega}_{i} - \omega_{t}\vert < \epsilon$, the target distribution is changed to a new one $\bar{\omega}_{i}\to\bar{\omega}_{i+1}$.
@@ -21,28 +22,34 @@ normalized as $\omega_{t} = \omega_{t}(\sum_{k} \omega_{t,i})^{-1}$ such that it
 
 
 % Results: scores and brief discussion
-\subsection{Table of results}
+\subsection{Performance comparison}
 
-\begin{table}[H]
-\centering
-\caption{Performance comparison across benchmark environments}
-\label{tab:model_performance}
-\begin{tabular}{l c c c c}
-\toprule
-\textbf{Model} & \textbf{\textsc{KAB-0}} & \textbf{\textsc{KAB-$\epsilon$}} & \textbf{\textsc{KAB-$\sin$}} & \textbf{KAB-$\sin$P}\\
-\midrule
-Random Baseline & $12.3 \pm 3.4$ & $5.1 \pm 2.1$ & $25.6 \pm 4.2$ & $10.7 \pm 3.1$ \\
-UCB & $215.7 \pm 22.3$ & $87.3 \pm 15.6$ & $182.4 \pm 18.7$ & $65.2 \pm 12.4$ \\
-Thompson & $187.5 \pm 19.8$ & $145.6 \pm 24.3$ & $201.3 \pm 20.1$ & $92.7 \pm 17.5$ \\
-$\epsilon$-Greedy & $232.1 \pm 25.6$ & $156.4 \pm 26.7$ & $215.9 \pm 22.3$ & $108.3 \pm 19.2$ \\
-Proposed Method & $\mathbf{276.4 \pm 30.2}$ & $\mathbf{194.7 \pm 32.1}$ & $\mathbf{248.3 \pm 26.5}$ & $\mathbf{135.6 \pm 22.9}$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.\textwidth]{figures/performance_plot.png}
+    \caption{\textsc{Performance comparison for different values of $K$ and game variants} \textit{The model is compared with Thompson Sampling, Epsilon-Greedy, and UCB. The performance is measured as the average reward obtained by the agent over a number of trials.}}
+    \label{fig:perf_plot}
+\end{figure}
 
 \subsection{Decision-making dynamics}
+
+\noindent For a better understanding of the qualitative differences between the models, we analyzed the progress over the rounds and tracked the selected arms in the simplest case of zero-steps distribution shift. Additionally, in order to quantify the variability of the decision policy at a given time and highlight the particularity of each
+decision-making behaviour, we calculated the entropy of the distribution of chosen
+arms over a time window of 20 rounds as $H=-\sum^{K}_{i} p_{i}\log(p_{i})$. In figure \ref{fig:entropy_fig1}, it is plotted for each model the raster plot of selected arms together with its level of entropy. As expected, the over shape of the changes in the entropy over time are rather specific to
+each model. In particular, the UCB algorithm showed the highest variability, marked by a persistent exploratory behaviour throughout the trials despited converging to reward options. Thompson Sampling was able to reach most solutions, although with difficulty in adapting to new reward distributions
+leading to high entropy levels.
+$\epsilon-$Greedy also showed a good performance quite reliably, with the greedy strategy assuring low entropy for most of the rounds.
+Similar behaviour was observed for our model, which was able to reach the optimal policy and maintain it over time, with entropy peaking mostly at the beggining of the trials and being, on average, the lowest among all models.
+Indeed, the model dynamics make it particularly suited for the task of non-stationary K-armed bandits, as it is able to quickly adapt to new reward distributions and firmly maintain a greedy policy.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/performance_analysis_KABv0.png}
+    \caption{\textsc{Decision-making dynamics for different models} \textit{The raster plot shows the selected arms over time (black dots), while the entropy plot shows the variability of the decision policy (red lines). It is also reported the total reward and average entropy over all trials.}}
+    \label{fig:entropy_fig1}
+\end{figure}
+
+
 
 
 \subsection{Robustness and parameter sensitivity}

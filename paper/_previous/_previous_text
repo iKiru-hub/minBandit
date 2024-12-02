@@ -118,3 +118,14 @@
 %\hfill \break
 %The optimization of the parameters has been carried out through an evolutionary search using the Covariance Matrix Adaptation Evolution Strategy (CMA-ES) algorithm, which is a stochastic optimization method particularly suited for high-dimensional and non-linear optimization problems. 
 
+
+
+% introduction to the role of dopamine in decision making.
+An important ingredient for processing and selecting adaptive behaviours is the neuromodulation. In particular, the catecholamine dopamine has been shown to play a crucial role in learning and memory in numerous brain regions, and across animal species \cite{puigDopamineModulationLearning2014, duszkiewiczNoveltyDopaminergicModulation2019}.
+Important sources are the ventral tegmental area (VTA), locus coeruleus (LC), and the substantia nigra pars compacta (SNpc), which project consistently to the frontal lobe, the basal ganglia (BG), and the hippocampus \cite{gotoPrefrontalCorticalSynaptic2007, coolsChemistryAdaptiveMind2019, reynoldsDopaminedependentPlasticityCorticostriatal2002}.
+Dopamine has been long associated with reward prediction errors, for which dopaminergic neurons have been recorded tuning their phasic firing rate to signal either unexectedly positive, neutral, or negative feedback \cite{toblerAdaptiveCodingReward2005, schultzNeuralSubstratePrediction1997}.
+Further, several studies have highlighted the importance of dopamine in modulating processes in the PFC, such as multiple types of synaptic plasticity, balance of neuronal excitation and inhibition, updating and supporting representation in working memory, learning in operant conditioning protocols,
+and helping value encoding \cite{sheynikhovichLongtermMemorySynaptic2023, didomenicoDopaminergicModulationPrefrontal2023, lohaniDopamineModulationPrefrontal2019, dardenneRolePrefrontalCortex2012,
+roeschDopamineNeuronsEncode2007}.
+
+

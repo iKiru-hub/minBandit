@@ -65,56 +65,6 @@ Michael~J. Frank and Eric~D. Claus.
 \newblock Anatomy of a decision: {{Striato-orbitofrontal}} interactions in reinforcement learning, decision making, and reversal.
 \newblock {\em Psychological Review}, 113(2):300--326, April 2006.
 
-\bibitem{puigDopamineModulationLearning2014}
-M.~Victoria Puig, Jonas Rose, Robert Schmidt, and Nadja Freund.
-\newblock Dopamine modulation of learning and memory in the prefrontal cortex: Insights from studies in primates, rodents, and birds.
-\newblock {\em Frontiers in Neural Circuits}, 8, August 2014.
-
-\bibitem{duszkiewiczNoveltyDopaminergicModulation2019}
-Adrian~J. Duszkiewicz, Colin~G. McNamara, Tomonori Takeuchi, and Lisa Genzel.
-\newblock Novelty and {{Dopaminergic Modulation}} of {{Memory Persistence}}: {{A Tale}} of {{Two Systems}}.
-\newblock {\em Trends in Neurosciences}, 42(2):102--114, February 2019.
-
-\bibitem{gotoPrefrontalCorticalSynaptic2007}
-Yukiori Goto and Satoru Otani.
-\newblock Prefrontal {{Cortical Synaptic Plasticity}}: {{The Roles}} of {{Dopamine}} and {{Implication}} for {{Schizophrenia}}.
-\newblock In Kuei-Yuan Tseng and Marco Atzori, editors, {\em Monoaminergic {{Modulation}} of {{Cortical Excitability}}}, pages 165--174. Springer US, Boston, MA, 2007.
-
-\bibitem{coolsChemistryAdaptiveMind2019}
-Roshan Cools.
-\newblock Chemistry of the {{Adaptive Mind}}: {{Lessons}} from {{Dopamine}}.
-\newblock {\em Neuron}, 104(1):113--131, October 2019.
-
-\bibitem{reynoldsDopaminedependentPlasticityCorticostriatal2002}
-John~N.J Reynolds and Jeffery~R Wickens.
-\newblock Dopamine-dependent plasticity of corticostriatal synapses.
-\newblock {\em Neural Networks}, 15(4-6):507--521, June 2002.
-
-\bibitem{toblerAdaptiveCodingReward2005}
-Philippe~N. Tobler, Christopher~D. Fiorillo, and Wolfram Schultz.
-\newblock Adaptive {{Coding}} of {{Reward Value}} by {{Dopamine Neurons}}.
-\newblock {\em Science}, 307(5715):1642--1645, March 2005.
-
-\bibitem{schultzNeuralSubstratePrediction1997}
-Wolfram Schultz, Peter Dayan, and P.~Read Montague.
-\newblock A {{Neural Substrate}} of {{Prediction}} and {{Reward}}.
-\newblock {\em Science}, 275(5306):1593--1599, March 1997.
-
-\bibitem{didomenicoDopaminergicModulationPrefrontal2023}
-Danila Di~Domenico and Lisa Mapelli.
-\newblock Dopaminergic {{Modulation}} of {{Prefrontal Cortex Inhibition}}.
-\newblock {\em Biomedicines}, 11(5):1276, May 2023.
-
-\bibitem{lohaniDopamineModulationPrefrontal2019}
-Sweyta Lohani, Adria~K. Martig, Karl Deisseroth, Ilana~B. Witten, and Bita Moghaddam.
-\newblock Dopamine {{Modulation}} of {{Prefrontal Cortex Activity Is Manifold}} and {{Operates}} at {{Multiple Temporal}} and {{Spatial Scales}}.
-\newblock {\em Cell Reports}, 27(1):99--114.e6, April 2019.
-
-\bibitem{roeschDopamineNeuronsEncode2007}
-Matthew~R. Roesch, Donna~J. Calu, and Geoffrey Schoenbaum.
-\newblock Dopamine neurons encode the better option in rats deciding between differently delayed or sized rewards.
-\newblock {\em Nature Neuroscience}, 10(12):1615--1624, December 2007.
-
 \bibitem{suttonReinforcementLearningProblem1998}
 Richard~S. Sutton and Andrew~G. Barto.
 \newblock The {{Reinforcement Learning Problem}}.
@@ -270,10 +220,60 @@ Sam Carroll, Kre{\v s}imir Josi{\'c}, and Zachary~P. Kilpatrick.
 Jose~M. {Esnaola-Acebes}, Alex Roxin, and Klaus Wimmer.
 \newblock Bump attractor dynamics underlying stimulus integration in perceptual estimation tasks, March 2021.
 
+\bibitem{schultzNeuralSubstratePrediction1997}
+Wolfram Schultz, Peter Dayan, and P.~Read Montague.
+\newblock A {{Neural Substrate}} of {{Prediction}} and {{Reward}}.
+\newblock {\em Science}, 275(5306):1593--1599, March 1997.
+
+\bibitem{toblerAdaptiveCodingReward2005}
+Philippe~N. Tobler, Christopher~D. Fiorillo, and Wolfram Schultz.
+\newblock Adaptive {{Coding}} of {{Reward Value}} by {{Dopamine Neurons}}.
+\newblock {\em Science}, 307(5715):1642--1645, March 2005.
+
+\bibitem{reynoldsDopaminedependentPlasticityCorticostriatal2002}
+John~N.J Reynolds and Jeffery~R Wickens.
+\newblock Dopamine-dependent plasticity of corticostriatal synapses.
+\newblock {\em Neural Networks}, 15(4-6):507--521, June 2002.
+
 \bibitem{madadiaslDopaminergicModulationSynaptic2019}
 Mojtaba Madadi~Asl, Abdol-Hossein Vahabie, and Alireza Valizadeh.
 \newblock Dopaminergic {{Modulation}} of {{Synaptic Plasticity}}, {{Its Role}} in {{Neuropsychiatric Disorders}}, and {{Its Computational Modeling}}.
 \newblock {\em Basic and Clinical Neuroscience}, 10(1):1--12, 2019.
+
+\bibitem{lukChoiceCodingFrontal2013}
+Chung-Hay Luk and Jonathan~D. Wallis.
+\newblock Choice {{Coding}} in {{Frontal Cortex}} during {{Stimulus-Guided}} or {{Action-Guided Decision-Making}}.
+\newblock {\em Journal of Neuroscience}, 33(5):1864--1871, January 2013.
+
+\bibitem{kennerleyDecisionMakingReward2011a}
+Steven~W. Kennerley and Mark~E. Walton.
+\newblock Decision {{Making}} and {{Reward}} in {{Frontal Cortex}}.
+\newblock {\em Behavioral Neuroscience}, 125(3):297--317, June 2011.
+
+\bibitem{funahashiPrefrontalContributionDecisionMaking2017}
+Shintaro Funahashi.
+\newblock Prefrontal {{Contribution}} to {{Decision-Making}} under {{Free-Choice Conditions}}.
+\newblock {\em Frontiers in Neuroscience}, 11, July 2017.
+
+\bibitem{marcosDeterminingMonkeyFree2016}
+Encarni Marcos and Aldo Genovesio.
+\newblock Determining {{Monkey Free Choice Long}} before the {{Choice Is Made}}: {{The Principal Role}} of {{Prefrontal Neurons Involved}} in {{Both Decision}} and {{Motor Processes}}.
+\newblock {\em Frontiers in Neural Circuits}, 10, September 2016.
+
+\bibitem{balewskiValueDynamicsAffect2023}
+Zuzanna~Z. Balewski, Thomas~W. Elston, Eric~B. Knudsen, and Joni~D. Wallis.
+\newblock Value dynamics affect choice preparation during decision-making.
+\newblock {\em Nature neuroscience}, 26(9):1575--1583, September 2023.
+
+\bibitem{backmanEffectsWorkingMemoryTraining2011}
+Lars B{\"a}ckman, Lars Nyberg, Anna Soveri, Jarkko Johansson, Micael Andersson, Erika Dahlin, Anna~S. Neely, Jere Virta, Matti Laine, and Juha~O. Rinne.
+\newblock Effects of {{Working-Memory Training}} on {{Striatal Dopamine Release}}.
+\newblock {\em Science}, 333(6043):718--718, August 2011.
+
+\bibitem{enelStableDynamicRepresentations2020}
+Pierre Enel, Joni~D Wallis, and Erin~L Rich.
+\newblock Stable and dynamic representations of value in the prefrontal cortex.
+\newblock {\em eLife}, 9:e54313, July 2020.
 
 \bibitem{steyversBayesianAnalysisHuman2009a}
 Mark Steyvers, Michael~D. Lee, and Eric-Jan Wagenmakers.
@@ -289,5 +289,10 @@ Eric Schulz, Nicholas~T. Franklin, and Samuel~J. Gershman.
 Shunan Zhang and Angela~J Yu.
 \newblock Forgetful {{Bayes}} and myopic planning: {{Human}} learning and decision-making in a bandit setting.
 \newblock In {\em Advances in {{Neural Information Processing Systems}}}, volume~26. Curran Associates, Inc., 2013.
+
+\bibitem{coolsChemistryAdaptiveMind2019}
+Roshan Cools.
+\newblock Chemistry of the {{Adaptive Mind}}: {{Lessons}} from {{Dopamine}}.
+\newblock {\em Neuron}, 104(1):113--131, October 2019.
 
 \end{thebibliography}

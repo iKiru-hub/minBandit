@@ -113,6 +113,8 @@ INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/booktab
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/booktabs/booktabs.sty
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/tools/array.sty
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/tools/array.sty
+INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/tools/longtable.sty
+INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/tools/longtable.sty
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT ./main.aux
@@ -127,6 +129,8 @@ INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/epstopd
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/caption/ltcaption.sty
+INPUT /opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/tex/latex/caption/ltcaption.sty
 INPUT ./main.out
 INPUT ./main.out
 INPUT main.out
@@ -200,6 +204,16 @@ INPUT ./results.tex
 INPUT ./results.tex
 INPUT ./results.tex
 INPUT results.tex
+INPUT ./figures/performance_plot.png
+INPUT ./figures/performance_plot.png
+INPUT ./figures/performance_plot.png
+INPUT ./figures/performance_plot.png
+INPUT ./figures/performance_plot.png
+INPUT ./figures/performance_analysis_KABv0.png
+INPUT ./figures/performance_analysis_KABv0.png
+INPUT ./figures/performance_analysis_KABv0.png
+INPUT ./figures/performance_analysis_KABv0.png
+INPUT ./figures/performance_analysis_KABv0.png
 INPUT ./discussion.tex
 INPUT ./discussion.tex
 INPUT ./discussion.tex

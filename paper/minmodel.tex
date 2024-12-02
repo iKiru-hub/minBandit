@@ -41,7 +41,7 @@ the contribution from \textit{V} is null. After a fixed amount of time $\sim 5 \
 \end{equation*}
 
 \noindent The selection rule is simple: if the value representation $\textbf{v}$ is in agreement with the memory trace $\textbf{u}$, then the option with the highest value is selected. Otherwise, a random option is chosen. This rule is a way to express the exploration-exploitation trade-off, and it
-is dependent on the current policy $\tilde{\textbf{W}}^{MV}$. \\ Below \ref{alg:decision}, is reported the pseudo-code for algorithm behind the selection process.
+is dependent on the current policy $\tilde{\textbf{W}}^{MV}$. \\ Below \ref{alg:decision1}, is reported the pseudo-code for algorithm behind the selection process.
 
 \hfill \break
 % --- ALGORITHM
@@ -70,7 +70,7 @@ $k_{v} \gets \text{argmax}_{k}\{\textbf{v}\}$\;
     $k \gets \text{random}(K)$ \Comment*[r]{Exploration}
 }
 \Return $k$
-\end{algorithm}\label{alg:decision}
+\end{algorithm}\label{alg:decision1}
 
 \[\textit{maybe place this directly in the results?}\]
 \noindent In figure \ref{fig:sel1} it is shown the history of selections over three trials. The initial rounds features higher variability. In particular, it can noted how the policy adopted by the model encounters period of exploration and successive settling over an explotative strategy, which can be reverted in case of a change in the environment's reward distribution.
@@ -98,6 +98,9 @@ different parameters.
 
 \subsection{Bio-inspired features}
 
-Our model does related to brain, maybe.
+The model is inspired by the functioning of the prefrontal cortex (PFC) and its importance in decision-making processes. In particular, despite their marked simplicity, the two population $M, V$ of the model can be related to the orbito-frontal cortex (OFC) and anterior cingulate cortex (ACC), respectively.
+More specifically, the OFC is known to be involved in the representation of the state different options and update their value with respect to rewarding outcomes and their history \cite{lukChoiceCodingFrontal2013, kennerleyDecisionMakingReward2011a}. The ACC has been associated to action values, and the dynamic interplay with OFC is observed to elicit
+transient pre-stimulus activation, which biases the decision towards the most valuable option \cite{funahashiPrefrontalContributionDecisionMaking2017, marcosDeterminingMonkeyFree2016, balewskiValueDynamicsAffect2023}. In the model, the first layer represents the available options, while the learned
+connections with the second layer encode their values based on the recent reward history. Another similarity with this particular pre-frontal circuit is the realization of a choice as a sample of the network state after a period of autonomous neural activity, where the depth of the closest
+neural attractor depends on the strength and reliability of the highest option value \cite{backmanEffectsWorkingMemoryTraining2011, enelStableDynamicRepresentations2020}.
 
-\newpage
