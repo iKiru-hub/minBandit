@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1733180310.98409 "main.aux" "main.bbl" "main" 1733187163.26968 0
+["bibtex main"] 1733223609.13851 "main.aux" "main.bbl" "main" 1733223612.24775 0
   "./mkb_bibliography.bib" 1733164910.50802 167226 321f6108db5dfd12218c123740c56039 ""
   "/opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/bibtex/bst/base/unsrt.bst" 1710106625 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "main.aux" 1733187163.04033 15118 6e92c45316aa6e5d0747e9c4c1f0013f "pdflatex"
+  "main.aux" 1733223612.00183 15660 2203e373e01400e64293e6b787e09da8 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1733187160.22905 "main.tex" "main.pdf" "main" 1733187163.26984 0
+["pdflatex"] 1733223609.24311 "main.tex" "main.pdf" "main" 1733223612.24793 0
   "/opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/map/fontname/texfonts.map" 1710106625 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/map/pdftex/updmap/pdftex.map" 1710106625 5472554 f7861620179a71a79d4bd86251f559d0 ""
   "/opt/homebrew/Cellar/texlive/20240312_2/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1710106625 1004 54797486969f23fa377b128694d548df ""
@@ -119,6 +119,7 @@
   "appendix.tex" 1733177013.99015 5264 07aa65c48cc178c7a2addb2f095c5edb ""
   "discussion.tex" 1733174338.14638 1632 bb6f973d0097d4bc359e35cade779f7a ""
   "figures/entropy_performance_plot.pdf" 1733187112.82292 189052 b44a844ca8fb3d7030ed474fb687574b ""
+  "figures/evolution_plot.png" 1733223459.16793 33761 c4385dc208395cfb76081013d6ecc242 ""
   "figures/gaussian_sigmoid.png" 1732497383.12439 80804 ca22e5f9bf89e7f64159edfd6e04de00 ""
   "figures/minb_architecture.png" 1732573533.61671 96622 89f59e3412edce7e739469306a88c960 ""
   "figures/performance_plot.png" 1733075034.69203 796064 b6171f281046875ab916a78587d627f0 ""
@@ -126,14 +127,14 @@
   "figures/selections_1.png" 1724203912.88984 30364 4b20caebfa68196e307af3aacc6188b7 ""
   "figures/selections_entropy_KABv0.png" 1733152799.02076 467790 be31f8f559fedcc57e19b01cc9eee7ec ""
   "introduction.tex" 1733171713.37345 8569 d4c9f60c8501a882f315757be5bfc9a6 ""
-  "main.aux" 1733187163.04033 15118 6e92c45316aa6e5d0747e9c4c1f0013f "pdflatex"
-  "main.bbl" 1733180311.1108 12373 982306501c423edef2e24cd7d625cd19 "bibtex main"
-  "main.out" 1733187163.04537 2906 f610a498c2900b6275256560e58c4a3a "pdflatex"
+  "main.aux" 1733223612.00183 15660 2203e373e01400e64293e6b787e09da8 "pdflatex"
+  "main.bbl" 1733223609.24094 12373 982306501c423edef2e24cd7d625cd19 "bibtex main"
+  "main.out" 1733223612.0059 2906 f610a498c2900b6275256560e58c4a3a "pdflatex"
   "main.tex" 1733172601.17829 987 4b27b54ed25a266d704f60d72295f1e0 ""
-  "main.toc" 1733187163.04609 1721 f5d629fc9ece86202d67b51f8a813fe3 "pdflatex"
+  "main.toc" 1733223612.00687 1721 4e3ee74a61d5c6d8901540263888a915 "pdflatex"
   "methods.tex" 1733180255.39359 2935 84dc6e026e461105106ef7f706fbda6c ""
   "minmodel.tex" 1733175368.30956 8347 11306b85841b9328fbafeda8c0d68f8e ""
-  "results.tex" 1733180306.49123 8799 c0d93743601dffa3a1173fd6fbbfb3b2 ""
+  "results.tex" 1733223605.93123 9138 dbc97c2f59165b5dd34c72e9fa9fb9d4 ""
   (generated)
   "main.aux"
   "main.log"

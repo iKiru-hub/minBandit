@@ -204,6 +204,11 @@ INPUT ./results.tex
 INPUT ./results.tex
 INPUT ./results.tex
 INPUT results.tex
+INPUT ./figures/evolution_plot.png
+INPUT ./figures/evolution_plot.png
+INPUT ./figures/evolution_plot.png
+INPUT ./figures/evolution_plot.png
+INPUT ./figures/evolution_plot.png
 INPUT ./figures/performance_plot.png
 INPUT ./figures/performance_plot.png
 INPUT ./figures/performance_plot.png
