@@ -19,8 +19,41 @@ logger = setup_logger(__name__)
 
 """ Env """
 
+# define the environment
+def make_env(K: int,
+             env_type: str,
+             probabilities_set: list,
+             tau: int,
+             normalize=True):
 
-def calc_fitness(stats: dict) -> float:
+    if env_type == "driftv0":
+        env = envs.KABdriftv0(K=K,
+                              probabilities_set=probabilities_set,
+                              verbose=False,
+                              tau=tau)
+    elif env_type == "driftv1":
+        env = envs.KABdriftv1(K=K,
+                              verbose=False,
+                              tau=tau,
+                              normalize=normalize,
+                              fixed_p=0.9)
+    elif env_type == "sinv0":
+        frequencies = np.linspace(0.02, 0.4, K)
+        phases = np.random.uniform(0, 2*np.pi, K)
+        env = envs.KABsinv0(K=K,
+                            frequencies=frequencies,
+                            phases=phases,
+                            normalize=normalize,
+                            verbose=False)
+    else:
+        env = envs.KABv0(K=K,
+                         probabilities_set=probabilities_set,
+                         verbose=False)
+
+    return env
+
+
+def calc_fitness2(stats: dict) -> float:
 
     """
     Calculate the fitness value.
@@ -42,7 +75,27 @@ def calc_fitness(stats: dict) -> float:
     return (fitness,)
 
 
-class Env:
+def calc_fitness(stats: dict) -> float:
+
+    """
+    Calculate the fitness value.
+
+    Parameters
+    ----------
+    stats : dict
+        The statistics of the agent.
+
+    Returns
+    -------
+    fitness : float
+        The fitness value.
+    """
+
+
+    return (fitness,)
+
+
+class Env2:
 
     """
     The game class for a k-arm bandit task.
@@ -197,6 +250,133 @@ class Env:
         return (fitness / (len(Ks) + 3),)
 
 
+class Env:
+
+    """
+    The game class for a k-arm bandit task.
+    """
+
+    def __init__(self, protocol: dict,
+                 verbose: bool,
+                 env_type: str="simple"):
+
+        """
+        The game class.
+
+        Parameters
+        ----------
+        game : envs.Environment
+            The environment.
+        protocol : dict
+            The protocol for a trial.
+        probabilities_set : list
+            The set of probabilities for each round.
+        verbose : bool
+            Whether to print information.
+        env_type: str
+            type of kbandit environment, options are
+            `simple` or `smooth`.
+            Default `simple`.
+        """
+
+        #
+        self.fitness_size = 1
+        self.protocol = protocol
+        self.verbose = verbose
+        self.env_type = env_type
+
+        self.K = protocol["K"]
+        self.tau = protocol["tau"]
+        self.nb_trials = protocol["nb_trials"]
+        self.nb_rounds = protocol["nb_rounds"]
+        self.nb_reps = protocol["nb_reps"]
+
+    def __repr__(self):
+
+        return f"Env({self.nb_reps}:{self.nb_trials}:{self.nb_rounds}, K={self.K}, env_type={self.env_type})"
+
+    def _make_env(self, env_type: str, nb_trials: int, K: int=None) -> object:
+
+        """
+        Make the environment.
+
+        Parameters
+        ----------
+        env_type : str
+            The type of environment.
+        nb_trials : int
+            The number of trials.
+        K : int
+            The number of bandits.
+
+        Returns
+        -------
+        env : object
+            The environment object.
+        """
+
+        if K is None:
+            K = self.K
+
+        normalize = False
+        fixed_p = 0.7
+
+        probabilities_set = make_probability_set(K=K,
+                                        nb_trials=self.nb_trials,
+                                                 fixed_p=0.9,
+                                                 normalize=normalize)
+
+        return make_env(K=K,
+                       probabilities_set=probabilities_set,
+                       env_type=env_type,
+                       tau=self.tau,
+                       normalize=False)
+
+    def run(self, agent: object) -> float:
+
+        """
+        Evaluate the agent on the k-arm bandit task.
+
+        Parameters
+        ----------
+        agent : object
+            The agent object.
+
+        Returns
+        -------
+        fitness : float
+            The fitness value.
+        """
+
+        # variant: multiple K
+        Ks = [10, 200]
+
+        fitness = 0.
+        for env_type in ("v0", "driftv0", "sin0"):
+
+            # config-overwriting settings <<<< ! >>>>
+            nb_trials = 2 if env_type == "v0" else self.nb_trials
+            nb_rounds = 500 if env_type == "v0 else self.nb_rounds
+
+            for K in Ks:
+                env = self._make_env(env_type=env_type,
+                                     nb_trials=nb_trials,
+                                     K=K)
+                params = agent.get_genome()
+                params['K'] = K
+                model = mm.Model(**params)
+                stats = envs.trial_multiple_model(models=[model],
+                                               environment=env,
+                                               nb_trials=nb_trials,
+                                               nb_rounds=nb_rounds,
+                                               nb_reps=self.nb_reps)
+
+                fitness += stats["scores"][0].mean(axis=1).mean(axis=0)
+
+        return (fitness / (len(Ks) + 3),)
+
+
+
 """
 GENOME SETUP
 ------------
@@ -295,7 +475,7 @@ if __name__ == "__main__" :
     me.FORCE_POOL = True
 
     # trial settings
-    env_type = "smooth2" #"smooth"  # "simple" or "smooth"
+    env_type = "v0" #"smooth"  # "simple" or "smooth"
     K = config_model["bandits"]["K"]
     nb_trials = config_model["trial"]["nb_trials"]
     nb_rounds = config_model["trial"]["nb_rounds"]

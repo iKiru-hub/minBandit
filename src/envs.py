@@ -669,7 +669,6 @@ def trial_multiple_models(models: list, environment: KAB,
         "scores": scores,
         "score_list": score_list,
         # "mean_scores": mean_score_list,
-        # "entropy_list": entropy_list,
         "names": names
     }
 

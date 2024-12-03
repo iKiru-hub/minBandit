@@ -8,11 +8,12 @@
 \contentsline {subsection}{\numberline {2.4}Bio-inspired features}{8}{subsection.2.4}%
 \contentsline {section}{\numberline {3}Results}{8}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Game variants}{9}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Performance comparison}{10}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Decision-making dynamics}{10}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Entropy analysis}{10}{subsubsection.3.3.1}%
-\contentsline {subsubsection}{\numberline {3.3.2}Weight update dynamics}{12}{subsubsection.3.3.2}%
-\contentsline {subsubsection}{\numberline {3.3.3}Robustness}{13}{subsubsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.2}Evolution search}{10}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Performance comparison}{10}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Decision-making dynamics}{11}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Entropy analysis}{11}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}Weight update dynamics}{12}{subsubsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.3}Robustness}{13}{subsubsection.3.4.3}%
 \contentsline {section}{\numberline {4}Discussion}{14}{section.4}%
 \contentsline {section}{\numberline {5}Appendix}{20}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Activation function}{20}{subsection.5.1}%
