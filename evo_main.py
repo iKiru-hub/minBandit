@@ -75,25 +75,6 @@ def calc_fitness2(stats: dict) -> float:
     return (fitness,)
 
 
-def calc_fitness(stats: dict) -> float:
-
-    """
-    Calculate the fitness value.
-
-    Parameters
-    ----------
-    stats : dict
-        The statistics of the agent.
-
-    Returns
-    -------
-    fitness : float
-        The fitness value.
-    """
-
-
-    return (fitness,)
-
 
 class Env2:
 
@@ -323,7 +304,7 @@ class Env:
 
         probabilities_set = make_probability_set(K=K,
                                         nb_trials=self.nb_trials,
-                                                 fixed_p=0.9,
+                                          fixed_p=0.9,
                                                  normalize=normalize)
 
         return make_env(K=K,
@@ -356,7 +337,7 @@ class Env:
 
             # config-overwriting settings <<<< ! >>>>
             nb_trials = 2 if env_type == "v0" else self.nb_trials
-            nb_rounds = 500 if env_type == "v0 else self.nb_rounds
+            nb_rounds = 500 if env_type == "v0" else self.nb_rounds
 
             for K in Ks:
                 env = self._make_env(env_type=env_type,
@@ -365,13 +346,13 @@ class Env:
                 params = agent.get_genome()
                 params['K'] = K
                 model = mm.Model(**params)
-                stats = envs.trial_multiple_model(models=[model],
+                stats = envs.trial_multiple_models(models=[model],
                                                environment=env,
                                                nb_trials=nb_trials,
                                                nb_rounds=nb_rounds,
                                                nb_reps=self.nb_reps)
 
-                fitness += stats["scores"][0].mean(axis=1).mean(axis=0)
+                fitness += stats["score_list"][0].mean(axis=1).mean(axis=0)
 
         return (fitness / (len(Ks) + 3),)
 
@@ -471,8 +452,8 @@ if __name__ == "__main__" :
     """ Game initialization """
 
     model = me.Model
-    me.USE_TQDM = True
-    me.FORCE_POOL = True
+    me.USE_TQDM = False
+    me.FORCE_POOL = False
 
     # trial settings
     env_type = "v0" #"smooth"  # "simple" or "smooth"
@@ -500,7 +481,7 @@ if __name__ == "__main__" :
     NPOP = config_evo["evolution"]["NPOP"]
     NGEN = config_evo["evolution"]["NGEN"]
     NUM_CORES = config_evo["evolution"]["NUM_CORES"]  # out of 8
-    path = r"src/cache/"
+    path = r"src/_evo_cache/"
 
     # Ignore runtime warnings
     import warnings
