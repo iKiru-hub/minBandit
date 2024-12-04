@@ -60,35 +60,26 @@ class Env:
     """
 
     def __init__(self, protocol: dict,
-                 verbose: bool,
-                 env_type: str="simple"):
+                 verbose: bool):
 
         """
         The game class.
 
         Parameters
         ----------
-        game : envs.Environment
-            The environment.
         protocol : dict
             The protocol for a trial.
-        probabilities_set : list
-            The set of probabilities for each round.
         verbose : bool
             Whether to print information.
-        env_type: str
-            type of kbandit environment, options are
-            `simple` or `smooth`.
-            Default `simple`.
         """
 
         #
         self.fitness_size = 1
         self.protocol = protocol
         self.verbose = verbose
-        self.env_type = env_type
+        self.env_list = protocol["env_list"]
 
-        self.K = protocol["K"]
+        self.K_list = protocol["K_list"]
         self.tau = protocol["tau"]
         self.nb_trials = protocol["nb_trials"]
         self.nb_rounds = protocol["nb_rounds"]
@@ -96,9 +87,9 @@ class Env:
 
     def __repr__(self):
 
-        return f"Env({self.nb_reps}:{self.nb_trials}:{self.nb_rounds}, K={self.K}, env_type={self.env_type})"
+        return f"Env({self.nb_reps}:{self.nb_trials}:{self.nb_rounds})"
 
-    def _make_env(self, env_type: str, nb_trials: int, K: int=None) -> object:
+    def _make_env(self, env_type: str, nb_trials: int, K: int) -> object:
 
         """
         Make the environment.
@@ -118,16 +109,12 @@ class Env:
             The environment object.
         """
 
-        if K is None:
-            K = self.K
-
         normalize = False
-        fixed_p = 0.7
 
         probabilities_set = make_probability_set(K=K,
                                         nb_trials=self.nb_trials,
-                                          fixed_p=0.9,
-                                                 normalize=normalize)
+                                        fixed_p=0.9,
+                                        normalize=normalize)
 
         return make_env(K=K,
                        probabilities_set=probabilities_set,
@@ -151,32 +138,28 @@ class Env:
             The fitness value.
         """
 
-        # variant: multiple K
-        Ks = [10, 200]
-
         fitness = 0.
-        for env_type in ("v0", "driftv0", "sin0"):
+        for env_type in self.env_list:
 
             # config-overwriting settings <<<< ! >>>>
-            nb_trials = 2 if env_type == "v0" else self.nb_trials
             nb_rounds = 500 if env_type == "v0" else self.nb_rounds
 
-            for K in Ks:
+            for K in self.K_list:
                 env = self._make_env(env_type=env_type,
-                                     nb_trials=nb_trials,
+                                     nb_trials=self.nb_trials,
                                      K=K)
                 params = agent.get_genome()
                 params['K'] = K
                 model = mm.Model(**params)
                 stats = envs.trial_multiple_models(models=[model],
                                                environment=env,
-                                               nb_trials=nb_trials,
+                                               nb_trials=self.nb_trials,
                                                nb_rounds=nb_rounds,
                                                nb_reps=self.nb_reps)
 
-                fitness += stats["score_list"][0].mean(axis=1).mean(axis=0)
+                fitness += stats["scores"].item()
 
-        return (fitness / (len(Ks) + 3),)
+        return (fitness / (len(self.K_list) + len(self.env_list)),)
 
 
 """
@@ -277,22 +260,20 @@ if __name__ == "__main__" :
     me.FORCE_POOL = False
 
     # trial settings
-    env_type = "v0" #"smooth"  # "simple" or "smooth"
-    K = config_model["bandits"]["K"]
     nb_trials = config_model["trial"]["nb_trials"]
     nb_rounds = config_model["trial"]["nb_rounds"]
     protocol = {
         "nb_reps": config_model["trial"]["nb_reps"],
         "nb_trials": nb_trials,
         "nb_rounds": nb_rounds,
-        "K": K,
+        "K_list": [10, 100],
+        "env_list": ["v0", "driftv0"],
         "tau": config_model["bandits"]["tau"],
     }
 
     # environment & game
     env = Env(protocol=protocol,
-              verbose=verbose,
-              env_type=env_type)
+              verbose=verbose)
 
 
     """ Evolution initialization """
