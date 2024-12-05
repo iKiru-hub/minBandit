@@ -27,7 +27,9 @@ normalized as $\mathbf{p}_{t} = \mathbf{p}_{t}(\sum_{k} \mathbf{p}_{t,i})^{-1}$ 
 
 % Evolution: fitness evolution
 \subsection{Evolution search}
-\textit{todo}
+The optimization of the parameters has been performed using the Covariance Matrix Adaptation evolutionary strategy algorithm (CMA-es).
+The search has been run with a population of $64$ individuals (unique set of genomes corresponding to a sample in parameter space) for $100$ generations. The fitness function has been defined as the average reward obtained by an individual over 3 independent iterations.
+The results are summarized in figure \ref{fig:evolution}.
 
 \begin{figure}[h]
     \centering
