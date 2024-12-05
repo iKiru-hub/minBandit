@@ -1,9 +1,5 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import scienceplots
-import seaborn as sns
 from multiprocessing import Pool, cpu_count
-from scipy.ndimage import convolve1d
 import os, json
 from tqdm import tqdm
 import time
