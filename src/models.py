@@ -49,7 +49,8 @@ class Model(MBsolver):
                  threshold: float=0.,
                  value_function: str="gaussian",
                  lr_function: str="none",
-                 track_weights: bool=False):
+                 track_weights: bool=False,
+                 weights_history: bool=False):
 
         super().__init__(K)
 
@@ -98,7 +99,9 @@ class Model(MBsolver):
         # record
         self.choices = []
         self.dw_record = []
+        self.w_record = []
         self.track_weights = track_weights
+        self.weights_history = weights_history
 
     def __str__(self):
         return "`Model`"
@@ -337,6 +340,9 @@ class Model(MBsolver):
         if self.track_weights:
             self.dw_record.append(dw.item())
 
+        if self.weights_history:
+            self.w_record.append(self._W.flatten().copy())
+
     def get_values(self) -> np.ndarray:
 
         """
@@ -359,6 +365,14 @@ class Model(MBsolver):
         """
 
         return np.array(self.dw_record)
+
+    def get_weights_record(self) -> np.ndarray:
+
+        """
+        Get the record of the weights
+        """
+
+        return np.array(self.w_record)
 
     def reset(self, complete: bool=False):
 

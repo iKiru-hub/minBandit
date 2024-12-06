@@ -211,6 +211,11 @@ Pierre Enel, Joni~D Wallis, and Erin~L Rich.
 \newblock Stable and dynamic representations of value in the prefrontal cortex.
 \newblock {\em eLife}, 9:e54313, July 2020.
 
+\bibitem{igelCovarianceMatrixAdaptation2007}
+Christian Igel, Nikolaus Hansen, and Stefan Roth.
+\newblock Covariance {{Matrix Adaptation}} for {{Multi-objective Optimization}}.
+\newblock {\em Evolutionary Computation}, 15(1):1--28, March 2007.
+
 \bibitem{steyversBayesianAnalysisHuman2009a}
 Mark Steyvers, Michael~D. Lee, and Eric-Jan Wagenmakers.
 \newblock A {{Bayesian}} analysis of human decision-making on bandit problems.

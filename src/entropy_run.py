@@ -230,12 +230,12 @@ if __name__ == "__main__":
 
     for i, res in enumerate(results):
         if i == 0:
-            data["prob_entropy"] += res[0]
-        data["model_reward"] += res[1]
-        data["model_reward_std"] += res[2]
-        data["model_entropy"] += res[3]
-        data["model_entropy_std"] += res[4]
-        data["upper_list"] += res[5]
+            data["prob_entropy"] += [res[0]]
+        data["model_reward"] += [res[1]]
+        data["model_reward_std"] += [res[2]]
+        data["model_entropy"] += [res[3]]
+        data["model_entropy_std"] += [res[4]]
+        data["upper_list"] += [res[5]]
 
     """ save results """
 
@@ -246,4 +246,3 @@ if __name__ == "__main__":
 
     logger(f"saved to {name}")
 
-    plt.show()

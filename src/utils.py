@@ -638,7 +638,7 @@ def render_func():
                          mu=1, sigma=1, r=0.5)
  
 
-    fig, ax = plt.subplots(figsize=(3, 5))
+    fig, ax = plt.subplots(figsize=(7, 3))
     fig.suptitle("Gaussian Sigmoid function",
                  fontsize=19)
     ax.plot(x, y)
@@ -647,8 +647,8 @@ def render_func():
     ax.grid()
     plt.show()
 
-    fig.savefig("../paper/figures/gaussian_sigmoid.png",
-                dpi=300, bbox_inches="tight")
+    # fig.savefig("../paper/figures/gaussian_sigmoid.png",
+    #             dpi=500, bbox_inches="tight")
     print("saved")
 
 

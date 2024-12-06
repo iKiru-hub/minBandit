@@ -29,36 +29,29 @@ This problem has been extensively studied in the context of reinforcement learni
 \subsection{Related work}
 % overview of the main solutions proposed in the literature from a computational perspective.
 There exists various flavours of this problem, with the simplest having a stationary reward distributione.
-
 Over the years, several algorithms have been proposed, alongside with their theoretical guarantees.
 In this regard, Thompson sampling is a popular algorithm that has been shown to achieve near-optimal regret bounds in the stochastic setting \cite{agrawalAnalysisThompsonSampling2012, kaufmannThompsonSamplingAsymptotically2012}.
 This approach relies on Bayesian optimization, where the goal is to maintain a posterior distribution over the reward probabilities of the actions, and selecting actions accordingly.
 Another popular algorithm is Upper Confidence Bound (UCB), which has been shown to achieve near-optimal regret bounds in the adversarial setting \cite{auerFinitetimeAnalysisMultiarmed2002}.
-The approach is based on the idea of maintaining an upper limit on the reward probabilities of the actions, and selecting actions accordingly. 
-Other successful algorithms are $\epsilon$-greedy and VDBE \cite{gittinsBanditProcessesDynamic1979, , banMultifacetContextualBandits2021, tokicAdaptiveEGreedyExploration2010, tokicValueDifferenceBasedExploration2011}.\\
-
+The approach is based on the idea of maintaining an upper limit on the reward probabilities of the actions, and selecting actions accordingly.
+Other successful algorithms are $\epsilon$-greedy and VDBE \cite{gittinsBanditProcessesDynamic1979, banMultifacetContextualBandits2021, tokicAdaptiveEGreedyExploration2010, tokicValueDifferenceBasedExploration2011}.
 % outline of lack of bio-realism and what we currently know about how the brain might solve this task.
-Despite the success of these algorithms in solving the k-armed bandit problem, they lack biological plausibility.
-The brain has evolved a complex network of interconnected regions that work together to solve this task.
+Nonetheless, despite their success, they have little resemblance to neural dynamics and functional similarity to brain regions.
 
 % aim of the work
-In this work, we focuses on stochastic bandit problems, more challenging variant of the original task endowed with \textit{concept drift}, where the reward distribution changes over time \cite{garivierUpperConfidenceBoundPolicies2008, besbesStochasticMultiArmedBanditProblem2014, cavenaghiNonStationaryMultiArmed2021}.
-
+In this work, we propose a biologically plausible algorithm using rate neurons applied to stochastic bandit problems, more challenging variant of the original task endowed with \textit{concept drift}, where the reward distribution changes over time \cite{garivierUpperConfidenceBoundPolicies2008, besbesStochasticMultiArmedBanditProblem2014, cavenaghiNonStationaryMultiArmed2021}.
 % brief overview of the model
-We propose a biologically plausible model using rate neurons, obtaining good performance even with settings with a large amount of arms.
-Its architecture is composed of two connected neuronal layers, both with as many neurons as the arm of the bandit task.
+The architecture of our model consists of two connected neuronal layers, both with as many neurons as the arms of the bandit task.
 The first layer is inspired by the functionality of the OFC, and its scope is to maintain an active representation of the arms weighted by the input from the second layer.
 The second, modeled after the ACC, is meant to represent the value of the arms, and its input connections are updated through a learning rule dependant on the reward history and current connectivity pattern.
 
-
 % main motivations
-Our models features two important aspects of brain decision making. Firstly, the decision making process itself is implemented as a dynamical interaction between neural populations, similarly to bump attractor networks for perceptual computations \cite{carrollEncodingCertaintyBump2014, esnaola-acebesBumpAttractorDynamics2021}.
+Our model features two important aspects of brain during decision making. Firstly, the option selection process itself is implemented as a dynamical interaction between neural populations, similarly to bump attractor networks for perceptual cognition \cite{carrollEncodingCertaintyBump2014, esnaola-acebesBumpAttractorDynamics2021}.
 The final choice of the arm is achieved by the agreement or disagreement between the two populations, and it depends on their underlying value representation \cite{bariDynamicDecisionMaking2021, houstonMatchingBehavioursRewards2021}.
-Secondly, plasticity is based on a non-associative learning rule, endowed with a non-linear kernel for the weight update quantity.
-Importantly, the specific values of a parametrization of the kernel has been optimized through an evolutionary algorithm.
-Behind this design choice there is our hypothesis that the scale of neural synaptic updates should vary according to its magnitudeand with a non-linear shape of its scaling function represent a better choice that a constant one.
-This considerations align with the idea that the brain is able to adapt its learning rate according to the context, and that the learning rate is not constant across neurons within the same network.
-This approach has been already adopted in several computational architectures, for instance using spiking neurons \cite{inglisModulationDopamineAdaptive2021} and synaptic metaplasticity \cite{iigayaAdaptiveLearningDecisionmaking2016}.
+Secondly, plasticity is based on a non-associative learning rule, endowed with a non-linear kernel for the weight update term.
+% The specific values of a parametrization of the kernel has been optimized through an evolutionary algorithm.
+Behind this design choice there is our hypothesis that the scale of the synaptic delta update should vary non-linearly according to its magnitude.
+This consideration is aligned with the idea that the learning rate is a parameter specific to each neuron, and that it can change according to some policy or inductive bias.
+This approach has been already adopted in several computational architectures, for instance in spiking neural networks \cite{inglisModulationDopamineAdaptive2021} and for synaptic metaplasticity \cite{iigayaAdaptiveLearningDecisionmaking2016}.
 Lastly, there is experimental evidence that this function of adaptive plasticity might be covered by dopamine \cite{toblerAdaptiveCodingReward2005}.
-Indeed, it is role in prediction error and reward signaling is well established \cite{schultzNeuralSubstratePrediction1997}, together with its importance in modulating processes in the PFC \cite{didomenicoDopaminergicModulationPrefrontal2023, lohaniDopamineModulationPrefrontal2019,
-dardenneRolePrefrontalCortex2012}. 
+Indeed, its involvement in calculating prediction errors and reward signaling is well established \cite{schultzNeuralSubstratePrediction1997}, as well with its modulation of various aspects of the PFC \cite{didomenicoDopaminergicModulationPrefrontal2023, lohaniDopamineModulationPrefrontal2019, dardenneRolePrefrontalCortex2012}. 
