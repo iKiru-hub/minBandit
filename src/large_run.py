@@ -18,8 +18,8 @@ main_PATH = r"/Users/daniekru/Research/lab/minBandit/src/data"
 pigeon_PATH = r"/Users/daniekru/Research/lab/pigeon/data"
 main_PATH_cl = r"/home/daniekru/lab/minBandit/src/data"
 pigeon_PATH_cl = r"/home/daniekru/lab/pigeon/data"
-# PATH = pigeon_PATH_cl
-PATH = main_PATH
+PATH = pigeon_PATH_cl
+#PATH = main_PATH
 
 # from a sweep
 # model_params = {
@@ -242,7 +242,7 @@ def parallel_run_over_ks(NUM_CORES: int, chunksize: int):
 
     # make folder with timestamp
     dirname = time.strftime("run_%d%m%Y_%H%M%S")
-    path = f"{PATH_cl}/{dirname}"
+    path = f"{PATH}/{dirname}"
     os.makedirs(path, exist_ok=True)
 
 
