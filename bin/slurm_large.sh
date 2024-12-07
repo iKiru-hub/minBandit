@@ -17,6 +17,9 @@ echo "%in $(pwd)"
 
 srun python3 large_run.py --cores 64 --reps 64
 
+cd ~/lab/pigeon
+echo "%in $(pwd)"
+
 git add .
 git commit -m "large run from ex3"
 git push

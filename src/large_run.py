@@ -50,7 +50,7 @@ model_params = load_model(idx=6) # 1
 """ settings """
 
 
-NB_ROUNDS = 10
+NB_ROUNDS = 2000
 NB_TRIALS = 2
 # NB_REPS = 2
 
