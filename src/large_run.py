@@ -44,7 +44,7 @@ model_params = {
 "lr_function": "gaussian"}
 
 # from evolution
-model_params = load_model(idx=4) # 1
+model_params = load_model(idx=6) # 1
 
 
 """ settings """
@@ -52,9 +52,11 @@ model_params = load_model(idx=4) # 1
 
 NB_ROUNDS = 2000
 NB_TRIALS = 2
-NB_REPS = 2
+# NB_REPS = 2
 
-entropy_calc = True
+entropy_calc = False
+K_list = [5, 10]
+# K_list = [5, 10, 50, 100, 200, 1000]
 
 
 """ some local functions """
@@ -152,7 +154,7 @@ def run_for_one_k(K: int):
                              environment=env,
                              nb_trials=NB_TRIALS,
                              nb_rounds=NB_ROUNDS,
-                             nb_reps=NB_REPS,
+                             nb_reps=1,
                              bin_size=20,
                              entropy_calc=entropy_calc,
                              verbose=False)
@@ -206,10 +208,75 @@ def run_for_all_k(K_list: list):
         save(path=path, data=data, name=name)
 
 
+def process_over_ks(empty):
+
+    """Encapsulate the per-beta computation."""
+
+    results = {}
+    for K in tqdm(K_list):
+        results_k = run_for_one_k(K=K)
+        results[K] = {env_name: values["scores"] \
+            for env_name, values in results_k.items()}
+
+    return results
+
+def parallel_run_over_ks(NUM_CORES: int, chunksize: int):
+
+    """Run the computation over all Ks in parallel."""
+
+    logger(f"running for Ks={K_list}...")
+
+    with Pool(processes=NUM_CORES) as pool:
+        results = list(
+            tqdm(pool.imap(process_over_ks, [None] * NUM_REPS,
+                           chunksize=chunksize),
+                 total=NUM_REPS)
+        )
+
+    logger("run finished")
+
+    # make folder with timestamp
+    dirname = time.strftime("run_%d%m%Y_%H%M%S")
+    path = f"{PATH}/{dirname}"
+    os.makedirs(path, exist_ok=True)
+
+    # save
+    results = {i: res for i, res in enumerate(results)}
+    # for result in results:
+    data = sanitize_for_json(results)
+    name = f"large_run_results_over_ks"
+    save(path=path, data=data, name=name)
+
+
+
+
 if __name__ == "__main__":
 
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Run entropy experiment')
+    parser.add_argument('--reps', type=int, default=4,
+                        help='Number of repetitions')
+    parser.add_argument('--cores', type=int, default=4,
+                        help='Number of cores')
+
+    args = parser.parse_args()
 
     """ settings """
+
+    NUM_CORES = args.cores
+    NUM_REPS = args.reps
+
+    """ parallel computation """
+
+    chunksize = NUM_REPS // NUM_CORES  # Divide the workload evenly
+
+    logger(f"{NUM_CORES=}")
+    logger(f"{NUM_REPS=}")
+    logger(f"{chunksize=}")
+    logger(f"running...")
+
+    parallel_run_over_ks(NUM_CORES=NUM_CORES, chunksize=chunksize)
 
     # K_list = [5, 10, 50, 100, 200, 500, 1000, 1500]
     # K_list = [5, 10, 100]
@@ -222,9 +289,9 @@ if __name__ == "__main__":
     # print("\n\n\n")
 
     # K_list = [200, 1000, 2000]
-    K_list = [50]
+    # K_list = [50]
 
-    run_for_all_k(K_list=K_list)
-    logger(f"{K_list} done.")
+    # run_for_all_k(K_list=K_list)
+    # logger(f"{K_list} done.")
 
 
