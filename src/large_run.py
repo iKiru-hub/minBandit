@@ -55,8 +55,10 @@ NB_TRIALS = 2
 # NB_REPS = 2
 
 entropy_calc = False
-# K_list = [5, 10]
-K_list = [5, 10, 50, 100, 200, 1000]
+K_list = [5, 10]
+K_list = [50, 100]
+K_list = [200, 1000]
+# K_list = [5, 10, 50, 100, 200, 1000]
 
 
 """ some local functions """
@@ -215,10 +217,13 @@ def process_over_ks(empty):
     results = {}
     for K in tqdm(K_list):
         results_k = run_for_one_k(K=K)
-        results[K] = {env_name: values["scores"] \
+        results[K] = {env_name: {"score": values["scores"],
+                                 "max": np.mean(values["upper_bound_list"]),
+                                 "chance": np.mean(values["chance_list"])} \
             for env_name, values in results_k.items()}
 
     return results
+
 
 def parallel_run_over_ks(NUM_CORES: int, chunksize: int):
 
@@ -237,8 +242,9 @@ def parallel_run_over_ks(NUM_CORES: int, chunksize: int):
 
     # make folder with timestamp
     dirname = time.strftime("run_%d%m%Y_%H%M%S")
-    path = f"{PATH}/{dirname}"
+    path = f"{PATH_cl}/{dirname}"
     os.makedirs(path, exist_ok=True)
+
 
     # save
     results = {i: res for i, res in enumerate(results)}
