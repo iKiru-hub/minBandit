@@ -22,26 +22,26 @@ pigeon_PATH_cl = r"/home/daniekru/lab/pigeon/data"
 PATH = main_PATH
 
 # from a sweep
-model_params = {
-"alpha":0.4450195718988339,
-"alpha_lr":-2.958221399416473,
-"beta":7.391580370882872,
-"beta_lr":0.9526338245859882,
-"gain":47.86910588825282,
-"lr":0.2773642826170334,
-"mu":2.6713225228884383,
-"mu_lr":-0.6084876849578418,
-"r":0.5161936304182647,
-"r_lr":0.044296190220556864,
-"sigma":0.5450255193262612,
-"sigma_lr":4.463404997440599,
-"threshold":0.3842711049268154,
-"w_max":2.461390370832377,
-"K": None,
-"dur_pre": 2000,
-"dur_post": 2000,
-"value_function": "gaussian",
-"lr_function": "gaussian"}
+# model_params = {
+# "alpha":0.4450195718988339,
+# "alpha_lr":-2.958221399416473,
+# "beta":7.391580370882872,
+# "beta_lr":0.9526338245859882,
+# "gain":47.86910588825282,
+# "lr":0.2773642826170334,
+# "mu":2.6713225228884383,
+# "mu_lr":-0.6084876849578418,
+# "r":0.5161936304182647,
+# "r_lr":0.044296190220556864,
+# "sigma":0.5450255193262612,
+# "sigma_lr":4.463404997440599,
+# "threshold":0.3842711049268154,
+# "w_max":2.461390370832377,
+# "K": None,
+# "dur_pre": 2000,
+# "dur_post": 2000,
+# "value_function": "gaussian",
+# "lr_function": "gaussian"}
 
 # from evolution
 model_params = load_model(idx=6) # 1
@@ -55,8 +55,8 @@ NB_TRIALS = 2
 # NB_REPS = 2
 
 entropy_calc = False
-K_list = [5, 10]
-# K_list = [5, 10, 50, 100, 200, 1000]
+# K_list = [5, 10]
+K_list = [5, 10, 50, 100, 200, 1000]
 
 
 """ some local functions """
