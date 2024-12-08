@@ -163,8 +163,8 @@ def calculation_over_betas(empty):
 
         """ run """
         results = run_(probabilities_set, model_params)
-        model_reward += [results["score_list"].tolist()]
-        model_reward_std += [results["score_list"].tolist()] 
+        model_reward += [results["score_list"][:, 0, :].tolist()]
+        model_reward_std += [results["score_list"][:, 0, :].tolist()] 
         upper_list += [results["upper_bound_list"].tolist()]
         for i in range(settings1.trials):
             model_entropy += [results["entropy_list"][:, :, i, :].mean(axis=2).mean(axis=1).tolist()]
