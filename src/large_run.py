@@ -18,8 +18,8 @@ main_PATH = r"/Users/daniekru/Research/lab/minBandit/src/data"
 pigeon_PATH = r"/Users/daniekru/Research/lab/pigeon/data"
 main_PATH_cl = r"/home/daniekru/lab/minBandit/src/data"
 pigeon_PATH_cl = r"/home/daniekru/lab/pigeon/data"
-#PATH = pigeon_PATH_cl
-PATH = main_PATH
+PATH = pigeon_PATH_cl
+# PATH = main_PATH
 
 # from a sweep
 # model_params = {
@@ -44,13 +44,13 @@ PATH = main_PATH
 # "lr_function": "gaussian"}
 
 # from evolution
-model_params = load_model(idx=6) # 1
+model_params = load_model(idx=2) # 1
 
 
 """ settings """
 
 
-NB_ROUNDS = 20
+NB_ROUNDS = 2000
 NB_TRIALS = 2
 # NB_REPS = 2
 
@@ -82,12 +82,12 @@ def make_env(K: int,
                               normalize=normalize,
                               fixed_p=0.9)
     elif env_type == "sinv0":
-        frequencies = np.linspace(0.1, 0.4, K)
+        frequencies = np.linspace(0.01, 0.4, K)
         phases = np.random.uniform(0, 2*np.pi, K)
         env = envs.KABsinv0(K=K,
                             frequencies=frequencies,
                             phases=phases,
-                            normalize=normalize,
+                            normalize=True,
                             verbose=False)
     elif env_type == "sinv1":
         frequencies = np.linspace(0.1, 0.4, K)

@@ -15,7 +15,7 @@ echo "%ecl1 activated"
 cd ~/lab/minBandit/src
 echo "%in $(pwd)"
 
-srun python3 large_run.py --cores 64 --reps 64
+srun python3 large_run.py --cores 64 --reps 128
 
 cd ~/lab/pigeon
 echo "%in $(pwd)"
