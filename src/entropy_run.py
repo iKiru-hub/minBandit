@@ -62,7 +62,6 @@ def run_(probabilities_set, params):
     verbose = settings1.verbose
     env_type = settings1.env
 
-
     # define the environment
     if env_type == "driftv0":
         env = envs.KABdriftv0(K=K,
@@ -91,7 +90,6 @@ def run_(probabilities_set, params):
 
     # define models
     params["K"] = K
-
 
     model_list = [
         mm.ThompsonSampling(K=K),
@@ -156,7 +154,7 @@ def calculation_over_betas(empty):
 
         #logger(f"running {beta=:.4f}")
 
-        # define proababilities 
+        # define proababilities
         p = softmax(probability, beta)
         probabilities_set = np.array([p.tolist()])
         prob_entropy += [utils.calc_entropy(p)]
@@ -164,7 +162,7 @@ def calculation_over_betas(empty):
         """ run """
         results = run_(probabilities_set, model_params)
         model_reward += [results["score_list"][:, 0, :].tolist()]
-        model_reward_std += [results["score_list"][:, 0, :].tolist()] 
+        model_reward_std += [results["score_list"][:, 0, :].tolist()]
         upper_list += [results["upper_bound_list"].tolist()]
         for i in range(settings1.trials):
             model_entropy += [results["entropy_list"][:, :, i, :].mean(axis=2).mean(axis=1).tolist()]

@@ -63,13 +63,14 @@ In particular, the UCB algorithm showed the highest variability, marked by a per
 leading to high entropy levels.
 $\epsilon-$Greedy also showed a good performance quite reliably, with the greedy strategy assuring low entropy for most of the rounds.
 Similar behaviour was observed for our model, which was able to reach the optimal policy and maintain it over time, with entropy peaking mostly at the beggining of the trials and being, on average, the lowest among all models.
-Indeed, the model dynamics make it particularly suited for the task of non-stationary K-armed bandits, as it is able to quickly adapt to new reward distributions and firmly maintain a greedy policy.
+Indeed, the dynamics of our model make it particularly suited for the task of non-stationary K-armed bandits, as it is able to quickly adapt to new reward distributions and firmly maintain a greedy policy.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/performance_analysis_KABv0.png}
-    \caption{\textsc{Decision-making dynamics for different models} \textit{Each plot display the results from one model obtained from average over 20 iterations. The raster plots (black dots) show arm selected at each round. The red lines represent the entropy level, calculated from the distribution of selections over the preceding 20
-    rounds; the line is then smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy over all trials are also reported.}}
+    \caption{\textsc{Decision-making dynamics for different models} \textit{Each plot display the results from one model.
+The raster plots (black dots) show the arms selected at each round.
+The red lines represent the entropy level, calculated from the distribution of selections over the preceeding 20 rounds, smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy over all trials are also reported.}}
     \label{fig:entropy_fig1}
 \end{figure}
 
@@ -101,22 +102,26 @@ This behaviour is consistent with the low entropy levels observed in the previou
 
 % robustness
 \noindent Then, we sought to investigate the robustness of the model.
-This was accomplished by evaluating the performances in a stationary setting with $K=10$ and increasing levels of entropy in the reward distribution, again measured in nats.
-For more details about the calculation see the appendix \ref{sec:appendix_entropy}.
-In the top plot of figure \ref{fig:entropy_distr}, it is plotted the average reward obtained by each model against the reward distribution entropy.
-The results report how all models, with a mild expection of Epsilon-Greedy, are capable of robust performance even in the presence of clear uncertainty.
-Nonetheless, our model show to suffer more than the others from the presence of high entropy. This fact is highlighed by the dashed lines representing the average regret, which overall keep getting wider despite a diminishing of the upper bound.
-Another perspective to this analysis is given by the bottom plot, which shows the average entropy of the selections for the first and second trial of the simulation, showed respectively with solid and dashed lines.
+This was accomplished by evaluating the performances in a stationary setting with $K=50$ and increasing levels of entropy in the reward distribution, averaged over 128 simulations and again measured in nats.
+For more details about the distribution see the appendix \ref{sec:appendix_entropy}.
+In the top row of figure \ref{fig:entropy_distr}, it is plotted the average reward obtained by each model against the reward distribution entropy in two trials.
+The results report how all models are capable of robust performance even in the presence of high uncertainty.
+In the second trial however, there is a ubiquitous and clear decline in rounds of elevented entropy. This can be explained by the greated challenge of changing arms when numerous options appear similarly good.
+In general, our model shows to perform as good as UCB, and better than Epsilon-Greedy and Thompson Sampling.
+Further, the latter seemed to suffer the most, probably due to its conservative approach and difficulty of disengaging from an previously rewarding arm, as underlined also in figure \ref{fig:entropy_fig1}.
+In the same figure, the regret (dashed lines) tells the same story, and remarks the robust performance over uncertainty.
 
-
-
+Another perspective to this analysis is given by the plots in the bottom row, which show the average entropy of the selections.
+Overall, there is the not suprising trend of increasing selection entropy with the entropy of the reward distribution. However, striking is the exception of Epsilon-Greedy, which maintain a constant level throughout.
+On the one hand, UCB shows a marked and gradual increase, while Thompson Sampling follows with some delay.
+On the other hand, our model display a more abrupt change, at around 2.43 nats, going from a state of very low to very high entropy.
 
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/entropy_performance_plot.png}
-    \caption{\textsc{Entropy analysis for the model in a stationary setting} - Top plot: \textit{a solid line represent the average reward obtained by a model for for increasing levels of entropy in the reward distribution; a dashed line instead report the regret with respect to the upper bound
-    (black solid line) } Bottom plot: \textit{average entropy of the selections for the first and second trial of the simulation, each with 2000 rounds each (as calculated in \ref{sec:entropy}).}}
+    \caption{\textsc{Entropy analysis for the model in a stationary setting} - Top row: \textit{trial 1 and 2 have been divided into two columns. A solid line represents the average reward obtained by a model for increasing levels of entropy in the reward distribution; a dashed line instead reports the regret with respect to the upper bound (black solid line) }
+- Bottom row: \textit{average entropy of the selections for the first and second trial of the simulation, each with 2000 rounds each (as calculated in \ref{sec:entropy}).}}
 \end{figure}\label{fig:entropy_distr}
 
 
