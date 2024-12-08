@@ -57,6 +57,7 @@ The results are summarized in figure \ref{fig:evolution}.
 \subsubsection{Entropy analysis}\label{sec:entropy}
 \noindent For a better understanding of the qualitative differences between the models, we analyzed the progress over the rounds by tracking the selected arms, within the simplest case of zero-steps distribution shift.
 Additionally, in order to quantify the variability of the decision policy at a given time and highlight the particularity of each decision-making behaviour, we calculated the entropy of the probability distribution $p$ of chosen arms, calculated over a window of 20 rounds, as $H=-\sum^{K}_{i} p_{i}\log(p_{i})$.
+The unit of entropy is in nats, and it ranges from $0$ (no uncertainty) to $\log_{e}(K)$ (maximum uncertainty).
 In figure \ref{fig:entropy_fig1}, it is plotted for each model the raster plot of selected arms together with its level of entropy. As expected, the shape of the entropy curve expresses the inherent strategy adopted by each model.
 In particular, the UCB algorithm showed the highest variability, marked by a persistent exploratory behaviour throughout the trials despited converging to reward options. Thompson Sampling was able to reach most solutions, although with difficulty in adapting to new reward distributions
 leading to high entropy levels.
@@ -100,16 +101,21 @@ This behaviour is consistent with the low entropy levels observed in the previou
 
 % robustness
 \noindent Then, we sought to investigate the robustness of the model.
-This was accomplished by evaluating the performances in a stationary setting with $K=10$ and increasing levels of entropy in the reward distribution. For the details of calculation of the reward distribution see the appendix \ref{sec:appendix_entropy}.
-In the top plot of figure \ref{fig:entropy_distr}, it is plotted the average reward obtained by each model for increasing levels of entropy in the reward distribution.
-% The results show how there is a steady 
+This was accomplished by evaluating the performances in a stationary setting with $K=10$ and increasing levels of entropy in the reward distribution, again measured in nats.
+For more details about the calculation see the appendix \ref{sec:appendix_entropy}.
+In the top plot of figure \ref{fig:entropy_distr}, it is plotted the average reward obtained by each model against the reward distribution entropy.
+The results report how all models, with a mild expection of Epsilon-Greedy, are capable of robust performance even in the presence of clear uncertainty.
+Nonetheless, our model show to suffer more than the others from the presence of high entropy. Another perspective is given by the dashed lines representing the average regret, which overall keep getting wider despite a diminishing of the upper bound.
+This fact is also confirmed by the bottom plot, which shows the average entropy of the selections for the first and second trial of the simulation.
 
 
-\begin{figure}[ht]
+
+
+\begin{figure}[H]
     \centering
-    \includegraphics[width=1.\textwidth]{figures/entropy_performance_plot.pdf}
-    \caption{\textsc{Entropy analysis for the model in a stationary setting} Top plot: \textit{average reward obtained by each model for for increasing levels of entropy in the reward distribution.} Bottom plot: \textit{average entropy of the selections (as calculated in \ref{sec:entropy}) for
-    increasing levels of entropy in the reward distribution.}}
+    \includegraphics[width=0.9\textwidth]{figures/entropy_performance_plot.png}
+    \caption{\textsc{Entropy analysis for the model in a stationary setting} - Top plot: \textit{a solid line represent the average reward obtained by a model for for increasing levels of entropy in the reward distribution; a dashed line instead report the regret with respect to the upper bound
+    (black solid line) } Bottom plot: \textit{average entropy of the selections for the first and second trial of the simulation, each with 2000 rounds each (as calculated in \ref{sec:entropy}).}}
 \end{figure}\label{fig:entropy_distr}
 
 

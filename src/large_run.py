@@ -18,8 +18,8 @@ main_PATH = r"/Users/daniekru/Research/lab/minBandit/src/data"
 pigeon_PATH = r"/Users/daniekru/Research/lab/pigeon/data"
 main_PATH_cl = r"/home/daniekru/lab/minBandit/src/data"
 pigeon_PATH_cl = r"/home/daniekru/lab/pigeon/data"
-PATH = pigeon_PATH_cl
-#PATH = main_PATH
+#PATH = pigeon_PATH_cl
+PATH = main_PATH
 
 # from a sweep
 # model_params = {
@@ -50,7 +50,7 @@ model_params = load_model(idx=6) # 1
 """ settings """
 
 
-NB_ROUNDS = 2000
+NB_ROUNDS = 20
 NB_TRIALS = 2
 # NB_REPS = 2
 
@@ -250,7 +250,7 @@ def parallel_run_over_ks(NUM_CORES: int, chunksize: int):
     results = {i: res for i, res in enumerate(results)}
     # for result in results:
     data = sanitize_for_json(results)
-    name = f"large_run_results_over_ks"
+    name = "large_run_" + "".join(["%" + str(l) for l in K_list])
     save(path=path, data=data, name=name)
 
 

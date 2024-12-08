@@ -1,7 +1,7 @@
 # evolution settings
 evolution:
-    NUM_CORES: 64
-    NPOP: 64
+    NUM_CORES: 128
+    NPOP: 128
     NGEN: 100
     CXPB: 0.4
     MUTPB: 0.5

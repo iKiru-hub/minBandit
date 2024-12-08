@@ -38,12 +38,22 @@ def make_env(K: int,
                               normalize=normalize,
                               fixed_p=0.9)
     elif env_type == "sinv0":
-        frequencies = np.linspace(0.02, 0.4, K)
+        frequencies = np.linspace(0.1, 0.4, K)
         phases = np.random.uniform(0, 2*np.pi, K)
         env = envs.KABsinv0(K=K,
                             frequencies=frequencies,
                             phases=phases,
                             normalize=normalize,
+                            verbose=False)
+    elif env_type == "sinv1":
+        frequencies = np.linspace(0.1, 0.4, K)
+        phases = np.random.uniform(0, 2*np.pi, K)
+        constants = np.random.uniform(0.1, 0.7, int(K/2))
+        env = envs.KABsinv0(K=K,
+                            frequencies=frequencies,
+                            phases=phases,
+                            normalize=normalize,
+                            constants=constants,
                             verbose=False)
     else:
         env = envs.KABv0(K=K,
@@ -148,8 +158,13 @@ class Env:
                 env = self._make_env(env_type=env_type,
                                      nb_trials=self.nb_trials,
                                      K=K)
+
+                # initialize the genome
                 params = agent.get_genome()
                 params['K'] = K
+                params['r'] = np.clip(params['r'], 0., 1.)
+                params['r_lr'] = np.clip(params['r_lr'], 0., 1.)
+
                 model = mm.Model(**params)
                 stats = envs.trial_multiple_models(models=[model],
                                                environment=env,
@@ -195,13 +210,13 @@ PARAMETERS = {
     'beta': lambda: round(random.uniform(0.1, 10), 1),
     'mu': lambda: round(random.uniform(-5, 5), 1),
     'sigma': lambda: round(random.uniform(0.01, 10), 1),
-    'r': lambda: round(random.uniform(.0, 1.0), 2),
+    'r': lambda: round(random.uniform(-0.5, 1.5), 2),
 
     'alpha_lr': lambda: round(random.uniform(-5, 5), 1),
     'beta_lr': lambda: round(random.uniform(0.1, 10), 1),
     'mu_lr': lambda: round(random.uniform(-5, 5), 1),
     'sigma_lr': lambda: round(random.uniform(0.01, 10), 1),
-    'r_lr': lambda: round(random.uniform(.0, 1.0), 2),
+    'r_lr': lambda: round(random.uniform(-0.5, 1.5), 2),
 
     'w_max': lambda: round(random.uniform(3, 4), 1),
     'lr': lambda: round(random.uniform(0.001, 0.1), 3),
@@ -266,8 +281,8 @@ if __name__ == "__main__" :
         "nb_reps": config_model["trial"]["nb_reps"],
         "nb_trials": nb_trials,
         "nb_rounds": nb_rounds,
-        "K_list": [10, 100],
-        "env_list": ["v0", "driftv0"],
+        "K_list": [10, 150],
+        "env_list": ["v0", "sinv1"],
         "tau": config_model["bandits"]["tau"],
     }
 

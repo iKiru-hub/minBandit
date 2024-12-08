@@ -31,7 +31,7 @@ class Settings:
 
 
 settings1 = Settings()
-settings1.rounds = 2000
+settings1.rounds = 200
 settings1.trials = 2
 settings1.reps = 1
 settings1.verbose = False
@@ -40,7 +40,7 @@ settings1.load = True
 settings1.env = "v0"
 settings1.K = 10
 
-NUM_BETAS = 10
+NUM_BETAS = 3
 
 probability = np.around(np.random.uniform(0.05, 0.5, settings1.K),
                         2)
@@ -163,8 +163,8 @@ def calculation_over_betas(empty):
 
         """ run """
         results = run_(probabilities_set, model_params)
-        model_reward += [results["scores"].tolist()]
-        model_reward_std += [results["score_list"].mean(axis=2).std(axis=1)] 
+        model_reward += [results["score_list"].tolist()]
+        model_reward_std += [results["score_list"].tolist()] 
         upper_list += [results["upper_bound_list"].tolist()]
         for i in range(settings1.trials):
             model_entropy += [results["entropy_list"][:, :, i, :].mean(axis=2).mean(axis=1).tolist()]
@@ -174,8 +174,6 @@ def calculation_over_betas(empty):
     model_entropy_std = np.stack(model_entropy_std).tolist()
 
     return prob_entropy, model_reward, model_reward_std, model_entropy, model_entropy_std, upper_list
-
-
 
 
 if __name__ == "__main__":
