@@ -67,7 +67,7 @@ Indeed, the model dynamics make it particularly suited for the task of non-stati
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{figures/selections_entropy_KABv0.png}
+    \includegraphics[width=1.0\textwidth]{figures/performance_analysis_KABv0.png}
     \caption{\textsc{Decision-making dynamics for different models} \textit{Each plot display the results from one model obtained from average over 20 iterations. The raster plots (black dots) show arm selected at each round. The red lines represent the entropy level, calculated from the distribution of selections over the preceding 20
     rounds; the line is then smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy over all trials are also reported.}}
     \label{fig:entropy_fig1}
@@ -105,8 +105,9 @@ This was accomplished by evaluating the performances in a stationary setting wit
 For more details about the calculation see the appendix \ref{sec:appendix_entropy}.
 In the top plot of figure \ref{fig:entropy_distr}, it is plotted the average reward obtained by each model against the reward distribution entropy.
 The results report how all models, with a mild expection of Epsilon-Greedy, are capable of robust performance even in the presence of clear uncertainty.
-Nonetheless, our model show to suffer more than the others from the presence of high entropy. Another perspective is given by the dashed lines representing the average regret, which overall keep getting wider despite a diminishing of the upper bound.
-This fact is also confirmed by the bottom plot, which shows the average entropy of the selections for the first and second trial of the simulation.
+Nonetheless, our model show to suffer more than the others from the presence of high entropy. This fact is highlighed by the dashed lines representing the average regret, which overall keep getting wider despite a diminishing of the upper bound.
+Another perspective to this analysis is given by the bottom plot, which shows the average entropy of the selections for the first and second trial of the simulation, showed respectively with solid and dashed lines.
+
 
 
 

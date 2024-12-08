@@ -214,11 +214,11 @@ INPUT ./figures/performance_plot.png
 INPUT ./figures/performance_plot.png
 INPUT ./figures/performance_plot.png
 INPUT ./figures/performance_plot.png
-INPUT ./figures/selections_entropy_KABv0.png
-INPUT ./figures/selections_entropy_KABv0.png
-INPUT ./figures/selections_entropy_KABv0.png
-INPUT ./figures/selections_entropy_KABv0.png
-INPUT ./figures/selections_entropy_KABv0.png
+INPUT ./figures/performance_analysis_KABv0.png
+INPUT ./figures/performance_analysis_KABv0.png
+INPUT ./figures/performance_analysis_KABv0.png
+INPUT ./figures/performance_analysis_KABv0.png
+INPUT ./figures/performance_analysis_KABv0.png
 INPUT ./figures/reward_update_plot.pdf
 INPUT ./figures/reward_update_plot.pdf
 INPUT ./figures/reward_update_plot.pdf
