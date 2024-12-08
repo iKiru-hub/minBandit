@@ -31,16 +31,16 @@ class Settings:
 
 
 settings1 = Settings()
-settings1.rounds = 200
+settings1.rounds = 2000
 settings1.trials = 2
 settings1.reps = 1
 settings1.verbose = False
 settings1.idx = 6
 settings1.load = True
 settings1.env = "v0"
-settings1.K = 10
+settings1.K = 50
 
-NUM_BETAS = 3
+NUM_BETAS = 12
 
 probability = np.around(np.random.uniform(0.05, 0.5, settings1.K),
                         2)
