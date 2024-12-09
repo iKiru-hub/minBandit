@@ -28,24 +28,37 @@ normalized as $\mathbf{p}_{t} = \mathbf{p}_{t}(\sum_{k} \mathbf{p}_{t,i})^{-1}$ 
 % Evolution: fitness evolution
 \subsection{Evolution search}
 The optimization of the parameters has been performed using the Covariance Matrix Adaptation evolutionary strategy algorithm (CMA-es) \cite{igelCovarianceMatrixAdaptation2007}.
-The search has been run with a population of $64$ individuals (unique set of genomes corresponding to a sample in parameter space) for $100$ generations. The fitness function has been defined as the average reward obtained by an individual over 3 independent iterations.
-The results are summarized in figure \ref{fig:evolution}.
+The search has been run with a population of $128$ individuals (unique set of genomes corresponding to a sample in parameter space) for $70$ generations. The fitness function has been defined as the average reward obtained by an individual over 2 independent iterations.
+The results are summarized below in figure \ref{fig:evolution}.
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/evolution_plot.png}
-    \caption{\textsc{Evolution of the model over generations.} - \textit{The plot shows the top fitness of the population over generations, and the standard deviation centered around the mean.}}
+    \includegraphics[width=1.0\textwidth]{figures/evolution_plot.png}
+    \caption{\textsc{Evolution of the model over generations.} - Left: \textit{top fitness, mean and standard deviation of the population over generations.} - Top-Right: \textit{option value and learning rate Gaussian sigmoid functions parametrized according to the genome of the fittest individual} -
+    Bottom-Right: \textit{sigmoidal activation function for population $v$}}
     \label{fig:evolution}
 \end{figure}
 
+% comment on the evolved functions
+\noindent The evolution results show a steady improvement of the fitness over generations, before hitting a plateau corresponding to the theoretical optimal of the chosen simulations.
+Regarding the evolved functions, the option value function $\Phi_{v}$ is characterized by a steep sigmoid curve.
+However, it has the peculiarity of a convex shape in an initial interval $(0, \sim 2)$ explained by a parameter $r=0.71$, which factors in the influence of the Gaussian with $\mu=-2.7, \sigma=4.2$ and constraints the constant part of the sigmoid to $\sim 0.7$.
+This is consistent with the idea that the input of population $u$ (memory layer $U$) to population $v$ (value layer $V$) is weighted maximally for high option values (strong synapses), whereas for weaker estimates the contributions are low or close to zero, allowing for more exploration.
+
+The learning rate function $\Phi_{\eta}$ is instead characterized by a marked bell-shaped curve, given a parameter $r=0.06$. The associated Gaussian has a positive mean located at $\mu=1.$, which aligns approximately with the local valley of the weight function $\Phi_{v}$.
+This can be interpreted as a mechanism to ensure that the learning rate is high when the value options are more uncertain, and low otherwise, thus preventing overshooting and oscillations in the weight updates.
 
 % Results: scores and brief discussion
-\subsection{Performance comparison}
+\subsection{Environment variants and number of arms}
+
+The model has been tested and compared with the other algorithms: Thompson Sampling, Epsilon-Greedy, and UCB, in the four different variants of the K-armed bandit problem.
+In figure \ref{fig:perf_plot}, it is reported their results over a different number of arms, ranging from 5 to 1000.
+Overall, our model displayed a remarkable performance over all environments and arm numbers, suffering only when the latter reached 1000.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.\textwidth]{figures/performance_plot.png}
-    \caption{\textsc{Performance comparison for different values of $K$ and game variants} \textit{The model is compared with Thompson Sampling, Epsilon-Greedy, and UCB. The performance is measured as the average reward obtained by the agent over a number of trials.}}
+    \caption{\textsc{Performance comparison for different values of $K$ and game variants} - \textit{The models are evaluated on the four variants of the bandit problem, and their performance is measured as the average reward obtained over 2 trials of 2000 rounds each.}}
     \label{fig:perf_plot}
 \end{figure}
 
@@ -58,7 +71,9 @@ The results are summarized in figure \ref{fig:evolution}.
 \noindent For a better understanding of the qualitative differences between the models, we analyzed the progress over the rounds by tracking the selected arms, within the simplest case of zero-steps distribution shift.
 Additionally, in order to quantify the variability of the decision policy at a given time and highlight the particularity of each decision-making behaviour, we calculated the entropy of the probability distribution $p$ of chosen arms, calculated over a window of 20 rounds, as $H=-\sum^{K}_{i} p_{i}\log(p_{i})$.
 The unit of entropy is in nats, and it ranges from $0$ (no uncertainty) to $\log_{e}(K)$ (maximum uncertainty).
-In figure \ref{fig:entropy_fig1}, it is plotted for each model the raster plot of selected arms together with its level of entropy. As expected, the shape of the entropy curve expresses the inherent strategy adopted by each model.
+In figure \ref{fig:entropy_fig1}, it is plotted for each model the raster plot of selected arms together with its level of entropy. The reward probability distribution over the arms has $H=2.02$.
+
+As expected, the shape of the entropy curve expresses the inherent strategy adopted by each model.
 In particular, the UCB algorithm showed the highest variability, marked by a persistent exploratory behaviour throughout the trials despited converging to reward options. Thompson Sampling was able to reach most solutions, although with difficulty in adapting to new reward distributions
 leading to high entropy levels.
 $\epsilon-$Greedy also showed a good performance quite reliably, with the greedy strategy assuring low entropy for most of the rounds.
@@ -68,8 +83,7 @@ Indeed, the dynamics of our model make it particularly suited for the task of no
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/performance_analysis_KABv0.png}
-    \caption{\textsc{Decision-making dynamics for different models} \textit{Each plot display the results from one model.
-The raster plots (black dots) show the arms selected at each round.
+    \caption{\textsc{Decision-making dynamics for different models} \textit{Each plot display the results from one model. The raster plots (black dots) show the arms selected at each round.
 The red lines represent the entropy level, calculated from the distribution of selections over the preceeding 20 rounds, smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy over all trials are also reported.}}
     \label{fig:entropy_fig1}
 \end{figure}
@@ -90,7 +104,7 @@ This behaviour is consistent with the low entropy levels observed in the previou
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/reward_update_plot.pdf}
+    \includegraphics[width=1.0\textwidth]{figures/reward_update_plot.pdf}
     \caption{\textsc{Weight update developement for the model} \textit{The plot displays the weight update quantity $\Delta W_{k}^{MV}$ for each round (blue line), smoothed as a 20-steps moving average.
     It is also reported the average reward in a window of 30 rounds (golden line). The results have been obtained averaging over 20 iterations.}}
     \label{fig:rew_update}

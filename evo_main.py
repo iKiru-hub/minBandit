@@ -165,7 +165,7 @@ class Env:
                 params['r'] = np.clip(params['r'], 0., 1.)
                 params['r_lr'] = np.clip(params['r_lr'], 0., 1.)
 
-                model = mm.Model(**params)
+                model = mm.Modelv2(**params)
                 stats = envs.trial_multiple_models(models=[model],
                                                environment=env,
                                                nb_trials=self.nb_trials,
@@ -197,12 +197,13 @@ FIXED_PARAMETERS = {
     # 'mu': 0.,
     # 'sigma': 1.,
     # 'r': 0.5,
-    'value_function': "gaussian",
+    # 'value_function': "gaussian",
 }
 
-PARAMETERS = {
+PARAMETERS2 = {
     'tau_u': lambda: random.randint(1, 300),
     'tau_v': lambda: random.randint(1, 300),
+
     'gain': lambda: random.randint(1, 500) / 10,
     'threshold': lambda: round(random.uniform(0.1, 10), 2),
 
@@ -219,12 +220,41 @@ PARAMETERS = {
     'r_lr': lambda: round(random.uniform(-0.5, 1.5), 2),
 
     'w_max': lambda: round(random.uniform(3, 4), 1),
-    'lr': lambda: round(random.uniform(0.001, 0.1), 3),
+    # 'lr': lambda: round(random.uniform(0.001, 0.1), 3),
     # 'tau': lambda: round(random.uniform(1, 100), 1),
     'dur_pre': lambda: random.randint(100, 3000),
     'dur_post': lambda: random.randint(100, 3000),
-    'value_function': lambda: random.choice(["gaussian", "none"]),
-    'lr_function': lambda: random.choice(["gaussian", "none"]),
+    # 'value_function': lambda: random.choice(["gaussian", "none"]),
+    # 'lr_function': lambda: random.choice(["gaussian", "none"]),
+}
+
+PARAMETERS = {
+    'tau_u': lambda: random.randint(1, 300),
+    'tau_v': lambda: random.randint(1, 300),
+
+    'gain_v': lambda: random.randint(1, 500) / 10,
+    'offset_v': lambda: random.randint(1, 50) / 10,
+    'threshold_v': lambda: round(random.uniform(-0.5, 0.9), 2),
+
+    'gain_u': lambda: random.randint(1, 500) / 10,
+    'offset_u': lambda: random.randint(1, 50) / 10,
+    'threshold_u': lambda: round(random.uniform(-0.5, 0.9), 2),
+
+    'alpha': lambda: round(random.uniform(-5, 5), 1),
+    'beta': lambda: round(random.uniform(0.1, 10), 1),
+    'mu': lambda: round(random.uniform(-5, 5), 1),
+    'sigma': lambda: round(random.uniform(0.01, 10), 1),
+    'r': lambda: round(random.uniform(-0.5, 1.5), 2),
+
+    'alpha_lr': lambda: round(random.uniform(-5, 5), 1),
+    'beta_lr': lambda: round(random.uniform(0.1, 10), 1),
+    'mu_lr': lambda: round(random.uniform(-5, 5), 1),
+    'sigma_lr': lambda: round(random.uniform(0.01, 10), 1),
+    'r_lr': lambda: round(random.uniform(-0.5, 1.5), 2),
+
+    'w_max': lambda: round(random.uniform(2, 5), 1),
+    'dur_pre': lambda: random.randint(400, 3000),
+    'dur_post': lambda: random.randint(400, 3000),
 }
 
 
@@ -270,7 +300,7 @@ if __name__ == "__main__" :
 
     """ Game initialization """
 
-    model = me.Model
+    model = me.Modelv2
     me.USE_TQDM = False
     me.FORCE_POOL = False
 
@@ -281,7 +311,7 @@ if __name__ == "__main__" :
         "nb_reps": config_model["trial"]["nb_reps"],
         "nb_trials": nb_trials,
         "nb_rounds": nb_rounds,
-        "K_list": [10, 150],
+        "K_list": [50, 300],
         "env_list": ["v0", "sinv1"],
         "tau": config_model["bandits"]["tau"],
     }
@@ -292,14 +322,14 @@ if __name__ == "__main__" :
 
 
     """ Evolution initialization """
-    
+
 
     fitness_weights = (1.,)
     NPOP = config_evo["evolution"]["NPOP"]
     NGEN = config_evo["evolution"]["NGEN"]
     NUM_CORES = config_evo["evolution"]["NUM_CORES"]  # out of 8
     #path = r"src/_evo_cache/"
-    path = r"../../pigeon/data"
+    path = r"/home/daniekru/lab/pigeon/data"
 
     # Ignore runtime warnings
     import warnings

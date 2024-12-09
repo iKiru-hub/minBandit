@@ -2,7 +2,7 @@
 \section{Appendix}\label{sec:appendix}
 
 
-\subsection{Activation function}
+\subsection{Gaussian-sigmoid function}
 \noindent The function $\Phi_{\cdot}$ is defined by combining a generalized version of the sigmoid, namely with a gain $\beta \neq 1$ and offset $\alpha\neq 0$, and a Gaussian with mean $\mu$ and variance $\sigma$. Their contributions are weighted by as $r$ and $1-r$ ($r\in(0,1)$) respectively.
 
 \begin{equation*}
@@ -18,6 +18,52 @@ $\alpha$, and intensity $\gamma_{1}$).
     \caption{\textsc{Activation function $\Phi_{v}$} - \textit{Parameters $\beta=10$, $\alpha=1$, $\mu=1$, $\sigma=1$, and $r=0.5$.}}
     \label{fig:gau_sigm}
 \end{figure}
+
+
+\subsection{Evolution search stup}
+The optimization was carried out over several parameters concerning the model architecture and dynamics:
+\textbf{Network parameters}
+\begin{itemize}
+    \item $\tau_{u}$: time constant of population $u$ ($M$)
+    \item $\tau_{v}$: time constant of population $v$ ($V$)
+    \item $g$: gain of the sigmoidal activation function of population v
+    \item $\theta$: threshold of the sigmoidal activation function of population v
+    \item $W^{+}$: maximal weight value for the weights $\textbf{W}^{MV}$
+\end{itemize}
+
+\noindent \textbf{Option value function parameters}
+\begin{itemize}
+    \item $\beta_{v}$: steepness of the sigmoid
+    \item $\alpha_{v}$: shift of the sigmoid
+    \item $\mu_{v}$: mean of the Gaussian
+    \item $\sigma_{v}$: variance of the Gaussian
+    \item $r_{v}$: weight of the sigmoid
+\end{itemize}
+
+\noindent \textbf{Learning rate function parameters}
+\begin{itemize}
+    \item $\gamma_{\eta}$: intensity of the l
+    \item $\beta_{\eta}$: steepness of the sigmoid
+    \item $\alpha_{\eta}$: shift of the sigmoid
+    \item $\mu_{\eta}$: mean of the Gaussian
+    \item $\sigma_{\eta}$: variance of the Gaussian
+    \item $r_{\eta}$: weight of the sigmoid
+\end{itemize}
+
+\noindent Each individual has been evaluated over environment the following environments:
+
+\begin{itemize}
+    \item \textsc{MAB-0}: average reward distribution entropy $\langle H\rangle=2.05$
+    \item \textsc{KAB-$\sin$P}: average reward distribution entropy $\langle H\rangle=2.1$, given $K$ arm frequencies as an equally spaced set $\{0.1\ldots i\ldots 0.4\}$, phases drawn from an uniform $\sim \mathcal{U}(0, 2\pi)$, and half of the arms have been set to constant values drawn from
+        another uniform $\sim \mathcal{U}(0.1, 0.7)$; the final reward distribution was not normalized.
+\end{itemize}
+
+\noindent The number of arms was $K=10$ and $150$, and lasted for $2$ trials with $2000$ rounds each.
+The final fitenss was the average over $2$ iterations.
+
+\hfill \break
+The optimization has been implemented in Python using the \texttt{DEAP} library, and the algorithm used was the \texttt{CMA-es} algorithm. The optimization involved $70$ generations with a population size of $128$ individuals. The mutation rate was set to $0.5$ with a sigma of $0.8$, the cross-over rate was set to $0.4$.
+The run were carried out on a 256-core AMD EPYC 7763 with 2TB of RAM.
 
 
 \subsection{Reward distribution entropy}\label{sec:appendix_entropy}

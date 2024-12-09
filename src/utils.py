@@ -606,6 +606,15 @@ def gaussian_sigmoid(x: np.ndarray, alpha: float, beta: float,
         (1 - r) * np.exp(- ((x - mu)**2) / sigma)
 
 
+@jit(no_python=True)
+def neural_response_func(x: np.ndarray, gain: float, offset: float,
+                         threshold: float) -> np.ndarray:
+
+    z = 1 / (1 + np.exp(-gain*(x - offset)))
+    return z * (z > threshold)
+
+
+
 @jit(nopython=True)
 def sigmoid(x: np.ndarray, alpha: float=0., beta: float=1.) -> np.ndarray:
 
