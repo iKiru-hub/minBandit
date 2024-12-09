@@ -6,8 +6,12 @@ from abc import ABC, abstractmethod
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from utils import sigmoid, gaussian_sigmoid, generalized_sigmoid, neural_response_func
-from utils import plot_online_3d, plot_online_2d, plot_online_tape, plot_online_choices
+try:
+    from utils import sigmoid, gaussian_sigmoid, generalized_sigmoid, neural_response_func
+    from utils import plot_online_3d, plot_online_2d, plot_online_tape, plot_online_choices
+except ImportError or ModuleNotFoundError:
+    from src.utils import sigmoid, gaussian_sigmoid, generalized_sigmoid, neural_response_func
+    from src.utils import plot_online_3d, plot_online_2d, plot_online_tape#, plot_online
 
 
 

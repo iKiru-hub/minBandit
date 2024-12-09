@@ -172,3 +172,5 @@ Next, it has been enquired how the model selection policy evolves over time and 
 \noindent In the setting with a smooth distribution shift the difficulty of the problem is increased, especially since short-sighted greedy behaviours are easily sub-optimal. The model (always in red) is capable of reaching and maintaining a successful profile, even with many arms available.
 
 
+Other behaviours dependant on contexts are \textit{input matching}, where social cues are considered, and \textit{probability matching}, where the animal's choice behaviour is proportional to the reward probability of the options \cite{bariDynamicDecisionMaking2021, houstonMatchingBehavioursRewards2021}.
+

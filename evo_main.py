@@ -300,7 +300,7 @@ if __name__ == "__main__" :
 
     """ Game initialization """
 
-    model = me.Modelv2
+    model = me.Model
     me.USE_TQDM = False
     me.FORCE_POOL = False
 
@@ -328,7 +328,7 @@ if __name__ == "__main__" :
     NPOP = config_evo["evolution"]["NPOP"]
     NGEN = config_evo["evolution"]["NGEN"]
     NUM_CORES = config_evo["evolution"]["NUM_CORES"]  # out of 8
-    #path = r"src/_evo_cache/"
+    # path = r"src/_evo_cache/"
     path = r"/home/daniekru/lab/pigeon/data"
 
     # Ignore runtime warnings

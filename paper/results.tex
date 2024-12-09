@@ -18,16 +18,15 @@ the reward distribution $\mathbf{p}$ changes gradually over rounds, tracked as t
 $\tau_{p}\dot{\mathbf{p}}_{t}=\mathbf{q}_{i}-\mathbf{p}_{t}$. Here, $\dot{\mathbf{p}}$ is the time derivative of the distribution and $\tau_{p}$ is its time constant.
 Once distance is below a threshold $\epsilon$ as $\vert \mathbf{q}_{i} - \mathbf{p}_{t}\vert < \epsilon$, the target distribution is changed to a new one $\mathbf{q}_{i}\to\mathbf{q}_{i+1}$.
 
-\noindent \textbf{Sinusoidal distribution shift} [\textsc{KAB-$\sin$}]: the reward distribution changes over rounds, with the probability of each arm following a sine wave with a specific frequency $f_{k}$ and amplitude $1$. At any given time $t$, the distribution is $\mathbf{p}_{t}=\{\sin(2\pi f_{k}
-t)\text{  for }k=1\ldots K\}$ and it is
-normalized as $\mathbf{p}_{t} = \mathbf{p}_{t}(\sum_{k} \mathbf{p}_{t,i})^{-1}$ such that it sums to $1$.
+\noindent \textbf{Sinusoidal distribution shift} [\textsc{KAB-$\sin$}]: the reward distribution changes over rounds, with the probability of each arm following a sine wave with a specific frequency $f_{k}$, phase $\lambda_{k}$ and amplitude $1$. At any given time $t$, the distribution is $\mathbf{p}_{t}=\{\sin(2\pi f_{k}
+t+\lambda_{k})\text{  for }k=1\ldots K\}$.
 
-\noindent \textbf{Partial sinusoidal distribution shift} [\textsc{KAB-$\sin$P}]: identical to the sinusoidal distribution shift, but only a subset of the arms changes sinusoidally while the rest is kept at a constant value.
+\noindent \textbf{Partial sinusoidal distribution shift} [\textsc{KAB-$\sin$P}]: identical to the sinusoidal distribution shift, but only a subset of the arms changes sinusoidally while the rest is kept at a constant value and the distribution is not normalized.
 
 
 % Evolution: fitness evolution
 \subsection{Evolution search}
-The optimization of the parameters has been performed using the Covariance Matrix Adaptation evolutionary strategy algorithm (CMA-es) \cite{igelCovarianceMatrixAdaptation2007}.
+The optimization of the parameters has been performed using the Covariance Matrix Adaptation evolutionary strategy algorithm (CMA-ES) \cite{igelCovarianceMatrixAdaptation2007}.
 The search has been run with a population of $128$ individuals (unique set of genomes corresponding to a sample in parameter space) for $70$ generations. The fitness function has been defined as the average reward obtained by an individual over 2 independent iterations.
 The results are summarized below in figure \ref{fig:evolution}.
 
@@ -46,7 +45,10 @@ However, it has the peculiarity of a convex shape in an initial interval $(0, \s
 This is consistent with the idea that the input of population $u$ (memory layer $U$) to population $v$ (value layer $V$) is weighted maximally for high option values (strong synapses), whereas for weaker estimates the contributions are low or close to zero, allowing for more exploration.
 
 The learning rate function $\Phi_{\eta}$ is instead characterized by a marked bell-shaped curve, given a parameter $r=0.06$. The associated Gaussian has a positive mean located at $\mu=1.$, which aligns approximately with the local valley of the weight function $\Phi_{v}$.
-This can be interpreted as a mechanism to ensure that the learning rate is high when the value options are more uncertain, and low otherwise, thus preventing overshooting and oscillations in the weight updates.
+A possible interpretation is that it serves as a mechanism to ensure that the learning rate is high when the value options are more uncertain, and low otherwise, thus preventing overshooting and oscillations in the weight updates.
+This adaptive behaviour is in line with known neuronal dynamics such as homeostatic plasticity, which works towards a stabilization of synapses, for instance through synaptic scaling and proportional updates \cite{citriSynapticPlasticityMultiple2008}.
+A variable learning rate is an important feature of several plasticity rules, from the more biologically plausible like the Oja \cite{ojaOjaLearningRule2008} to deep learning optimizers like Adam \cite{kingmaAdamMethodStochastic2017}.
+
 
 % Results: scores and brief discussion
 \subsection{Environment variants and number of arms}
@@ -94,7 +96,7 @@ The red lines represent the entropy level, calculated from the distribution of s
 \noindent Next, we analyzed the weight update dynamics of the model over the rounds.
 In figure \ref{fig:rew_update}, we plotted the evolution of the weights for each arm over time, averaged over 20 simulations and smoothed over 30 rounds.
 The results show that the model is able to quickly adapt to new reward distributions. It is also able to maintain the optimal policy over time, with the weights remaining approximately stable.
-The update quantity $\Delta W_{k}^{MV}$ changes sign according to the collected reward, with its magnitude being higher at the beginning of the trials.
+The update quantity $\Delta W_{k}^{UV}$ changes sign according to the collected reward, with its magnitude being higher at the beginning of the trials.
 Initially, the sign is mostly positive (potentiation) since the weights start at zero, and after some uncertainty a consistently preferred arm emerges.
 However, when the reward distribution switches a regular series of sub-optimal choices is made, leading to zero reward.
 This causes an accumulation of weight updates with negative sign (depression), eventually bringing the value of the preferred arm to drop. In the meantime, other options are probed until another sequence of choices converges to another arm, promoted by a trail of positive weight updates.
@@ -105,7 +107,7 @@ This behaviour is consistent with the low entropy levels observed in the previou
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/reward_update_plot.pdf}
-    \caption{\textsc{Weight update developement for the model} \textit{The plot displays the weight update quantity $\Delta W_{k}^{MV}$ for each round (blue line), smoothed as a 20-steps moving average.
+    \caption{\textsc{Weight update developement for the model} \textit{The plot displays the weight update quantity $\Delta W_{k}^{UV}$ for each round (blue line), smoothed as a 20-steps moving average.
     It is also reported the average reward in a window of 30 rounds (golden line). The results have been obtained averaging over 20 iterations.}}
     \label{fig:rew_update}
 \end{figure}

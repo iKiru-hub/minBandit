@@ -3,7 +3,7 @@
 
 
 \subsection{Gaussian-sigmoid function}
-\noindent The function $\Phi_{\cdot}$ is defined by combining a generalized version of the sigmoid, namely with a gain $\beta \neq 1$ and offset $\alpha\neq 0$, and a Gaussian with mean $\mu$ and variance $\sigma$. Their contributions are weighted by as $r$ and $1-r$ ($r\in(0,1)$) respectively.
+\noindent The function $\Phi_{\cdot}$ is defined by combining a generalized version of the sigmoid, namely with a gain $\beta \neq 1$ and offset $\alpha\neq 0$, and a Gaussian with mean $\mu$ and variance $\sigma^{2}$. Their contributions are weighted by as $r$ and $1-r$ ($r\in(0,1)$) respectively.
 
 \begin{equation*}
     \Phi_v(x) = r\left(1 + \exp^{-\beta(x-\alpha)}\right)^{-1} + (1-r)\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
@@ -20,7 +20,7 @@ $\alpha$, and intensity $\gamma_{1}$).
 \end{figure}
 
 
-\subsection{Evolution search stup}
+\subsection{Evolution search}
 The optimization was carried out over several parameters concerning the model architecture and dynamics:
 \textbf{Network parameters}
 \begin{itemize}
@@ -54,7 +54,7 @@ The optimization was carried out over several parameters concerning the model ar
 
 \begin{itemize}
     \item \textsc{MAB-0}: average reward distribution entropy $\langle H\rangle=2.05$
-    \item \textsc{KAB-$\sin$P}: average reward distribution entropy $\langle H\rangle=2.1$, given $K$ arm frequencies as an equally spaced set $\{0.1\ldots i\ldots 0.4\}$, phases drawn from an uniform $\sim \mathcal{U}(0, 2\pi)$, and half of the arms have been set to constant values drawn from
+    \item \textsc{KAB-$\sin$P}: average reward distribution entropy $\langle H\rangle=2.1$, given $K$ arm frequencies $f_{k}$ as an equally spaced set $\{0.1\ldots i\ldots 0.4\}$, phases $\lambda_{k}$ drawn from an uniform $\sim \mathcal{U}(0, 2\pi)$, and half of the arms have been set to constant values drawn from
         another uniform $\sim \mathcal{U}(0.1, 0.7)$; the final reward distribution was not normalized.
 \end{itemize}
 
@@ -62,7 +62,7 @@ The optimization was carried out over several parameters concerning the model ar
 The final fitenss was the average over $2$ iterations.
 
 \hfill \break
-The optimization has been implemented in Python using the \texttt{DEAP} library, and the algorithm used was the \texttt{CMA-es} algorithm. The optimization involved $70$ generations with a population size of $128$ individuals. The mutation rate was set to $0.5$ with a sigma of $0.8$, the cross-over rate was set to $0.4$.
+The optimization has been implemented in Python using the \texttt{DEAP} library, and the algorithm used was the \texttt{CMA-ES} algorithm. The optimization involved $70$ generations with a population size of $128$ individuals. The mutation rate was set to $0.5$ with a sigma of $0.8$, the cross-over rate was set to $0.4$.
 The run were carried out on a 256-core AMD EPYC 7763 with 2TB of RAM.
 
 

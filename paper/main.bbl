@@ -30,36 +30,6 @@ Rebecca Elliott, Raymond~J. Dolan, and Chris~D. Frith.
 \newblock Dissociable {{Functions}} in the {{Medial}} and {{Lateral Orbitofrontal Cortex}}: {{Evidence}} from {{Human Neuroimaging Studies}}.
 \newblock {\em Cerebral Cortex}, 10(3):308--317, March 2000.
 
-\bibitem{baddeleyWorkingMemory1974}
-Alan~D. Baddeley and Graham Hitch.
-\newblock Working {{Memory}}.
-\newblock In {\em Psychology of {{Learning}} and {{Motivation}}}, volume~8, pages 47--89. Elsevier, 1974.
-
-\bibitem{dardenneRolePrefrontalCortex2012}
-Kimberlee D'Ardenne, Neir Eshel, Joseph Luka, Agatha Lenartowicz, Leigh~E. Nystrom, and Jonathan~D. Cohen.
-\newblock Role of prefrontal cortex and the midbrain dopamine system in working memory updating.
-\newblock {\em Proceedings of the National Academy of Sciences}, 109(49):19900--19909, December 2012.
-
-\bibitem{cohenTemporalDynamicsBrain1997}
-Jonathan~D. Cohen, William~M. Perlstein, Todd~S. Braver, Leigh~E. Nystrom, Douglas~C. Noll, John Jonides, and Edward~E. Smith.
-\newblock Temporal dynamics of brain activation during a working memory task.
-\newblock {\em Nature}, 386(6625):604--608, April 1997.
-
-\bibitem{constantinidisPersistentSpikingActivity2018}
-Christos Constantinidis, Shintaro Funahashi, Daeyeol Lee, John~D. Murray, Xue-Lian Qi, Min Wang, and Amy F.~T. Arnsten.
-\newblock Persistent {{Spiking Activity Underlies Working Memory}}.
-\newblock {\em Journal of Neuroscience}, 38(32):7020--7028, August 2018.
-
-\bibitem{zylberbergMechanismsPersistentActivity2017}
-Joel Zylberberg and Ben~W. Strowbridge.
-\newblock Mechanisms of {{Persistent Activity}} in {{Cortical Circuits}}: {{Possible Neural Substrates}} for {{Working Memory}}.
-\newblock {\em Annual Review of Neuroscience}, 40(Volume 40, 2017):603--627, July 2017.
-
-\bibitem{laraRolePrefrontalCortex2015}
-Antonio~H. Lara and Jonathan~D. Wallis.
-\newblock The {{Role}} of {{Prefrontal Cortex}} in {{Working Memory}}: {{A Mini Review}}.
-\newblock {\em Frontiers in Systems Neuroscience}, 9, December 2015.
-
 \bibitem{frankAnatomyDecisionStriatoorbitofrontal2006}
 Michael~J. Frank and Eric~D. Claus.
 \newblock Anatomy of a decision: {{Striato-orbitofrontal}} interactions in reinforcement learning, decision making, and reversal.
@@ -74,16 +44,6 @@ Richard~S. Sutton and Andrew~G. Barto.
 Yael Niv, Daphna Joel, Isaac Meilijson, and Eytan Ruppin.
 \newblock Evolution of {{Reinforcement Learning}} in {{Uncertain Environments}}: {{A Simple Explanation}} for {{Complex Foraging Behaviors}}.
 \newblock {\em International Society for Adaptive Behavior}, 2002.
-
-\bibitem{bariDynamicDecisionMaking2021}
-Bilal~A. Bari and Jeremiah~Y. Cohen.
-\newblock Dynamic decision making and value computations in medial frontal cortex.
-\newblock {\em International review of neurobiology}, 158:83--113, 2021.
-
-\bibitem{houstonMatchingBehavioursRewards2021}
-Alasdair~I. Houston, Pete~C. Trimmer, and John~M. McNamara.
-\newblock Matching {{Behaviours}} and {{Rewards}}.
-\newblock {\em Trends in Cognitive Sciences}, 25(5):403--415, May 2021.
 
 \bibitem{averbeckTheoryChoiceBandit2015}
 Bruno~B. Averbeck.
@@ -146,6 +106,16 @@ Sam Carroll, Kre{\v s}imir Josi{\'c}, and Zachary~P. Kilpatrick.
 Jose~M. {Esnaola-Acebes}, Alex Roxin, and Klaus Wimmer.
 \newblock Bump attractor dynamics underlying stimulus integration in perceptual estimation tasks, March 2021.
 
+\bibitem{bariDynamicDecisionMaking2021}
+Bilal~A. Bari and Jeremiah~Y. Cohen.
+\newblock Dynamic decision making and value computations in medial frontal cortex.
+\newblock {\em International review of neurobiology}, 158:83--113, 2021.
+
+\bibitem{houstonMatchingBehavioursRewards2021}
+Alasdair~I. Houston, Pete~C. Trimmer, and John~M. McNamara.
+\newblock Matching {{Behaviours}} and {{Rewards}}.
+\newblock {\em Trends in Cognitive Sciences}, 25(5):403--415, May 2021.
+
 \bibitem{inglisModulationDopamineAdaptive2021}
 Jeffrey~B. Inglis, Vivian~V. Valentin, and F.~Gregory Ashby.
 \newblock Modulation of {{Dopamine}} for {{Adaptive Learning}}: {{A Neurocomputational Model}}.
@@ -175,6 +145,11 @@ Danila Di~Domenico and Lisa Mapelli.
 Sweyta Lohani, Adria~K. Martig, Karl Deisseroth, Ilana~B. Witten, and Bita Moghaddam.
 \newblock Dopamine {{Modulation}} of {{Prefrontal Cortex Activity Is Manifold}} and {{Operates}} at {{Multiple Temporal}} and {{Spatial Scales}}.
 \newblock {\em Cell Reports}, 27(1):99--114.e6, April 2019.
+
+\bibitem{dardenneRolePrefrontalCortex2012}
+Kimberlee D'Ardenne, Neir Eshel, Joseph Luka, Agatha Lenartowicz, Leigh~E. Nystrom, and Jonathan~D. Cohen.
+\newblock Role of prefrontal cortex and the midbrain dopamine system in working memory updating.
+\newblock {\em Proceedings of the National Academy of Sciences}, 109(49):19900--19909, December 2012.
 
 \bibitem{lukChoiceCodingFrontal2013}
 Chung-Hay Luk and Jonathan~D. Wallis.
@@ -211,10 +186,29 @@ Pierre Enel, Joni~D Wallis, and Erin~L Rich.
 \newblock Stable and dynamic representations of value in the prefrontal cortex.
 \newblock {\em eLife}, 9:e54313, July 2020.
 
+\bibitem{parkSymmetryLearningRate2017}
+Youngjin Park, Woochul Choi, and Se-Bum Paik.
+\newblock Symmetry of learning rate in synaptic plasticity modulates formation of flexible and stable memories.
+\newblock {\em Scientific Reports}, 7(1):5671, July 2017.
+
 \bibitem{igelCovarianceMatrixAdaptation2007}
 Christian Igel, Nikolaus Hansen, and Stefan Roth.
 \newblock Covariance {{Matrix Adaptation}} for {{Multi-objective Optimization}}.
 \newblock {\em Evolutionary Computation}, 15(1):1--28, March 2007.
+
+\bibitem{citriSynapticPlasticityMultiple2008}
+Ami Citri and Robert~C. Malenka.
+\newblock Synaptic {{Plasticity}}: {{Multiple Forms}}, {{Functions}}, and {{Mechanisms}}.
+\newblock {\em Neuropsychopharmacology}, 33(1):18--41, January 2008.
+
+\bibitem{ojaOjaLearningRule2008}
+Erkki Oja.
+\newblock Oja learning rule.
+\newblock {\em Scholarpedia}, 3(3):3612, March 2008.
+
+\bibitem{kingmaAdamMethodStochastic2017}
+Diederik~P. Kingma and Jimmy Ba.
+\newblock Adam: {{A Method}} for {{Stochastic Optimization}}, January 2017.
 
 \bibitem{steyversBayesianAnalysisHuman2009a}
 Mark Steyvers, Michael~D. Lee, and Eric-Jan Wagenmakers.

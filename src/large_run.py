@@ -87,7 +87,7 @@ def make_env(K: int,
         env = envs.KABsinv0(K=K,
                             frequencies=frequencies,
                             phases=phases,
-                            normalize=True,
+                            normalize=False,
                             verbose=False)
     elif env_type == "sinv1":
         frequencies = np.linspace(0.1, 0.4, K)

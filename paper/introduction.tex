@@ -6,21 +6,15 @@
 % brief introduction to decision making and the brain.
 The ability to make decisions for long-term reward maximization is a fundamental aspect of cognition. The brain has evolved a complex web of interconnected regions that work together to express this behaviour under the constraints of biology. The Pre-Frontal Cortex (PFC) is considered
 a fundamental high-level region for the attention and cognitive control, in particular the medial PFC \cite{millerIntegrativeTheoryPrefrontal2001a, sheynikhovichLongtermMemorySynaptic2023}.
-Further, the orbitofrontal cortex (OFC) is thought to be involved in motivation and representation of the expected value of the actions, either positive or negative  \cite{odohertyAbstractRewardPunishment2001, ricebergRewardStabilityDetermines2012, tremblayRelativeRewardPreference1999}, and action
-selection in uncertain environments \cite{elliottDissociableFunctionsMedial2000}.
-A relevant element for online executive functions is working memory, which is usually defined as the capacity to hold and manipulate information over short periods of time \cite{baddeleyWorkingMemory1974}; thus functionality 
-has been associated with the dorsolateral PFC \cite{dardenneRolePrefrontalCortex2012, cohenTemporalDynamicsBrain1997, constantinidisPersistentSpikingActivity2018, zylberbergMechanismsPersistentActivity2017}.
-However, it has also been suggested that the PFC is instead exercising a more top-down control over more sensory regions \cite{laraRolePrefrontalCortex2015}. These cortical projections have been proposed to target also the basal ganglia, which are thought to rely on first-order reward statistics,
-while the OFC is able to capture more complex contextual dynamics \cite{frankAnatomyDecisionStriatoorbitofrontal2006}.
+Further, the orbitofrontal cortex (OFC) is thought to be involved in motivation and representation of the expected value of the actions, either positive or negative \cite{odohertyAbstractRewardPunishment2001, ricebergRewardStabilityDetermines2012, tremblayRelativeRewardPreference1999}, action selection in uncertain environments \cite{elliottDissociableFunctionsMedial2000}, and contextual dynamics \cite{frankAnatomyDecisionStriatoorbitofrontal2006}.
 
 % bridge between decision making and the k-armed bandit problem.
 Considering decision-making, simple and well-studied ecological settings are foraging tasks, such as food search. In this problems, the agent is usually asked to choose between different options to maximize the expected reward.
 In nature, animals have been shown to exhibit different strategies depending on context.
 \textit{matching behaviour} is a well-known phenomenon in which the animal's decision patterns are proportional to the reward probability of the available options.
-This behaviour is thought to result from the trade-off between exploration and exploitation \cite{suttonReinforcementLearningProblem1998, nivEvolutionReinforcementLearning2002}.
-This is a well known phenomenon in the reinforcement learning literature, in which the agent is faced with the dilemma of exploring new alternatives, potentially more rewarding, or exploiting known options, although possibly sup-optimal.
-Other behaviours dependant on contexts are \textit{input matching}, where social cues are considered, and \textit{probability matching}, where the animal's choice behaviour is proportional to the reward probability of the options \cite{bariDynamicDecisionMaking2021, houstonMatchingBehavioursRewards2021}.
-When considering more computational approaches in the study of choice behaviour, a popular formalization of such tasks is the \textit{multi-armed bandit problem} (MABP) \cite{averbeckTheoryChoiceBandit2015}. This settins is usually described in terms of a slot machine endowed with $K$ distinct levers.
+Such behaviour is thought to result from the trade-off between exploration and exploitation \cite{suttonReinforcementLearningProblem1998, nivEvolutionReinforcementLearning2002}.
+In fact, this is a well known phenomenon in the reinforcement learning literature, in which the agent is faced with the dilemma of exploring new alternatives, potentially more rewarding, or exploiting known options, although possibly sup-optimal.
+A popular formalization of these type of tasks is the \textit{multi-armed bandit problem} (MABP) \cite{averbeckTheoryChoiceBandit2015}. This settins is usually described in terms of a slot machine endowed with $K$ distinct levers, also called arms.
 During a round, the agent selects one of the levers and collects a reward $R$ according to an unknown reward probability specific to the chosen lever.
 The goal is simply to maximizes the total reward after a given number steps, which is achieved by effectively updating a selection policy after each round.
 This problem has been extensively studied in the context of reinforcement learning, and it is considered a fundamental building block for more complex tasks \cite{suttonReinforcementLearningProblem1998}.
@@ -28,7 +22,7 @@ This problem has been extensively studied in the context of reinforcement learni
 % brief introduction of the k-armed bandit problem and previous algorithms.
 \subsection{Related work}
 % overview of the main solutions proposed in the literature from a computational perspective.
-There exists various flavours of this problem, with the simplest having a stationary reward distributione.
+There exists various flavours of this problem, with the simplest having a stationary reward distribution.
 Over the years, several algorithms have been proposed, alongside with their theoretical guarantees.
 In this regard, Thompson sampling is a popular algorithm that has been shown to achieve near-optimal regret bounds in the stochastic setting \cite{agrawalAnalysisThompsonSampling2012, kaufmannThompsonSamplingAsymptotically2012}.
 This approach relies on Bayesian optimization, where the goal is to maintain a posterior distribution over the reward probabilities of the actions, and selecting actions accordingly.
