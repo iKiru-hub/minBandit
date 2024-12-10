@@ -93,107 +93,109 @@ $\mathbf{p}_i \gets \frac{\exp(\beta_i \mathbf{z})}{\sum_j \exp(\beta_i \mathbf{
 
 \subsection{Table of results}
 
-% --- table K.5
-\begin{table}[H]
-\centering
-\caption{Performance comparison for $K=5$}
-\label{tab:k5}
-\begin{tabular}{l c c c}
-\toprule
-\textbf{Model} & \textbf{\textsc{KAB-0}} & \textbf{\textsc{KAB-$\epsilon$}} & \textbf{\textsc{KAB-$\sin$}}\\
-\midrule
-Optimal & $0.900$ & $0.881$ & $0.563$ \\
-Random & $0.330$ & $0.337$ & $0.200$ \\
-\midrule
-Thompson & $0.905$ & $0.617$ & $0.317$ \\
-$\epsilon$-Greedy & $0.797$ & $0.531$ & $0.315$ \\
-UCB & $0.897$ & $0.656$ & $0.319$ \\
-\textbf{Model} & $\mathbf{0.899}$ & $\mathbf{0.663}$ & $\mathbf{0.265}$ \\
+\textit{\textbf{Note:} table to update}
 
-\bottomrule
-\end{tabular}
-\end{table}
+% % --- table K.5
+% \begin{table}[H]
+% \centering
+% \caption{Performance comparison for $K=5$}
+% \label{tab:k5}
+% \begin{tabular}{l c c c}
+% \toprule
+% \textbf{Model} & \textbf{\textsc{KAB-0}} & \textbf{\textsc{KAB-$\epsilon$}} & \textbf{\textsc{KAB-$\sin$}}\\
+% \midrule
+% Optimal & $0.900$ & $0.881$ & $0.563$ \\
+% Random & $0.330$ & $0.337$ & $0.200$ \\
+% \midrule
+% Thompson & $0.905$ & $0.617$ & $0.317$ \\
+% $\epsilon$-Greedy & $0.797$ & $0.531$ & $0.315$ \\
+% UCB & $0.897$ & $0.656$ & $0.319$ \\
+% \textbf{Model} & $\mathbf{0.899}$ & $\mathbf{0.663}$ & $\mathbf{0.265}$ \\
 
-% --- table K.10
-\begin{table}[H]
-\centering
-\caption{Performance comparison for $K=10$}
-\label{tab:k10}
-\begin{tabular}{l c c c}
-\toprule
-\textbf{Model} & \textbf{\textsc{KAB-0}} & \textbf{\textsc{KAB-$\epsilon$}} & \textbf{\textsc{KAB-$\sin$}} \\
-\midrule
-Optimal & $0.900$ & $0.885$ & $0.355$  \\
-Random & $0.247$ & $0.250$ & $0.100$ \\
-\midrule
-Thompson & $0.896$ & $0.648$ & $0.339$ \\
+% \bottomrule
+% \end{tabular}
+% \end{table}
 
-$\epsilon$-Greedy & $0.611$ & $0.597$ & $0.343$ \\
-UCB & $0.891$ & $0.655$ & $0.358$ \\
-\textbf{Model} & $\mathbf{0.905}$ & $\mathbf{0.668}$ & $\mathbf{0.203}$  \\
-\bottomrule
-\end{tabular}
-\end{table}
+% % --- table K.10
+% \begin{table}[H]
+% \centering
+% \caption{Performance comparison for $K=10$}
+% \label{tab:k10}
+% \begin{tabular}{l c c c}
+% \toprule
+% \textbf{Model} & \textbf{\textsc{KAB-0}} & \textbf{\textsc{KAB-$\epsilon$}} & \textbf{\textsc{KAB-$\sin$}} \\
+% \midrule
+% Optimal & $0.900$ & $0.885$ & $0.355$  \\
+% Random & $0.247$ & $0.250$ & $0.100$ \\
+% \midrule
+% Thompson & $0.896$ & $0.648$ & $0.339$ \\
 
-% --- table K.100
-\begin{table}[H]
-\centering
-\caption{Performance comparison for $K=100$}
-\label{tab:k100}
-\begin{tabular}{l c c c}
-\toprule
-\textbf{Model} & \textbf{\textsc{KAB-0}} & \textbf{\textsc{KAB-$\epsilon$}} & \textbf{\textsc{KAB-$\sin$}} \\
-\midrule
-Optimal & $0.900$ & $0.883$ & $0.020$  \\
-Random & $0.196$ & $0.201$ & $0.010$ \\
-\midrule
-Thompson & $0.894$ & $0.586$ & $0.013$ \\
-$\epsilon$-Greedy & $0.519$ & $0.574$ & $0.018$ \\
-UCB & $0.853$ & $0.572$ & $0.012$ \\
-\textbf{Model} & $\mathbf{0.898}$ & $\mathbf{0.651}$ & $\mathbf{0.010}$  \\
-\bottomrule
-\end{tabular}
-\end{table}
+% $\epsilon$-Greedy & $0.611$ & $0.597$ & $0.343$ \\
+% UCB & $0.891$ & $0.655$ & $0.358$ \\
+% \textbf{Model} & $\mathbf{0.905}$ & $\mathbf{0.668}$ & $\mathbf{0.203}$  \\
+% \bottomrule
+% \end{tabular}
+% \end{table}
 
-% --- table K.200
-\begin{table}[H]
-\centering
-\caption{Performance comparison for $K=100$}
-\label{tab:k200}
-\begin{tabular}{l c c c}
-\toprule
-\textbf{Model} & \textbf{\textsc{KAB-0}} & \textbf{\textsc{KAB-$\epsilon$}} & \textbf{\textsc{KAB-$\sin$}} \\
-\midrule
-Optimal & $0.900$ & $0.885$ & $0.010$  \\
-Random & $0.178$ & $0.176$ & $0.005$ \\
-\midrule
-Thompson & $0.875$ & $0.624$ & $0.006$ \\
-$\epsilon$-Greedy & $0.679$ & $0.588$ & $0.010$ \\
-UCB & $0.792$ & $0.510$ & $0.006$ \\
-\textbf{Model} & $\mathbf{0.905}$ & $\mathbf{0.610}$ & $\mathbf{0.006}$  \\
-\bottomrule
-\end{tabular}
-\end{table}
+% % --- table K.100
+% \begin{table}[H]
+% \centering
+% \caption{Performance comparison for $K=100$}
+% \label{tab:k100}
+% \begin{tabular}{l c c c}
+% \toprule
+% \textbf{Model} & \textbf{\textsc{KAB-0}} & \textbf{\textsc{KAB-$\epsilon$}} & \textbf{\textsc{KAB-$\sin$}} \\
+% \midrule
+% Optimal & $0.900$ & $0.883$ & $0.020$  \\
+% Random & $0.196$ & $0.201$ & $0.010$ \\
+% \midrule
+% Thompson & $0.894$ & $0.586$ & $0.013$ \\
+% $\epsilon$-Greedy & $0.519$ & $0.574$ & $0.018$ \\
+% UCB & $0.853$ & $0.572$ & $0.012$ \\
+% \textbf{Model} & $\mathbf{0.898}$ & $\mathbf{0.651}$ & $\mathbf{0.010}$  \\
+% \bottomrule
+% \end{tabular}
+% \end{table}
 
-% --- table K.1000
-\begin{table}[H]
-\centering
-\caption{Performance comparison for $K=100$}
-\label{tab:k1000}
-\begin{tabular}{l c c c}
-\toprule
-\textbf{Model} & \textbf{\textsc{KAB-0}} & \textbf{\textsc{KAB-$\epsilon$}} & \textbf{\textsc{KAB-$\sin$}} \\
-\midrule
-Optimal & $0.900$ & $0.880$ & $0.002$  \\
-Random & $0.177$ & $0.178$ & $0.001$ \\
-\midrule
-Thompson & $0.779$ & $0.445$ & $0.001$ \\
-$\epsilon$-Greedy & $0.386$ & $0.478$ & $0.002$ \\
-UCB & $0.301$ & $0.185$ & $0.001$ \\
-\textbf{Model} & $\mathbf{0.703}$ & $\mathbf{0.480}$ & $\mathbf{0.001}$  \\
-\bottomrule
-\end{tabular}
-\end{table}
+% % --- table K.200
+% \begin{table}[H]
+% \centering
+% \caption{Performance comparison for $K=100$}
+% \label{tab:k200}
+% \begin{tabular}{l c c c}
+% \toprule
+% \textbf{Model} & \textbf{\textsc{KAB-0}} & \textbf{\textsc{KAB-$\epsilon$}} & \textbf{\textsc{KAB-$\sin$}} \\
+% \midrule
+% Optimal & $0.900$ & $0.885$ & $0.010$  \\
+% Random & $0.178$ & $0.176$ & $0.005$ \\
+% \midrule
+% Thompson & $0.875$ & $0.624$ & $0.006$ \\
+% $\epsilon$-Greedy & $0.679$ & $0.588$ & $0.010$ \\
+% UCB & $0.792$ & $0.510$ & $0.006$ \\
+% \textbf{Model} & $\mathbf{0.905}$ & $\mathbf{0.610}$ & $\mathbf{0.006}$  \\
+% \bottomrule
+% \end{tabular}
+% \end{table}
+
+% % --- table K.1000
+% \begin{table}[H]
+% \centering
+% \caption{Performance comparison for $K=100$}
+% \label{tab:k1000}
+% \begin{tabular}{l c c c}
+% \toprule
+% \textbf{Model} & \textbf{\textsc{KAB-0}} & \textbf{\textsc{KAB-$\epsilon$}} & \textbf{\textsc{KAB-$\sin$}} \\
+% \midrule
+% Optimal & $0.900$ & $0.880$ & $0.002$  \\
+% Random & $0.177$ & $0.178$ & $0.001$ \\
+% \midrule
+% Thompson & $0.779$ & $0.445$ & $0.001$ \\
+% $\epsilon$-Greedy & $0.386$ & $0.478$ & $0.002$ \\
+% UCB & $0.301$ & $0.185$ & $0.001$ \\
+% \textbf{Model} & $\mathbf{0.703}$ & $\mathbf{0.480}$ & $\mathbf{0.001}$  \\
+% \bottomrule
+% \end{tabular}
+% \end{table}
 
 
-\newpage
+% \newpage

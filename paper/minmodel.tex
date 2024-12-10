@@ -13,7 +13,7 @@ The first equation tracks the evolution of the neural activity $\textbf{u}$ of p
 
 \noindent The external input $\textbf{I}_{\text{ext}}$ is a constant input that is used to set the initial conditions of the neural activity $\textbf{u}$. The activation function $\phi$ is applied to population $v$, and it is chosen to be a generalized sigmoid with gain $g$ and threshold $\theta$.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.6\textwidth]{figures/minb_architecture.png}
     \caption{\textsc{Model architecture} - \textit{The model is composed of a layer $U$ (blue), receiving a feedfoward input $I_{\text{ext}}$, a layer $V$ (orange), and connections $\textbf{W}^{UV}$ and $\textbf{W}^{VU}$. Additionally, two indexes $k_{U}, k_{V}$  can be extracted from the layers and
@@ -27,8 +27,9 @@ The function $\Phi_{v}$ is defined as the sum of a generalized sigmoid and a Gau
 
 \subsubsection{Option selection}
 The decision-making process within a single round is structured in two distinct phases. Initially, the model receives a constant external input targeting all neurons in the memory population \textit{U} equally.
-During this phase, $\textbf{I}_{\text{ext}}$ works as an equilibrium value while the reciprocal interactions with population \textit{V} push $\textbf{u}$ to different values, depending on the current policy encoded in $\tilde{\textbf{W}}^{UV}$. However, in the early rounds the weights $\textbf{W}^{UV}$ are zero, and thus
-the contribution from \textit{V} is null. After a fixed amount of time $\sim 5 \text{s}$, the second phase begins. Here, the external input is removed and the model is left to evolve autonomously, and since there are no recurrent connections in neither population the dynamics are entirely driven by their coupling. A selection $k$ is sampled after another fixed amount of time $\sim 5 \text{s}$, and it is defined according to the following rule:
+During this phase, $\textbf{I}_{\text{ext}}$ works as an equilibrium value while the reciprocal interactions with population \textit{V} push $\textbf{u}$ to different values, depending on the current policy encoded in $\tilde{\textbf{W}}^{UV}$.
+However, in the early rounds the weights $\textbf{W}^{UV}$ are zero, and thus the contribution from \textit{V} is zero. After a fixed amount of time $\sim 2 \text{s}$, the second phase begins. Here, the external input is removed and the model is left to evolve autonomously, and since there are no recurrent connections in neither population the dynamics are entirely driven by their coupling.
+A selection $k$ is sampled after another fixed amount of time $\sim 5 \text{s}$, and it is defined according to the following rule:
 
 \begin{equation*}
     k =
@@ -53,11 +54,11 @@ is dependent on the current policy $\tilde{\textbf{W}}^{UV}$. \\ Below \ref{alg:
 
 \SetKwComment{Comment}{// }{ }
 
-\textbf{Phase 1:} \textit{external input} \Comment*[r]{Duration: $\sim$5s}
+\textbf{Phase 1:} \textit{external input} \Comment*[r]{Duration: $\sim$2s}
 Define constant $\textbf{I}_{\text{ext}}$\;
 Update populations $\textbf{u}, \textbf{v}$ according to \ref{eq:main}\;
 
-\textbf{Phase 2:} \textit{autonomous evolution} \Comment*[r]{Duration: $\sim$5s}
+\textbf{Phase 2:} \textit{autonomous evolution} \Comment*[r]{Duration: $\sim$2s}
 Remove external input $\textbf{I}_{\text{ext}}$\;
 Let system evolve through population coupling according to \ref{eq:main}\;
 
@@ -98,9 +99,12 @@ Where $W^{+}$ is a constant value that sets the upper bound for the synaptic wei
 \subsection{Bio-inspired features}
 
 The model is inspired by the functioning of the prefrontal cortex (PFC) and its importance in decision-making processes. In particular, despite their marked simplicity, the two population $U, V$ of the model can be related to the orbito-frontal cortex (OFC) and anterior cingulate cortex (ACC), respectively.
-More specifically, the OFC is known to be involved in the representation of the state different options and update their value with respect to rewarding outcomes and their history \cite{lukChoiceCodingFrontal2013, kennerleyDecisionMakingReward2011a}. The ACC has been associated to action values, and the dynamic interplay with OFC is observed to elicit
-transient pre-stimulus activation, which biases the decision towards the most valuable option \cite{funahashiPrefrontalContributionDecisionMaking2017, marcosDeterminingMonkeyFree2016, balewskiValueDynamicsAffect2023}. In the model, the first layer represents the available options, while the learned
-connections with the second layer encode their values based on the recent reward history. Another similarity with this particular pre-frontal circuit is the realization of a choice as a sample of the network state after a period of autonomous neural activity, where the depth of the closest
-neural attractor depends on the strength and reliability of the highest option value \cite{backmanEffectsWorkingMemoryTraining2011, enelStableDynamicRepresentations2020}.
+More specifically, the OFC is known to be involved in the representation of the state different options and update their value with respect to rewarding outcomes and their history \cite{lukChoiceCodingFrontal2013, kennerleyDecisionMakingReward2011a}.
+The ACC has been associated to action values and influencing the exploration-exploitation assessment \cite{khamassiChapter22Medial2013}. Further, its dynamic interplay with the OFC is observed to elicit transient pre-stimulus activation, which biases the decision towards the most valuable option \cite{funahashiPrefrontalContributionDecisionMaking2017, marcosDeterminingMonkeyFree2016, balewskiValueDynamicsAffect2023}.
+In the model, the first layer represents the available options, while the learned connections with the second layer encode their values based on the recent reward history.
+Another similarity with this particular pre-frontal circuit is the realization of a choice as a sample of the network state after a period of autonomous neural activity, where the depth of the closest neural attractor depends on the strength and reliability of the highest option value \cite{backmanEffectsWorkingMemoryTraining2011, enelStableDynamicRepresentations2020}.
+Moreover, the application of the function $\Phi_{v}$ on the connections $\textbf{W}^{UV}$ can be regarded as meta-plasticity, mediated by a neuromodulator \cite{wangMetalearningNaturalArtificial2021}.
 Lastly, learning follows a simple hetero-synaptic rule with a symmetric kernel (\textit{i.e.} there is no bias towards synaptic potentiation or depression), a features that is not uncommon for learning rules \cite{parkSymmetryLearningRate2017}.
+The learning rate is modulated by a non-linear function of the weights, which can be again regarded as a form of meta-learning \cite{inglisModulationDopamineAdaptive2021, iigayaAdaptiveLearningDecisionmaking2016}.
+Further, the synaptic specificity of the plasticity rate is a well documented trait of biolgical neurons, known as synapse-type specific plasticity (STSP) \cite{larsenSynapsetypespecificPlasticityLocal2015}.
 

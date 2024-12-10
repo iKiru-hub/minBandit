@@ -161,6 +161,11 @@ Steven~W. Kennerley and Mark~E. Walton.
 \newblock Decision {{Making}} and {{Reward}} in {{Frontal Cortex}}.
 \newblock {\em Behavioral Neuroscience}, 125(3):297--317, June 2011.
 
+\bibitem{khamassiChapter22Medial2013}
+Mehdi Khamassi, Pierre Enel, Peter~Ford Dominey, and Emmanuel Procyk.
+\newblock Chapter 22 - {{Medial}} prefrontal cortex and the adaptive regulation of reinforcement learning parameters.
+\newblock In V.~S.~Chandrasekhar Pammi and Narayanan Srinivasan, editors, {\em Progress in {{Brain Research}}}, volume 202 of {\em Decision {{Making}}}, pages 441--464. Elsevier, January 2013.
+
 \bibitem{funahashiPrefrontalContributionDecisionMaking2017}
 Shintaro Funahashi.
 \newblock Prefrontal {{Contribution}} to {{Decision-Making}} under {{Free-Choice Conditions}}.
@@ -186,10 +191,20 @@ Pierre Enel, Joni~D Wallis, and Erin~L Rich.
 \newblock Stable and dynamic representations of value in the prefrontal cortex.
 \newblock {\em eLife}, 9:e54313, July 2020.
 
+\bibitem{wangMetalearningNaturalArtificial2021}
+Jane~X Wang.
+\newblock Meta-learning in natural and artificial intelligence.
+\newblock {\em Current Opinion in Behavioral Sciences}, 38:90--95, April 2021.
+
 \bibitem{parkSymmetryLearningRate2017}
 Youngjin Park, Woochul Choi, and Se-Bum Paik.
 \newblock Symmetry of learning rate in synaptic plasticity modulates formation of flexible and stable memories.
 \newblock {\em Scientific Reports}, 7(1):5671, July 2017.
+
+\bibitem{larsenSynapsetypespecificPlasticityLocal2015}
+Rylan~S Larsen and P~Jesper Sj{\"o}str{\"o}m.
+\newblock Synapse-type-specific plasticity in local circuits.
+\newblock {\em Current opinion in neurobiology}, 35:127--135, December 2015.
 
 \bibitem{igelCovarianceMatrixAdaptation2007}
 Christian Igel, Nikolaus Hansen, and Stefan Roth.
@@ -224,5 +239,25 @@ Eric Schulz, Nicholas~T. Franklin, and Samuel~J. Gershman.
 Shunan Zhang and Angela~J Yu.
 \newblock Forgetful {{Bayes}} and myopic planning: {{Human}} learning and decision-making in a bandit setting.
 \newblock In {\em Advances in {{Neural Information Processing Systems}}}, volume~26. Curran Associates, Inc., 2013.
+
+\bibitem{roeschDopamineNeuronsEncode2007}
+Matthew~R. Roesch, Donna~J. Calu, and Geoffrey Schoenbaum.
+\newblock Dopamine neurons encode the better option in rats deciding between differently delayed or sized rewards.
+\newblock {\em Nature Neuroscience}, 10(12):1615--1624, December 2007.
+
+\bibitem{coolsChemistryAdaptiveMind2019}
+Roshan Cools.
+\newblock Chemistry of the {{Adaptive Mind}}: {{Lessons}} from {{Dopamine}}.
+\newblock {\em Neuron}, 104(1):113--131, October 2019.
+
+\bibitem{faisalNoiseNeuronsOther2012}
+A.~Aldo Faisal.
+\newblock Noise in {{Neurons}} and {{Other Constraints}}.
+\newblock In N.~Le~Nov{\`e}re, editor, {\em Computational {{Systems Neurobiology}}}, pages 227--257. Springer Netherlands, Dordrecht, 2012.
+
+\bibitem{nunesSpikingNeuralNetworks2022}
+Jo{\~a}o~D. Nunes, Marcelo Carvalho, Diogo Carneiro, and Jaime~S. Cardoso.
+\newblock Spiking {{Neural Networks}}: {{A Survey}}.
+\newblock {\em IEEE Access}, 10:60738--60764, 2022.
 
 \end{thebibliography}
