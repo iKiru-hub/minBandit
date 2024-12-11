@@ -9,10 +9,13 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 try:
     from utils import sigmoid, gaussian_sigmoid, generalized_sigmoid, neural_response_func
     from utils import plot_online_3d, plot_online_2d, plot_online_tape, plot_online_choices
+    from utils import setup_logger
 except ImportError or ModuleNotFoundError:
     from src.utils import sigmoid, gaussian_sigmoid, generalized_sigmoid, neural_response_func
-    from src.utils import plot_online_3d, plot_online_2d, plot_online_tape#, plot_online
+    from src.utils import plot_online_3d, plot_online_2d, plot_online_tape, setup_logger
 
+
+logger = setup_logger(__name__, level=2)
 
 
 class MBsolver(ABC):
@@ -107,6 +110,20 @@ class Model(MBsolver):
         self.w_record = []
         self.track_weights = track_weights
         self.weights_history = weights_history
+
+    def __new__(cls, *args, **kwargs):
+
+        """
+        check if the parameters are valid for this model implementation,
+        if not, use Modelv2 implementation
+        """
+
+        try:
+            # Attempt to create an instance of the current class
+            return super().__new__(cls, *args, **kwargs)
+        except TypeError:
+            logger.warning("Invalid parameters for Model, using Modelv2 instead")
+            return Modelv2(*args, **kwargs)
 
     def __str__(self):
         return "`Model`"
@@ -275,6 +292,7 @@ class Model(MBsolver):
                    ax: plt.Axes=None,
                    style: str="3d",
                    t_update: int=20,
+                   record: bool=False,
                    title: str="") -> int:
 
         """
@@ -315,13 +333,34 @@ class Model(MBsolver):
         else:
             Iext = np.ones((self._K, 1))
 
+            if record:
+                record = {
+                    "u": {
+                        "pre": np.zeros((self._dur_pre, self._K)),
+                        "post": np.zeros((self._dur_post, self._K))
+                    },
+                    "v": {
+                        "pre": np.zeros((self._dur_pre, self._K)),
+                        "post": np.zeros((self._dur_post, self._K))
+                    }
+                }
+
             # pre-decision period
             for _ in range(self._dur_pre):
                 self._step(Iext=Iext)
+                if record:
+                    record["u"]["pre"] = self._u.flatten()
+                    record["v"]["pre"] = self._v.flatten()
 
             # post-decision period
             for _ in range(self._dur_post):
                 self._step()
+                if record:
+                    record["u"]["post"] = self._u.flatten()
+                    record["v"]["post"] = self._v.flatten()
+
+        if record:
+            return self._make_decison(), record
 
         return self._make_decison()
 
@@ -639,6 +678,7 @@ class Modelv2(MBsolver):
                    ax: plt.Axes=None,
                    style: str="3d",
                    t_update: int=20,
+                   record: bool=False,
                    title: str="") -> int:
 
         """
@@ -677,15 +717,49 @@ class Modelv2(MBsolver):
                                       title=title,
                                       style=style)
         else:
+
             Iext = np.ones((self._K, 1))
 
+            if record:
+                record = {
+                    "u": {
+                        "pre": np.zeros((self._K, self._dur_pre)),
+                        "post": np.zeros((self._K, self._dur_post))
+                    },
+                    "v": {
+                        "pre": np.zeros((self._K, self._dur_pre)),
+                        "post": np.zeros((self._K, self._dur_post))
+                    }
+                }
+
             # pre-decision period
-            for _ in range(self._dur_pre):
+            for t in range(self._dur_pre):
                 self._step(Iext=Iext)
+                if record:
+                    record["u"]["pre"][:, t] = neural_response_func(self._u.flatten(),
+                                                                    self._gain_u,
+                                                                    self._offset_u,
+                                                                    self._threshold_u)
+                    record["v"]["pre"][:, t] = neural_response_func(self._v.flatten(),
+                                                                    self._gain_v,
+                                                                    self._offset_v,
+                                                                    self._threshold_v)
 
             # post-decision period
-            for _ in range(self._dur_post):
+            for t in range(self._dur_post):
                 self._step()
+                if record:
+                    record["u"]["post"][:, t] = neural_response_func(self._u.flatten(),
+                                                                     self._gain_u,
+                                                                     self._offset_u,
+                                                                     self._threshold_u)
+                    record["v"]["post"][:, t] = neural_response_func(self._v.flatten(),
+                                                                     self._gain_v,
+                                                                     self._offset_v,
+                                                                     self._threshold_v)
+
+        if record:
+            return self._make_decison(), record
 
         return self._make_decison()
 

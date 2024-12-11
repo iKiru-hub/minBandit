@@ -3,17 +3,16 @@
 \section{Methods}
 
 % brief outline of the section
-\noindent The following section is organized as follows. First, we introduce a formalization of general problem setting, together with the variants considered in this work. Then, we outline the architecture of the our model and how it can be mapped to neurobiology. Finally, we describe the learning procedure,
+\noindent The following section is organized as follows. First, we introduce a formalization of general problem setting, together with the variants considered in this work. Then, we outline the architecture of our model and how it can be mapped to neurobiology. Finally, we describe the learning procedure,
 and showcase its dynamics in a simple example.
 
 % mathematical formulation of the k-armed bandit problem.
 \subsection{Binomial K-armed bandit problem}
 \hfill \break
-\noindent The standard formulation of the task is structured as a set of $\{1\dots K\}$ levers (or arms), with an associated reward distribution $\mathbf{p}=\{p_{1}, \ldots p_{K}\}$. At each iteration, the agent pulls a lever and collect a possible reward drawn as a Bernoulli variable $R\sim
-\mathcal{B}(\{0,1\},p_{k})$. The agent's objective is maximizing the total reward
-$\sum^{T}_{t} R_{t}$, after a certain number $T$ of trials.
-Importantly, the agent is unaware of the true reward probability distribution, and thus has to make its decisions following a certain policy, denoted as $\omega$. In the reinforcement learning literature, the policy is often defined as
-a distribution over the actions, here the levers $K$, given the current state, which in this case can be the history of past actions and rewards up to time $t\leq T$.
+\noindent The standard formulation of the task is structured as a set of $\{1\dots K\}$ levers (or arms), with an associated reward distribution $\mathbf{p}=\{p_{1}, \ldots p_{K}\}$.
+At each iteration, the agent pulls a lever and collects a possible reward drawn as a Bernoulli variable $R\sim \mathcal{B}(\{0,1\},p_{k})$. The agent's objective is maximizing the total reward $\sum^{T}_{t} R_{t}$, after a certain number $T$ of trials.
+Importantly, the agent is unaware of the true reward probability distribution, and thus has to make its decisions following a certain policy, denoted as $\omega$.
+In the reinforcement learning literature, the policy is often defined as a distribution over the actions, here the levers $K$, given the current state. In the bandit problem, the state can defined to be taken to be the history of past actions and rewards up to time $t\leq T$.
 Given the inherent stochasticity of the feedbacks from the environment, the definition of the policy is affected by the so-called exploration-exploitation trade-off, which here is phrased as the contrast between the option of the lever with the known highest expected reward versus the option to explore other levers, so to gather more information.
 A common approach is the $\epsilon-$greedy policy, where the choice to explore is selected with a probability $\epsilon$.
 Moreover, it is often preferable to have a more explorative behaviour early during the training, with the intent to have a good sample size for the empirical reward distribution, which can be later exploited for maximizing reward.

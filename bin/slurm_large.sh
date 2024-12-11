@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name="mkbwb"
-#SBATCH -p milanq #ipuq #armq #milanq #fpgaq #milanq # partition (queue)
+#SBATCH -p ipuq #armq #milanq #fpgaq #milanq # partition (queue)
 #SBATCH -N 1 # number of nodes
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=64
@@ -15,7 +15,7 @@ echo "%ecl1 activated"
 cd ~/lab/minBandit/src
 echo "%in $(pwd)"
 
-srun python3 large_run.py --cores 64 --reps 128
+srun python3 large_run.py --cores 64 --reps 64
 
 cd ~/lab/pigeon
 echo "%in $(pwd)"

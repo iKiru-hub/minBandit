@@ -27,14 +27,14 @@ t+\lambda_{k})\text{  for }k=1\ldots K\}$.
 % Evolution: fitness evolution
 \subsection{Evolution search}
 The optimization of the hyper-parameters has been performed using the Covariance Matrix Adaptation evolutionary strategy algorithm (CMA-ES) \cite{igelCovarianceMatrixAdaptation2007}.
-The search has been run with a population of $128$ individuals (unique set of genomes corresponding to a sample in parameter space) for $70$ generations. The fitness function has been defined as the average reward obtained by an individual over 2 independent iterations.
+The search has been run with a population of $256$ individuals (unique set of genomes corresponding to a sample in parameter space) for $40$ generations. The fitness function has been defined as the average reward obtained by an individual over 2 independent iterations.
 The results are summarized below in figure \ref{fig:evolution}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/evolution_plot.png}
-    \caption{\textsc{Evolution of the model over generations.} - Left: \textit{top fitness, mean and standard deviation of the population over generations.} - Top-Right: \textit{option value and learning rate Gaussian sigmoid functions parametrized according to the genome of the fittest individual} -
-    Bottom-Right: \textit{sigmoidal activation function for population $v$}}
+    \caption{\textsc{Evolution of the model over generations.} - Left: \textit{top fitness, mean and standard deviation (16-84 percentile) of the population over generations.} - Top-Right: \textit{option value and learning rate Gaussian sigmoid functions parametrized according to the genome of the fittest individual}
+    Bottom-Right: \textit{activation function for population $v$ and $u$}}
     \label{fig:evolution}
 \end{figure}
 
