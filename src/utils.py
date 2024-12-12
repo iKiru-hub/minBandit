@@ -230,7 +230,7 @@ def make_probability_set(K: int, nb_trials: int,
         if fixed_p:
             p = np.around(np.random.uniform(0.05, 0.3, K), 2)
             # p[i%K] = fixed_p
-            p[idx_set[i%K]] = 0.9
+            p[idx_set[i%K]] = fixed_p
             logger.warning(f"# Fixed probability: {p}")
         else:
             p = np.around(np.random.uniform(0.05, 0.95, K), 2)

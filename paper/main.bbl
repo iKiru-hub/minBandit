@@ -151,6 +151,10 @@ Kimberlee D'Ardenne, Neir Eshel, Joseph Luka, Agatha Lenartowicz, Leigh~E. Nystr
 \newblock Role of prefrontal cortex and the midbrain dopamine system in working memory updating.
 \newblock {\em Proceedings of the National Academy of Sciences}, 109(49):19900--19909, December 2012.
 
+\bibitem{qiForcedExplorationBandit2023}
+Han Qi, Fei Guo, and Li~Zhu.
+\newblock Forced {{Exploration}} in {{Bandit Problems}}, December 2023.
+
 \bibitem{lukChoiceCodingFrontal2013}
 Chung-Hay Luk and Jonathan~D. Wallis.
 \newblock Choice {{Coding}} in {{Frontal Cortex}} during {{Stimulus-Guided}} or {{Action-Guided Decision-Making}}.
