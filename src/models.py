@@ -445,6 +445,7 @@ class Modelv2(MBsolver):
                  gain_u: float=1.,
                  offset_u: float=0.,
                  threshold_u: float=0.,
+                 Iext_intensity: float=1.,
                  value_function: str="gaussian",
                  lr_function: str="gaussian",
                  track_weights: bool=False,
@@ -478,6 +479,7 @@ class Modelv2(MBsolver):
         # roll parameters
         self._dur_pre = dur_pre
         self._dur_post = dur_post
+        self._Iext_intensity = Iext_intensity
 
         # variables
         self._u = np.zeros((K, 1))  # memory var
@@ -508,7 +510,7 @@ class Modelv2(MBsolver):
         self.weights_history = weights_history
 
     def __str__(self):
-        return "`Model.v2`"
+        return "Model"
 
     def __repr__(self):
 
@@ -521,7 +523,7 @@ class Modelv2(MBsolver):
         Make a decision based on the current state of the model
         """
 
-        self._u = np.around(self._u, 3)
+        # self._u = np.around(self._u, 3)
         choice = np.argmax(self._u)
 
         if choice == np.argmax(self._v) and self._u[choice] > 0.:
@@ -535,24 +537,14 @@ class Modelv2(MBsolver):
         return self._choice
 
     def _value_function(self):
-
-        if self._value_function_name == "gaussian":
-
-            return gaussian_sigmoid(x=self._W, alpha=self._alpha,
-                                    beta=self._beta, mu=self._mu,
-                                    sigma=self._sigma, r=self._r)
-
-        return None
+        return gaussian_sigmoid(x=self._W, alpha=self._alpha,
+                                beta=self._beta, mu=self._mu,
+                                sigma=self._sigma, r=self._r)
 
     def _lr_function(self):
-
-        if self._lr_function_name == "gaussian":
-
-            return gaussian_sigmoid(x=self._W, alpha=self._alpha_lr,
-                                    beta=self._beta_lr, mu=self._mu_lr,
-                                    sigma=self._sigma_lr, r=self._r_lr).flatten()
-
-        return None
+        return gaussian_sigmoid(x=self._W, alpha=self._alpha_lr,
+                                beta=self._beta_lr, mu=self._mu_lr,
+                                sigma=self._sigma_lr, r=self._r_lr).flatten()
 
     def _step(self, Iext: np.ndarray=0):
 
@@ -851,7 +843,7 @@ class ThompsonSampling(MBsolver):
         self.beta = np.ones(K)
 
     def __str__(self):
-        return "`Thompson Sampling`"
+        return "Thompson Sampling"
 
     def select_arm(self, **kwargs) -> int:
 
@@ -916,7 +908,7 @@ class EpsilonGreedy(MBsolver):
         self.n = np.zeros(K)
 
     def __str__(self):
-        return f"`Epsilon-Greedy`"
+        return f"Epsilon-Greedy"
 
     def select_arm(self, **kwargs) -> int:
 
@@ -980,7 +972,7 @@ class UCB1(MBsolver):
         self.t = 0
 
     def __str__(self):
-        return "`UCB1`"
+        return "UCB1"
 
     def select_arm(self, **kwargs) -> int:
 

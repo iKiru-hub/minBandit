@@ -174,3 +174,11 @@ Next, it has been enquired how the model selection policy evolves over time and 
 
 Other behaviours dependant on contexts are \textit{input matching}, where social cues are considered, and \textit{probability matching}, where the animal's choice behaviour is proportional to the reward probability of the options \cite{bariDynamicDecisionMaking2021, houstonMatchingBehavioursRewards2021}.
 
+
+
+
+
+Lastly, learning follows a simple hetero-synaptic rule with a symmetric kernel (\textit{i.e.} there is no bias towards synaptic potentiation or depression), a features that is not uncommon for learning rules \cite{parkSymmetryLearningRate2017}.
+The learning rate is modulated by a non-linear function of the weights, which can be again regarded as a form of meta-learning \cite{inglisModulationDopamineAdaptive2021, iigayaAdaptiveLearningDecisionmaking2016}.
+Further, the synaptic specificity of the plasticity rate is a well documented trait of biolgical neurons, known as synapse-type specific plasticity (STSP) \cite{larsenSynapsetypespecificPlasticityLocal2015}.
+

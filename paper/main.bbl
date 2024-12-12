@@ -116,6 +116,25 @@ Alasdair~I. Houston, Pete~C. Trimmer, and John~M. McNamara.
 \newblock Matching {{Behaviours}} and {{Rewards}}.
 \newblock {\em Trends in Cognitive Sciences}, 25(5):403--415, May 2021.
 
+\bibitem{larsenSynapsetypespecificPlasticityLocal2015}
+Rylan~S Larsen and P~Jesper Sj{\"o}str{\"o}m.
+\newblock Synapse-type-specific plasticity in local circuits.
+\newblock {\em Current opinion in neurobiology}, 35:127--135, December 2015.
+
+\bibitem{blackmanTargetcellspecificShorttermPlasticity2013}
+Arne~V. Blackman, Therese Abrahamsson, Rui~Ponte Costa, Txomin Lalanne, and P.~Jesper Sj{\"o}str{\"o}m.
+\newblock Target-cell-specific short-term plasticity in local circuits.
+\newblock {\em Frontiers in Synaptic Neuroscience}, 5:11, December 2013.
+
+\bibitem{bartolHippocampalSpineHead2015}
+Thomas~M. Bartol, Cailey Bromer, Justin Kinney, Michael~A. Chirillo, Jennifer~N. Bourne, Kristen~M. Harris, and Terrence~J. Sejnowski.
+\newblock Hippocampal {{Spine Head Sizes Are Highly Precise}}, March 2015.
+
+\bibitem{arielIntrinsicVariabilityPv2012}
+Pablo Ariel, Michael~B. Hoppa, and Timothy~A. Ryan.
+\newblock Intrinsic variability in {{Pv}}, {{RRP}} size, {{Ca}}(2+) channel repertoire, and presynaptic potentiation in individual synaptic boutons.
+\newblock {\em Frontiers in Synaptic Neuroscience}, 4:9, 2012.
+
 \bibitem{inglisModulationDopamineAdaptive2021}
 Jeffrey~B. Inglis, Vivian~V. Valentin, and F.~Gregory Ashby.
 \newblock Modulation of {{Dopamine}} for {{Adaptive Learning}}: {{A Neurocomputational Model}}.
@@ -155,15 +174,39 @@ Kimberlee D'Ardenne, Neir Eshel, Joseph Luka, Agatha Lenartowicz, Leigh~E. Nystr
 Han Qi, Fei Guo, and Li~Zhu.
 \newblock Forced {{Exploration}} in {{Bandit Problems}}, December 2023.
 
-\bibitem{igelCovarianceMatrixAdaptation2007}
-Christian Igel, Nikolaus Hansen, and Stefan Roth.
-\newblock Covariance {{Matrix Adaptation}} for {{Multi-objective Optimization}}.
-\newblock {\em Evolutionary Computation}, 15(1):1--28, March 2007.
+\bibitem{ockerFlexibleNeuralConnectivity2020}
+Gabriel~Koch Ocker and Michael~A. Buice.
+\newblock Flexible neural connectivity under constraints on total connection strength, January 2020.
+
+\bibitem{apicellaSurveyModernTrainable2021}
+Andrea Apicella, Francesco Donnarumma, Francesco Isgr{\`o}, and Roberto Prevete.
+\newblock A survey on modern trainable activation functions.
+\newblock {\em Neural Networks}, 138:14--32, June 2021.
+
+\bibitem{millerCombinedMechanismsNeural2019}
+Paul Miller and Jonathan Cannon.
+\newblock Combined mechanisms of neural firing rate homeostasis.
+\newblock {\em Biological Cybernetics}, 113(1):47--59, 2019.
 
 \bibitem{citriSynapticPlasticityMultiple2008}
 Ami Citri and Robert~C. Malenka.
 \newblock Synaptic {{Plasticity}}: {{Multiple Forms}}, {{Functions}}, and {{Mechanisms}}.
 \newblock {\em Neuropsychopharmacology}, 33(1):18--41, January 2008.
+
+\bibitem{kennedySynapticSignalingLearning2016}
+Mary~B. Kennedy.
+\newblock Synaptic {{Signaling}} in {{Learning}} and {{Memory}}.
+\newblock {\em Cold Spring Harbor Perspectives in Biology}, 8(2):a016824, February 2016.
+
+\bibitem{samavatSynapticInformationStorage2024}
+Mohammad Samavat, Thomas~M. Bartol, Kristen~M. Harris, and Terrence~J. Sejnowski.
+\newblock Synaptic {{Information Storage Capacity Measured With Information Theory}}.
+\newblock {\em Neural Computation}, 36(5):781--802, April 2024.
+
+\bibitem{igelCovarianceMatrixAdaptation2007}
+Christian Igel, Nikolaus Hansen, and Stefan Roth.
+\newblock Covariance {{Matrix Adaptation}} for {{Multi-objective Optimization}}.
+\newblock {\em Evolutionary Computation}, 15(1):1--28, March 2007.
 
 \bibitem{ojaOjaLearningRule2008}
 Erkki Oja.
@@ -218,16 +261,6 @@ Pierre Enel, Joni~D Wallis, and Erin~L Rich.
 Jane~X Wang.
 \newblock Meta-learning in natural and artificial intelligence.
 \newblock {\em Current Opinion in Behavioral Sciences}, 38:90--95, April 2021.
-
-\bibitem{parkSymmetryLearningRate2017}
-Youngjin Park, Woochul Choi, and Se-Bum Paik.
-\newblock Symmetry of learning rate in synaptic plasticity modulates formation of flexible and stable memories.
-\newblock {\em Scientific Reports}, 7(1):5671, July 2017.
-
-\bibitem{larsenSynapsetypespecificPlasticityLocal2015}
-Rylan~S Larsen and P~Jesper Sj{\"o}str{\"o}m.
-\newblock Synapse-type-specific plasticity in local circuits.
-\newblock {\em Current opinion in neurobiology}, 35:127--135, December 2015.
 
 \bibitem{steyversBayesianAnalysisHuman2009a}
 Mark Steyvers, Michael~D. Lee, and Eric-Jan Wagenmakers.

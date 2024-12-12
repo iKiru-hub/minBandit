@@ -123,7 +123,7 @@ class Env:
 
         probabilities_set = make_probability_set(K=K,
                                         nb_trials=self.nb_trials,
-                                        fixed_p=0.9,
+                                        fixed_p=None,
                                         normalize=normalize)
 
         return make_env(K=K,
@@ -255,6 +255,7 @@ PARAMETERS = {
     'w_max': lambda: round(random.uniform(2, 5), 1),
     'dur_pre': lambda: random.randint(400, 3000),
     'dur_post': lambda: random.randint(400, 3000),
+    'Iext_intensity': lambda: round(random.uniform(0.1, 1), 1),
 }
 
 
@@ -416,6 +417,7 @@ if __name__ == "__main__" :
                        verbose=verbose,
                        max_duration=max_duration,
                        save_figure=save,
+                       perc_to_save=0.5,
                        path=path)
 
 

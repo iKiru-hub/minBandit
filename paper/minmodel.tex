@@ -23,14 +23,16 @@ The activation functions $\phi_{v},\phi_{u}$ are applied to population $v$, and 
 \end{figure}
 
 \noindent Importantly, the two layers are not fully connected and the matrices are diagonal.
-More in detail, the weight matrix $\textbf{W}^{VU}$ is simply made of $1$s, while $\tilde{\textbf{W}}^{UV}$ is a function of the actual weights $\Phi_{v}(\textbf{W}^{UV})$ and it represents the contribution of the
-active options $\textbf{u}$ to the value representation $\textbf{v}$, it is thus referred to as \textit{option value function}.
-The function $\Phi_{v}$ is defined as the sum of a generalized sigmoid and a Gaussian, whose shape is characterized by a bell curve smoothly settling to a constant value. See more in the appendinx \ref{sec:appendix}.
+More in detail, the weight matrix $\textbf{W}^{VU}$ is simply made of $1$s, while $\tilde{\textbf{W}}^{UV}$ is a function of the actual weights $\Phi_{v}(\textbf{W}^{UV})$ and it represents the contribution of the active options $\textbf{u}$ to the value representation $\textbf{v}$, it is thus referred to as \textit{option value function}.
+The function $\Phi_{v}$ is defined a weighted sum of a generalized sigmoid and a Gaussian, whose shape is characterized by a bell curve smoothly settling to a constant value. For details see in the appendinx \ref{sec:appendix}.
+Since the exact values of the model hyperparameters are optimized through an evolution, our motivation behind the structure of $\Phi_{v}$ is to be agnostic about its final form, and allow competition or integration of two distinct traits of the function shape.
+One is a smooth transition to a plateau value with a certain steepness (or gain), which can represent a saturation once a threshold is crossed, such feature has been reporeted for both biological and artificial neurons \cite{ockerFlexibleNeuralConnectivity2020, apicellaSurveyModernTrainable2021}.
+The other is a bell-shaped curve with a defined center and width, which can allow for placing emphasis on values only within a given window and modulate information transfer \cite{millerCombinedMechanismsNeural2019}.
 
 \subsubsection{Option selection}
 The decision-making process within a single round is structured in two distinct phases. Initially, the model receives a constant external input targeting all neurons in the memory population \textit{U} equally.
 During this phase, $\textbf{I}_{\text{ext}}$ works as an equilibrium value while the reciprocal interactions with population \textit{V} push $\textbf{u}$ to different values, depending on the current policy encoded in $\tilde{\textbf{W}}^{UV}$.
-Importantly, the weights $\textbf{W}^{UV}$ are initialized to zero, and thus the input from $U$ to $V$ is uniform. This approach ensures the absence of biases towards any arm by having all weights equal, and corresponds to an untrained network with blank connections\footnote{\textbf{NB} do \textit{blank connections} even make sense}.
+Importantly, the weights $\textbf{W}^{UV}$ are initialized to zero, and thus the input from $U$ to $V$ is uniform. This approach ensures the absence of biases towards any arm by having all weights equal, and corresponds to a completely untrained network.
 After a fixed amount of time $\sim 2 \text{s}$, the second phase begins. Here, the external input is removed and the model is left to evolve autonomously, and since there are no recurrent connections in neither population the dynamics are entirely driven by their coupling.
 A selection $k$ is sampled after another fixed amount of time $\sim 5 \text{s}$, and it is defined according to the following rule:
 
@@ -88,13 +90,16 @@ The model selections are the black vertical lines for an arm and a round. The re
 
 
 \subsection{Learning}
-Given a selected option $k$, the environment (set of bandits) samples and returns a reward $R\in [0, 1]$ with probability $p_{k}$.
+Given a selected option $k$, the environment (set of bandits) samples and returns a reward $R\in \{0, 1\}$ with probability $p_{k}$.
 Then, the connections $\textbf{W}^{UV}$ for the neuron corresponding to the option $k$ are updated according to the following plasticity rule:
 
 \begin{equation}
     \Delta \textbf{W}^{UV}_{k} = \tilde{\eta}_{k} \left(R\cdot w^{+}- \textbf{W}^{UV}_{k}\right)
 \end{equation}
 
-\noindent where $w^{+}$ is a constant maximum synaptic weight, while $\tilde{\eta}_{k}$ is the learning rate for the option $k$ determined by a function $\Phi_{\eta}$ of the current weights $\textbf{W}^{UV}_{k}$, referred to as \textit{learning rate function}, and its shape is the same as $\Phi_{v}$, but with different parameters.
+\noindent where $w^{+}$ is a constant maximum synaptic weight, while $\tilde{\eta}_{k}$ is the learning rate for the option $k$ determined by a function $\Phi_{\eta}$ of the current weights $\textbf{W}^{UV}_{k}$, referred to as \textit{learning rate function}.
+
+The shape of $\Phi_{\eta}$ is again a Gaussian-sigmoid but with different parameters, giving evolution the opportunity to combine the shape traits of plateau and bell-shaped tuning in a task-efficient manner.
+In particular, these features can be combined so to define mechanisms of synapse-type specific plasticity as a function of the current synaptic strenght \cite{larsenSynapsetypespecificPlasticityLocal2015}, as well the application of other useful homeostatic constraints with computational advantages, such as synaptic scaling and proportional updates \cite{citriSynapticPlasticityMultiple2008, kennedySynapticSignalingLearning2016, samavatSynapticInformationStorage2024}.
 
 

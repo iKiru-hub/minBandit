@@ -9,7 +9,7 @@ The Pre-Frontal Cortex (PFC) is considered a fundamental high-level region for a
 The orbitofrontal cortex (OFC) is thought to be involved in motivation and representation of the expected value of the actions, either positive or negative \cite{odohertyAbstractRewardPunishment2001, ricebergRewardStabilityDetermines2012, tremblayRelativeRewardPreference1999}, action selection in uncertain environments \cite{elliottDissociableFunctionsMedial2000}, and contextual processing \cite{frankAnatomyDecisionStriatoorbitofrontal2006}.
 
 % bridge between decision making and the k-armed bandit problem.
-Concerning decision-making, simple and well-studied ecological settings are foraging tasks, such as food search. In this problems, the agent is usually asked to choose between different options to maximize an expected reward.
+Well-studied ecological settings of decision-making are foraging tasks, such as food search. In this problems, the agent is usually asked to choose between different options to maximize an expected reward.
 In nature, animals have been shown to exhibit different strategies depending on context.
 \textit{Matching behaviour} is a well-known phenomenon in which the animal's decision patterns are proportional to the reward probability of the available options.
 Such behaviour is thought to result from the trade-off between exploration and exploitation \cite{suttonReinforcementLearningProblem1998, nivEvolutionReinforcementLearning2002}.
@@ -35,7 +35,8 @@ Other successful algorithms are $\epsilon$-greedy and VDBE \cite{gittinsBanditPr
 Nonetheless, despite their success they have little resemblance to neural dynamics nor clear functional similarity to brain regions.
 
 % aim of the work
-In this work, we propose a biologically plausible algorithm using rate neurons applied to stochastic bandit problems, more challenging variants of the original task endowed with \textit{concept drift}, where the reward distribution changes over time \cite{garivierUpperConfidenceBoundPolicies2008, besbesStochasticMultiArmedBanditProblem2014, cavenaghiNonStationaryMultiArmed2021}.
+In this work, we propose a biologically plausible algorithm using rate neurons, whose hyper-parameters are optimized through an evolution search. The benchmarks we chose are stochastic bandit problems, more challenging variants of the original task endowed with \textit{concept drift}, where the reward distribution changes over time \cite{garivierUpperConfidenceBoundPolicies2008, besbesStochasticMultiArmedBanditProblem2014, cavenaghiNonStationaryMultiArmed2021}.
+
 % brief overview of the model
 The architecture of our model consists of two connected neuronal layers, both with as many neurons as the arms of the bandit task.
 The first layer is inspired by the functionality of the OFC, and its scope is to maintain an active representation of the arms weighted by the input from the second layer.
@@ -44,10 +45,13 @@ The second, modeled after the ACC, is meant to represent the value of the arms, 
 % main motivations
 Our model features two important aspects of the brain during decision making. Firstly, the option selection process itself is implemented as a dynamical interaction between neural populations, similarly to bump attractor networks for perceptual cognition \cite{carrollEncodingCertaintyBump2014, esnaola-acebesBumpAttractorDynamics2021}.
 The final choice of the arm is achieved by the agreement or disagreement between the two populations, and it depends on their underlying value representation \cite{bariDynamicDecisionMaking2021, houstonMatchingBehavioursRewards2021}.
+
 Secondly, plasticity is based on a non-associative learning rule, endowed with a non-linear kernel for the weight update term.
 % The specific values of a parametrization of the kernel has been optimized through an evolutionary algorithm.
 Behind this design choice there is our hypothesis that the scale of the synaptic update should vary non-linearly according to its magnitude.
-This consideration is aligned with the idea that the learning rate is a parameter specific to each neuron, and that it can change according to some policy or inductive bias.
+This consideration is aligned with the idea that the learning rate is a parameter specific to each neuron. This synapse-type specific plasticity (STSP) \cite{larsenSynapsetypespecificPlasticityLocal2015} is a  unction of the resources available at the synaptic button and its state, including the size \cite{blackmanTargetcellspecificShorttermPlasticity2013, bartolHippocampalSpineHead2015, arielIntrinsicVariabilityPv2012}.
 This approach has been already adopted in several computational architectures, for instance in spiking neural networks \cite{inglisModulationDopamineAdaptive2021} and for synaptic metaplasticity \cite{iigayaAdaptiveLearningDecisionmaking2016}.
 Lastly, there is experimental evidence that this adaptation function might be covered by dopamine \cite{toblerAdaptiveCodingReward2005}.
 Indeed, its involvement in calculating prediction errors and reward signaling is well established \cite{schultzNeuralSubstratePrediction1997}, as well with its modulation of  high-level cortical networks like the PFC \cite{didomenicoDopaminergicModulationPrefrontal2023, lohaniDopamineModulationPrefrontal2019, dardenneRolePrefrontalCortex2012}.
+
+

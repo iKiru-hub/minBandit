@@ -1,13 +1,13 @@
 \contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
 \contentsline {section}{\numberline {2}Methods}{4}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Binomial K-armed bandit problem}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.1}Binomial K-armed bandit problem}{5}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Model description}{5}{subsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}Option selection}{6}{subsubsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.3}Learning}{8}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.1}Option selection}{7}{subsubsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.3}Learning}{7}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}Evolution search}{8}{subsection.2.4}%
 \contentsline {subsection}{\numberline {2.5}Bio-inspired features}{10}{subsection.2.5}%
-\contentsline {section}{\numberline {3}Experiments}{10}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Game variants}{10}{subsection.3.1}%
+\contentsline {section}{\numberline {3}Experiments}{11}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Game variants}{11}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Environment variants and number of arms}{11}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Decision-making dynamics}{12}{subsection.3.3}%
 \contentsline {subsubsection}{\numberline {3.3.1}Entropy analysis}{12}{subsubsection.3.3.1}%

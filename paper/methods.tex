@@ -30,6 +30,7 @@ Formally, for a stationary distribution\footnote{\textbf{<<NB>>} should I genera
 \noindent where $R^{*}$ is the reward obtained by always choosing the arm $a_{k}$ associated with the highest expected reward: $R^{*}=T\max_{k}\{\mathbf{p}\}$, and $R_{t}$ is the empirical reward obtained up to time $t$ by following policy $\pi$: $R_{t}=\sum^{T}_{t=1}\mathcal{B}(\pi(h_{t}))$.
 The regret is a measure of the performance of the agent, and it is often used to compare different algorithms. The goal of the agent is to minimize the regret, and thus maximize the total reward.
 
+% minimal model description
 \input{minmodel}
 
 % Evolution: fitness evolution
@@ -47,16 +48,15 @@ The results are summarized below in figure \ref{fig:evolution}.
 \end{figure}
 
 % comment on the evolved functions
-\noindent The evolution results show a steady improvement of the fitness over generations, before hitting a plateau corresponding to the theoretical optimal of the chosen simulations.
+\noindent The evolution results show a steady improvement of the fitness over generations, before hitting a plateau corresponding to the theoretical optimal ($\sim 0.9$) of the chosen simulations.
 
 \textbf{TELL ME ABOUT THE RESPONSE FUNCTIONS, LIKE IS IT A TYPE II NEURON FR?} Regarding the evolved functions, the option value function $\Phi_{v}$ is characterized by a steep sigmoid curve, with a marked.
-This is consistent with the idea that the input of population $u$ (memory layer $U$) to population $v$ (value layer $V$) is weighted maximally for high option values (strong synapses), whereas for weaker estimates the contributions are low or close to zero, allowing for more exploration.
+This is consistent with the idea that the input of population $U$ to population $V$ is weighted maximally for high option values (strong synapses), whereas for weaker estimates the contributions are low or close to zero, allowing for more exploration.
 
 The learning rate function $\Phi_{\eta}$ is instead characterized by a marked bell-shaped curve, given a parameter $r=0.06$. The associated Gaussian has a positive mean located at $\mu=1.$, which aligns approximately with the local valley of the weight function $\Phi_{v}$.
 A possible interpretation is that it serves as a mechanism to ensure that the learning rate is high when the value options are more uncertain, and low otherwise, thus preventing overshooting and oscillations in the weight updates.
 This adaptive behaviour is in line with known neuronal dynamics such as homeostatic plasticity, which works towards a stabilization of synapses, for instance through synaptic scaling and proportional updates \cite{citriSynapticPlasticityMultiple2008}.
 A variable learning rate is an important feature of several plasticity rules, from the more biologically plausible like the Oja \cite{ojaOjaLearningRule2008} to deep learning optimizers like Adam \cite{kingmaAdamMethodStochastic2017}.
-
 
 
 \subsection{Bio-inspired features}
@@ -68,7 +68,4 @@ The ACC has been associated to action values and influencing the exploration-exp
 In the model, the first layer represents the available options, while the learned connections with the second layer encode their values based on the recent reward history.
 Another similarity with this particular pre-frontal circuit is the realization of a choice as a sample of the network state after a period of autonomous neural activity, where the stability of the neural activations depend on the strength and reliability of the highest option value \cite{backmanEffectsWorkingMemoryTraining2011, enelStableDynamicRepresentations2020}.
 Moreover, the application of the function $\Phi_{v}$ on the connections $\textbf{W}^{UV}$ can be regarded as meta-plasticity, mediated by a neuromodulator \cite{wangMetalearningNaturalArtificial2021}.
-Lastly, learning follows a simple hetero-synaptic rule with a symmetric kernel (\textit{i.e.} there is no bias towards synaptic potentiation or depression), a features that is not uncommon for learning rules \cite{parkSymmetryLearningRate2017}.
-The learning rate is modulated by a non-linear function of the weights, which can be again regarded as a form of meta-learning \cite{inglisModulationDopamineAdaptive2021, iigayaAdaptiveLearningDecisionmaking2016}.
-Further, the synaptic specificity of the plasticity rate is a well documented trait of biolgical neurons, known as synapse-type specific plasticity (STSP) \cite{larsenSynapsetypespecificPlasticityLocal2015}.
 
