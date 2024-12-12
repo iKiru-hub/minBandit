@@ -374,7 +374,8 @@ if __name__ == "__main__" :
     title_text = f"{protocol['nb_reps']}:{protocol['nb_trials']}:{protocol['nb_rounds']} "
 
     if not args.noplot:
-        visualizer = me.Visualizer(settings=settings, online=True,
+        visualizer = me.Visualizer(settings=settings,
+                                   online=False,
                                    target=None,
                                    k_average=10,
                                    fitness_size=len(fitness_weights),
