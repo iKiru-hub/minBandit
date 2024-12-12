@@ -29,7 +29,7 @@ t+\lambda_{k})\text{  for }k=1\ldots K\}$.
 
 The model has been tested and compared with the other algorithms: Thompson Sampling, Epsilon-Greedy, and UCB, in the four different variants of the K-armed bandit problem.
 In figure \ref{fig:perf_plot}, it is reported their results over a different number of arms, ranging from 5 to 1000.
-Overall, our model displayed a remarkable performance over all environments and arm numbers, suffering only when the latter reached 1000.
+Overall, our model displayed a good performance over all environments and arm numbers, suffering only when the latter reached 1000.
 
 \begin{figure}[H]
     \centering
@@ -45,12 +45,13 @@ Overall, our model displayed a remarkable performance over all environments and 
 % entropy over rounds
 \subsubsection{Entropy analysis}\label{sec:entropy}
 \noindent For a better understanding of the qualitative differences between the models, we analyzed the progress over the rounds by tracking the selected arms, within the simplest case of zero-steps distribution shift.
+The simulation was ran for $3$ trials with $2000$, and averaged over $5$ iterations.
 Additionally, in order to quantify the variability of the decision policy at a given time and highlight the particularity of each decision-making behaviour, we calculated the entropy of the probability distribution $p$ of chosen arms, calculated over a window of 20 rounds, as $H=-\sum^{K}_{i} p_{i}\log(p_{i})$.
 The unit of entropy is in nats, and it ranges from $0$ (no uncertainty) to $\log_{e}(K)$ (maximum uncertainty).
-In figure \ref{fig:entropy_fig1}, it is plotted for each model the raster plot of selected arms together with its level of entropy. The reward probability distribution over the arms has $H=2.02$.
+In figure \ref{fig:entropy_fig1}, it is plotted for each model the raster plot of selected arms together with its level of entropy. The reward probability distribution over the arms has an average of $H=2.02$.
 
 As expected, the shape of the entropy curve expresses the inherent strategy adopted by each model.
-In particular, the UCB algorithm showed the highest variability, marked by a persistent exploratory behaviour throughout the trials despited converging to reward options. Thompson Sampling was able to reach most solutions, although with difficulty in adapting to new reward distributions
+In particular, the UCB algorithm showed the highest variability, marked by a persistent exploratory behaviour throughout the trials despite converging to reward options. Thompson Sampling was able to reach most solutions, although with difficulty in adapting to new reward distributions
 leading to high entropy levels.
 $\epsilon-$Greedy also showed a good performance quite reliably, with the greedy strategy assuring low entropy for most of the rounds.
 Similar behaviour was observed for our model, which was able to reach the optimal policy and maintain it over time, with entropy peaking mostly at the beggining of the trials and being, on average, the lowest among all models.
@@ -65,28 +66,6 @@ The red lines represent the entropy level, calculated from the distribution of s
 \end{figure}
 
 
-% weight update over rounds
-\subsubsection{Weight update dynamics}
-\noindent Next, we analyzed the weight update dynamics of the model over the rounds.
-In figure \ref{fig:rew_update}, we plotted the evolution of the weights for each arm over time, averaged over 20 simulations and smoothed over 30 rounds.
-The results show that the model is able to quickly adapt to new reward distributions. It is also able to maintain the optimal policy over time, with the weights remaining approximately stable.
-The update quantity $\Delta W_{k}^{UV}$ changes sign according to the collected reward, with its magnitude being higher at the beginning of the trials.
-Initially, the sign is mostly positive (potentiation) since the weights start at zero, and after some uncertainty a consistently preferred arm emerges.
-However, when the reward distribution switches a regular series of sub-optimal choices is made, leading to zero reward.
-This causes an accumulation of weight updates with negative sign (depression), eventually bringing the value of the preferred arm to drop. In the meantime, other options are probed until another sequence of choices converges to another arm, promoted by a trail of positive weight updates.
-
-This behaviour is consistent with the low entropy levels observed in the previous analysis.
-
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\textwidth]{figures/reward_update_plot.pdf}
-    \caption{\textsc{Weight update developement for the model} \textit{The plot displays the weight update quantity $\Delta W_{k}^{UV}$ for each round (blue line), smoothed as a 20-steps moving average.
-    It is also reported the average reward in a window of 30 rounds (golden line). The results have been obtained averaging over 20 iterations.}}
-    \label{fig:rew_update}
-\end{figure}
-
-
 % how robust and structure is the model
 \subsubsection{Robustness}
 
@@ -96,7 +75,7 @@ This was accomplished by evaluating the performances in a stationary setting wit
 For more details about the distribution see the appendix \ref{sec:appendix_entropy}.
 In the top row of figure \ref{fig:entropy_distr}, it is plotted the average reward obtained by each model against the reward distribution entropy in two trials.
 The results report how all models are capable of robust performance even in the presence of high uncertainty.
-In the second trial however, there is a ubiquitous and clear decline in rounds of elevented entropy. This can be explained by the greated challenge of changing arms when numerous options appear similarly good.
+In the second trial however, there is a ubiquitous and clear decline in rounds of elevated entropy. This can be explained by the greater challenge of changing arms when numerous options appear similarly good.
 In general, our model shows to perform as good as UCB, and better than Epsilon-Greedy and Thompson Sampling.
 Further, the latter seemed to suffer the most, probably due to its conservative approach and difficulty of disengaging from an previously rewarding arm, as underlined also in figure \ref{fig:entropy_fig1}.
 In the same figure, the regret (dashed lines) tells the same story, and remarks the robust performance over uncertainty.

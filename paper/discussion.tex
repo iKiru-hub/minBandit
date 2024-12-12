@@ -13,6 +13,7 @@ In this work, we introduced a model based on two interactive population of rate 
 Our goal was to design an architecture that resemble the functional role of the orbitofrontal cortex (OFC) and anterior cingulate cortex (ACC), together with biologically plausible neuronal dynamics based on synaptic plasticity.
 The results obtained report how it is able to succesfully adapt to changing reward distributions and maintain a near-optimal policy over time, achieving equally well when compared to the standard algorithms.
 The assessment was done over four different variants of the bandit problem and a wide range of number of arms, corroborating the robstness of the model.
+
 Further analysis involved the evaluation of the model's behaviour in situations with variable levels of entropy in the reward distribution.
 One insight was that in situation with low uncertainty, the model is almost always capable of quickly switching to the optimal option and settling to a greedy strategy, similarly to Thompson Sampling but unlike UCB, which is used to persevere in a noticeable exploratory behaviour.
 When the uncertainty increases also the model's entropy grows, which however does not necessarily hinder performance, except for switching arm in new trials. Here, the model's approach becomes more similar to UCB's than Thompson's.

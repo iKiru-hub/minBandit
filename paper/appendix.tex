@@ -120,6 +120,29 @@ $\mathbf{p}_i \gets \frac{\exp(\beta_i \mathbf{z})}{\sum_j \exp(\beta_i \mathbf{
 
 \textit{\textbf{Note:} table to update}
 
+
+% weight update over rounds
+\subsection{Weight update dynamics}
+\noindent We also analyzed the weight update dynamics of the model over the rounds.
+In figure \ref{fig:rew_update}, we plotted the evolution of the total weight $\Delta W^{UV}$ over time, averaged over 20 simulations and smoothed over 30 rounds.
+The results show that the model is able to quickly adapt to new reward distributions. It is also able to maintain the optimal policy over time, with the weights remaining approximately stable.
+The update quantity $\Delta W_{k}^{UV}$, which at each round is applied to one connection $k$, changes sign according to the collected reward, with its magnitude being higher at the beginning of the trials.
+Initially, the sign is mostly positive (potentiation) since the weights start at zero, and after some uncertainty a consistently preferred arm emerges.
+However, when the reward distribution switches a regular series of sub-optimal choices with respect to the new distribution is made, leading to zero reward.
+This causes an accumulation of weight updates with negative sign (depression), eventually bringing the value of the preferred arm to drop. In the meantime, other options are probed until another sequence of choices converges to another arm, promoted by a trail of positive weight updates.
+
+This behaviour is consistent with the low entropy levels observed in the previous analysis.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/reward_update_plot.pdf}
+    \caption{\textsc{Weight update developement for the model} \textit{The plot displays the weight update quantity $\Delta W_{k}^{UV}$ for each round (blue line), smoothed as a 20-steps moving average.
+    It is also reported the average reward in a window of 30 rounds (orange line). The results have been obtained averaging over 20 iterations.}}
+    \label{fig:rew_update}
+\end{figure}
+
+
 % % --- table K.5
 % \begin{table}[H]
 % \centering
