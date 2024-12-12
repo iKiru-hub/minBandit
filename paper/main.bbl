@@ -151,6 +151,25 @@ Kimberlee D'Ardenne, Neir Eshel, Joseph Luka, Agatha Lenartowicz, Leigh~E. Nystr
 \newblock Role of prefrontal cortex and the midbrain dopamine system in working memory updating.
 \newblock {\em Proceedings of the National Academy of Sciences}, 109(49):19900--19909, December 2012.
 
+\bibitem{igelCovarianceMatrixAdaptation2007}
+Christian Igel, Nikolaus Hansen, and Stefan Roth.
+\newblock Covariance {{Matrix Adaptation}} for {{Multi-objective Optimization}}.
+\newblock {\em Evolutionary Computation}, 15(1):1--28, March 2007.
+
+\bibitem{citriSynapticPlasticityMultiple2008}
+Ami Citri and Robert~C. Malenka.
+\newblock Synaptic {{Plasticity}}: {{Multiple Forms}}, {{Functions}}, and {{Mechanisms}}.
+\newblock {\em Neuropsychopharmacology}, 33(1):18--41, January 2008.
+
+\bibitem{ojaOjaLearningRule2008}
+Erkki Oja.
+\newblock Oja learning rule.
+\newblock {\em Scholarpedia}, 3(3):3612, March 2008.
+
+\bibitem{kingmaAdamMethodStochastic2017}
+Diederik~P. Kingma and Jimmy Ba.
+\newblock Adam: {{A Method}} for {{Stochastic Optimization}}, January 2017.
+
 \bibitem{qiForcedExplorationBandit2023}
 Han Qi, Fei Guo, and Li~Zhu.
 \newblock Forced {{Exploration}} in {{Bandit Problems}}, December 2023.
@@ -209,25 +228,6 @@ Youngjin Park, Woochul Choi, and Se-Bum Paik.
 Rylan~S Larsen and P~Jesper Sj{\"o}str{\"o}m.
 \newblock Synapse-type-specific plasticity in local circuits.
 \newblock {\em Current opinion in neurobiology}, 35:127--135, December 2015.
-
-\bibitem{igelCovarianceMatrixAdaptation2007}
-Christian Igel, Nikolaus Hansen, and Stefan Roth.
-\newblock Covariance {{Matrix Adaptation}} for {{Multi-objective Optimization}}.
-\newblock {\em Evolutionary Computation}, 15(1):1--28, March 2007.
-
-\bibitem{citriSynapticPlasticityMultiple2008}
-Ami Citri and Robert~C. Malenka.
-\newblock Synaptic {{Plasticity}}: {{Multiple Forms}}, {{Functions}}, and {{Mechanisms}}.
-\newblock {\em Neuropsychopharmacology}, 33(1):18--41, January 2008.
-
-\bibitem{ojaOjaLearningRule2008}
-Erkki Oja.
-\newblock Oja learning rule.
-\newblock {\em Scholarpedia}, 3(3):3612, March 2008.
-
-\bibitem{kingmaAdamMethodStochastic2017}
-Diederik~P. Kingma and Jimmy Ba.
-\newblock Adam: {{A Method}} for {{Stochastic Optimization}}, January 2017.
 
 \bibitem{steyversBayesianAnalysisHuman2009a}
 Mark Steyvers, Michael~D. Lee, and Eric-Jan Wagenmakers.

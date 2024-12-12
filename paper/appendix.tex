@@ -1,8 +1,29 @@
 
 \section{Appendix}\label{sec:appendix}
 
+\subsection{Neural response function}
+
+The activation functions applied to the two neuronal population are defined as a step-function composed with a generalized sigmoid as follows:
+
+\begin{equation}
+f(x; g, o, \theta) =
+\begin{cases}
+    \left[1 + e^{-g(x - o)}\right]^{-1} & \text{ if } \left[1 + e^{-g(x - o)}\right]^{-1} > \theta \\
+0 & \text{ otherwise}
+\end{cases}
+\end{equation}
+
+Where:
+\begin{itemize}
+\item $x$ is the neuron pre-activation value
+\item $g$ is the gain
+\item $o$ is the offset
+\item $\theta$ is the threshold
+\end{itemize}
+\noindent Each population has its own set of parameters, which are optimized through evolutionary search.
 
 \subsection{Gaussian-sigmoid function}
+
 \noindent The function $\Phi_{\cdot}$ is defined by combining a generalized version of the sigmoid, namely with a gain $\beta \neq 1$ and offset $\alpha\neq 0$, and a Gaussian with mean $\mu$ and variance $\sigma^{2}$. Their contributions are weighted by as $r$ and $1-r$ ($r\in(0,1)$) respectively.
 
 \begin{equation*}
@@ -22,13 +43,18 @@ $\alpha$, and intensity $\gamma_{1}$).
 
 \subsection{Evolution search}
 The optimization was carried out over several parameters concerning the model architecture and dynamics:
-\textbf{Network parameters}
+
+\noindent \textbf{Network parameters}
 \begin{itemize}
-    \item $\tau_{u}$: time constant of population $u$ ($M$)
-    \item $\tau_{v}$: time constant of population $v$ ($V$)
-    \item $g$: gain of the sigmoidal activation function of population v
-    \item $\theta$: threshold of the sigmoidal activation function of population v
-    \item $W^{+}$: maximal weight value for the weights $\textbf{W}^{MV}$
+    \item $\tau_{u}$: time constant of population $U$
+    \item $\tau_{v}$: time constant of population $V$
+    \item $g_{u}$: gain of the neural response function of population $U$
+    \item $g_{v}$: gain of the neural response function of population $V$
+    \item $o_{u}$: offset of the neural response function of population $U$
+    \item $o_{v}$: offset of the neural response function of population $V$
+    \item $\theta_{u}$: threshold of the neural response function of population $U$
+    \item $\theta_{v}$: threshold of the neural response function of population $V$
+    \item $W^{+}$: maximal weight value for the weights $\textbf{W}^{UV}$
 \end{itemize}
 
 \noindent \textbf{Option value function parameters}
@@ -42,7 +68,6 @@ The optimization was carried out over several parameters concerning the model ar
 
 \noindent \textbf{Learning rate function parameters}
 \begin{itemize}
-    \item $\gamma_{\eta}$: intensity of the l
     \item $\beta_{\eta}$: steepness of the sigmoid
     \item $\alpha_{\eta}$: shift of the sigmoid
     \item $\mu_{\eta}$: mean of the Gaussian

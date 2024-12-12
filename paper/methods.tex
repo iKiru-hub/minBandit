@@ -6,14 +6,42 @@
 \noindent The following section is organized as follows. First, we introduce a formalization of general problem setting, together with the variants considered in this work. Then, we outline the architecture of our model and how it can be mapped to neurobiology. Finally, we describe the learning procedure,
 and showcase its dynamics in a simple example.
 
+
+% Evolution: fitness evolution
+\subsection{Evolution search}
+The optimization of the hyper-parameters has been performed using the Covariance Matrix Adaptation evolutionary strategy algorithm (CMA-ES) \cite{igelCovarianceMatrixAdaptation2007}.
+The search has been run with a population of $256$ individuals (unique set of genomes corresponding to a sample in parameter space) for $40$ generations. The fitness function has been defined as the average reward obtained by an individual over 2 independent iterations.
+The results are summarized below in figure \ref{fig:evolution}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/evolution_plot.png}
+    \caption{\textsc{Evolution of the model over generations.} - Left: \textit{top fitness, mean and standard deviation (16-84 percentile) of the population over generations.} - Top-Right: \textit{option value and learning rate Gaussian sigmoid functions parametrized according to the genome of the fittest individual}
+    Bottom-Right: \textit{activation function for population $v$ and $u$}}
+    \label{fig:evolution}
+\end{figure}
+
+% comment on the evolved functions
+\noindent The evolution results show a steady improvement of the fitness over generations, before hitting a plateau corresponding to the theoretical optimal of the chosen simulations.
+Regarding the evolved functions, the option value function $\Phi_{v}$ is characterized by a steep sigmoid curve.
+However, it has the peculiarity of a convex shape in an initial interval $(0, \sim 2)$ explained by a parameter $r=0.71$, which factors in the influence of the Gaussian with $\mu=-2.7, \sigma=4.2$ and constraints the constant part of the sigmoid to $\sim 0.7$.
+This is consistent with the idea that the input of population $u$ (memory layer $U$) to population $v$ (value layer $V$) is weighted maximally for high option values (strong synapses), whereas for weaker estimates the contributions are low or close to zero, allowing for more exploration.
+
+The learning rate function $\Phi_{\eta}$ is instead characterized by a marked bell-shaped curve, given a parameter $r=0.06$. The associated Gaussian has a positive mean located at $\mu=1.$, which aligns approximately with the local valley of the weight function $\Phi_{v}$.
+A possible interpretation is that it serves as a mechanism to ensure that the learning rate is high when the value options are more uncertain, and low otherwise, thus preventing overshooting and oscillations in the weight updates.
+This adaptive behaviour is in line with known neuronal dynamics such as homeostatic plasticity, which works towards a stabilization of synapses, for instance through synaptic scaling and proportional updates \cite{citriSynapticPlasticityMultiple2008}.
+A variable learning rate is an important feature of several plasticity rules, from the more biologically plausible like the Oja \cite{ojaOjaLearningRule2008} to deep learning optimizers like Adam \cite{kingmaAdamMethodStochastic2017}.
+
+
+
 % mathematical formulation of the k-armed bandit problem.
 \subsection{Binomial K-armed bandit problem}
 \hfill \break
-\noindent The standard formulation of the task is structured as a set of $\{1\dots K\}$ arms (or levers), with an associated reward distribution $\mathbf{p}=\{p_{1}, \ldots p_{K}\}$.
+\noindent The standard formulation of the task is structured as a set of $K$ arms (or levers) $\mathcal{A}_{K}=\{a_{1}\ldots a_{K}\}$, with an associated reward distribution $\mathbf{p}=\{p_{1}, \ldots p_{K}\}$.
 At each iteration, the agent pulls an arm and collects a possible reward drawn as a Bernoulli variable $R\sim \mathcal{B}(\{0,1\},p_{k})$. The agent's objective is maximizing the total reward $\sum^{T}_{t} R_{t}$, after a certain number $T$ of rounds, also called horizon.
 Importantly, the agent is unaware of the true reward probabilities, and thus has to make its decisions following a certain policy, denoted as $\pi$.
-In the reinforcement learning literature, the policy is often defined as a distribution from which sample actions, here the arms $K$, given the current state at time $t$. In the bandit problem, the state can be taken to correspond to the history $h_{t}$ of past actions and rewards in the period
-$0\ldots t$ \cite{qiForcedExplorationBandit2023}.
+In the reinforcement learning literature, the policy is often defined as a distribution over actions, here the arms $\mathcal{A}_{K}$, given the current state at time $t$. In the bandit problem, the state can be taken to correspond to the history $h_{t}$ of past actions and rewards in the period
+$(0\ldots t]$, and the policy as a function that return a selected arm $\pi(h_{t})=a_{t}$ \cite{qiForcedExplorationBandit2023}.
 
 Given the inherent stochasticity of the feedbacks from the environment, the policy is affected by the so-called exploration-exploitation trade-off, which here is phrased as the contrast between the option of the arm with the estimated highest expected reward versus the option to explore other arms, so to gather more information.
 A common approach is the $\epsilon-$greedy policy, where the choice to explore is selected with a probability $\epsilon$.
@@ -21,12 +49,12 @@ Moreover, it is often preferable to have a more explorative behaviour early duri
 
 % regret
 Another important concept in multi-armed bandit problems is \textit{regret}. Intuitively, it is defined as the deviation of the total reward obtained by the agent from the optimal reward that could have been obtained by always choosing the arm with the highest expected reward.
-Formally, the regret is defined as:
+Formally, for a stationary distribution\footnote{\textbf{<<NB>>} should I generalize to non-stationary distribution, e.g. using extected values?} the regret is defined as:
 \begin{equation}
     \rho=R^{*} - \sum^{T}_{t} R_{t}
 \end{equation}
 
-\noindent where $R^{*}$ is the reward obtained by always choosing the arm with the highest expected reward $R^{*}=T\max_{k}\{p_{k}\}$, and $R_{t}$ is the empirical reward obtained up to time $t$ by following policy $\pi$ as $R_{t}=\sum^{T}_{t=1}\pi_{\theta}(t)$.
+\noindent where $R^{*}$ is the reward obtained by always choosing the arm $a_{k}$ associated with the highest expected reward: $R^{*}=T\max_{k}\{\mathbf{p}\}$, and $R_{t}$ is the empirical reward obtained up to time $t$ by following policy $\pi$: $R_{t}=\sum^{T}_{t=1}\mathcal{B}(\pi(h_{t}))$.
 The regret is a measure of the performance of the agent, and it is often used to compare different algorithms. The goal of the agent is to minimize the regret, and thus maximize the total reward.
 
 \input{minmodel}
