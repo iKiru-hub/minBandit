@@ -11,7 +11,8 @@ import time, warnings
 import src.envs as envs
 import src.models as mm
 
-from src.utils import setup_logger, make_probability_set, make_new_env
+from src.utils import setup_logger, make_probability_set
+from src.envs import make_new_env
 logger = setup_logger(__name__)
 
 
@@ -82,7 +83,7 @@ class Env:
 
                 env = make_new_env(K=K,
                                    env_type=env_type,
-                                   nb_trials=nb_trials)
+                                   nb_trials=self.nb_trials)
 
                 # initialize the genome
                 params = agent.get_genome()
@@ -102,13 +103,9 @@ class Env:
         return (fitness / (len(self.K_list) + len(self.env_list)),)
 
 
-"""
-GENOME SETUP
-------------
 
-K - lr - tau - dur_pre - dur_post - *value function*
 
-"""
+""" GENOME SETUP """
 
 FIXED_PARAMETERS = {
     # 'w_max': 5.,

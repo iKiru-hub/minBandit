@@ -446,14 +446,14 @@ def make_new_env(K: int, env_type: str, nb_trials: int=3) -> object:
 
     # define the environment
     if env_type == "driftv0":
-        env = envs.KABdriftv0(K=K,
+        env = KABdriftv0(K=K,
                               probabilities_set=probabilities_set,
                               verbose=False,
                               tau=100)
     elif env_type == "sinv0":
         frequencies = np.random.uniform(0, 0.1, K)
         phases = np.random.uniform(0, 6.28, K)
-        env = envs.KABsinv0(K=K,
+        env = KABsinv0(K=K,
                             frequencies=frequencies,
                             normalize=False,
                             phases=phases,
@@ -462,14 +462,14 @@ def make_new_env(K: int, env_type: str, nb_trials: int=3) -> object:
         frequencies = np.random.uniform(0, 0.1, K)
         phases = np.random.uniform(0, 6.28, K)
         constants = np.random.uniform(0, 0.7, K//2)
-        env = envs.KABsinv0(K=K,
+        env = KABsinv0(K=K,
                             frequencies=frequencies,
                             normalize=False,
                             phases=phases,
                             constants=constants,
                             verbose=False)
     elif env_type == "v0":
-        env = envs.KABv0(K=K,
+        env = KABv0(K=K,
                          probabilities_set=probabilities_set,
                          verbose=False)
     else:
