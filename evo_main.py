@@ -11,56 +11,13 @@ import time, warnings
 import src.envs as envs
 import src.models as mm
 
-from src.utils import setup_logger, make_probability_set
+from src.utils import setup_logger, make_probability_set, make_new_env
 logger = setup_logger(__name__)
 
 
 
 
 """ Env """
-
-# define the environment
-def make_env(K: int,
-             env_type: str,
-             probabilities_set: list,
-             tau: int,
-             normalize=True):
-
-    if env_type == "driftv0":
-        env = envs.KABdriftv0(K=K,
-                              probabilities_set=probabilities_set,
-                              verbose=False,
-                              tau=tau)
-    elif env_type == "driftv1":
-        env = envs.KABdriftv1(K=K,
-                              verbose=False,
-                              tau=tau,
-                              normalize=normalize,
-                              fixed_p=0.9)
-    elif env_type == "sinv0":
-        frequencies = np.linspace(0.1, 0.4, K)
-        phases = np.random.uniform(0, 2*np.pi, K)
-        env = envs.KABsinv0(K=K,
-                            frequencies=frequencies,
-                            phases=phases,
-                            normalize=normalize,
-                            verbose=False)
-    elif env_type == "sinv1":
-        frequencies = np.linspace(0.1, 0.4, K)
-        phases = np.random.uniform(0, 2*np.pi, K)
-        constants = np.random.uniform(0.1, 0.7, int(K/2))
-        env = envs.KABsinv0(K=K,
-                            frequencies=frequencies,
-                            phases=phases,
-                            normalize=normalize,
-                            constants=constants,
-                            verbose=False)
-    else:
-        env = envs.KABv0(K=K,
-                         probabilities_set=probabilities_set,
-                         verbose=False)
-
-    return env
 
 
 class Env:
@@ -99,39 +56,6 @@ class Env:
 
         return f"Env({self.nb_reps}:{self.nb_trials}:{self.nb_rounds})"
 
-    def _make_env(self, env_type: str, nb_trials: int, K: int) -> object:
-
-        """
-        Make the environment.
-
-        Parameters
-        ----------
-        env_type : str
-            The type of environment.
-        nb_trials : int
-            The number of trials.
-        K : int
-            The number of bandits.
-
-        Returns
-        -------
-        env : object
-            The environment object.
-        """
-
-        normalize = False
-
-        probabilities_set = make_probability_set(K=K,
-                                        nb_trials=self.nb_trials,
-                                        fixed_p=None,
-                                        normalize=normalize)
-
-        return make_env(K=K,
-                       probabilities_set=probabilities_set,
-                       env_type=env_type,
-                       tau=self.tau,
-                       normalize=False)
-
     def run(self, agent: object) -> float:
 
         """
@@ -155,9 +79,10 @@ class Env:
             nb_rounds = 500 if env_type == "v0" else self.nb_rounds
 
             for K in self.K_list:
-                env = self._make_env(env_type=env_type,
-                                     nb_trials=self.nb_trials,
-                                     K=K)
+
+                env = make_new_env(K=K,
+                                   env_type=env_type,
+                                   nb_trials=nb_trials)
 
                 # initialize the genome
                 params = agent.get_genome()
@@ -167,10 +92,10 @@ class Env:
 
                 model = mm.Modelv2(**params)
                 stats = envs.trial_multiple_models(models=[model],
-                                               environment=env,
-                                               nb_trials=self.nb_trials,
-                                               nb_rounds=nb_rounds,
-                                               nb_reps=self.nb_reps)
+                                                   environment=env,
+                                                   nb_trials=self.nb_trials,
+                                                   nb_rounds=nb_rounds,
+                                                   nb_reps=self.nb_reps)
 
                 fitness += stats["scores"].item()
 
@@ -312,8 +237,8 @@ if __name__ == "__main__" :
         "nb_reps": config_model["trial"]["nb_reps"],
         "nb_trials": nb_trials,
         "nb_rounds": nb_rounds,
-        "K_list": [50, 300],
-        "env_list": ["v0", "sinv1"],
+        "K_list": [40, 200],
+        "env_list": ["v0", "driftv0", "sinv0"],
         "tau": config_model["bandits"]["tau"],
     }
 

@@ -7,9 +7,9 @@ from abc import ABC, abstractmethod
 from statistics import mode
 
 try:
-    from src.utils import tqdm_enumerate, setup_logger, calc_entropy
+    from src.utils import tqdm_enumerate, setup_logger, calc_entropy, cosine_similarity
 except ModuleNotFoundError:
-    from utils import tqdm_enumerate, setup_logger, calc_entropy
+    from utils import tqdm_enumerate, setup_logger, calc_entropy, cosine_similarity
 
 
 logger = setup_logger(__name__)
@@ -45,7 +45,7 @@ class KAB(ABC):
         if probabilities_set is not None:
             assert len(probabilities_set[0]) == K, \
                 "The number of probabilities must be equal to K"
-            self._probabilities_set_or = probabilities_set
+            self._probabilities_set_or = probabilities_set.copy()
             self.probabilities_set = probabilities_set if isinstance(
                 probabilities_set, np.ndarray) else np.array(
                         probabilities_set)
@@ -59,6 +59,7 @@ class KAB(ABC):
         self.chance_level_list = [np.mean(self.probabilities)]
         self.upper_bound_list = [np.max(self.probabilities)]
         self.best_arm_list = [np.argmax(self.probabilities)]
+        self.probabilities_record = [self.probabilities.tolist()]
         self.verbose = verbose
         self.record = record
 
@@ -79,8 +80,9 @@ class KAB(ABC):
         self.chance_level_list += [np.mean(self.probabilities)]
         self.upper_bound_list += [np.max(self.probabilities)]
         self.best_arm_list += [np.argmax(self.probabilities)]
+        self.probabilities_record += [self.probabilities.tolist()]
 
-    def sample(self, k: int) -> int:
+    def sample(self, k: int, update_flag: bool=True) -> int:
 
         """
         Sample the reward of the k-th arm
@@ -89,6 +91,8 @@ class KAB(ABC):
         ----------
         k : int
             The index of the arm
+        update_flag : bool, optional
+            Update the record, by default True
 
         Returns
         -------
@@ -96,7 +100,8 @@ class KAB(ABC):
             The reward
         """
 
-        self._update()
+        if update_flag:
+            self._update()
 
         return np.random.binomial(1, p=self.probabilities[k])
 
@@ -128,7 +133,7 @@ class KAB(ABC):
 
         if complete:
 
-            self.probabilities_set = self._probabilities_set_or
+            self.probabilities_set = self._probabilities_set_or.copy()
             self.probabilities = self.probabilities_set[0]
             self.counter = 0
 
@@ -140,10 +145,10 @@ class KAB(ABC):
 class KABv0(KAB):
 
     def __init__(self, K: int, probabilities_set: list,
-                 verbose: bool=False):
+                 record: bool=False, verbose: bool=False):
 
         super().__init__(K=K, probabilities_set=probabilities_set,
-                                    verbose=verbose)
+                         record=record, verbose=verbose)
 
     def _update(self):
 
@@ -170,7 +175,6 @@ class KABv0(KAB):
             logger.info(f"%upper bound: {self.upper_bound:.3f}")
 
 
-
 class KABdriftv0(KAB):
 
     """
@@ -178,8 +182,8 @@ class KABdriftv0(KAB):
     """
 
     def __init__(self, K: int, probabilities_set: list,
-                 tau: float=5.,
-                 verbose: bool=False):
+                 tau: float=100,
+                 record: bool=False, verbose: bool=False):
 
         """
         Parameters
@@ -194,10 +198,16 @@ class KABdriftv0(KAB):
         """
 
         super().__init__(K=K, probabilities_set=probabilities_set,
+                         record=record,
                          verbose=verbose)
 
-        self.trg_probabilities = self.probabilities_set[1]
+        self.probabilities_set = tuple([tuple(p.tolist()) for p in self.probabilities_set])
+
+        self.probabilities = np.array(self.probabilities_set[0])
+        self.trg_probabilities = np.array(self.probabilities_set[1])
+
         self._tau = tau
+        self.counter = 0
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self.K}," + \
@@ -215,9 +225,13 @@ class KABdriftv0(KAB):
         self._update_record()
 
         # check if the target distribution has been reached
-        if np.abs(self.probabilities - self.trg_probabilities).sum() < 0.01:
-            self.trg_probabilities = self.probabilities_set[self.counter % self.nb_sets]
+        err = np.abs(self.probabilities - self.trg_probabilities).sum()
+        if err < 0.01:
+
+            self.trg_probabilities = np.array(self.probabilities_set[self.counter % self.nb_sets])
             self.counter += 1
+
+            err = np.abs(self.probabilities - self.trg_probabilities).sum()
 
         if self.verbose:
             logger.info("---renew")
@@ -228,8 +242,11 @@ class KABdriftv0(KAB):
     def reset(self, complete: bool=False):
         super().reset(complete=complete)
 
+        # self.probabilities_set = tuple([tuple(p.tolist()) for p in self.probabilities_set])
         if complete:
-            self.trg_probabilities = self.probabilities_set[1]
+            self.counter = 0
+            self.probabilities = np.array(self.probabilities_set[0])
+            self.trg_probabilities = np.array(self.probabilities_set[1])
 
 
 class KABdriftv1(KAB):
@@ -240,7 +257,8 @@ class KABdriftv1(KAB):
     """
 
     def __init__(self, K: int, tau: float=5., verbose: bool=False,
-                 fixed_p: float=False, seed: int=None, normalize: bool=False):
+                 fixed_p: float=False, record: bool=False,
+                 seed: int=None, normalize: bool=False):
 
         """
         Parameters
@@ -335,8 +353,9 @@ class KABsinv0(KAB):
                  phases: list=None,
                  constants: list=[],
                  normalize: bool=True,
+                 record: bool=False,
                  verbose: bool=False):
-    
+
         """
         Parameters
         ----------
@@ -355,7 +374,7 @@ class KABsinv0(KAB):
         """
 
         super().__init__(K=K, probabilities_set=None,
-                         verbose=verbose)
+                         record=record, verbose=verbose)
 
         self._frequencies = frequencies if isinstance(frequencies,
                                                       np.ndarray) else np.array(frequencies)
@@ -419,6 +438,45 @@ class KABsinv0(KAB):
             self.chance_level_list = [np.mean(self.probabilities)]
             self.upper_bound_list = [np.max(self.probabilities)]
             self.best_arm_list = [np.argmax(self.probabilities)]
+
+
+def make_new_env(K: int, env_type: str, nb_trials: int=3) -> object:
+
+    probabilities_set = np.random.normal(0.5, 0.2, (nb_trials, K)).clip(0, 1)
+
+    # define the environment
+    if env_type == "driftv0":
+        env = envs.KABdriftv0(K=K,
+                              probabilities_set=probabilities_set,
+                              verbose=False,
+                              tau=100)
+    elif env_type == "sinv0":
+        frequencies = np.random.uniform(0, 0.1, K)
+        phases = np.random.uniform(0, 6.28, K)
+        env = envs.KABsinv0(K=K,
+                            frequencies=frequencies,
+                            normalize=False,
+                            phases=phases,
+                            verbose=False)
+    elif env_type == "sinv1":
+        frequencies = np.random.uniform(0, 0.1, K)
+        phases = np.random.uniform(0, 6.28, K)
+        constants = np.random.uniform(0, 0.7, K//2)
+        env = envs.KABsinv0(K=K,
+                            frequencies=frequencies,
+                            normalize=False,
+                            phases=phases,
+                            constants=constants,
+                            verbose=False)
+    elif env_type == "v0":
+        env = envs.KABv0(K=K,
+                         probabilities_set=probabilities_set,
+                         verbose=False)
+    else:
+        raise NameError(f"\n==> {env_type=} not recognized")
+
+    return env
+
 
 
 """ Trial """
@@ -622,7 +680,7 @@ def trial_multiple_models(models: list, environment: KAB,
 
     # loop over repetitions
     for rep_i in tqdm(range(nb_reps), disable=not verbose or nb_reps < 2):
-        environment.reset()
+        environment.reset(complete=True)
 
         # loop over trials
         for trial_i in tqdm(range(nb_trials),
@@ -645,11 +703,14 @@ def trial_multiple_models(models: list, environment: KAB,
             # loop over rounds
             for round_i in range(nb_rounds):
 
+                # update only once per round
+                environment._update()
+
                 # loop over models
                 for i, m in enumerate(models):
 
                     k = m.select_arm() # select an arm
-                    reward = environment.sample(k=k) # sample reward
+                    reward = environment.sample(k=k, update_flag=False) # sample reward
                     m.update(k=k, reward=reward) # update model
 
                     # local record update

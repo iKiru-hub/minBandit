@@ -614,7 +614,6 @@ def neural_response_func(x: np.ndarray, gain: float, offset: float,
     return z * (z > threshold)
 
 
-
 @jit(nopython=True)
 def sigmoid(x: np.ndarray, alpha: float=0., beta: float=1.) -> np.ndarray:
 
@@ -637,6 +636,26 @@ def generalized_sigmoid(x: np.ndarray, gain: float, threshold: float) -> np.ndar
 
     return 1 / (1 + np.exp(-gain*(x - threshold)))
 
+
+def cosine_similarity(x: np.ndarray, y: np.ndarray) -> float:
+
+    """
+    compute the cosine similarity between two vectors
+
+    Parameters
+    ----------
+    x : np.ndarray
+        the first vector
+    y : np.ndarray
+        the second vector
+
+    Returns
+    -------
+    float
+        the cosine similarity
+    """
+
+    return np.dot(x, y) / (np.linalg.norm(x) * np.linalg.norm(y))
 
 
 
