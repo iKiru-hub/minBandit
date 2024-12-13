@@ -5,8 +5,8 @@
 
 % brief introduction to decision making and the brain.
 The ability to make decisions for long-term reward maximization is a fundamental aspect of cognition. The brain is has evolved specialized and interconnected regions to implement this behaviour under the constraints of biology.
-The Pre-Frontal Cortex (PFC) is considered a fundamental high-level region for attention and cognitive control, in particular the medial PFC \cite{millerIntegrativeTheoryPrefrontal2001a, sheynikhovichLongtermMemorySynaptic2023}.
-The orbitofrontal cortex (OFC) is thought to be involved in motivation and representation of the expected value of the actions, either positive or negative \cite{odohertyAbstractRewardPunishment2001, ricebergRewardStabilityDetermines2012, tremblayRelativeRewardPreference1999}, action selection in uncertain environments \cite{elliottDissociableFunctionsMedial2000}, and contextual processing \cite{frankAnatomyDecisionStriatoorbitofrontal2006}.
+% The Pre-Frontal Cortex (PFC) is considered a fundamental high-level region for attention and cognitive control, in particular the medial PFC \cite{millerIntegrativeTheoryPrefrontal2001a, sheynikhovichLongtermMemorySynaptic2023}.
+% The orbitofrontal cortex (OFC) is thought to be involved in motivation and representation of the expected value of the actions, either positive or negative \cite{odohertyAbstractRewardPunishment2001, ricebergRewardStabilityDetermines2012, tremblayRelativeRewardPreference1999}, action selection in uncertain environments \cite{elliottDissociableFunctionsMedial2000}, and contextual processing \cite{frankAnatomyDecisionStriatoorbitofrontal2006}.
 
 % bridge between decision making and the k-armed bandit problem.
 Well-studied ecological settings of decision-making are foraging tasks, such as food search. In this problems, the agent is usually asked to choose between different options to maximize an expected reward.
@@ -22,7 +22,7 @@ This problem has been extensively studied in the context of reinforcement learni
 
 % brief introduction of the k-armed bandit problem and previous algorithms.
 % \subsection{Related work}
-\hfill \break
+% \hfill \break
 % overview of the main solutions proposed in the literature from a computational perspective.
 There exist various flavours of this problem, with the simplest having a stationary reward distribution.
 Over the years, several algorithms have been proposed, alongside with their theoretical guarantees.
@@ -39,8 +39,9 @@ In this work, we propose a biologically plausible algorithm using rate neurons, 
 
 % brief overview of the model
 The architecture of our model consists of two connected neuronal layers, both with as many neurons as the arms of the bandit task.
-The first layer is inspired by the functionality of the OFC, and its scope is to maintain an active representation of the arms weighted by the input from the second layer.
-The second, modeled after the ACC, is meant to represent the value of the arms, and its input connections are updated through a learning rule dependant on the reward history and current connectivity pattern.
+The first layer is inspired by the functionality of the orbitofrontal cortex (OFC), and its scope is to maintain an active representation of the arms weighted by the input from the second layer. Moreover, this are is thought to be involved in motivation and representation of the expected value of the actions, either positive or negative \cite{odohertyAbstractRewardPunishment2001, ricebergRewardStabilityDetermines2012, tremblayRelativeRewardPreference1999}, action selection in uncertain environments \cite{elliottDissociableFunctionsMedial2000}, and contextual processing \cite{frankAnatomyDecisionStriatoorbitofrontal2006}.
+The second layer is instead modeled after the ACC, and it is meant to represent the value of the arms. Its input connections are updated through a learning rule dependant on the reward history and current connectivity pattern.
+% The Pre-Frontal Cortex (PFC) is considered a fundamental high-level region for attention and cognitive control, in particular the medial PFC \cite{millerIntegrativeTheoryPrefrontal2001a, sheynikhovichLongtermMemorySynaptic2023}.
 
 % main motivations
 Our model features two important aspects of the brain during decision making. Firstly, the option selection process itself is implemented as a dynamical interaction between neural populations, similarly to bump attractor networks for perceptual cognition \cite{carrollEncodingCertaintyBump2014, esnaola-acebesBumpAttractorDynamics2021}.

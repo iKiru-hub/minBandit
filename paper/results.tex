@@ -3,26 +3,39 @@
 The model has been tested in a series of benchmark environments, each with a different number of arms and reward distributions. The performance has been compared with the following algorithms: Random Baseline, Upper-Confidence Bound (UCB), Thompson Sampling, and Epsilon-Greedy.
 
 % Description of the environments
-\subsection{Game variants} \textbf{YEAH BUDDY WORK ON THIS A LIL MORE}
+\subsection{Game variants} %\textbf{YEAH BUDDY WORK ON THIS A LIL MORE}
 
-\noindent The game environments considered in this work are non-stationary K-Armed Bandits with Binomial rewards.
-In particular, the agent is evaluated over a number $T_{\text{trials}}$ of \textit{trials}, each composed by an arbitrary number $T_{\text{rounds}}$ of \textit{rounds}; each \textit{trial} is characterized by a different reward distribution $\mathbf{p}\sim\mathcal{U}(0,1)^{K}$ (although in practice the bounds have been set to $(0.1, 0.9)$ such that the distributions are less trivial).
-Our goal in this work is to investigate the performance of the agent in a non-stationary environment with Binomial reward distributions, meaning that its underlying distribution changes over time.
+% \noindent The game environments considered in this work are non-stationary K-Armed Bandits with Binomial rewards.
+% In particular, the agent is evaluated over a number $T_{\text{trials}}$ of \textit{trials}, each composed by an arbitrary number $T_{\text{rounds}}$ of \textit{rounds}; each \textit{trial} is characterized by a different reward distribution $\mathbf{p}\sim\mathcal{U}(0,1)^{K}$ (although in practice the bounds have been set to $(0.1, 0.9)$ such that the distributions are less trivial).
+\noindent Our goal in this work is to investigate the performance of the agent in a non-stationary environment with Binomial reward distributions, meaning that its underlying distribution changes over time \footnote{Since the arm probabilities are not normalized to $1$, it is
+technically improper to call them \textit{probability distributions}; we will therefore refer to either \textit{probability} or \textit{distribution} separately at any given time for avoiding confusion.}
 We choose this setting as it resembles an ecological scenario in which an animal has to forage in an environment with food (reward) is distributed over a set of fixed locations, but whose occurrence probability can change over time.
-More specifically, we used four different variants:
+More specifically, we used four different variants obtained by introducing different types of non-stationarity: piecewise constant, uniformly changing, sinusoidally changing, and sinusoidally changing plus pieacewise constant.
+The reason for this choices is to test the model performance under different speed and uniformity of the distribution changes.
+Figure \ref{fig:envs} visually illustrates their specificities.
 
-\noindent \textbf{Zero-steps distribution shift} [\textsc{KAB-0}]: the reward distribution changes immediately at the end of a trial $i$ to a new one $i+1$ as $\mathbf{\mathbf{p}}_{i} \to \mathbf{\mathbf{p}}_{i+1}$.
+\hfill \break
+\noindent \textbf{Piecewise stationary environment} [\textsc{KAB-P}]\\ Within a trial the reward distribution is stationary and it is drawn from a uniform $\mathbf{p}=\mathcal{U}(0, 1)^{K}$. At the end of each trial $i$ it is drawn a new distribution $\mathbf{\mathbf{p}}_{i} \to \mathbf{\mathbf{p}}_{i+1}$ \cite{qiForcedExplorationBandit2023}.
 
-\noindent \textbf{Epsilon-steps distribution shift} [\textsc{KAB-$\epsilon$}]:
-the reward distribution $\mathbf{p}$ changes gradually over rounds, tracked as time $t$, such that its shape tends towards a target distribution $\mathbf{q}_{i}$ as
-$\tau_{p}\dot{\mathbf{p}}_{t}=\mathbf{q}_{i}-\mathbf{p}_{t}$. Here, $\dot{\mathbf{p}}$ is the time derivative of the distribution and $\tau_{p}$ is its time constant.
-Once distance is below a threshold $\epsilon$ as $\vert \mathbf{q}_{i} - \mathbf{p}_{t}\vert < \epsilon$, the target distribution is changed to a new one $\mathbf{q}_{i}\to\mathbf{q}_{i+1}$.
+\hfill \break
+\noindent \textbf{Piecewise stationary environment with drift} [\textsc{KAB-D}]\\ At the very beginning, the reward distribution $\mathbf{p}$ is sampled from a uniform $\mathbf{p}=\mathcal{U}(0, 1)^{K}$. Then, it changes gradually over the rounds, tracked as time $t$, such that its values tend towards a target distribution $\mathbf{q}_{i}$ as $\tau_{p}\dot{\mathbf{p}}_{t}=\mathbf{q}_{i}-\mathbf{p}_{t}$.
+Here, $\dot{\mathbf{p}}$ is the time derivative of the distribution and $\tau_{p}$ is its time constant.
+Once the distance is below a threshold $\delta$ as $\vert \mathbf{q}_{i} - \mathbf{p}_{t}\vert < \delta$, the target distribution is changed to a new one $\mathbf{q}_{i}\to\mathbf{q}_{i+1}$. In this variant, there are no proper trials but the target distribution keep changing until a maximum number
+of rounds is reached.
 
-\noindent \textbf{Sinusoidal distribution shift} [\textsc{KAB-$\sin$}]: the reward distribution changes over rounds, with the probability of each arm following a sine wave with a specific frequency $f_{k}$, phase $\lambda_{k}$ and amplitude $1$. At any given time $t$, the distribution is $\mathbf{p}_{t}=\{\sin(2\pi f_{k}
-t+\lambda_{k})\text{  for }k=1\ldots K\}$.
+\hfill \break
+\noindent \textbf{Sinusoidal distribution shift} [\textsc{KAB-$\sin$}]\\ The reward distribution changes over rounds, with the probability of each arm following a sine wave with a specific frequency $f_{k}$, phase $\lambda_{k}$ and amplitude $1$. At any given time $t$, the distribution is $\mathbf{p}_{t}=\{\sin(2\pi f_{k} t+\lambda_{k})\text{  for }k=1\ldots K\}$.
 
-\noindent \textbf{Partial sinusoidal distribution shift} [\textsc{KAB-$\sin$P}]: identical to the sinusoidal distribution shift, but only a subset of the arms changes sinusoidally while the rest is kept at a constant value and the distribution is not normalized.
+\hfill \break
+\noindent \textbf{Partial sinusoidal distribution shift} [\textsc{KAB-$\sin$P}]\\ Identical to the sinusoidal distribution shift, but only a subset of the arms changes sinusoidally while the rest is kept at a constant value and the distribution is not normalized.
 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.\textwidth]{figures/envs_1.png}
+    \caption{\textsc{Reward distribution for the four game variants} - \textit{The reward distribution for each arm and environment is plotted over two trials of 2000, demarcated by a dotted grey line.}}
+    \label{fig:envs}
+\end{figure}
 
 % Results: scores and brief discussion
 \subsection{Environment variants and number of arms}

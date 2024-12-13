@@ -21,14 +21,14 @@ A common approach is the $\epsilon-$greedy policy, where the choice to explore i
 Moreover, it is often preferable to have a more explorative behaviour early during the training, with the intent to have a good sample size for the empirical reward distribution, which can be later exploited for maximizing reward.
 
 % regret
-Another important concept in multi-armed bandit problems is \textit{regret}. Intuitively, it is defined as the deviation of the total reward obtained by the agent from the optimal reward that could have been obtained by always choosing the arm with the highest expected reward.
-Formally, for a stationary distribution\footnote{\textbf{<<NB>>} should I generalize to non-stationary distribution, e.g. using extected values?} the regret is defined as:
+Another important concept in multi-armed bandit problems is \textit{regret}. Intuitively, it quantifies the loss of reward due to following a certain policy, and it is determined by the difference beween the collected reward and the theoretical optimal, obtained by choosing the best arm at each round.
+Formally, defined a function $r(\pi)$ which returns the expected reward while following policy $\pi$, then the regret over an horizon $T$ can be formulated as:
 \begin{equation}
-    \rho=R^{*} - \sum^{T}_{t} R_{t}
+    \rho = \frac{1}{T}\sum^{T}_{t} p^{*}_{t} -r(\pi(h_{t}))
 \end{equation}
 
-\noindent where $R^{*}$ is the reward obtained by always choosing the arm $a_{k}$ associated with the highest expected reward: $R^{*}=T\max_{k}\{\mathbf{p}\}$, and $R_{t}$ is the empirical reward obtained up to time $t$ by following policy $\pi$: $R_{t}=\sum^{T}_{t=1}\mathcal{B}(\pi(h_{t}))$.
-The regret is a measure of the performance of the agent, and it is often used to compare different algorithms. The goal of the agent is to minimize the regret, and thus maximize the total reward.
+\noindent where $p^{*}_{t}$ is the expected reward of the optimal arm at time $t$, which correspond to its probability since it is a Bernoulli distribution.
+\noindent The regret is a measure of the performance of the agent, and it is often used to compare different algorithms. The goal of the agent is to minimize the regret, and thus maximize the total reward.
 
 % minimal model description
 \input{minmodel}

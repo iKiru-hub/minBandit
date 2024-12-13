@@ -26,7 +26,7 @@ class KAB(ABC):
     """
 
     def __init__(self, K: int, probabilities_set: list,
-                 verbose: bool=False):
+                 record: bool=False, verbose: bool=False):
 
         """
         Parameters
@@ -35,6 +35,8 @@ class KAB(ABC):
             The number of arms of the bandit.
         probabilities_set : list
             The set of probabilities to use
+        record : bool, optional
+            Record the results, by default False
         verbose : bool, optional. Default False.
         """
 
@@ -58,6 +60,7 @@ class KAB(ABC):
         self.upper_bound_list = [np.max(self.probabilities)]
         self.best_arm_list = [np.argmax(self.probabilities)]
         self.verbose = verbose
+        self.record = record
 
     def __str__(self) -> str:
         return f"{self.__class__.__name__}"
@@ -70,6 +73,9 @@ class KAB(ABC):
         return self.nb_sets
 
     def _update_record(self):
+
+        if not self.record:
+            return
         self.chance_level_list += [np.mean(self.probabilities)]
         self.upper_bound_list += [np.max(self.probabilities)]
         self.best_arm_list += [np.argmax(self.probabilities)]
@@ -90,10 +96,12 @@ class KAB(ABC):
             The reward
         """
 
+        self._update()
+
         return np.random.binomial(1, p=self.probabilities[k])
 
     @abstractmethod
-    def update(self):
+    def _update(self):
         pass
 
     @property
@@ -116,15 +124,17 @@ class KAB(ABC):
             "upper_bound": self.upper_bound.tolist()
         }
 
-    def reset(self):
+    def reset(self, complete: bool=False):
 
-        self.probabilities_set = self._probabilities_set_or
-        self.probabilities = self.probabilities_set[0]
-        self.counter = 0
+        if complete:
 
-        self.chance_level_list = [np.mean(self.probabilities)]
-        self.upper_bound_list = [np.max(self.probabilities)]
-        self.best_arm_list = [np.argmax(self.probabilities)]
+            self.probabilities_set = self._probabilities_set_or
+            self.probabilities = self.probabilities_set[0]
+            self.counter = 0
+
+            self.chance_level_list = [np.mean(self.probabilities)]
+            self.upper_bound_list = [np.max(self.probabilities)]
+            self.best_arm_list = [np.argmax(self.probabilities)]
 
 
 class KABv0(KAB):
@@ -135,23 +145,30 @@ class KABv0(KAB):
         super().__init__(K=K, probabilities_set=probabilities_set,
                                     verbose=verbose)
 
-    def update(self):
+    def _update(self):
+
+        self._update_record()
+
+        pass
+
+    def reset(self, complete: bool=False):
 
         """
         Renew the reward distribution
         """
 
+        super().reset(complete=complete)
+
         self.counter += 1
         self.probabilities = self.probabilities_set[self.counter % \
             self.nb_sets]
-
-        self._update_record()
 
         if self.verbose:
             logger.info("---renew")
             logger.info(f"%probabilities: {self.probabilities}")
             logger.info(f"%chance level: {self.chance_level:.3f}")
             logger.info(f"%upper bound: {self.upper_bound:.3f}")
+
 
 
 class KABdriftv0(KAB):
@@ -186,7 +203,7 @@ class KABdriftv0(KAB):
         return f"{self.__class__.__name__}({self.K}," + \
             f" #sets={self.nb_sets}, tau={self._tau})"
 
-    def update(self):
+    def _update(self):
 
         """
         Renew the reward distribution
@@ -208,9 +225,11 @@ class KABdriftv0(KAB):
             logger.info(f"%chance level: {self.chance_level:.3f}")
             logger.info(f"%upper bound: {self.upper_bound:.3f}")
 
-    def reset(self):
-        super().reset()
-        self.trg_probabilities = self.probabilities_set[1]
+    def reset(self, complete: bool=False):
+        super().reset(complete=complete)
+
+        if complete:
+            self.trg_probabilities = self.probabilities_set[1]
 
 
 class KABdriftv1(KAB):
@@ -350,13 +369,12 @@ class KABsinv0(KAB):
         self.constants = constants
         self.num_constants = len(constants)
 
-        self.update()
+        self._update()
         self.counter = 0
         if self.num_constants > 0:
             self._name = "KABsinv1"
         else:
             self._name = "KABsinv0"
-
 
     def __str__(self) -> str:
         return f"{self._name}"
@@ -366,7 +384,7 @@ class KABsinv0(KAB):
             f" frequencies={self._frequencies}, " + \
             f"const={self.num_constants})"
 
-    def update(self):
+    def _update(self):
 
         """
         Renew the reward distribution
@@ -395,11 +413,12 @@ class KABsinv0(KAB):
             logger.info(f"%chance level: {self.chance_level:.3f}")
             logger.info(f"%upper bound: {self.upper_bound:.3f}")
 
-    def reset(self):
-        self.counter = 0
-        self.chance_level_list = [np.mean(self.probabilities)]
-        self.upper_bound_list = [np.max(self.probabilities)]
-        self.best_arm_list = [np.argmax(self.probabilities)]
+    def reset(self, complete: bool=False):
+        if complete:
+            self.counter = 0
+            self.chance_level_list = [np.mean(self.probabilities)]
+            self.upper_bound_list = [np.max(self.probabilities)]
+            self.best_arm_list = [np.argmax(self.probabilities)]
 
 
 """ Trial """
@@ -460,8 +479,10 @@ def trial(model: object, environment: KAB,
     for trial_i in tqdm(range(nb_trials), disable=disable):
 
         # renew the reward distribution
+        # if trial_i > 0:
+        #     environment.update()
         if trial_i > 0:
-            environment.update()
+            environment.reset()
 
         # record
         rewards = np.zeros(nb_rounds)
@@ -609,7 +630,8 @@ def trial_multiple_models(models: list, environment: KAB,
 
             # renew the reward distribution
             if trial_i > 0:
-                environment.update()
+                # environment.update()
+                environment.reset()
 
             # global record update
             if rep_i == 0:

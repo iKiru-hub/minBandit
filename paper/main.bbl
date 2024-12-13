@@ -1,40 +1,5 @@
 \begin{thebibliography}{10}
 
-\bibitem{millerIntegrativeTheoryPrefrontal2001a}
-Earl~K. Miller and Jonathan~D. Cohen.
-\newblock An {{Integrative Theory}} of {{Prefrontal Cortex Function}}.
-\newblock {\em Annual Review of Neuroscience}, 24(1):167--202, March 2001.
-
-\bibitem{sheynikhovichLongtermMemorySynaptic2023}
-Denis Sheynikhovich, Satoru Otani, Jing Bai, and Angelo Arleo.
-\newblock Long-term memory, synaptic plasticity and dopamine in rodent medial prefrontal cortex: {{Role}} in executive functions.
-\newblock {\em Frontiers in Behavioral Neuroscience}, 16, January 2023.
-
-\bibitem{odohertyAbstractRewardPunishment2001}
-J.~O'Doherty, M.~L. Kringelbach, E.~T. Rolls, J.~Hornak, and C.~Andrews.
-\newblock Abstract reward and punishment representations in the human orbitofrontal cortex.
-\newblock {\em Nature Neuroscience}, 4(1):95--102, January 2001.
-
-\bibitem{ricebergRewardStabilityDetermines2012}
-Justin~S. Riceberg and Matthew~L. Shapiro.
-\newblock Reward {{Stability Determines}} the {{Contribution}} of {{Orbitofrontal Cortex}} to {{Adaptive Behavior}}.
-\newblock {\em Journal of Neuroscience}, 32(46):16402--16409, November 2012.
-
-\bibitem{tremblayRelativeRewardPreference1999}
-L{\'e}on Tremblay and Wolfram Schultz.
-\newblock Relative reward preference in primate orbitofrontal cortex.
-\newblock {\em Nature}, 398(6729):704--708, April 1999.
-
-\bibitem{elliottDissociableFunctionsMedial2000}
-Rebecca Elliott, Raymond~J. Dolan, and Chris~D. Frith.
-\newblock Dissociable {{Functions}} in the {{Medial}} and {{Lateral Orbitofrontal Cortex}}: {{Evidence}} from {{Human Neuroimaging Studies}}.
-\newblock {\em Cerebral Cortex}, 10(3):308--317, March 2000.
-
-\bibitem{frankAnatomyDecisionStriatoorbitofrontal2006}
-Michael~J. Frank and Eric~D. Claus.
-\newblock Anatomy of a decision: {{Striato-orbitofrontal}} interactions in reinforcement learning, decision making, and reversal.
-\newblock {\em Psychological Review}, 113(2):300--326, April 2006.
-
 \bibitem{suttonReinforcementLearningProblem1998}
 Richard~S. Sutton and Andrew~G. Barto.
 \newblock The {{Reinforcement Learning Problem}}.
@@ -96,6 +61,31 @@ Omar Besbes, Yonatan Gur, and Assaf Zeevi.
 Emanuele Cavenaghi, Gabriele Sottocornola, Fabio Stella, and Markus Zanker.
 \newblock Non {{Stationary Multi-Armed Bandit}}: {{Empirical Evaluation}} of a {{New Concept Drift-Aware Algorithm}}.
 \newblock {\em Entropy}, 23(3):380, March 2021.
+
+\bibitem{odohertyAbstractRewardPunishment2001}
+J.~O'Doherty, M.~L. Kringelbach, E.~T. Rolls, J.~Hornak, and C.~Andrews.
+\newblock Abstract reward and punishment representations in the human orbitofrontal cortex.
+\newblock {\em Nature Neuroscience}, 4(1):95--102, January 2001.
+
+\bibitem{ricebergRewardStabilityDetermines2012}
+Justin~S. Riceberg and Matthew~L. Shapiro.
+\newblock Reward {{Stability Determines}} the {{Contribution}} of {{Orbitofrontal Cortex}} to {{Adaptive Behavior}}.
+\newblock {\em Journal of Neuroscience}, 32(46):16402--16409, November 2012.
+
+\bibitem{tremblayRelativeRewardPreference1999}
+L{\'e}on Tremblay and Wolfram Schultz.
+\newblock Relative reward preference in primate orbitofrontal cortex.
+\newblock {\em Nature}, 398(6729):704--708, April 1999.
+
+\bibitem{elliottDissociableFunctionsMedial2000}
+Rebecca Elliott, Raymond~J. Dolan, and Chris~D. Frith.
+\newblock Dissociable {{Functions}} in the {{Medial}} and {{Lateral Orbitofrontal Cortex}}: {{Evidence}} from {{Human Neuroimaging Studies}}.
+\newblock {\em Cerebral Cortex}, 10(3):308--317, March 2000.
+
+\bibitem{frankAnatomyDecisionStriatoorbitofrontal2006}
+Michael~J. Frank and Eric~D. Claus.
+\newblock Anatomy of a decision: {{Striato-orbitofrontal}} interactions in reinforcement learning, decision making, and reversal.
+\newblock {\em Psychological Review}, 113(2):300--326, April 2006.
 
 \bibitem{carrollEncodingCertaintyBump2014}
 Sam Carroll, Kre{\v s}imir Josi{\'c}, and Zachary~P. Kilpatrick.
