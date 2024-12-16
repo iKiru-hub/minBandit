@@ -93,10 +93,10 @@ class Env:
 
                 model = mm.Modelv2(**params)
                 stats = envs.trial_multiple_models(models=[model],
-                                                   environment=env,
-                                                   nb_trials=self.nb_trials,
-                                                   nb_rounds=nb_rounds,
-                                                   nb_reps=self.nb_reps)
+                                           environment=env,
+                                           nb_trials=self.nb_trials,
+                                           nb_rounds=nb_rounds,
+                                           nb_reps=self.nb_reps)
 
                 fitness += stats["scores"].item()
 

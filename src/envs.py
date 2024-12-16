@@ -440,9 +440,11 @@ class KABsinv0(KAB):
             self.best_arm_list = [np.argmax(self.probabilities)]
 
 
-def make_new_env(K: int, env_type: str, nb_trials: int=3) -> object:
+def make_new_env(K: int, env_type: str, nb_trials: int=3,
+                 probabilities_set: np.ndarray=None) -> object:
 
-    probabilities_set = np.random.normal(0.5, 0.2, (nb_trials, K)).clip(0, 1)
+    if probabilities_set is None:
+        probabilities_set = np.random.normal(0.5, 0.2, (nb_trials, K)).clip(0, 1)
 
     # define the environment
     if env_type == "driftv0":

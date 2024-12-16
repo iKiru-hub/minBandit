@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1734367169.71504 "main.aux" "main.bbl" "main" 1734367173.66139 0
+["bibtex main"] 1734367848.05714 "main.aux" "main.bbl" "main" 1734367852.5882 0
   "./mkb_bibliography.bib" 1734032050.08311 220602 e40dcaa85c196f909a5ac9aaffd7f835 ""
   "/opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/bibtex/bst/base/unsrt.bst" 1710106625 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "main.aux" 1734367173.48212 17721 e80f0baaf5c3dfb5b46b5fb19d004422 "pdflatex"
+  "main.aux" 1734367852.38925 17721 697dd82f73d87ccdd541ae125048cee6 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1734367169.78984 "main.tex" "main.pdf" "main" 1734367173.66154 0
+["pdflatex"] 1734367848.13735 "main.tex" "main.pdf" "main" 1734367852.58835 0
   "/opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1710106625 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/map/fontname/texfonts.map" 1710106625 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/map/pdftex/updmap/pdftex.map" 1710106625 5472554 f7861620179a71a79d4bd86251f559d0 ""
@@ -138,12 +138,12 @@
   "figures/reward_update_plot.pdf" 1733154377.74843 281614 2748fed686597a49293aa0aee7efd41c ""
   "figures/selections_2.png" 1734349594.10169 80351 557b5bbdb947fa000e3ed4b4f424374c ""
   "introduction.tex" 1734052416.577 8205 f3ae0902f2d2ecacc5ddb6fbd4354e9d ""
-  "main.aux" 1734367173.48212 17721 e80f0baaf5c3dfb5b46b5fb19d004422 "pdflatex"
-  "main.bbl" 1734367169.78761 15172 1fa17b7274794ad7e469617d4793c3b2 "bibtex main"
-  "main.out" 1734367173.4834 3247 6800c4c6f5dc9cf6ea159c746b089f60 "pdflatex"
+  "main.aux" 1734367852.38925 17721 697dd82f73d87ccdd541ae125048cee6 "pdflatex"
+  "main.bbl" 1734367848.13516 15172 1fa17b7274794ad7e469617d4793c3b2 "bibtex main"
+  "main.out" 1734367852.39063 3247 6800c4c6f5dc9cf6ea159c746b089f60 "pdflatex"
   "main.tex" 1734009396.31159 715 b5230d268901fda41909ad9613f1b5ad ""
-  "main.toc" 1734367173.4836 1836 b9f2bad2872d8166298849490efd7df3 "pdflatex"
-  "methods.tex" 1734367165.29229 7783 bcee337973a95ae4c3d24c09515f315b ""
+  "main.toc" 1734367852.39084 1836 3489b6d8a3ae3cc0853f5d83f1de99ef "pdflatex"
+  "methods.tex" 1734367843.68439 7867 1127cd0b7cd13636f5fcf442a34a97d6 ""
   "minmodel.tex" 1734036995.59902 8773 e3fc44734cb9533c4ab9d9c407a1b344 ""
   "results.tex" 1734095358.38574 10523 e16fea131998af3c6630cd607d385b90 ""
   (generated)

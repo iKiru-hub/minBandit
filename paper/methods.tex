@@ -36,7 +36,8 @@ Formally, defined a function $r(\pi)$ which returns the expected reward while fo
 % Evolution: fitness evolution
 \subsection{Evolution search}
 The optimization of the hyper-parameters was performed using the Covariance Matrix Adaptation evolutionary strategy algorithm (CMA-ES) \cite{igelCovarianceMatrixAdaptation2007}.
-The search was run with a population of $256$ individuals (unique set of genomes corresponding to a sample in parameter space) for $40$ generations. The fitness function was defined as the average reward obtained by an individual over 2 independent iterations.
+The search was run with a population of $256$ individuals (unique set of genomes corresponding to a sample in parameter space) for $80$ generations.
+The fitness function was defined as the average reward obtained by an individual over 3 different non-stationary bandit environments, each for $K=\{50, 300\}$, and all averaged over 2 iterations.
 The results are summarized below in figure \ref{fig:evolution}.
 
 \begin{figure}[H]

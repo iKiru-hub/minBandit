@@ -7,7 +7,7 @@
 \contentsline {subsection}{\numberline {2.4}Evolution search}{9}{subsection.2.4}%
 \contentsline {subsection}{\numberline {2.5}Bio-inspired features}{10}{subsection.2.5}%
 \contentsline {section}{\numberline {3}Experiments}{10}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Game variants}{10}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.1}Game variants}{11}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Environment variants and number of arms}{11}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Decision-making dynamics}{13}{subsection.3.3}%
 \contentsline {subsubsection}{\numberline {3.3.1}Entropy analysis}{13}{subsubsection.3.3.1}%

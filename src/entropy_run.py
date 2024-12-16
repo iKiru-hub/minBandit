@@ -31,7 +31,7 @@ class Settings:
 
 
 settings1 = Settings()
-settings1.rounds = 1500
+settings1.rounds = 1000
 settings1.trials = 2
 settings1.reps = 1
 settings1.verbose = False
@@ -40,7 +40,7 @@ settings1.load = True
 settings1.env = "v0"
 settings1.K = 50
 
-NUM_BETAS = 6
+NUM_BETAS = 12
 
 probability = np.around(np.random.uniform(0.05, 0.5, settings1.K),
                         2)
@@ -63,28 +63,32 @@ def run_(probabilities_set, params):
     env_type = settings1.env
 
     # define the environment
-    if env_type == "driftv0":
-        env = envs.KABdriftv0(K=K,
-                              probabilities_set=probabilities_set,
-                              verbose=verbose,
-                              tau=5)
-    elif env_type == "driftv1":
-        env = envs.KABdriftv1(K=K,
-                              verbose=verbose,
-                              tau=100,
-                              normalize=True,
-                              fixed_p=0.9)
-    elif env_type == "sinv0":
-        frequencies = np.linspace(0, 0.4, K)
-        env = envs.KABsinv0(K=K,
-                            frequencies=frequencies,
-                            normalize=True,
-                            verbose=verbose)
-    else:
-        env = envs.KABv0(K=K,
-                         probabilities_set=probabilities_set,
-                         verbose=verbose)
+    # if env_type == "driftv0":
+    #     env = envs.KABdriftv0(K=K,
+    #                           probabilities_set=probabilities_set,
+    #                           verbose=verbose,
+    #                           tau=5)
+    # elif env_type == "driftv1":
+    #     env = envs.KABdriftv1(K=K,
+    #                           verbose=verbose,
+    #                           tau=100,
+    #                           normalize=True,
+    #                           fixed_p=0.9)
+    # elif env_type == "sinv0":
+    #     frequencies = np.linspace(0, 0.4, K)
+    #     env = envs.KABsinv0(K=K,
+    #                         frequencies=frequencies,
+    #                         normalize=True,
+    #                         verbose=verbose)
+    # else:
+    #     env = envs.KABv0(K=K,
+    #                      probabilities_set=probabilities_set,
+    #                      verbose=verbose)
 
+    env = envs.make_new_env(K=K,
+                            env_type=env_type,
+                            nb_trials=nb_trials,
+                            probabilities_set=probabilities_set)
     if verbose:
         logger.info(f"%env: {env}")
 
