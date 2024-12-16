@@ -33,31 +33,6 @@ Formally, defined a function $r(\pi)$ which returns the expected reward while fo
 % minimal model description
 \input{minmodel}
 
-% Evolution: fitness evolution
-\subsection{Evolution search}
-The optimization of the hyper-parameters was performed using the Covariance Matrix Adaptation evolutionary strategy algorithm (CMA-ES) \cite{igelCovarianceMatrixAdaptation2007}.
-The search was run with a population of $256$ individuals (unique set of genomes corresponding to a sample in parameter space) for $80$ generations.
-The fitness function was defined as the average reward obtained by an individual over 3 different non-stationary bandit environments, each for $K=\{50, 300\}$, and all averaged over 2 iterations.
-The results are summarized below in figure \ref{fig:evolution}.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\textwidth]{figures/evolution_comp_1.png}
-    \caption{\textsc{Evolution results} - \textbf{a}: \textit{top fitness, mean and standard deviation (as 16-84 percentile) of the population over generations.} - \textbf{b}: \textit{heatmap of the evolved parameters (rows) as histogram bins (y-axis) calculated from the 50 percentile of the
-    population of the last generation; higher density is in dark blue} - \textbf{c-d}: \textit{Gaussian-sigmoid [c] and neural response functions [d] of the top-half of the population, color intensity proportional to the fitness}}
-    \label{fig:evolution}
-\end{figure}
-
-% comment on the evolved functions
-\noindent The evolution results show a steady improvement of the fitness over generations, before hitting a plateau corresponding to the theoretical optimal ($\sim 0.9$) of the chosen simulations.
-
-\textbf{TELL ME ABOUT THE RESPONSE FUNCTIONS, LIKE IS IT A TYPE II NEURON FR?} Regarding the evolved functions, the option value function $\Phi_{v}$ is characterized by a steep sigmoid curve, with a marked.
-This is consistent with the idea that the input of population $U$ to population $V$ is weighted maximally for high option values (strong synapses), whereas for weaker estimates the contributions are low or close to zero, allowing for more exploration.
-
-The learning rate function $\Phi_{\eta}$ is instead characterized by a marked bell-shaped curve, given a parameter $r=0.06$. The associated Gaussian has a positive mean located at $\mu=1.$, which aligns approximately with the local valley of the weight function $\Phi_{v}$.
-A possible interpretation is that it serves as a mechanism to ensure that the learning rate is high when the value options are more uncertain, and low otherwise, thus preventing overshooting and oscillations in the weight updates.
-This adaptive behaviour is in line with known neuronal dynamics such as homeostatic plasticity, which works towards a stabilization of synapses, for instance through synaptic scaling and proportional updates \cite{citriSynapticPlasticityMultiple2008}.
-A variable learning rate is an important feature of several plasticity rules, from the more biologically plausible like the Oja \cite{ojaOjaLearningRule2008} to deep learning optimizers like Adam \cite{kingmaAdamMethodStochastic2017}.
 
 
 \subsection{Bio-inspired features}

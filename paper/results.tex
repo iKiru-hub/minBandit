@@ -30,12 +30,47 @@ of rounds is reached.
 \noindent \textbf{Partial sinusoidal distribution shift} [\textsc{KAB-$\sin$P}]\\ Identical to the sinusoidal distribution shift, but only a subset of the arms changes sinusoidally while the rest is kept at a constant value and the distribution is not normalized.
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=1.\textwidth]{figures/envs_1.png}
     \caption{\textsc{Reward distribution for the four game variants} - \textit{The reward distribution for each arm and environment is plotted over two trials of 2000, demarcated by a dotted grey line.}}
     \label{fig:envs}
 \end{figure}
+
+
+% Evolution: fitness evolution
+\subsection{Evolution search}
+The optimization of the hyper-parameters was performed using the Covariance Matrix Adaptation evolutionary strategy algorithm (CMA-ES) \cite{igelCovarianceMatrixAdaptation2007}.
+The search was run with a population of $256$ individuals for $80$ generations. Each individual was endowed with genome, corresponding to a vector of 22 parameters of the model.
+The fitness function of the evolution was defined as the average reward obtained by an individual over 3 different non-stationary bandit environments, each for $K=\{50, 300\}$, and all averaged over 2 iterations.
+The results are summarized below in figure \ref{fig:evolution}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{figures/evolution_comp_1.png}
+    \caption{\textsc{Evolution results} - \textbf{a}: \textit{top fitness, mean and standard deviation (as 16-84 percentile) of the population over generations.} - \textbf{b}: \textit{heatmap of the evolved parameters (rows) as histogram bins (y-axis) calculated from the 50 percentile of the
+    population of the last generation; higher density is in dark blue} - \textbf{c-d}: \textit{Gaussian-sigmoid [c] and neural response functions [d] of the top-half of the population, the color intensity is proportional to the fitness.}}
+    \label{fig:evolution}
+\end{figure}
+
+% comment on the evolved functions
+\noindent The evolution progress, plot \textit{a} of figure \ref{fig:evolution}, showed a steady improvement over the generations, with the fitness hitting a plateau once the theoretical optimum ($\sim 0.9$) of the chosen simulations was met.
+The evolved parameters (genome) are displayed as a frequency heatmap in \textit{b}, which was obtained from the individuals whose fitness was equal or above the median. The most relevant parameters resulted to be those concerning directly neuronal activity and learning.
+
+More in details, the two Gaussian-sigmoid functions $\Phi_{v}, \Phi_{\eta}$, which are respectively the option value and learning rate functions, are shown in \textit{c}.
+On the one hand, the learning rate function $\Phi_{\eta}$ is characterized by a decreasing curve, associated with the dominance of the right-side of the Gaussian, and a completely ignored sigmoid component.
+A possible interpretation for this shape is to ensure an high learnig speed when the value options are more uncertain (weak weights), and low otherwise; thus preventing overshooting and oscillations in the weight updates.
+This adaptive behaviour is in line with known neuronal dynamics such as homeostatic plasticity, which works towards a stabilization of synapses, for instance through synaptic scaling and proportional updates \cite{citriSynapticPlasticityMultiple2008}.
+A variable learning rate is an important feature of several plasticity rules, from the more biologically plausible like the Oja \cite{ojaOjaLearningRule2008} to deep learning optimizers like Adam \cite{kingmaAdamMethodStochastic2017}.
+
+On the other hand, the option value function $\Phi_{v}$ follows instead a steep sigmoid curve.
+This is consistent with the idea that the input of population $U$ to population $V$ is weighted maximally for high option values (strong synapses), whereas for weaker estimates the contributions are low or close to zero, allowing for more exploration.
+Interestingly, a common feature seemed to be a slight concavity after zero, a slim influence of the Gaussian component, which might be interpreted as a sort of test for newly formed synapses. However, the size of this effect is not large.
+
+The neural response functions are instead shown in \textit{d}. Both population evolved to have a similar shape, a sharp sigmoid with a clear threshold, with population \textit{U} having a more variable distribution.
+The convergence to this particular form, which does not allowed much for a gradual linear reponse but rather an high-pass filter, with activity occurring only after strong excitation.
+This firing behaviour is reminiscent of coincidence detector neurons, which are sometimes referred to as class III neurons with respect to their f-I curve \cite{ratteImpactNeuronalProperties2013}.
+
 
 % Results: scores and brief discussion
 \subsection{Environment variants and number of arms}

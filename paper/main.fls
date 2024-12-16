@@ -199,11 +199,6 @@ INPUT ./figures/selections_2.png
 INPUT ./figures/selections_2.png
 INPUT ./figures/selections_2.png
 INPUT ./figures/selections_2.png
-INPUT ./figures/evolution_comp_1.png
-INPUT ./figures/evolution_comp_1.png
-INPUT ./figures/evolution_comp_1.png
-INPUT ./figures/evolution_comp_1.png
-INPUT ./figures/evolution_comp_1.png
 INPUT ./results.tex
 INPUT ./results.tex
 INPUT ./results.tex
@@ -217,6 +212,11 @@ INPUT ./figures/envs_1.png
 INPUT ./figures/envs_1.png
 INPUT ./figures/envs_1.png
 INPUT ./figures/envs_1.png
+INPUT ./figures/evolution_comp_1.png
+INPUT ./figures/evolution_comp_1.png
+INPUT ./figures/evolution_comp_1.png
+INPUT ./figures/evolution_comp_1.png
+INPUT ./figures/evolution_comp_1.png
 INPUT ./figures/performance_plot.png
 INPUT ./figures/performance_plot.png
 INPUT ./figures/performance_plot.png

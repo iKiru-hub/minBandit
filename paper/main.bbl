@@ -193,20 +193,6 @@ Mohammad Samavat, Thomas~M. Bartol, Kristen~M. Harris, and Terrence~J. Sejnowski
 \newblock Synaptic {{Information Storage Capacity Measured With Information Theory}}.
 \newblock {\em Neural Computation}, 36(5):781--802, April 2024.
 
-\bibitem{igelCovarianceMatrixAdaptation2007}
-Christian Igel, Nikolaus Hansen, and Stefan Roth.
-\newblock Covariance {{Matrix Adaptation}} for {{Multi-objective Optimization}}.
-\newblock {\em Evolutionary Computation}, 15(1):1--28, March 2007.
-
-\bibitem{ojaOjaLearningRule2008}
-Erkki Oja.
-\newblock Oja learning rule.
-\newblock {\em Scholarpedia}, 3(3):3612, March 2008.
-
-\bibitem{kingmaAdamMethodStochastic2017}
-Diederik~P. Kingma and Jimmy Ba.
-\newblock Adam: {{A Method}} for {{Stochastic Optimization}}, January 2017.
-
 \bibitem{lukChoiceCodingFrontal2013}
 Chung-Hay Luk and Jonathan~D. Wallis.
 \newblock Choice {{Coding}} in {{Frontal Cortex}} during {{Stimulus-Guided}} or {{Action-Guided Decision-Making}}.
@@ -251,6 +237,25 @@ Pierre Enel, Joni~D Wallis, and Erin~L Rich.
 Jane~X Wang.
 \newblock Meta-learning in natural and artificial intelligence.
 \newblock {\em Current Opinion in Behavioral Sciences}, 38:90--95, April 2021.
+
+\bibitem{igelCovarianceMatrixAdaptation2007}
+Christian Igel, Nikolaus Hansen, and Stefan Roth.
+\newblock Covariance {{Matrix Adaptation}} for {{Multi-objective Optimization}}.
+\newblock {\em Evolutionary Computation}, 15(1):1--28, March 2007.
+
+\bibitem{ojaOjaLearningRule2008}
+Erkki Oja.
+\newblock Oja learning rule.
+\newblock {\em Scholarpedia}, 3(3):3612, March 2008.
+
+\bibitem{kingmaAdamMethodStochastic2017}
+Diederik~P. Kingma and Jimmy Ba.
+\newblock Adam: {{A Method}} for {{Stochastic Optimization}}, January 2017.
+
+\bibitem{ratteImpactNeuronalProperties2013}
+St{\'e}phanie Ratt{\'e}, Sungho Hong, Erik De~Schutter, and Steven~A. Prescott.
+\newblock Impact of {{Neuronal Properties}} on {{Network Coding}}: {{Roles}} of {{Spike Initiation Dynamics}} and {{Robust Synchrony Transfer}}.
+\newblock {\em Neuron}, 78(5):758--772, June 2013.
 
 \bibitem{steyversBayesianAnalysisHuman2009a}
 Mark Steyvers, Michael~D. Lee, and Eric-Jan Wagenmakers.

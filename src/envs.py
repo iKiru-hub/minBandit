@@ -472,8 +472,8 @@ def make_new_env(K: int, env_type: str, nb_trials: int=3,
                             verbose=False)
     elif env_type == "v0":
         env = KABv0(K=K,
-                         probabilities_set=probabilities_set,
-                         verbose=False)
+                    probabilities_set=probabilities_set,
+                    verbose=False)
     else:
         raise NameError(f"\n==> {env_type=} not recognized")
 
