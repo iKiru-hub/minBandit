@@ -31,7 +31,7 @@ class Settings:
 
 
 settings1 = Settings()
-settings1.rounds = 1000
+settings1.rounds = 1500
 settings1.trials = 2
 settings1.reps = 1
 settings1.verbose = False
