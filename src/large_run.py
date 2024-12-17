@@ -56,9 +56,9 @@ NB_TRIALS = 2
 # NB_REPS = 2
 
 entropy_calc = False
-K_list = [5, 10]
-# K_list = [50, 100]
-# K_list = [200, 1000]
+#K_list = [5, 10]
+#K_list = [50, 100]
+K_list = [200, 1000]
 # K_list = [5, 10, 50, 100, 200, 1000]
 
 

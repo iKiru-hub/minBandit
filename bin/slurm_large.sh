@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name="mkbwb"
-#SBATCH -p ipuq #armq #milanq #fpgaq #milanq # partition (queue)
+#SBATCH -p milanq #ipuq #armq #fpgaq #milanq # partition (queue)
 #SBATCH -N 1 # number of nodes
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=64
