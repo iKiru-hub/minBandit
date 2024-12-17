@@ -114,34 +114,38 @@ def run_for_one_k(K: int):
     model_params["K"] = K
 
     # define proababilities set
-    probabilities_set = make_probability_set(K=K,
-                                             nb_trials=NB_TRIALS,
-                                             fixed_p=False,
-                                             normalize=False)
+    # probabilities_set = make_probability_set(K=K,
+    #                                          nb_trials=NB_TRIALS,
+    #                                          fixed_p=False,
+    #                                          normalize=False)
 
     # define the environment
-    envs_list = [
-            make_env(K=K,
-                     env_type="v0",
-                     probabilities_set=probabilities_set,
-                     tau=None),
-            make_env(K=K,
-                     env_type="driftv0",
-                     probabilities_set=probabilities_set,
-                     tau=10),
-            make_env(K=K,
-                     env_type="sinv0",
-                     probabilities_set=probabilities_set,
-                     tau=None),
-            make_env(K=K,
-                     env_type="sinv1",
-                     probabilities_set=probabilities_set,
-                     tau=None),
-    ]
+    # envs_list = [
+    #         make_env(K=K,
+    #                  env_type="v0",
+    #                  probabilities_set=probabilities_set,
+    #                  tau=None),
+    #         make_env(K=K,
+    #                  env_type="driftv0",
+    #                  probabilities_set=probabilities_set,
+    #                  tau=10),
+    #         make_env(K=K,
+    #                  env_type="sinv0",
+    #                  probabilities_set=probabilities_set,
+    #                  tau=None),
+    #         make_env(K=K,
+    #                  env_type="sinv1",
+    #                  probabilities_set=probabilities_set,
+    #                  tau=None),
+    # ]
+
  
     # run
     all_results = {}
-    for env in tqdm(envs_list):
+    for env_name in tqdm(("v0", "driftv0", "sinv0", "sinv1")):):
+
+        env = envs.make_new_env(K=K, env_type=env_name,
+                                nb_trials=NB_TRIALS)
 
         # define models
         model_list = [
