@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH --job-name="mkbwb"
-#SBATCH -p milanq #ipuq #armq #fpgaq #milanq # partition (queue)
+#SBATCH -p ipuq #milanq #ipuq #armq #fpgaq #milanq # partition (queue)
 #SBATCH -N 1 # number of nodes
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=64
+#SBATCH --cpus-per-task=32
 ##SBATCH --mem-per-cpu=1GB
 #SBATCH --time=0-20:00
 #SBATCH -o /home/daniekru/slurm.column.%j.%N.out # STDOUT
@@ -15,7 +15,7 @@ echo "%ecl1 activated"
 cd ~/lab/minBandit/src
 echo "%in $(pwd)"
 
-srun python3 large_run.py --cores 64 --reps 64
+srun python3 large_run.py --cores 32 --reps 32
 
 cd ~/lab/pigeon
 echo "%in $(pwd)"

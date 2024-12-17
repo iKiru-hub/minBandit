@@ -142,7 +142,7 @@ def run_for_one_k(K: int):
  
     # run
     all_results = {}
-    for env_name in tqdm(("v0", "driftv0", "sinv0", "sinv1")):):
+    for env_name in tqdm(("v0", "driftv0", "sinv0", "sinv1")):
 
         env = envs.make_new_env(K=K, env_type=env_name,
                                 nb_trials=NB_TRIALS)
