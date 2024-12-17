@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1734372760.48819 "main.aux" "main.bbl" "main" 1734372780.53382 0
+["bibtex main"] 1734372760.48819 "main.aux" "main.bbl" "main" 1734394627.06851 0
   "./mkb_bibliography.bib" 1734032050.08311 220602 e40dcaa85c196f909a5ac9aaffd7f835 ""
   "/opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/bibtex/bst/base/unsrt.bst" 1710106625 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "main.aux" 1734372780.31956 17830 50cefeba76eb555f07fe394265782e15 "pdflatex"
+  "main.aux" 1734394626.86398 17830 50cefeba76eb555f07fe394265782e15 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1734372776.53217 "main.tex" "main.pdf" "main" 1734372780.53397 0
+["pdflatex"] 1734394623.05452 "main.tex" "main.pdf" "main" 1734394627.06867 0
   "/opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1710106625 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/map/fontname/texfonts.map" 1710106625 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/map/pdftex/updmap/pdftex.map" 1710106625 5472554 f7861620179a71a79d4bd86251f559d0 ""
@@ -128,24 +128,24 @@
   "acknowledgement.tex" 1733796682.94473 751 3079157c8d5de4843c8d0f3f0b6b5e98 ""
   "appendix.tex" 1733967743.55575 10746 50e10b9051b6343eef7764b9153c8841 ""
   "discussion.tex" 1734046636.43751 5083 fb66ba8264d41728eaf267df55d569c8 ""
+  "figures/entropy_main_plot.png" 1734393001 1316974 b8f73befec6d89c29700b27ce88a0ccb ""
   "figures/entropy_performance_plot.png" 1733698098.65138 890557 6a742ad6c74b3eafccb4026171fccab3 ""
   "figures/envs_1.png" 1734054056.96845 164526 9197d6ba7b5161785cac7da9255d9a58 ""
-  "figures/evolution_comp_1.png" 1734364862 957782 17ad988d649a759795b2937e854b3502 ""
+  "figures/evolution_comp_1.png" 1734394621 870609 3f54acd0e0d04353fd082ec21eca75b4 ""
   "figures/gaussian_sigmoid.png" 1733761062.40327 89724 883687bb01bed1a52c1e8bfa10a182c5 ""
   "figures/minb_architecture.png" 1733964896.55068 70385 60b38360de906542acaad6150140b736 ""
-  "figures/performance_analysis_v0_1.png" 1734017035.56952 435825 acf039a65cd0d5f628c965c663ed3401 ""
   "figures/performance_plot.png" 1733794713.89006 736626 71417311a2c1b674c4cc36eccc8cbb9a ""
   "figures/reward_update_plot.pdf" 1733154377.74843 281614 2748fed686597a49293aa0aee7efd41c ""
   "figures/selections_2.png" 1734349594.10169 80351 557b5bbdb947fa000e3ed4b4f424374c ""
   "introduction.tex" 1734052416.577 8205 f3ae0902f2d2ecacc5ddb6fbd4354e9d ""
-  "main.aux" 1734372780.31956 17830 50cefeba76eb555f07fe394265782e15 "pdflatex"
+  "main.aux" 1734394626.86398 17830 50cefeba76eb555f07fe394265782e15 "pdflatex"
   "main.bbl" 1734372760.56461 15493 98c5347a875439ad37310e32c6515093 "bibtex main"
-  "main.out" 1734372780.32098 3247 54b65cdc13f6d249c8b15d2e4fe1825c "pdflatex"
+  "main.out" 1734394626.86551 3247 54b65cdc13f6d249c8b15d2e4fe1825c "pdflatex"
   "main.tex" 1734009396.31159 715 b5230d268901fda41909ad9613f1b5ad ""
-  "main.toc" 1734372780.32118 1834 3f90aff8d93beff2674cbe67b7b315e1 "pdflatex"
+  "main.toc" 1734394626.86585 1834 3f90aff8d93beff2674cbe67b7b315e1 "pdflatex"
   "methods.tex" 1734372656.94773 4864 2179da083c84018baa87cb594a1ae0a7 ""
   "minmodel.tex" 1734036995.59902 8773 e3fc44734cb9533c4ab9d9c407a1b344 ""
-  "results.tex" 1734372775.48061 14721 4bdea398a26d6c8e248b04bc18ce5f56 ""
+  "results.tex" 1734393012.20848 14713 1b5eeec398805caeee05918f95db0a23 ""
   (generated)
   "main.aux"
   "main.log"

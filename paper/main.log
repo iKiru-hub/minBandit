@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Homebrew) (preloaded format=pdflatex 2024.10.29)  16 DEC 2024 19:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Homebrew) (preloaded format=pdflatex 2024.10.29)  17 DEC 2024 01:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -443,11 +443,11 @@ File: figures/envs_1.png Graphic file (type png)
 <use figures/envs_1.png>
 Package pdftex.def Info: figures/envs_1.png  used on input line 35.
 (pdftex.def)             Requested size: 345.0pt x 185.02998pt.
-<figures/evolution_comp_1.png, id=298, 573.53471pt x 309.74922pt>
+<figures/evolution_comp_1.png, id=298, 557.9244pt x 322.03513pt>
 File: figures/evolution_comp_1.png Graphic file (type png)
 <use figures/evolution_comp_1.png>
 Package pdftex.def Info: figures/evolution_comp_1.png  used on input line 50.
-(pdftex.def)             Requested size: 345.0pt x 186.3236pt.
+(pdftex.def)             Requested size: 345.0pt x 199.13884pt.
  [10] [11 <./figures/envs_1.png> <./figures/evolution_comp_1.png>]
 <figures/performance_plot.png, id=318, 593.91486pt x 361.63908pt>
 File: figures/performance_plot.png Graphic file (type png)
@@ -455,12 +455,12 @@ File: figures/performance_plot.png Graphic file (type png)
 Package pdftex.def Info: figures/performance_plot.png  used on input line 84.
 (pdftex.def)             Requested size: 345.0pt x 210.07086pt.
  [12] [13 <./figures/performance_plot.png>]
-<figures/performance_analysis_v0_1.png, id=336, 551.13103pt x 405.86832pt>
-File: figures/performance_analysis_v0_1.png Graphic file (type png)
-<use figures/performance_analysis_v0_1.png>
-Package pdftex.def Info: figures/performance_analysis_v0_1.png  used on input line 110.
-(pdftex.def)             Requested size: 345.0pt x 254.06963pt.
- [14 <./figures/performance_analysis_v0_1.png>]
+<figures/entropy_main_plot.png, id=336, 449.80849pt x 340.24716pt>
+File: figures/entropy_main_plot.png Graphic file (type png)
+<use figures/entropy_main_plot.png>
+Package pdftex.def Info: figures/entropy_main_plot.png  used on input line 110.
+(pdftex.def)             Requested size: 345.0pt x 260.97873pt.
+ [14 <./figures/entropy_main_plot.png>]
 <figures/entropy_performance_plot.png, id=346, 481.89636pt x 352.96667pt>
 File: figures/entropy_performance_plot.png Graphic file (type png)
 <use figures/entropy_performance_plot.png>
@@ -493,7 +493,7 @@ Package rerunfilecheck Info: File `main.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  12386 strings out of 474116
- 205277 string characters out of 5732612
+ 205221 string characters out of 5732612
  1937187 words of memory out of 5000000
  34448 multiletter control sequences out of 15000+600000
  567969 words of font info for 69 fonts, out of 8000000 for 9000
@@ -501,7 +501,7 @@ Here is how much of TeX's memory you used:
  75i,13n,79p,707b,564s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></opt
 /homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (26 pages, 3597306 bytes).
+Output written on main.pdf (26 pages, 4268394 bytes).
 PDF statistics:
  599 PDF objects out of 1000 (max. 8388607)
  498 compressed objects within 5 object streams

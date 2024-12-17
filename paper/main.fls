@@ -222,11 +222,11 @@ INPUT ./figures/performance_plot.png
 INPUT ./figures/performance_plot.png
 INPUT ./figures/performance_plot.png
 INPUT ./figures/performance_plot.png
-INPUT ./figures/performance_analysis_v0_1.png
-INPUT ./figures/performance_analysis_v0_1.png
-INPUT ./figures/performance_analysis_v0_1.png
-INPUT ./figures/performance_analysis_v0_1.png
-INPUT ./figures/performance_analysis_v0_1.png
+INPUT ./figures/entropy_main_plot.png
+INPUT ./figures/entropy_main_plot.png
+INPUT ./figures/entropy_main_plot.png
+INPUT ./figures/entropy_main_plot.png
+INPUT ./figures/entropy_main_plot.png
 INPUT ./figures/entropy_performance_plot.png
 INPUT ./figures/entropy_performance_plot.png
 INPUT ./figures/entropy_performance_plot.png

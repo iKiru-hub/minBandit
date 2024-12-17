@@ -40,7 +40,7 @@ settings1.load = True
 settings1.env = "v0"
 settings1.K = 50
 
-NUM_BETAS = 12
+NUM_BETAS = 7
 
 probability = np.around(np.random.uniform(0.05, 0.5, settings1.K),
                         2)

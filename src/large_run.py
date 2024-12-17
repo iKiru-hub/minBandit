@@ -45,7 +45,7 @@ PATH = pigeon_PATH_cl
 # "lr_function": "gaussian"}
 
 # from evolution
-model_params = load_model(idx=17) # 1
+model_params = load_model(idx=1) # 1
 
 
 """ settings """
