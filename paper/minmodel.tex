@@ -77,16 +77,16 @@ $k_{v} \gets \text{argmax}_{k}\{\textbf{v}\}$\;
 \Return $k$
 \end{algorithm}\label{alg:decision1}
 
-\noindent In figure \ref{fig:sel1} it is shown the history of selections over three trials. The initial rounds feature higher variability. In particular, it can be noted how the policy adopted by the model encounters periods of exploration and successive settling over an explotative strategy, which can be reverted in case of a change in the environment's reward distribution.
+\noindent According to the values of the policy's parameters, the behaviour of the model displays periods of exploration followed by a steady exploitation, which can be reverted in case of a change in the environment's reward distribution.
 
 % selections over time
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.9\textwidth]{figures/selections_2.png}
-    \caption{\textsc{Selection evolution over rounds} - \textit{the y-axis represents the available arms, while the x-axis the number of rounds, with the dotted vertical lines indicating the start of a new trial with 300 rounds each.
-The model selections are the black vertical lines for an arm and a round. The red horizontal lines signal the arm with the highest reward probability, representing the best option.}}
-    \label{fig:sel1}
-\end{figure}
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[width=0.9\textwidth]{figures/selections_2.png}
+%     \caption{\textsc{Selection evolution over rounds} - \textit{the y-axis represents the available arms, while the x-axis the number of rounds, with the dotted vertical lines indicating the start of a new trial with 300 rounds each.
+% The model selections are the black vertical lines for an arm and a round. The red horizontal lines signal the arm with the highest reward probability, representing the best option.}}
+%     \label{fig:sel1}
+% \end{figure}
 
 
 \subsection{Learning}

@@ -38,9 +38,9 @@ settings1.verbose = False
 settings1.idx = 1
 settings1.load = True
 settings1.env = "v0"
-settings1.K = 50
+settings1.K = 100
 
-NUM_BETAS = 7
+# NUM_BETAS = 7
 
 probability = np.around(np.random.uniform(0.05, 0.5, settings1.K),
                         2)
@@ -49,7 +49,9 @@ probability[0] = 1.
 model_params = utils.load_model(idx=settings1.idx)
 model_params["K"] = settings1.K
 
-beta_values = 1.5**(np.linspace(7, 1, NUM_BETAS))
+# beta_values = 1.5**(np.linspace(7, 1, NUM_BETAS))
+beta_values = [17, 14, 12, 9, 4, 1, 0.5]
+NUM_BETAS = len(beta_values)
 
 
 def run_(probabilities_set, params):
@@ -154,14 +156,23 @@ def calculation_over_betas(empty):
     model_reward_std = []
     upper_list = []
 
+    probability_1, probability_2 = np.random.uniform(0.0, 0.5, (2, settings1.K))
+    probability_1[0] = 1.
+    probability_2[0] = 1.
+
     for beta in tqdm(beta_values):
 
         #logger(f"running {beta=:.4f}")
 
         # define proababilities
-        p = softmax(probability, beta)
-        probabilities_set = np.array([p.tolist()])
-        prob_entropy += [utils.calc_entropy(p)]
+        p1 = np.clip(softmax(probability_1, beta) * probability_1.sum(),
+                     0., 1.)
+        p2 = np.clip(softmax(probability_2, beta) * probability_2.sum(),
+                     0., 1.)
+        probabilities_set = np.array([p1.tolist(),
+                                      p2.tolist()])
+        prob_entropy += [[utils.calc_entropy(p1),
+                          utils.calc_entropy(p2)]]
 
         """ run """
         results = run_(probabilities_set, model_params)

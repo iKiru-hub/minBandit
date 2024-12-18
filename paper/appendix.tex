@@ -33,7 +33,7 @@ Where:
 \noindent The motivation behind this choice is to express a function that possesses a bounded region (depending on $\mu,\,\sigma$) at a high/low peak (depeding on the value of $\gamma_{2}$), and a continuous transition to a constant value (depending on the steepness of the sigmoid $\beta$, shift
 $\alpha$, and intensity $\gamma_{1}$).
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/gaussian_sigmoid.png}
     \caption{\textsc{Activation function $\Phi_{v}$} - \textit{Parameters $\beta=10$, $\alpha=1$, $\mu=1$, $\sigma=1$, and $r=0.5$.}}
@@ -90,12 +90,25 @@ The final fitenss was the average over $2$ iterations.
 The optimization has been implemented in Python using the \texttt{DEAP} library, and the algorithm used was the \texttt{CMA-ES} algorithm. The optimization involved $40$ generations with a population size of $256$ individuals. The mutation rate was set to $0.5$ with a sigma of $0.8$, the cross-over rate was set to $0.4$.
 The run were carried out on a 256-core AMD EPYC 7763 with 2TB of RAM.
 
+\subsubsection{Genome distribution}
+Following the evolution search, it is taken the distribution of parameters over the top-scoring half of the population, corresponding to 128 individuals.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.\textwidth]{figures/evo_tabplot.png}
+    \caption{\textsc{Genome distribution} - \textit{each parameter is plotted against the fitness score.}}
+    \label{fig:evo_tabplot}
+\end{figure}
+
+\noindent Figure \ref{fig:evo_tabplot} reveals those parameters shared among the models with the highest fitness score, and those that are more variable.
+The most stable parameters are, predicatbly, those involved in directly shaping the neural activity (neural activation functions) and learning policy (Gaussian sigmoid).
+
 
 \subsection{Reward distribution entropy}\label{sec:appendix_entropy}
 
-\noindent The calculation of a set of $N$ reward probability distribution $\mathbf{p}_{i}\text{  for  } i\ldots N$ for $K$ values with a progressively decreasing levels of entropy $\mathbf{h}_{i}\text{  for  } i\ldots N$ has been obtained by the following algorithm:
+\noindent The calculation of a set of $N$ reward probability distribution $\mathbf{p}_{i}\text{  for  } i\ldots N$ for $K$ values with a progressively decreasing levels of entropy $\mathbf{h}_{i}\text{  for  } i\ldots N$ has been obtained by the algorithm below \ref{alg:entr_alg}.
 
-\begin{algorithm}[ht]
+\begin{algorithm}[H]
 \caption{Reward Probability Distribution Generation}
 \label{alg:reward_distribution}
 \SetAlgoLined
@@ -113,12 +126,7 @@ $\beta_i \gets \text{Sample index=} i \text{ from }(B)$ \Comment*[r]{Sample temp
 $\mathbf{p}_i \gets \frac{\exp(\beta_i \mathbf{z})}{\sum_j \exp(\beta_i \mathbf{z}_j)}$ \Comment*[r]{Softmax with temperature}
 }
 \Return ${\mathbf{p}_i}$
-\end{algorithm}
-
-
-\subsection{Table of results}
-
-\textit{\textbf{Note:} table to update}
+\end{algorithm}\label{alg:entr_alg}
 
 
 % weight update over rounds
@@ -143,107 +151,3 @@ This behaviour is consistent with the low entropy levels observed in the previou
 \end{figure}
 
 
-% % --- table K.5
-% \begin{table}[H]
-% \centering
-% \caption{Performance comparison for $K=5$}
-% \label{tab:k5}
-% \begin{tabular}{l c c c}
-% \toprule
-% \textbf{Model} & \textbf{\textsc{KAB-0}} & \textbf{\textsc{KAB-$\epsilon$}} & \textbf{\textsc{KAB-$\sin$}}\\
-% \midrule
-% Optimal & $0.900$ & $0.881$ & $0.563$ \\
-% Random & $0.330$ & $0.337$ & $0.200$ \\
-% \midrule
-% Thompson & $0.905$ & $0.617$ & $0.317$ \\
-% $\epsilon$-Greedy & $0.797$ & $0.531$ & $0.315$ \\
-% UCB & $0.897$ & $0.656$ & $0.319$ \\
-% \textbf{Model} & $\mathbf{0.899}$ & $\mathbf{0.663}$ & $\mathbf{0.265}$ \\
-
-% \bottomrule
-% \end{tabular}
-% \end{table}
-
-% % --- table K.10
-% \begin{table}[H]
-% \centering
-% \caption{Performance comparison for $K=10$}
-% \label{tab:k10}
-% \begin{tabular}{l c c c}
-% \toprule
-% \textbf{Model} & \textbf{\textsc{KAB-0}} & \textbf{\textsc{KAB-$\epsilon$}} & \textbf{\textsc{KAB-$\sin$}} \\
-% \midrule
-% Optimal & $0.900$ & $0.885$ & $0.355$  \\
-% Random & $0.247$ & $0.250$ & $0.100$ \\
-% \midrule
-% Thompson & $0.896$ & $0.648$ & $0.339$ \\
-
-% $\epsilon$-Greedy & $0.611$ & $0.597$ & $0.343$ \\
-% UCB & $0.891$ & $0.655$ & $0.358$ \\
-% \textbf{Model} & $\mathbf{0.905}$ & $\mathbf{0.668}$ & $\mathbf{0.203}$  \\
-% \bottomrule
-% \end{tabular}
-% \end{table}
-
-% % --- table K.100
-% \begin{table}[H]
-% \centering
-% \caption{Performance comparison for $K=100$}
-% \label{tab:k100}
-% \begin{tabular}{l c c c}
-% \toprule
-% \textbf{Model} & \textbf{\textsc{KAB-0}} & \textbf{\textsc{KAB-$\epsilon$}} & \textbf{\textsc{KAB-$\sin$}} \\
-% \midrule
-% Optimal & $0.900$ & $0.883$ & $0.020$  \\
-% Random & $0.196$ & $0.201$ & $0.010$ \\
-% \midrule
-% Thompson & $0.894$ & $0.586$ & $0.013$ \\
-% $\epsilon$-Greedy & $0.519$ & $0.574$ & $0.018$ \\
-% UCB & $0.853$ & $0.572$ & $0.012$ \\
-% \textbf{Model} & $\mathbf{0.898}$ & $\mathbf{0.651}$ & $\mathbf{0.010}$  \\
-% \bottomrule
-% \end{tabular}
-% \end{table}
-
-% % --- table K.200
-% \begin{table}[H]
-% \centering
-% \caption{Performance comparison for $K=100$}
-% \label{tab:k200}
-% \begin{tabular}{l c c c}
-% \toprule
-% \textbf{Model} & \textbf{\textsc{KAB-0}} & \textbf{\textsc{KAB-$\epsilon$}} & \textbf{\textsc{KAB-$\sin$}} \\
-% \midrule
-% Optimal & $0.900$ & $0.885$ & $0.010$  \\
-% Random & $0.178$ & $0.176$ & $0.005$ \\
-% \midrule
-% Thompson & $0.875$ & $0.624$ & $0.006$ \\
-% $\epsilon$-Greedy & $0.679$ & $0.588$ & $0.010$ \\
-% UCB & $0.792$ & $0.510$ & $0.006$ \\
-% \textbf{Model} & $\mathbf{0.905}$ & $\mathbf{0.610}$ & $\mathbf{0.006}$  \\
-% \bottomrule
-% \end{tabular}
-% \end{table}
-
-% % --- table K.1000
-% \begin{table}[H]
-% \centering
-% \caption{Performance comparison for $K=100$}
-% \label{tab:k1000}
-% \begin{tabular}{l c c c}
-% \toprule
-% \textbf{Model} & \textbf{\textsc{KAB-0}} & \textbf{\textsc{KAB-$\epsilon$}} & \textbf{\textsc{KAB-$\sin$}} \\
-% \midrule
-% Optimal & $0.900$ & $0.880$ & $0.002$  \\
-% Random & $0.177$ & $0.178$ & $0.001$ \\
-% \midrule
-% Thompson & $0.779$ & $0.445$ & $0.001$ \\
-% $\epsilon$-Greedy & $0.386$ & $0.478$ & $0.002$ \\
-% UCB & $0.301$ & $0.185$ & $0.001$ \\
-% \textbf{Model} & $\mathbf{0.703}$ & $\mathbf{0.480}$ & $\mathbf{0.001}$  \\
-% \bottomrule
-% \end{tabular}
-% \end{table}
-
-
-% \newpage

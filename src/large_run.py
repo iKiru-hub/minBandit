@@ -19,8 +19,8 @@ tmp_PATH = r"/Users/daniekru/Research/lab/minBandit/src/tmp"
 pigeon_PATH = r"/Users/daniekru/Research/lab/pigeon/data"
 main_PATH_cl = r"/home/daniekru/lab/minBandit/src/data"
 pigeon_PATH_cl = r"/home/daniekru/lab/pigeon/data"
-PATH = pigeon_PATH_cl
-# PATH = tmp_PATH
+#PATH = pigeon_PATH_cl
+PATH = tmp_PATH
 
 # from a sweep
 # model_params = {
@@ -58,8 +58,8 @@ NB_TRIALS = 2
 entropy_calc = False
 #K_list = [5, 10]
 #K_list = [50, 100]
-K_list = [200, 1000]
-# K_list = [5, 10, 50, 100, 200, 1000]
+#K_list = [200, 1000]
+K_list = [5, 10, 50, 100, 200, 1000]
 
 
 """ some local functions """

@@ -182,3 +182,7 @@ Lastly, learning follows a simple hetero-synaptic rule with a symmetric kernel (
 The learning rate is modulated by a non-linear function of the weights, which can be again regarded as a form of meta-learning \cite{inglisModulationDopamineAdaptive2021, iigayaAdaptiveLearningDecisionmaking2016}.
 Further, the synaptic specificity of the plasticity rate is a well documented trait of biolgical neurons, known as synapse-type specific plasticity (STSP) \cite{larsenSynapsetypespecificPlasticityLocal2015}.
 
+
+
+\noindent In figure \ref{fig:sel1} it is shown the history of selections over three trials. The initial rounds feature higher variability. In particular, it can be noted how the policy adopted by the model encounters periods of exploration and successive settling over an explotative strategy, which can be reverted in case of a change in the environment's reward distribution.
+

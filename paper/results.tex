@@ -3,7 +3,7 @@
 The model has been tested in a series of benchmark environments, each with a different number of arms and reward distributions. The performance has been compared with the following algorithms: Random Baseline, Upper-Confidence Bound (UCB), Thompson Sampling, and Epsilon-Greedy.
 
 % Description of the environments
-\subsection{Game variants} %\textbf{YEAH BUDDY WORK ON THIS A LIL MORE}
+\subsection{Game variants}\label{sec:envs}
 
 % \noindent The game environments considered in this work are non-stationary K-Armed Bandits with Binomial rewards.
 % In particular, the agent is evaluated over a number $T_{\text{trials}}$ of \textit{trials}, each composed by an arbitrary number $T_{\text{rounds}}$ of \textit{rounds}; each \textit{trial} is characterized by a different reward distribution $\mathbf{p}\sim\mathcal{U}(0,1)^{K}$ (although in practice the bounds have been set to $(0.1, 0.9)$ such that the distributions are less trivial).
@@ -15,10 +15,10 @@ The reason for this choices is to test the model performance under different spe
 Figure \ref{fig:envs} visually illustrates their specificities.
 
 \hfill \break
-\noindent \textbf{Piecewise stationary environment} [\textsc{KAB-P}]\\ Within a trial the reward distribution is stationary and it is drawn from a uniform $\mathbf{p}=\mathcal{U}(0, 1)^{K}$. At the end of each trial $i$ it is drawn a new distribution $\mathbf{\mathbf{p}}_{i} \to \mathbf{\mathbf{p}}_{i+1}$ \cite{qiForcedExplorationBandit2023}.
+\noindent \textbf{Piecewise stationary environment} [\textsc{KAB-P}]\\ Within a trial the reward distribution is stationary and it is drawn from a uniform $\mathbf{p}=\mathcal{N}(0.5, 0.2)^{K}$. At the end of each trial $i$ it is drawn a new distribution $\mathbf{\mathbf{p}}_{i} \to \mathbf{\mathbf{p}}_{i+1}$ \cite{qiForcedExplorationBandit2023}.
 
 \hfill \break
-\noindent \textbf{Piecewise stationary environment with drift} [\textsc{KAB-D}]\\ At the very beginning, the reward distribution $\mathbf{p}$ is sampled from a uniform $\mathbf{p}=\mathcal{U}(0, 1)^{K}$. Then, it changes gradually over the rounds, tracked as time $t$, such that its values tend towards a target distribution $\mathbf{q}_{i}$ as $\tau_{p}\dot{\mathbf{p}}_{t}=\mathbf{q}_{i}-\mathbf{p}_{t}$.
+\noindent \textbf{Piecewise stationary environment with drift} [\textsc{KAB-D}]\\ At the very beginning, the reward distribution $\mathbf{p}$ is sampled from a uniform $\mathbf{p}=\mathcal{N}(0.5, 0.2)^{K}$. Then, it changes gradually over the rounds, tracked as time $t$, such that its values tend towards a target distribution $\mathbf{q}_{i}$ as $\tau_{p}\dot{\mathbf{p}}_{t}=\mathbf{q}_{i}-\mathbf{p}_{t}$.
 Here, $\dot{\mathbf{p}}$ is the time derivative of the distribution and $\tau_{p}$ is its time constant.
 Once the distance is below a threshold $\delta$ as $\vert \mathbf{q}_{i} - \mathbf{p}_{t}\vert < \delta$, the target distribution is changed to a new one $\mathbf{q}_{i}\to\mathbf{q}_{i+1}$. In this variant, there are no proper trials but the target distribution keep changing until a maximum number
 of rounds is reached.
@@ -75,20 +75,52 @@ This firing behaviour is reminiscent of coincidence detector neurons, which are 
 % Results: scores and brief discussion
 \subsection{Environment variants and number of arms}
 
-The model has been tested and compared with the other algorithms: Thompson Sampling, Epsilon-Greedy, and UCB, in the four different variants of the K-armed bandit problem.
-In figure \ref{fig:perf_plot}, it is reported their results over a different number of arms, ranging from 5 to 1000.
-Overall, our model displayed a good performance over all environments and arm numbers, suffering only when the latter reached 1000.
+The model has been tested and compared with the other algorithms: Thompson Sampling (TS), $\epsilon$-Greedy, and UCB. The benchmark were the four different variants of the K-armed bandit problem listed above \ref{sec:envs}, with a variable number of arms ranging from 5 to 1000.
+The results are reported in table \ref{tab:results}.
+Overall, our model displayed a solid performance over all environments, most of the time being equally good or better than the other algorithms.
+Interestingly, large numbers of $K$ did not pose a significant difficulty, with the model being able to adapt to the different environments and reward distributions.
+However, this is in part due to the randomness in the assignment of arm probabilities, and the statistics of the quantity of high-reward arms as their number increases. Nonetheless, given the non-stationarity it is still a not trivial task to re-calibrate to new distributions.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.\textwidth]{figures/performance_plot.png}
-    \caption{\textsc{Performance comparison for different values of $K$ and game variants} - \textit{The models are evaluated on the four variants of the bandit problem, and their performance is measured as the average reward obtained over 2 trials of 2000 rounds each.}}
-    \label{fig:perf_plot}
-\end{figure}
+
+% % --- table mabp
+\begin{table}[ht]
+\centering
+\begin{tabular}{l c c c c c c c}
+\toprule
+\textbf{K} & \textbf{$5$} & \textbf{$10$} & \textbf{$50$} & \textbf{$100$} & \textbf{$200$} & \textbf{$1000$}\\
+\midrule
+TS & $0.03(8)$ & $0.02(6)$ & $0.02(7)$ & $0.04(5)$ & $0.02(3)$ & $0.16(2)$ \\
+$\epsilon$-Greedy & $0.05(14)$ & $0.07(5)$ & $0.08(7)$ & $0.15(6)$ & $0.08(2)$ & $0.10(4)$ \\
+UCB & $0.05(15)$ & $0.05(8)$ & $0.19(6)$ & $0.33(3)$ & $0.39(2)$ & $0.54(3)$ \\
+\textbf{Model} & $\mathbf{0.08(13)}$ & $\mathbf{0.07(11)}$ & $\mathbf{0.07(14)}$ & $\mathbf{0.07(8)}$ & $\mathbf{0.09(9)}$ & $\mathbf{0.07(8)}$ \\
+
+\midrule
+TS & $0.03(6)$ & $0.08(13)$ & $0.16(6)$ & $0.19(3)$ & $0.28(7)$ & $0.34(3)$ \\
+$\epsilon$-Greedy & $0.04(7)$ & $0.14(13)$ & $0.22(5)$ & $0.19(8)$ & $0.26(7)$ & $0.16(4)$ \\
+UCB & $0.05(6)$ & $0.09(13)$ & $0.21(3)$ & $0.36(4)$ & $0.40(3)$ & $0.49(2)$ \\
+\textbf{Model} & $\mathbf{0.13(10)}$ & $\mathbf{0.15(16)}$ & $\mathbf{0.05(6)}$ & $\mathbf{0.21(5)}$ & $\mathbf{0.26(7)}$ & $\mathbf{0.12(7)}$ \\
+
+\midrule
+TS & $0.21(22)$ & $0.22(16)$ & $0.07(5)$ & $0.10(5)$ & $0.06(4)$ & $0.21(5)$ \\
+$\epsilon$-Greedy & $0.21(21)$ & $0.18(10)$ & $0.12(5)$ & $0.12(6)$ & $0.10(4)$ & $0.10(1)$ \\
+UCB & $0.03(4)$ & $0.05(3)$ & $0.17(4)$ & $0.23(1)$ & $0.33(3)$ & $0.49(3)$ \\
+\textbf{Model} & $\mathbf{0.00(3)}$ & $\mathbf{0.02(4)}$ & $\mathbf{0.05(3)}$ & $\mathbf{0.06(4)}$ & $\mathbf{0.08(1)}$ & $\mathbf{0.05(4)}$ \\
+
+\midrule
+TS & $0.19(21)$ & $0.43(19)$ & $0.17(10)$ & $0.11(6)$ & $0.09(6)$ & $0.19(6)$ \\
+$\epsilon$-Greedy & $0.24(26)$ & $0.43(10)$ & $0.24(10)$ & $0.14(5)$ & $0.15(6)$ & $0.14(2)$ \\
+UCB & $0.00(6)$ & $0.26(17)$ & $0.18(6)$ & $0.29(3)$ & $0.34(1)$ & $0.52(3)$ \\
+\textbf{Model} & $\mathbf{0.00(9)}$ & $\mathbf{0.23(17)}$ & $\mathbf{0.14(7)}$ & $\mathbf{0.08(8)}$ & $\mathbf{0.06(4)}$ & $\mathbf{0.09(7)}$ \\
+\bottomrule
+\end{tabular}
+\hfill \break
+\caption{\textsc{Table of performance} - \textit{From the top: results for MAB-P, MAB-D, MAB-$\sin$, MAB-$\sin$P for different numbers $K$ of arms. Average regret and standard deviation (2 decimal places) over 2 trials of 2000 rounds each averaged over 5 simulations.}}
+\end{table}\label{tab:results}
+
 
 
 % How the models work and compare
-\subsection{Decision-making dynamics}
+\subsection{Analysis of dynamics and robustness}
 
 % entropy over rounds
 \subsubsection{Entropy analysis}\label{sec:entropy}
@@ -96,7 +128,7 @@ Overall, our model displayed a good performance over all environments and arm nu
 The simulation was ran for $3$ trials with $2000$, and averaged over $5$ iterations.
 Additionally, in order to quantify the variability of the decision policy at a given time and highlight the particularity of each decision-making behaviour, we calculated the entropy of the probability distribution $p$ of chosen arms, calculated over a window of 20 rounds, as $H=-\sum^{K}_{i} p_{i}\log(p_{i})$.
 The unit of entropy is in nats, and it ranges from $0$ (no uncertainty) to $\log_{e}(K)$ (maximum uncertainty).
-In figure \ref{fig:entropy_fig1}, it is plotted for each model the raster plot of selected arms together with its level of entropy. The reward probability distribution over the arms has an average of $H=2.02$.
+In figure \ref{fig:entropy_fig1}-\textbf{a}, it is plotted for each model the raster plot of selected arms together with its level of entropy. The reward probability distribution over the arms has an average of $H=2.02$.
 
 As expected, the shape of the entropy curve expresses the inherent strategy adopted by each model.
 In particular, the UCB algorithm showed the highest variability, marked by a persistent exploratory behaviour throughout the trials despite converging to reward options. Thompson Sampling was able to reach most solutions, although with difficulty in adapting to new reward distributions
@@ -108,38 +140,39 @@ Indeed, the dynamics of our model make it particularly suited for the task of no
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/entropy_main_plot.png}
-    \caption{\textsc{Decision-making dynamics for different models} \textit{Each plot display the results from one model. The raster plots (black dots) show the arms selected at each round.
-The red lines represent the entropy level, calculated from the distribution of selections over the preceeding 20 rounds, smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy over all trials are also reported.}}
+    \caption{\textsc{Decision-making dynamics for different models} - \textbf{a}: \textit{Each plot display the results from one model. The raster plots (black dots) show the arms selected at each round.
+The red lines represent the entropy level, calculated from the distribution of selections over the preceeding 20 rounds, smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy over all trials are also reported.}
+ - \textbf{b}: \textit{the top two rows display  the average reward for trial 1 and 2 obtained by each model for increasing levels of entropy (in nats) in the reward distribution; a dashed line is the regret with respect to the upper bound (black solid line). The two bottom average entropy of the selections for the first and second trial of the simulation, each with 2000 rounds.}}
     \label{fig:entropy_fig1}
 \end{figure}
 
 
 % how robust and structure is the model
-\subsubsection{Robustness}
+% \subsubsection{Robustness}
 
 % robustness
 \noindent Then, we sought to investigate the robustness of the model, quantified as the capacity to endure increasing levels of entropy in the reward distribution.
 The simulation was done in a piecewise stationary environment with $K=50$, averaged over 128 independent runs.
 The results report how all models are capable of robust performance even in the presence of high uncertainty.
-In the top row of figure \ref{fig:entropy_distr}, it is plotted the average reward obtained by each model against the reward distribution entropy in two trials.
+In the top two row of figure \ref{fig:entropy_fig1}-\textbf{b}, it is plotted the average reward obtained by each model against the reward distribution entropy in two trials.
 In the second trial however, there is a ubiquitous and clear decline in rounds with elevated entropy. This can be explained by the greater challenge of switching arms when numerous options appear similarly good.
-In general, our model shows to perform as good as UCB, and better than $\epsilon$-Greedy and Thompson Sampling.
-Further, the latter seemed to suffer the most, probably due to its conservative approach and difficulty of disengaging from an previously rewarding arm, as underlined also in figure \ref{fig:entropy_fig1}.
+In general, our model shows to perform as good as UCB, but not generally better than $\epsilon$-Greedy and Thompson Sampling.
+Further, the latter seemed also to suffer consistently, probably due to its conservative approach and difficulty of disengaging from an previously rewarding arm, as underlined also in plot \textbf{a}.
 In the same figure, the regret (dashed lines) tells the same story, and remarks the robust performance over uncertainty.
 
-Another perspective to this analysis is given by the plots in the bottom row, which show the average entropy of the selections.
+Another perspective to this analysis is given by the two bottom plots, which show the average entropy of the selections.
 Overall, there is the not suprising trend of increasing selection entropy with the entropy of the reward distribution. However, striking is the exception of Epsilon-Greedy, which maintain a constant level throughout.
 On the one hand, UCB shows a marked and gradual increase, while Thompson Sampling follows with some delay.
-On the other hand, our model display a more abrupt change, \textbf{at around 2.43 nats}, going from a state of very low to very high entropy.
+On the other hand, our model display a more abrupt change, going from a state of very low to very high entropy.
 For more details about the distribution see the appendix \ref{sec:appendix_entropy}.
 
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{figures/entropy_performance_plot.png}
-    \caption{\textsc{Entropy analysis for the model in a stationary setting} - Top row: \textit{trial 1 and 2 have been divided into two columns. A solid line represents the average reward obtained by a model for increasing levels of entropy (in nats) in the reward distribution; a dashed line instead reports the regret with respect to the upper bound (black solid line) }
-- Bottom row: \textit{average entropy of the selections for the first and second trial of the simulation, each with 2000 rounds each (as calculated in \ref{sec:entropy}).}}
-\end{figure}\label{fig:entropy_distr}
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.9\textwidth]{figures/entropy_performance_plot.png}
+%     \caption{\textsc{Entropy analysis for the model in a stationary setting} - Top row: \textit{trial 1 and 2 have been divided into two columns. A solid line represents the average reward obtained by a model for increasing levels of entropy (in nats) in the reward distribution; a dashed line instead reports the regret with respect to the upper bound (black solid line) }
+% - Bottom row: \textit{average entropy of the selections for the first and second trial of the simulation, each with 2000 rounds each (as calculated in \ref{sec:entropy}).}}
+% \end{figure}\label{fig:entropy_distr}
 
 
 
