@@ -47,9 +47,9 @@
 \citation{apicellaSurveyModernTrainable2021}
 \citation{millerCombinedMechanismsNeural2019}
 \newlabel{eq:main}{{2.2}{6}{Model description}{equation.2.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \textsc  {Model architecture} - \textit  {The model is composed of a layer $U$ (blue), receiving a feedfoward input $I_{\text  {ext}}$, a layer $V$ (orange), and connections $\textbf  {W}^{UV}$ and $\textbf  {W}^{VU}$. Additionally, two indexes $k_{U}, k_{V}$ can be extracted from the layers and corresponds to the selection made by the two populations as $k_{U}=\text  {argmax}_{k} \{\textbf  {u}\}$, $k_{V}=\text  {argmax}_{k} \{\textbf  {v}\}$.}}}{6}{figure.caption.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \textsc  {Model architecture} - \textit  {The model is composed of a layer $U$ (blue), receiving a feedfoward input $I_{\text  {ext}}$, a layer $V$ (orange), and connections $\textbf  {W}^{UV}$ and $\textbf  {W}^{VU}$. Additionally, two indexes $k_{U}, k_{V}$ are extracted from the layers and corresponds to the selection made by the two populations as $k_{U}=\text  {argmax}_{k} \{\textbf  {u}\}$, $k_{V}=\text  {argmax}_{k} \{\textbf  {v}\}$.}}}{6}{figure.caption.2}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:main_architecture}{{1}{6}{\textsc {Model architecture} - \textit {The model is composed of a layer $U$ (blue), receiving a feedfoward input $I_{\text {ext}}$, a layer $V$ (orange), and connections $\textbf {W}^{UV}$ and $\textbf {W}^{VU}$. Additionally, two indexes $k_{U}, k_{V}$ can be extracted from the layers and corresponds to the selection made by the two populations as $k_{U}=\text {argmax}_{k} \{\textbf {u}\}$, $k_{V}=\text {argmax}_{k} \{\textbf {v}\}$.}}{figure.caption.2}{}}
+\newlabel{fig:main_architecture}{{1}{6}{\textsc {Model architecture} - \textit {The model is composed of a layer $U$ (blue), receiving a feedfoward input $I_{\text {ext}}$, a layer $V$ (orange), and connections $\textbf {W}^{UV}$ and $\textbf {W}^{VU}$. Additionally, two indexes $k_{U}, k_{V}$ are extracted from the layers and corresponds to the selection made by the two populations as $k_{U}=\text {argmax}_{k} \{\textbf {u}\}$, $k_{V}=\text {argmax}_{k} \{\textbf {v}\}$.}}{figure.caption.2}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}Option selection}{7}{subsubsection.2.2.1}\protected@file@percent }
 \@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces Two-phases option selection process}}{7}{algocf.1}\protected@file@percent }
 \newlabel{alg:decision}{{1}{7}{Option selection}{algocf.1}{}}
@@ -67,6 +67,7 @@
 \citation{backmanEffectsWorkingMemoryTraining2011}
 \citation{enelStableDynamicRepresentations2020}
 \citation{wangMetalearningNaturalArtificial2021}
+\citation{martinRepresentationObjectConcepts2007a}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Learning}{8}{subsection.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Bio-inspired features}{8}{subsection.2.4}\protected@file@percent }
 \citation{qiForcedExplorationBandit2023}
@@ -74,8 +75,8 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Game variants}{9}{subsection.3.1}\protected@file@percent }
 \newlabel{sec:envs}{{3.1}{9}{Game variants}{subsection.3.1}{}}
 \citation{igelCovarianceMatrixAdaptation2007}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces \textsc  {Reward distribution for the four game variants} - \textit  {The reward distribution for each arm and environment is plotted over two trials of 2000, demarcated by a dotted grey line.}}}{10}{figure.caption.4}\protected@file@percent }
-\newlabel{fig:envs}{{2}{10}{\textsc {Reward distribution for the four game variants} - \textit {The reward distribution for each arm and environment is plotted over two trials of 2000, demarcated by a dotted grey line.}}{figure.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces \textsc  {Reward distribution for the four game variants} - \textit  {The reward distribution for each arm and environment is plotted over three trials of 1000, demarcated by a dotted grey line.}}}{10}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:envs}{{2}{10}{\textsc {Reward distribution for the four game variants} - \textit {The reward distribution for each arm and environment is plotted over three trials of 1000, demarcated by a dotted grey line.}}{figure.caption.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Evolution search}{10}{subsection.3.2}\protected@file@percent }
 \citation{citriSynapticPlasticityMultiple2008}
 \citation{ojaOjaLearningRule2008}
@@ -89,12 +90,13 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}Entropy analysis}{12}{subsubsection.3.4.1}\protected@file@percent }
 \newlabel{sec:entropy}{{3.4.1}{12}{Entropy analysis}{subsubsection.3.4.1}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces \textsc  {Table of performance} - \textit  {From the top: results for MAB-P, MAB-D, MAB-$\sin $, MAB-$\sin $P for different numbers $K$ of arms. Average regret and standard deviation (2 decimal places) over 2 trials of 2000 rounds each averaged over 5 simulations.}}}{13}{table.caption.6}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces \textsc  {Decision-making dynamics for different models} - \textbf  {a}: \textit  {Each plot display the results from one model. The raster plots (black dots) show the arms selected at each round. The red lines represent the entropy level, calculated from the distribution of selections over the preceeding 20 rounds, smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy over all trials are also reported.} - \textbf  {b}: \textit  {the top two rows display the average reward for trial 1 and 2 obtained by each model for increasing levels of entropy (in nats) in the reward distribution; a dashed line is the regret with respect to the upper bound (black solid line). The two bottom average entropy of the selections for the first and second trial of the simulation, each with 2000 rounds.}}}{14}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:entropy_fig1}{{4}{14}{\textsc {Decision-making dynamics for different models} - \textbf {a}: \textit {Each plot display the results from one model. The raster plots (black dots) show the arms selected at each round. The red lines represent the entropy level, calculated from the distribution of selections over the preceeding 20 rounds, smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy over all trials are also reported.} - \textbf {b}: \textit {the top two rows display the average reward for trial 1 and 2 obtained by each model for increasing levels of entropy (in nats) in the reward distribution; a dashed line is the regret with respect to the upper bound (black solid line). The two bottom average entropy of the selections for the first and second trial of the simulation, each with 2000 rounds.}}{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces \textsc  {Decision-making dynamics for different models} - \textbf  {a}: \textit  {Each plot display the results from one model. The raster plots (black dots) show the arms selected at each round. The red lines represent the entropy level, calculated from the distribution of selections over the preceeding 20 rounds, smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy over all trials are also reported.} - \textbf  {b}: \textit  {the top two rows display the average reward for trial 1 and 2 obtained by each model for increasing levels of entropy (in nats) in the reward distribution; a dashed line is the regret with respect to the upper bound (black solid line). The two bottom average entropy of the selections for the first and second trial of the simulation, each with 2000 rounds. - \textbf  {c}: \textit  {testing of the model to a 500 arms MAB-P enviroment for three epochs. - \textbf  {d}: representation of the arms reward distributions for different levels of entropy, aligned with the x-axis in plot \textbf  {b}.}}}}{14}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:entropy_fig1}{{4}{14}{\textsc {Decision-making dynamics for different models} - \textbf {a}: \textit {Each plot display the results from one model. The raster plots (black dots) show the arms selected at each round. The red lines represent the entropy level, calculated from the distribution of selections over the preceeding 20 rounds, smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy over all trials are also reported.} - \textbf {b}: \textit {the top two rows display the average reward for trial 1 and 2 obtained by each model for increasing levels of entropy (in nats) in the reward distribution; a dashed line is the regret with respect to the upper bound (black solid line). The two bottom average entropy of the selections for the first and second trial of the simulation, each with 2000 rounds. - \textbf {c}: \textit {testing of the model to a 500 arms MAB-P enviroment for three epochs. - \textbf {d}: representation of the arms reward distributions for different levels of entropy, aligned with the x-axis in plot \textbf {b}.}}}{figure.caption.7}{}}
 \citation{steyversBayesianAnalysisHuman2009a}
 \citation{schulzFindingStructureMultiarmed2020}
 \citation{zhangForgetfulBayesMyopic2013}
 \citation{suttonReinforcementLearningProblem1998}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Discussion}{15}{section.4}\protected@file@percent }
 \citation{wangMetalearningNaturalArtificial2021}
 \citation{toblerAdaptiveCodingReward2005}
 \citation{roeschDopamineNeuronsEncode2007}
@@ -102,10 +104,10 @@
 \citation{larsenSynapsetypespecificPlasticityLocal2015}
 \citation{inglisModulationDopamineAdaptive2021}
 \citation{iigayaAdaptiveLearningDecisionmaking2016}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Discussion}{15}{section.4}\protected@file@percent }
 \citation{faisalNoiseNeuronsOther2012}
 \citation{tokicAdaptiveEGreedyExploration2010}
 \citation{tokicValueDifferenceBasedExploration2011}
+\citation{qiForcedExplorationBandit2023}
 \citation{nunesSpikingNeuralNetworks2022}
 \bibdata{mkb_bibliography}
 \bibcite{suttonReinforcementLearningProblem1998}{1}
@@ -157,17 +159,18 @@
 \bibcite{backmanEffectsWorkingMemoryTraining2011}{47}
 \bibcite{enelStableDynamicRepresentations2020}{48}
 \bibcite{wangMetalearningNaturalArtificial2021}{49}
-\bibcite{igelCovarianceMatrixAdaptation2007}{50}
-\bibcite{ojaOjaLearningRule2008}{51}
-\bibcite{kingmaAdamMethodStochastic2017}{52}
-\bibcite{ratteImpactNeuronalProperties2013}{53}
-\bibcite{steyversBayesianAnalysisHuman2009a}{54}
-\bibcite{schulzFindingStructureMultiarmed2020}{55}
-\bibcite{zhangForgetfulBayesMyopic2013}{56}
-\bibcite{roeschDopamineNeuronsEncode2007}{57}
-\bibcite{coolsChemistryAdaptiveMind2019}{58}
-\bibcite{faisalNoiseNeuronsOther2012}{59}
-\bibcite{nunesSpikingNeuralNetworks2022}{60}
+\bibcite{martinRepresentationObjectConcepts2007a}{50}
+\bibcite{igelCovarianceMatrixAdaptation2007}{51}
+\bibcite{ojaOjaLearningRule2008}{52}
+\bibcite{kingmaAdamMethodStochastic2017}{53}
+\bibcite{ratteImpactNeuronalProperties2013}{54}
+\bibcite{steyversBayesianAnalysisHuman2009a}{55}
+\bibcite{schulzFindingStructureMultiarmed2020}{56}
+\bibcite{zhangForgetfulBayesMyopic2013}{57}
+\bibcite{roeschDopamineNeuronsEncode2007}{58}
+\bibcite{coolsChemistryAdaptiveMind2019}{59}
+\bibcite{faisalNoiseNeuronsOther2012}{60}
+\bibcite{nunesSpikingNeuralNetworks2022}{61}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Appendix}{22}{section.5}\protected@file@percent }
 \newlabel{sec:appendix}{{5}{22}{Appendix}{section.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Neural response function}{22}{subsection.5.1}\protected@file@percent }

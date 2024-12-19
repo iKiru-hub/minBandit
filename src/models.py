@@ -467,6 +467,8 @@ class Modelv2(MBsolver):
         # if self._lr_function_name == "gaussian":
         self._lr = np.ones(K) * lr
 
+        self._Wvu = np.ones((K, K)) / K
+
         # neural reponse parameters
         self._gain_v = gain_v
         self._offset_v = offset_v

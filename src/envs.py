@@ -225,8 +225,8 @@ class KABdriftv0(KAB):
         self._update_record()
 
         # check if the target distribution has been reached
-        err = np.abs(self.probabilities - self.trg_probabilities).sum()
-        if err < 0.01:
+        err = np.abs(self.probabilities - self.trg_probabilities).mean()
+        if err < 0.02:
 
             self.trg_probabilities = np.array(self.probabilities_set[self.counter % self.nb_sets])
             self.counter += 1
@@ -449,9 +449,9 @@ def make_new_env(K: int, env_type: str, nb_trials: int=3,
     # define the environment
     if env_type == "driftv0":
         env = KABdriftv0(K=K,
-                              probabilities_set=probabilities_set,
-                              verbose=False,
-                              tau=100)
+                         probabilities_set=probabilities_set,
+                         verbose=False,
+                         tau=200)
     elif env_type == "sinv0":
         frequencies = np.random.uniform(0, 0.1, K)
         phases = np.random.uniform(0, 6.28, K)

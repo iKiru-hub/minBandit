@@ -116,12 +116,12 @@ The most stable parameters are, predicatbly, those involved in directly shaping 
 \KwOut{Set of probability distributions ${\mathbf{p}_i}$ with decreasing entropy}
 \SetKwComment{Comment}{// }{ }
 \textbf{Initial Setup:}
-Define set $B = \{1.5^x \mid x = 1, \ldots, 7\}$; \\
+Define set $B = \{17, 15, 12, 8, 4, 1.5, 0.5\}$; \\
 \For{$i \gets 1$ to $N$}{
-$\mathbf{z} \gets \text{RandomVector}(0,1)^K$;\\
-$j \gets \text{RandomIndex}(K)$;\\
-$\mathbf{z}_j \gets 1$;\\
-$\beta_i \gets \text{Sample index=} i \text{ from }(B)$ \Comment*[r]{Sample temperature from $B$}
+    $\mathbf{z} \gets \text{RandomVector}\sim \mathcal{U}(0,0.5)^K$;\\
+    $j \gets \text{RandomIndex}(K)$;\\
+    $\mathbf{z}_j \gets 1$;\\
+    $\beta_i \gets \text{Sample index=} i \text{ from }(B)$ \Comment*[r]{Sample temperature from $B$}
 
 $\mathbf{p}_i \gets \frac{\exp(\beta_i \mathbf{z})}{\sum_j \exp(\beta_i \mathbf{z}_j)}$ \Comment*[r]{Softmax with temperature}
 }

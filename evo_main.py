@@ -100,7 +100,9 @@ class Env:
 
                 fitness += stats["scores"].item()
 
-        return (fitness / (len(self.K_list) + len(self.env_list)),)
+        logger.debug(f"fitness: {fitness:.4f} / ({len(self.K_list) + len(self.env_list)})")
+
+        return (fitness / (len(self.K_list) * len(self.env_list)),)
 
 
 

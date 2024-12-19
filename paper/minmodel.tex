@@ -2,12 +2,12 @@
 \subsection{Model description}
 The model is constructed as a rate network of two populations of neurons \textit{U} and \textit{V}, the former representing the memory trace of the \textit{K} available options (\textit{i.e.} the bandits), and the latter the value of the options under the current policy.
 More formally, the model is defined by a set of coupled ordinary differential equations (ODEs).
-The first equation tracks the evolution of the neural activity $\textbf{u}$ of population \textit{U}, while the second tracks the activity $\textbf{v}$ of the population \textit{V}. The time constant $\tau$ is the same for both equations and it is set to $10$ms.
+The first equation tracks the evolution of the neural activity $\textbf{u}$ of population \textit{U}, while the second tracks the activity $\textbf{v}$ of the population \textit{V}. Further, each has its own time constant $\tau$.
 
 \begin{equation}
 \begin{aligned}
-    \tau \dot{\textbf{u}}&= -\textbf{u} + \textbf{W}^{VU}\phi_{v}(\textbf{v}) + \textbf{I}_{\text{ext}} \\
-    \tau \dot{\textbf{v}}&= -\textbf{v} + \tilde{\textbf{W}}^{UV}\phi_{u}\textbf{u}
+    \tau_{u} \dot{\textbf{u}}&= -\textbf{u} + \textbf{W}^{VU}\phi_{v}(\textbf{v}) + \textbf{I}_{\text{ext}} \\
+    \tau_{v} \dot{\textbf{v}}&= -\textbf{v} + \tilde{\textbf{W}}^{UV}\phi_{u}\textbf{u}
 \end{aligned}
 \end{equation}\label{eq:main}
 
@@ -17,7 +17,7 @@ The activation functions $\phi_{v},\phi_{u}$ are applied to population $v$, and 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.6\textwidth]{figures/minb_architecture.png}
-    \caption{\textsc{Model architecture} - \textit{The model is composed of a layer $U$ (blue), receiving a feedfoward input $I_{\text{ext}}$, a layer $V$ (orange), and connections $\textbf{W}^{UV}$ and $\textbf{W}^{VU}$. Additionally, two indexes $k_{U}, k_{V}$  can be extracted from the layers and
+    \caption{\textsc{Model architecture} - \textit{The model is composed of a layer $U$ (blue), receiving a feedfoward input $I_{\text{ext}}$, a layer $V$ (orange), and connections $\textbf{W}^{UV}$ and $\textbf{W}^{VU}$. Additionally, two indexes $k_{U}, k_{V}$  are extracted from the layers and
     corresponds to the selection made by the two populations as $k_{U}=\text{argmax}_{k} \{\textbf{u}\}$, $k_{V}=\text{argmax}_{k} \{\textbf{v}\}$.}}
     \label{fig:main_architecture}
 \end{figure}
@@ -25,8 +25,9 @@ The activation functions $\phi_{v},\phi_{u}$ are applied to population $v$, and 
 \noindent Importantly, the two layers are not fully connected and the matrices are diagonal.
 More in detail, the weight matrix $\textbf{W}^{VU}$ is simply made of $1$s, while $\tilde{\textbf{W}}^{UV}$ is a function of the actual weights $\Phi_{v}(\textbf{W}^{UV})$ and it represents the contribution of the active options $\textbf{u}$ to the value representation $\textbf{v}$, it is thus referred to as \textit{option value function}.
 The function $\Phi_{v}$ is defined a weighted sum of a generalized sigmoid and a Gaussian, whose shape is characterized by a bell curve smoothly settling to a constant value. For details see in the appendinx \ref{sec:appendix}.
-Since the exact values of the model hyperparameters are optimized through an evolution, our motivation behind the structure of $\Phi_{v}$ is to be agnostic about its final form, and allow competition or integration of two distinct traits of the function shape.
-One is a smooth transition to a plateau value with a certain steepness (or gain), which can represent a saturation once a threshold is crossed, such feature has been reporeted for both biological and artificial neurons \cite{ockerFlexibleNeuralConnectivity2020, apicellaSurveyModernTrainable2021}.
+
+The exact values of the model hyperparameters are optimized through an evolution algorithm. The motivation behind our choice of $\Phi_{v}$ is to be agnostic about its final form, and allow competition or integration of two distinct traits of the function shape.
+In particular, one corresponds to a smooth transition to a plateau value with a certain steepness (or gain), which can represent a saturation once a threshold is crossed, such feature has been reporeted for both biological and artificial neurons \cite{ockerFlexibleNeuralConnectivity2020, apicellaSurveyModernTrainable2021}.
 The other is a bell-shaped curve with a defined center and width, which can allow for placing emphasis on values only within a given window and modulate information transfer \cite{millerCombinedMechanismsNeural2019}.
 
 \subsubsection{Option selection}
@@ -99,7 +100,7 @@ Then, the connections $\textbf{W}^{UV}$ for the neuron corresponding to the opti
 
 \noindent where $w^{+}$ is a constant maximum synaptic weight, while $\tilde{\eta}_{k}$ is the learning rate for the option $k$ determined by a function $\Phi_{\eta}$ of the current weights $\textbf{W}^{UV}_{k}$, referred to as \textit{learning rate function}.
 
-The shape of $\Phi_{\eta}$ is again a Gaussian-sigmoid but with different parameters, giving evolution the opportunity to combine the shape traits of plateau and bell-shaped tuning in a task-efficient manner.
+The shape of $\Phi_{\eta}$ is again a Gaussian-sigmoid but with different parameters, giving evolution the opportunity to combine the two characteristic traits of plateau and bell-shaped tuning.
 In particular, these features can be combined so to define mechanisms of synapse-type specific plasticity as a function of the current synaptic strenght \cite{larsenSynapsetypespecificPlasticityLocal2015}, as well the application of other useful homeostatic constraints with computational advantages, such as synaptic scaling and proportional updates \cite{citriSynapticPlasticityMultiple2008, kennedySynapticSignalingLearning2016, samavatSynapticInformationStorage2024}.
 
 

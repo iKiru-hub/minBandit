@@ -2,7 +2,7 @@
 \section{Discussion}
 
 % work on the k-armed bandit problem and neuroscience
-The process of making decision in uncertain settings is a remarkable aspect of cognition. For instance, such behaviour is implemented in animals during foraging and matching behaviour.
+The process of making decision in uncertain situations is a remarkable aspect of cognition. For instance, such behaviour is implemented in animals during foraging and matching behaviour.
 In the context of humans, it has been observed that the pool of adopted policies vary considerably \cite{steyversBayesianAnalysisHuman2009a}.
 Nevertheless, the subjects seems able to integrate environmental uncertainty and trial generalization in their strategy, and Bayesian algorithms are generally a good fit for the observed policies \cite{schulzFindingStructureMultiarmed2020, zhangForgetfulBayesMyopic2013}.
 A useful formalization of such tasks is the multi-armed bandit problem, which has been extensively studied in the context of reinforcement learning \cite{suttonReinforcementLearningProblem1998}.
@@ -11,15 +11,16 @@ Although several algorithms have been proposed to solve the problem with robust 
 %
 In this work, we introduced a model based on two interactive population of rate neurons to address the binomial K-armed bandit problem in non-stationary environments.
 Our goal was to design an architecture that resemble the functional role of the orbitofrontal cortex (OFC) and anterior cingulate cortex (ACC), together with biologically plausible neuronal dynamics based on synaptic plasticity.
-The results obtained report how it is able to succesfully adapt to changing reward distributions and maintain a near-optimal policy over time, achieving equally well when compared to the standard algorithms.
-The assessment was done over four different variants of the bandit problem and a wide range of number of arms, corroborating the robstness of the model.
+The results obtained report how it was able to succesfully adapt to changing reward distributions and maintain a near-optimal policy over time, achieving equally well when compared to the standard algorithms.
+The assessment was done over four different variants of stochastic bandit problems and a wide range of number of arms, providing evidence for the consistency of the model.
 
-Further analysis involved the evaluation of the model's behaviour in situations with variable levels of entropy in the reward distribution.
-One insight was that in situation with low uncertainty, the model is almost always capable of quickly switching to the optimal option and settling to a greedy strategy, similarly to Thompson Sampling but unlike UCB, which is used to persevere in a noticeable exploratory behaviour.
-When the uncertainty increases also the model's entropy grows, which however does not necessarily hinder performance, except for switching arm in new trials. Here, the model's approach becomes more similar to UCB's than Thompson's.
+Further analysis involved the evaluation of the its behaviour in situations with variable levels of entropy in the reward distribution.
+One notable insight was that in situation with low uncertainty, the model was reliably capable of quickly switching to the rewarding option and settling to a greedy strategy, similarly to Thompson Sampling but unlike UCB, which is used to persevere in a noticeable exploratory behaviour.
+When the uncertainty increased over a certain level the option entropy of the model followed, which however did not necessarily hinder performance, except for switching arm in new trials.
+Here, the adopted policy became markedly exploratory, akin to the approach of UCB.
 
 The strengths of the model can be traced both in the architecture and in the learning paradigm, whose hyperparameters were optimized through an evolutionary process.
-On one hand the attractor dynamics, which rely on plastic connections and a consensus-like selection process.
+On one hand the neural dynamics, which rely on plastic connections and a consensus-like selection process.
 Particularly important was the choice of modulating the afferent connections to the value population $V$ according to a non-linear function dependant on the synaptic weight itself. In so doing, it was possible to evolve implicitly an effective option-value policy for the tradeoff between exploration and exploitation.
 This approach can be seen as a form of meta-plasticity implemented through neuromodulation \cite{wangMetalearningNaturalArtificial2021}, where a region external to the network affects the synaptic connections withough alterning their actual weights; dopamine is a well-suited candidate \cite{toblerAdaptiveCodingReward2005, roeschDopamineNeuronsEncode2007, coolsChemistryAdaptiveMind2019}.
 On another hand, learning was structured as a non-associative plasticity rule based on the reward. Similarly to before, a non-linear function of the synaptic weights played a critical role, specifically in defining the synapse-specific learning rate \cite{larsenSynapsetypespecificPlasticityLocal2015}.
@@ -28,7 +29,8 @@ Again, this mechanism can be considered a form of meta-learning, with evolution 
 % limits
 Despite the promising results, there are some limitations to the model. First and foremost, the great level of abstraction in the neuronal details, as we considered simple point neurons with synapses modeled with relatively elementary functions.
 In particular, the model does not account for the presence of noise in the neural dynamics, which is a well-known feature of biological neurons \cite{faisalNoiseNeuronsOther2012}.
-Further, the functional association with the pre-frontal cortical region is only moderate.
-On the computational side, since our interested lied in the biological plausibility and evolution of adaptive meta-learning solutions, we used as reference only a few well established and relatively simple algorithms, and not taken into account more advanced variants \cite{tokicAdaptiveEGreedyExploration2010, tokicValueDifferenceBasedExploration2011}.
+Further, the functional association with the pre-frontal cortical region is only moderate, although present.
+On the computational side, since our interested lied in the biological plausibility and evolution of adaptive meta-learning solutions, we used as reference only a few well established and relatively simple algorithms, and not taken into account more advanced variants
+\cite{tokicAdaptiveEGreedyExploration2010, tokicValueDifferenceBasedExploration2011, qiForcedExplorationBandit2023}.
 Future work could involve the comparison with more complex algorithms, and the introduction of more realistic neural dynamics, such as spiking neurons \cite{nunesSpikingNeuralNetworks2022}.
 

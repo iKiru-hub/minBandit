@@ -7,18 +7,19 @@ The model has been tested in a series of benchmark environments, each with a dif
 
 % \noindent The game environments considered in this work are non-stationary K-Armed Bandits with Binomial rewards.
 % In particular, the agent is evaluated over a number $T_{\text{trials}}$ of \textit{trials}, each composed by an arbitrary number $T_{\text{rounds}}$ of \textit{rounds}; each \textit{trial} is characterized by a different reward distribution $\mathbf{p}\sim\mathcal{U}(0,1)^{K}$ (although in practice the bounds have been set to $(0.1, 0.9)$ such that the distributions are less trivial).
-\noindent Our goal in this work is to investigate the performance of the agent in a non-stationary environment with Binomial reward distributions, meaning that its underlying distribution changes over time \footnote{Since the arm probabilities are not normalized to $1$, it is
+\noindent Our goal is to investigate the performance of the agent in a non-stationary environment, meaning that its underlying distribution changes over time \footnote{Since the arm probabilities are not normalized to $1$, it is
 technically improper to call them \textit{probability distributions}; we will therefore refer to either \textit{probability} or \textit{distribution} separately at any given time for avoiding confusion.}
 We choose this setting as it resembles an ecological scenario in which an animal has to forage in an environment with food (reward) is distributed over a set of fixed locations, but whose occurrence probability can change over time.
-More specifically, we used four different variants obtained by introducing different types of non-stationarity: piecewise constant, uniformly changing, sinusoidally changing, and sinusoidally changing plus piecewise constant.
+Four different variants were used, obtained by introducing different types of non-stationarity: piecewise constant, uniformly changing, sinusoidally changing, and sinusoidally changing with piecewise constant arms.
 The reason for this choices is to test the model performance under different speed and uniformity of the distribution changes.
 Figure \ref{fig:envs} visually illustrates their specificities.
 
 \hfill \break
-\noindent \textbf{Piecewise stationary environment} [\textsc{KAB-P}]\\ Within a trial the reward distribution is stationary and it is drawn from a uniform $\mathbf{p}=\mathcal{N}(0.5, 0.2)^{K}$. At the end of each trial $i$ it is drawn a new distribution $\mathbf{\mathbf{p}}_{i} \to \mathbf{\mathbf{p}}_{i+1}$ \cite{qiForcedExplorationBandit2023}.
+\noindent \textbf{Piecewise stationary environment} [\textsc{KAB-P}]\\ Within a trial the reward distribution is stationary and it is drawn from a normal $\mathbf{p}=\mathcal{N}(0.5, 0.2)^{K}$, clipped in $(0, 1)$. At the end of each trial $i$ it is drawn a new distribution $\mathbf{\mathbf{p}}_{i} \to \mathbf{\mathbf{p}}_{i+1}$ \cite{qiForcedExplorationBandit2023}.
 
 \hfill \break
-\noindent \textbf{Piecewise stationary environment with drift} [\textsc{KAB-D}]\\ At the very beginning, the reward distribution $\mathbf{p}$ is sampled from a uniform $\mathbf{p}=\mathcal{N}(0.5, 0.2)^{K}$. Then, it changes gradually over the rounds, tracked as time $t$, such that its values tend towards a target distribution $\mathbf{q}_{i}$ as $\tau_{p}\dot{\mathbf{p}}_{t}=\mathbf{q}_{i}-\mathbf{p}_{t}$.
+\noindent \textbf{Piecewise stationary environment with drift} [\textsc{KAB-D}]\\ At the very beginning, the reward distribution $\mathbf{p}$ is sampled from a normal $\mathbf{p}=\mathcal{N}(0.5, 0.2)^{K}$.
+Then, it changes gradually over the rounds, tracked as time $t$, such that its values tend towards a target distribution $\mathbf{q}_{i}$ as $\tau_{p}\dot{\mathbf{p}}_{t}=\mathbf{q}_{i}-\mathbf{p}_{t}$.
 Here, $\dot{\mathbf{p}}$ is the time derivative of the distribution and $\tau_{p}$ is its time constant.
 Once the distance is below a threshold $\delta$ as $\vert \mathbf{q}_{i} - \mathbf{p}_{t}\vert < \delta$, the target distribution is changed to a new one $\mathbf{q}_{i}\to\mathbf{q}_{i+1}$. In this variant, there are no proper trials but the target distribution keep changing until a maximum number
 of rounds is reached.
@@ -33,7 +34,7 @@ of rounds is reached.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=1.\textwidth]{figures/envs_1.png}
-    \caption{\textsc{Reward distribution for the four game variants} - \textit{The reward distribution for each arm and environment is plotted over two trials of 2000, demarcated by a dotted grey line.}}
+    \caption{\textsc{Reward distribution for the four game variants} - \textit{The reward distribution for each arm and environment is plotted over three trials of 1000, demarcated by a dotted grey line.}}
     \label{fig:envs}
 \end{figure}
 
@@ -42,7 +43,7 @@ of rounds is reached.
 \subsection{Evolution search}
 The optimization of the hyper-parameters was performed using the Covariance Matrix Adaptation evolutionary strategy algorithm (CMA-ES) \cite{igelCovarianceMatrixAdaptation2007}.
 The search was run with a population of $256$ individuals for $80$ generations. Each individual was endowed with genome, corresponding to a vector of 22 parameters of the model.
-The fitness function of the evolution was defined as the average reward obtained by an individual over 3 different non-stationary bandit environments, each for $K=\{50, 300\}$, and all averaged over 2 iterations.
+The fitness function of the evolution was defined as the average reward obtained by an individual over 3 different non-stationary bandit environments, each for $K=\{40, 200\}$, and all averaged over 2 iterations.
 The results are summarized below in figure \ref{fig:evolution}.
 
 \begin{figure}[H]
@@ -54,12 +55,13 @@ The results are summarized below in figure \ref{fig:evolution}.
 \end{figure}
 
 % comment on the evolved functions
-\noindent The evolution progress, plot \textit{a} of figure \ref{fig:evolution}, showed a steady improvement over the generations, with the fitness hitting a plateau once the theoretical optimum ($\sim 0.9$) of the chosen simulations was met.
-The evolved parameters (genome) are displayed as a frequency heatmap in \textit{b}, which was obtained from the individuals whose fitness was equal or above the median. The most relevant parameters resulted to be those concerning directly neuronal activity and learning.
+\noindent The evolution progress, plot \textbf{a} of figure \ref{fig:evolution}, showed a steady improvement over the generations, with the fitness hitting a plateau once the total reward could not get any closer to the optimum $\approx 1$ due to randomness and the finite horizon.
 
-More in details, the two Gaussian-sigmoid functions $\Phi_{v}, \Phi_{\eta}$, which are respectively the option value and learning rate functions, are shown in \textit{c}.
+The evolved parameters (genome) are displayed as a frequency heatmap in \textbf{b}, which was obtained from the individuals whose fitness was equal or above the median. The most relevant parameters resulted to be those concerning directly neuronal activity and learning.
+
+More in details, the two Gaussian-sigmoid functions $\Phi_{v}, \Phi_{\eta}$, which are respectively the option value and learning rate functions, are shown in \textbf{c}.
 On the one hand, the learning rate function $\Phi_{\eta}$ is characterized by a decreasing curve, associated with the dominance of the right-side of the Gaussian, and a completely ignored sigmoid component.
-A possible interpretation for this shape is to ensure an high learnig speed when the value options are more uncertain (weak weights), and low otherwise; thus preventing overshooting and oscillations in the weight updates.
+A possible interpretation for this shape is to ensure an high learning speed when the value options are more uncertain (weak weights), and low otherwise; thus preventing overshooting and oscillations in the weight updates.
 This adaptive behaviour is in line with known neuronal dynamics such as homeostatic plasticity, which works towards a stabilization of synapses, for instance through synaptic scaling and proportional updates \cite{citriSynapticPlasticityMultiple2008}.
 A variable learning rate is an important feature of several plasticity rules, from the more biologically plausible like the Oja \cite{ojaOjaLearningRule2008} to deep learning optimizers like Adam \cite{kingmaAdamMethodStochastic2017}.
 
@@ -67,8 +69,8 @@ On the other hand, the option value function $\Phi_{v}$ follows instead a steep 
 This is consistent with the idea that the input of population $U$ to population $V$ is weighted maximally for high option values (strong synapses), whereas for weaker estimates the contributions are low or close to zero, allowing for more exploration.
 Interestingly, a common feature seemed to be a slight concavity after zero, a slim influence of the Gaussian component, which might be interpreted as a sort of test for newly formed synapses. However, the size of this effect is not large.
 
-The neural response functions are instead shown in \textit{d}. Both population evolved to have a similar shape, a sharp sigmoid with a clear threshold, with population \textit{U} having a more variable distribution.
-The convergence to this particular form, which does not allowed much for a gradual linear reponse but rather an high-pass filter, with activity occurring only after strong excitation.
+The neural response functions are shown in \textbf{d}. Both population evolved to have a similar shape, a sharp sigmoid with a clear threshold, with population \textit{U} having a more variable distribution.
+The form is characterized by not allowing for a fine-grained linear reponse but rather an high-pass filter, with activity occurring only after strong excitation.
 This firing behaviour is reminiscent of coincidence detector neurons, which are sometimes referred to as class III neurons with respect to their f-I curve \cite{ratteImpactNeuronalProperties2013}.
 
 
@@ -139,10 +141,11 @@ Indeed, the dynamics of our model make it particularly suited for the task of no
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{figures/entropy_main_plot.png}
+    \includegraphics[width=1.0\textwidth]{figures/entropy_main_plot_2.png}
     \caption{\textsc{Decision-making dynamics for different models} - \textbf{a}: \textit{Each plot display the results from one model. The raster plots (black dots) show the arms selected at each round.
 The red lines represent the entropy level, calculated from the distribution of selections over the preceeding 20 rounds, smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy over all trials are also reported.}
- - \textbf{b}: \textit{the top two rows display  the average reward for trial 1 and 2 obtained by each model for increasing levels of entropy (in nats) in the reward distribution; a dashed line is the regret with respect to the upper bound (black solid line). The two bottom average entropy of the selections for the first and second trial of the simulation, each with 2000 rounds.}}
+ - \textbf{b}: \textit{the top two rows display  the average reward for trial 1 and 2 obtained by each model for increasing levels of entropy (in nats) in the reward distribution; a dashed line is the regret with respect to the upper bound (black solid line). The two bottom average entropy of the selections for the first and second trial of the simulation, each with 2000 rounds. -
+\textbf{c}: \textit{testing of the model to a 500 arms MAB-P enviroment for three epochs. - \textbf{d}: representation of the arms reward distributions for different levels of entropy, aligned with the x-axis in plot \textbf{b}.}}}
     \label{fig:entropy_fig1}
 \end{figure}
 
@@ -152,28 +155,18 @@ The red lines represent the entropy level, calculated from the distribution of s
 
 % robustness
 \noindent Then, we sought to investigate the robustness of the model, quantified as the capacity to endure increasing levels of entropy in the reward distribution.
-The simulation was done in a piecewise stationary environment with $K=50$, averaged over 128 independent runs.
-The results report how all models are capable of robust performance even in the presence of high uncertainty.
-In the top two row of figure \ref{fig:entropy_fig1}-\textbf{b}, it is plotted the average reward obtained by each model against the reward distribution entropy in two trials.
-In the second trial however, there is a ubiquitous and clear decline in rounds with elevated entropy. This can be explained by the greater challenge of switching arms when numerous options appear similarly good.
-In general, our model shows to perform as good as UCB, but not generally better than $\epsilon$-Greedy and Thompson Sampling.
-Further, the latter seemed also to suffer consistently, probably due to its conservative approach and difficulty of disengaging from an previously rewarding arm, as underlined also in plot \textbf{a}.
-In the same figure, the regret (dashed lines) tells the same story, and remarks the robust performance over uncertainty.
-
-Another perspective to this analysis is given by the two bottom plots, which show the average entropy of the selections.
-Overall, there is the not suprising trend of increasing selection entropy with the entropy of the reward distribution. However, striking is the exception of Epsilon-Greedy, which maintain a constant level throughout.
-On the one hand, UCB shows a marked and gradual increase, while Thompson Sampling follows with some delay.
-On the other hand, our model display a more abrupt change, going from a state of very low to very high entropy.
+The simulation was done in a piecewise stationary environment with $K=200$ in two trials averaged over 5 independent runs, and it is showed in figure \ref{fig:entropy_fig1}-\textbf{b}.
+The distributions were chosen such to have only one strongly rewarding arm, in order to highlight the models ability to find it.
+In plot \textbf{d}, an example of distributions is plotted in \textbf{d} and are aligned with the x-axis in plot \textbf{b}.
 For more details about the distribution see the appendix \ref{sec:appendix_entropy}.
+In the top two plots, it is shown the average reward and regret obtained by each model against the reward distribution entropy for the two trials.
+The results reported how all models are capable of robust performance in the first trial even in the presence of high uncertainty.
+In the second trial, $\epsilon$-Greedy and Thompson Sampling suffered the increasing difficulty of switching arms, probably due to their conservative approaches. However, this challenge afflicted UCB and our model only with higher entropy levels, recognizing their adaptability.
 
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.9\textwidth]{figures/entropy_performance_plot.png}
-%     \caption{\textsc{Entropy analysis for the model in a stationary setting} - Top row: \textit{trial 1 and 2 have been divided into two columns. A solid line represents the average reward obtained by a model for increasing levels of entropy (in nats) in the reward distribution; a dashed line instead reports the regret with respect to the upper bound (black solid line) }
-% - Bottom row: \textit{average entropy of the selections for the first and second trial of the simulation, each with 2000 rounds each (as calculated in \ref{sec:entropy}).}}
-% \end{figure}\label{fig:entropy_distr}
-
+Another perspective to this analysis was given by the two bottom plots, which showed the average entropy over the trials.
+Overall, there was the unsuprising trend of increasing selection entropy with the entropy of the reward distribution. Nonetheless, striking is the exception of Epsilon-Greedy, which still maintained a constant level throughout.
+UCB displayed the highest average values, while Thompson Sampling followed with some delay.
+On the other hand, our model display a more abrupt change, going from a state of very low to high variability, sign of a solid exploratory behaviour.
 
 
 

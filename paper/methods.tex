@@ -22,7 +22,7 @@ Moreover, it is often preferable to have a more explorative behaviour early duri
 
 % regret
 Another important concept in multi-armed bandit problems is \textit{regret}. Intuitively, it quantifies the loss of reward due to following a certain policy, and it is determined by the difference beween the collected reward and the theoretical optimal, obtained by choosing the best arm at each round.
-Formally, defined a function $r(\pi)$ which returns the expected reward while following policy $\pi$, then the regret over an horizon $T$ can be formulated as:
+Formally, given defined a function $r(\pi)$ which returns the expected reward while following policy $\pi$, the regret $\rho$ over an horizon $T$ can be formulated as:
 \begin{equation}
     \rho = \frac{1}{T}\sum^{T}_{t} p^{*}_{t} -r(\pi(h_{t}))
 \end{equation}
@@ -44,4 +44,7 @@ The ACC has been associated to action values and influencing the exploration-exp
 In the model, the first layer represents the available options, while the learned connections with the second layer encode their values based on the recent reward history.
 Another similarity with this particular pre-frontal circuit is the realization of a choice as a sample of the network state after a period of autonomous neural activity, where the stability of the neural activations depend on the strength and reliability of the highest option value \cite{backmanEffectsWorkingMemoryTraining2011, enelStableDynamicRepresentations2020}.
 Moreover, the application of the function $\Phi_{v}$ on the connections $\textbf{W}^{UV}$ can be regarded as meta-plasticity, mediated by a neuromodulator \cite{wangMetalearningNaturalArtificial2021}.
+
+Nonetheless, one core premise in our model is the lumping of the option representations into single neurons.
+This choice is motivated by simplicity, and constitutes an abstraction of the more distributed encoding implemented by actual brain networks \cite{martinRepresentationObjectConcepts2007a}.
 

@@ -15,9 +15,9 @@ In nature, animals have been shown to exhibit different strategies depending on 
 Such behaviour is thought to result from the trade-off between exploration and exploitation \cite{suttonReinforcementLearningProblem1998, nivEvolutionReinforcementLearning2002}.
 In fact, this is a well known phenomenon in the reinforcement learning literature, in which an agent is faced with the dilemma of exploring new alternatives, potentially more rewarding, or exploiting known options, despite being possibly sup-optimal.
 
-A popular formalization of these type of tasks is the \textit{multi-armed bandit problem} (MABP) \cite{averbeckTheoryChoiceBandit2015}. This setting is usually described in terms of a slot machine endowed with $K$ distinct levers, also called arms.
-During a round, the agent selects one of the levers and collects a reward $R$ according to an unknown reward probability specific to the chosen lever.
-The goal is simply to maximizes the total reward after a given number of steps, which is achieved by effectively updating a selection policy after each round.
+A popular formalization of these type of tasks is the \textit{multi-armed bandit} problem (MAB) \cite{averbeckTheoryChoiceBandit2015}. This setting is usually described in terms of a slot machine endowed with $K$ distinct arms, also called levers.
+During a round, the agent selects one of the arms and collects a reward $R$ according to an unknown reward probability specific to the chosen arm.
+The goal is simply to maximize the total reward after a given number of steps, which is achieved by effectively updating a selection policy after each round.
 This problem has been extensively studied in the context of reinforcement learning, and it is considered a fundamental building block for more complex tasks \cite{suttonReinforcementLearningProblem1998}.
 
 % brief introduction of the k-armed bandit problem and previous algorithms.
@@ -30,16 +30,17 @@ In this regard, Thompson sampling is a popular algorithm that has been shown to 
 This approach relies on Bayesian optimization, where the goal is to maintain a posterior distribution over the reward probabilities of the actions, and select actions accordingly.
 Another popular algorithm is Upper Confidence Bound (UCB), which has been shown to achieve near-optimal regret bounds in the adversarial setting \cite{auerFinitetimeAnalysisMultiarmed2002}.
 The approach is based on the idea of maintaining an upper limit on the reward probabilities of the actions, and select actions accordingly.
-Other successful algorithms are $\epsilon$-greedy and VDBE \cite{gittinsBanditProcessesDynamic1979, banMultifacetContextualBandits2021, tokicAdaptiveEGreedyExploration2010, tokicValueDifferenceBasedExploration2011}.
+Other successful algorithms are $\epsilon$-Greedy and VDBE \cite{gittinsBanditProcessesDynamic1979, banMultifacetContextualBandits2021, tokicAdaptiveEGreedyExploration2010, tokicValueDifferenceBasedExploration2011}.
 % outline of lack of bio-realism and what we currently know about how the brain might solve this task.
 Nonetheless, despite their success they have little resemblance to neural dynamics nor clear functional similarity to brain regions.
 
+\hfill \break
 % aim of the work
 In this work, we propose a biologically plausible algorithm using rate neurons, whose hyper-parameters are optimized through an evolution search. The benchmarks we chose are stochastic bandit problems, more challenging variants of the original task endowed with \textit{concept drift}, where the reward distribution changes over time \cite{garivierUpperConfidenceBoundPolicies2008, besbesStochasticMultiArmedBanditProblem2014, cavenaghiNonStationaryMultiArmed2021}.
 
 % brief overview of the model
 The architecture of our model consists of two connected neuronal layers, both with as many neurons as the arms of the bandit task.
-The first layer is inspired by the functionality of the orbitofrontal cortex (OFC), and its scope is to maintain an active representation of the arms weighted by the input from the second layer. Moreover, this are is thought to be involved in motivation and representation of the expected value of the actions, either positive or negative \cite{odohertyAbstractRewardPunishment2001, ricebergRewardStabilityDetermines2012, tremblayRelativeRewardPreference1999}, action selection in uncertain environments \cite{elliottDissociableFunctionsMedial2000}, and contextual processing \cite{frankAnatomyDecisionStriatoorbitofrontal2006}.
+The first layer is inspired by the functionality of the orbitofrontal cortex (OFC), and its scope is to maintain an active representation of the arms weighted by the input from the second layer. These two areas are thought to be involved in motivation and representation of the expected value of the actions, either positive or negative \cite{odohertyAbstractRewardPunishment2001, ricebergRewardStabilityDetermines2012, tremblayRelativeRewardPreference1999}, action selection in uncertain environments \cite{elliottDissociableFunctionsMedial2000}, and contextual processing \cite{frankAnatomyDecisionStriatoorbitofrontal2006}.
 The second layer is instead modeled after the ACC, and it is meant to represent the value of the arms. Its input connections are updated through a learning rule dependant on the reward history and current connectivity pattern.
 % The Pre-Frontal Cortex (PFC) is considered a fundamental high-level region for attention and cognitive control, in particular the medial PFC \cite{millerIntegrativeTheoryPrefrontal2001a, sheynikhovichLongtermMemorySynaptic2023}.
 
@@ -50,7 +51,7 @@ The final choice of the arm is achieved by the agreement or disagreement between
 Secondly, plasticity is based on a non-associative learning rule, endowed with a non-linear kernel for the weight update term.
 % The specific values of a parametrization of the kernel has been optimized through an evolutionary algorithm.
 Behind this design choice there is our hypothesis that the scale of the synaptic update should vary non-linearly according to its magnitude.
-This consideration is aligned with the idea that the learning rate is a parameter specific to each neuron. This synapse-type specific plasticity (STSP) \cite{larsenSynapsetypespecificPlasticityLocal2015} is a  unction of the resources available at the synaptic button and its state, including the size \cite{blackmanTargetcellspecificShorttermPlasticity2013, bartolHippocampalSpineHead2015, arielIntrinsicVariabilityPv2012}.
+This consideration is aligned with the idea that the learning rate is a parameter specific to each neuron. This synapse-type specific plasticity (STSP) \cite{larsenSynapsetypespecificPlasticityLocal2015} is a function of the resources available at the synaptic button and its state, including the size \cite{blackmanTargetcellspecificShorttermPlasticity2013, bartolHippocampalSpineHead2015, arielIntrinsicVariabilityPv2012}.
 This approach has been already adopted in several computational architectures, for instance in spiking neural networks \cite{inglisModulationDopamineAdaptive2021} and for synaptic metaplasticity \cite{iigayaAdaptiveLearningDecisionmaking2016}.
 Lastly, there is experimental evidence that this adaptation function might be covered by dopamine \cite{toblerAdaptiveCodingReward2005}.
 Indeed, its involvement in calculating prediction errors and reward signaling is well established \cite{schultzNeuralSubstratePrediction1997}, as well with its modulation of  high-level cortical networks like the PFC \cite{didomenicoDopaminergicModulationPrefrontal2023, lohaniDopamineModulationPrefrontal2019, dardenneRolePrefrontalCortex2012}.

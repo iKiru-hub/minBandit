@@ -38,7 +38,7 @@ settings1.verbose = False
 settings1.idx = 1
 settings1.load = True
 settings1.env = "v0"
-settings1.K = 100
+settings1.K = 200
 
 # NUM_BETAS = 7
 
@@ -50,7 +50,7 @@ model_params = utils.load_model(idx=settings1.idx)
 model_params["K"] = settings1.K
 
 # beta_values = 1.5**(np.linspace(7, 1, NUM_BETAS))
-beta_values = [17, 14, 12, 9, 4, 1, 0.5]
+beta_values = [17, 15, 12, 8, 4, 1.5, 0.5]
 NUM_BETAS = len(beta_values)
 
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Homebrew) (preloaded format=pdflatex 2024.10.29)  17 DEC 2024 22:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Homebrew) (preloaded format=pdflatex 2024.10.29)  19 DEC 2024 12:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -481,37 +481,37 @@ File: figures/minb_architecture.png Graphic file (type png)
 <use figures/minb_architecture.png>
 Package pdftex.def Info: figures/minb_architecture.png  used on input line 19.
 (pdftex.def)             Requested size: 207.0021pt x 166.71704pt.
- [6 <./figures/minb_architecture.png>] [7])) (./results.tex [8] [9]
-<figures/envs_1.png, id=287, 579.17178pt x 290.23631pt>
+ [6 <./figures/minb_architecture.png>] [7]) [8]) (./results.tex [9]
+<figures/envs_1.png, id=289, 723.71178pt x 362.50632pt>
 File: figures/envs_1.png Graphic file (type png)
 <use figures/envs_1.png>
-Package pdftex.def Info: figures/envs_1.png  used on input line 35.
-(pdftex.def)             Requested size: 345.0pt x 172.88982pt.
-<figures/evolution_comp_1.png, id=290, 557.9244pt x 322.03513pt>
+Package pdftex.def Info: figures/envs_1.png  used on input line 36.
+(pdftex.def)             Requested size: 345.0pt x 172.8118pt.
+<figures/evolution_comp_1.png, id=292, 557.9244pt x 322.03513pt>
 File: figures/evolution_comp_1.png Graphic file (type png)
 <use figures/evolution_comp_1.png>
-Package pdftex.def Info: figures/evolution_comp_1.png  used on input line 50.
+Package pdftex.def Info: figures/evolution_comp_1.png  used on input line 51.
 (pdftex.def)             Requested size: 345.0pt x 199.13884pt.
  [10 <./figures/envs_1.png>] [11 <./figures/evolution_comp_1.png>] [12]
-<figures/entropy_main_plot.png, id=320, 449.80849pt x 340.24716pt>
-File: figures/entropy_main_plot.png Graphic file (type png)
-<use figures/entropy_main_plot.png>
-Package pdftex.def Info: figures/entropy_main_plot.png  used on input line 142.
-(pdftex.def)             Requested size: 345.0pt x 260.97873pt.
- [13] [14 <./figures/entropy_main_plot.png>]) (./discussion.tex [15]) (./acknowledgement.tex) (./main.bbl [16{/opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [17] [18] [19] [20]) [21] (./appendix.tex
-<figures/gaussian_sigmoid.png, id=390, 432.8973pt x 259.59384pt>
+<figures/entropy_main_plot_2.png, id=322, 450.53117pt x 390.11346pt>
+File: figures/entropy_main_plot_2.png Graphic file (type png)
+<use figures/entropy_main_plot_2.png>
+Package pdftex.def Info: figures/entropy_main_plot_2.png  used on input line 144.
+(pdftex.def)             Requested size: 345.0pt x 298.75131pt.
+ [13] [14 <./figures/entropy_main_plot_2.png>]) (./discussion.tex [15]) (./acknowledgement.tex [16{/opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]) (./main.bbl [17] [18] [19] [20]) [21] (./appendix.tex
+<figures/gaussian_sigmoid.png, id=393, 432.8973pt x 259.59384pt>
 File: figures/gaussian_sigmoid.png Graphic file (type png)
 <use figures/gaussian_sigmoid.png>
 Package pdftex.def Info: figures/gaussian_sigmoid.png  used on input line 38.
 (pdftex.def)             Requested size: 276.00105pt x 165.51363pt.
  [22] [23 <./figures/gaussian_sigmoid.png>]
-<figures/evo_tabplot.png, id=402, 793.66914pt x 577.14822pt>
+<figures/evo_tabplot.png, id=405, 793.66914pt x 577.14822pt>
 File: figures/evo_tabplot.png Graphic file (type png)
 <use figures/evo_tabplot.png>
 Package pdftex.def Info: figures/evo_tabplot.png  used on input line 98.
 (pdftex.def)             Requested size: 345.0pt x 250.88132pt.
  [24] [25 <./figures/evo_tabplot.png>]
-<figures/reward_update_plot.pdf, id=419, 701.7417pt x 347.25734pt>
+<figures/reward_update_plot.pdf, id=422, 701.7417pt x 347.25734pt>
 File: figures/reward_update_plot.pdf Graphic file (type pdf)
 <use figures/reward_update_plot.pdf>
 Package pdftex.def Info: figures/reward_update_plot.pdf  used on input line 147.
@@ -525,19 +525,19 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 47CB49C107DC27F3A928D39A9828E98B;3215.
  ) 
 Here is how much of TeX's memory you used:
- 16222 strings out of 474116
- 324712 string characters out of 5732612
- 1944187 words of memory out of 5000000
- 38263 multiletter control sequences out of 15000+600000
+ 16225 strings out of 474116
+ 324822 string characters out of 5732612
+ 1945187 words of memory out of 5000000
+ 38265 multiletter control sequences out of 15000+600000
  567969 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,13n,79p,988b,1023s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,13n,79p,1228b,1021s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></opt
 /homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></opt/homebrew/Cellar/texlive/20240312_3/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (27 pages, 3190494 bytes).
+Output written on main.pdf (27 pages, 3357752 bytes).
 PDF statistics:
- 591 PDF objects out of 1000 (max. 8388607)
- 494 compressed objects within 5 object streams
- 129 named destinations out of 1000 (max. 500000)
+ 594 PDF objects out of 1000 (max. 8388607)
+ 497 compressed objects within 5 object streams
+ 130 named destinations out of 1000 (max. 500000)
  204 words of extra memory for PDF output out of 10000 (max. 10000000)
 
