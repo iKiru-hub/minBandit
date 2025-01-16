@@ -48,6 +48,33 @@ Michel Tokic and G{\"u}nther Palm.
 \newblock Value-{{Difference Based Exploration}}: {{Adaptive Control}} between {{Epsilon-Greedy}} and {{Softmax}}.
 \newblock In Joscha Bach and Stefan Edelkamp, editors, {\em {{KI}} 2011: {{Advances}} in {{Artificial Intelligence}}}, volume 7006, pages 335--346. Springer Berlin Heidelberg, Berlin, Heidelberg, 2011.
 
+\bibitem{EvaluationBioInspiredModels}
+Evaluation of {{Bio-Inspired Models}} under {{Different Learning Settings For Energy Efficiency}} in {{Network Traffic Prediction}}.
+\newblock https://arxiv.org/html/2412.17565.
+
+\bibitem{ReviewNeuroscienceInspiredMachine}
+A {{Review}} of {{Neuroscience-Inspired Machine Learning}}.
+\newblock https://arxiv.org/html/2403.18929v1.
+
+\bibitem{schmidgallBraininspiredLearningArtificial2024}
+Samuel Schmidgall, Rojin Ziaei, Jascha Achterberg, Louis Kirsch, S.~Pardis Hajiseyedrazi, and Jason Eshraghian.
+\newblock Brain-inspired learning in artificial neural networks: {{A}} review.
+\newblock {\em APL Machine Learning}, 2(2):021501, May 2024.
+
+\bibitem{hassabisNeuroscienceInspiredArtificialIntelligence2017}
+Demis Hassabis, Dharshan Kumaran, Christopher Summerfield, and Matthew Botvinick.
+\newblock Neuroscience-{{Inspired Artificial Intelligence}}.
+\newblock {\em Neuron}, 95(2):245--258, July 2017.
+
+\bibitem{leeBraininspiredPredictiveCoding2022}
+Jangho Lee, Jeonghee Jo, Byounghwa Lee, Jung-Hoon Lee, and Sungroh Yoon.
+\newblock Brain-inspired {{Predictive Coding Improves}} the {{Performance}} of {{Machine Challenging Tasks}}.
+\newblock {\em Frontiers in Computational Neuroscience}, 16:1062678, 2022.
+
+\bibitem{liuSeeingBelievingBrainInspired2023}
+Ziming Liu, Eric Gan, and Max Tegmark.
+\newblock Seeing is {{Believing}}: {{Brain-Inspired Modular Training}} for {{Mechanistic Interpretability}}, June 2023.
+
 \bibitem{garivierUpperConfidenceBoundPolicies2008}
 Aur{\'e}lien Garivier and Eric Moulines.
 \newblock On {{Upper-Confidence Bound Policies}} for {{Non-Stationary Bandit Problems}}, May 2008.

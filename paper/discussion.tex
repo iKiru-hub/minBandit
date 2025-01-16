@@ -5,13 +5,13 @@
 The process of making decision in uncertain situations is a remarkable aspect of cognition. For instance, such behaviour is implemented in animals during foraging and matching behaviour.
 In the context of humans, it has been observed that the pool of adopted policies vary considerably \cite{steyversBayesianAnalysisHuman2009a}.
 Nevertheless, the subjects seems able to integrate environmental uncertainty and trial generalization in their strategy, and Bayesian algorithms are generally a good fit for the observed policies \cite{schulzFindingStructureMultiarmed2020, zhangForgetfulBayesMyopic2013}.
-A useful formalization of such tasks is the multi-armed bandit problem, which has been extensively studied in the context of reinforcement learning \cite{suttonReinforcementLearningProblem1998}.
+A useful formalization of such tasks are multi-armed bandit problems (MABs), which has been extensively studied in the context of reinforcement learning \cite{suttonReinforcementLearningProblem1998}.
 Although several algorithms have been proposed to solve the problem with robust theoretical guarentees, there is a general lack of biological plausibility of the architecture and dynamics.
 
 %
-In this work, we introduced a model based on two interactive population of rate neurons to address the binomial K-armed bandit problem in non-stationary environments.
-Our goal was to design an architecture that resemble the functional role of the orbitofrontal cortex (OFC) and anterior cingulate cortex (ACC), together with biologically plausible neuronal dynamics based on synaptic plasticity.
-The results obtained report how it was able to succesfully adapt to changing reward distributions and maintain a near-optimal policy over time, achieving equally well when compared to the standard algorithms.
+The goal of this work was to design a bio-inspired architecture and learning for solving MABs. In particular, we introduced a model based on two interactive population of rate neurons to address the binomial K-armed bandit problem in non-stationary environments.
+We took inspiration from the functional role of the orbitofrontal cortex (OFC) and anterior cingulate cortex (ACC), two important pre-frontal regions known to be involved in decision-making processes \cite{kennerleyDecisionMakingReward2011a, khamassiChapter22Medial2013}.
+The results obtained report its adaptability to changing reward distributions and maintain a rewarding policy over time, achieving equally well when compared to standard algorithms.
 The assessment was done over four different variants of stochastic bandit problems and a wide range of number of arms, providing evidence for the consistency of the model.
 
 Further analysis involved the evaluation of the its behaviour in situations with variable levels of entropy in the reward distribution.
@@ -19,12 +19,16 @@ One notable insight was that in situation with low uncertainty, the model was re
 When the uncertainty increased over a certain level the option entropy of the model followed, which however did not necessarily hinder performance, except for switching arm in new trials.
 Here, the adopted policy became markedly exploratory, akin to the approach of UCB.
 
-The strengths of the model can be traced both in the architecture and in the learning paradigm, whose hyperparameters were optimized through an evolutionary process.
+The strengths of the model can be traced both in the architecture and in the learning paradigm, whose hyperparameters were optimized through an evolutionary process. Interestingly, the values found converged to solutions that can be mapped to real synaptic mechanisms, corroborating the model's biological plausibility.
 On one hand the neural dynamics, which rely on plastic connections and a consensus-like selection process.
 Particularly important was the choice of modulating the afferent connections to the value population $V$ according to a non-linear function dependant on the synaptic weight itself. In so doing, it was possible to evolve implicitly an effective option-value policy for the tradeoff between exploration and exploitation.
 This approach can be seen as a form of meta-plasticity implemented through neuromodulation \cite{wangMetalearningNaturalArtificial2021}, where a region external to the network affects the synaptic connections withough alterning their actual weights; dopamine is a well-suited candidate \cite{toblerAdaptiveCodingReward2005, roeschDopamineNeuronsEncode2007, coolsChemistryAdaptiveMind2019}.
+The emerged neural response functions were characterized by a steep sigmoidal shape, which can be related to the saturation of the neural response once a certain threshold is crossed, a feature observed in biological network as class III neurons, besides being a common choice for artificial ones \cite{ratteImpactNeuronalProperties2013, ockerFlexibleNeuralConnectivity2020, apicellaSurveyModernTrainable2021}.
+
 On another hand, learning was structured as a non-associative plasticity rule based on the reward. Similarly to before, a non-linear function of the synaptic weights played a critical role, specifically in defining the synapse-specific learning rate \cite{larsenSynapsetypespecificPlasticityLocal2015}.
-Again, this mechanism can be considered a form of meta-learning, with evolution leading to the emergence of hyper-parameter encoding important inductive biases \cite{inglisModulationDopamineAdaptive2021, iigayaAdaptiveLearningDecisionmaking2016}.
+Again, this mechanism can be considered a form of meta-learning, with evolution leading to the emergence of hyper-parameter encoding important inductive biases \cite{inglisModulationDopamineAdaptive2021, iigayaAdaptiveLearningDecisionmaking2016}. Further, the evolved shape of the learning rate
+function was inversely proportional to the synaptic weight, which can be related to the resource availability at the synapse and its state, including the size \cite{blackmanTargetcellspecificShorttermPlasticity2013, bartolHippocampalSpineHead2015, arielIntrinsicVariabilityPv2012}.
+
 
 % limits
 Despite the promising results, there are some limitations to the model. First and foremost, the great level of abstraction in the neuronal details, as we considered simple point neurons with synapses modeled with relatively elementary functions.

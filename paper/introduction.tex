@@ -1,12 +1,10 @@
 
 \section{Introduction}
-\hfill \break
-\vspace {0.5cm}
+% \hfill \break
+% \vspace {0.5cm}
 
 % brief introduction to decision making and the brain.
-The ability to make decisions for long-term reward maximization is a fundamental aspect of cognition. The brain is has evolved specialized and interconnected regions to implement this behaviour under the constraints of biology.
-% The Pre-Frontal Cortex (PFC) is considered a fundamental high-level region for attention and cognitive control, in particular the medial PFC \cite{millerIntegrativeTheoryPrefrontal2001a, sheynikhovichLongtermMemorySynaptic2023}.
-% The orbitofrontal cortex (OFC) is thought to be involved in motivation and representation of the expected value of the actions, either positive or negative \cite{odohertyAbstractRewardPunishment2001, ricebergRewardStabilityDetermines2012, tremblayRelativeRewardPreference1999}, action selection in uncertain environments \cite{elliottDissociableFunctionsMedial2000}, and contextual processing \cite{frankAnatomyDecisionStriatoorbitofrontal2006}.
+The ability to make decisions for long-term reward maximization is a fundamental aspect of cognition. The brain has evolved specialized and interconnected regions to implement this behaviour under the constraints of biology.
 
 % bridge between decision making and the k-armed bandit problem.
 Well-studied ecological settings of decision-making are foraging tasks, such as food search. In this problems, the agent is usually asked to choose between different options to maximize an expected reward.
@@ -23,7 +21,6 @@ This problem has been extensively studied in the context of reinforcement learni
 % brief introduction of the k-armed bandit problem and previous algorithms.
 % \subsection{Related work}
 % \hfill \break
-% overview of the main solutions proposed in the literature from a computational perspective.
 There exist various flavours of this problem, with the simplest having a stationary reward distribution.
 Over the years, several algorithms have been proposed, alongside with their theoretical guarantees.
 In this regard, Thompson sampling is a popular algorithm that has been shown to achieve near-optimal regret bounds in the stochastic setting \cite{agrawalAnalysisThompsonSampling2012, kaufmannThompsonSamplingAsymptotically2012}.
@@ -31,25 +28,29 @@ This approach relies on Bayesian optimization, where the goal is to maintain a p
 Another popular algorithm is Upper Confidence Bound (UCB), which has been shown to achieve near-optimal regret bounds in the adversarial setting \cite{auerFinitetimeAnalysisMultiarmed2002}.
 The approach is based on the idea of maintaining an upper limit on the reward probabilities of the actions, and select actions accordingly.
 Other successful algorithms are $\epsilon$-Greedy and VDBE \cite{gittinsBanditProcessesDynamic1979, banMultifacetContextualBandits2021, tokicAdaptiveEGreedyExploration2010, tokicValueDifferenceBasedExploration2011}.
-% outline of lack of bio-realism and what we currently know about how the brain might solve this task.
-Nonetheless, despite their success they have little resemblance to neural dynamics nor clear functional similarity to brain regions.
+
+% why bio-plausibility is important
+Nonetheless, put aside their marked success, they bear little resemblance to actual neuronal dynamics, besides lacking a clear functional similarity to brain regions.
+Indeed, the interest in bio-inspired algorithms has seen a rise in recent years. One of the reasons is the optimization of energy usage, through the design of models with a better tradeoff between performance and power consumption \cite{EvaluationBioInspiredModels}, and possibly running on specialized neuromorphic hardware \cite{ReviewNeuroscienceInspiredMachine}.
+Other important advantages include novel algorithmic approaches employed by biological brains such as neural networks and predictive coding, which have been shown to be reach state of the art in several tasks and deal with the so-called \textit{machine-challenging tasks} (MCTs) \cite{schmidgallBraininspiredLearningArtificial2024, hassabisNeuroscienceInspiredArtificialIntelligence2017, leeBraininspiredPredictiveCoding2022}.
+Lastly, bio-inspired models can be used to improve algorithmic intepretability, namely understanding what is actually happening behind the scene, and make more direct comparison with real biological dynamics and components \cite{liuSeeingBelievingBrainInspired2023}.
 
 \hfill \break
 % aim of the work
-In this work, we propose a biologically plausible algorithm using rate neurons, whose hyper-parameters are optimized through an evolution search. The benchmarks we chose are stochastic bandit problems, more challenging variants of the original task endowed with \textit{concept drift}, where the reward distribution changes over time \cite{garivierUpperConfidenceBoundPolicies2008, besbesStochasticMultiArmedBanditProblem2014, cavenaghiNonStationaryMultiArmed2021}.
+\indent In this work, we aimed at improving the biological plausibility of algorithms in the context of the multi-armed bandit problem by proposing a new model based on rate neurons and synaptic plasticity.
+Additionally, we optimized the hyper-parameters of the model through an evolution search, showing the convergence to solutions in line with experimental observations.
+The benchmarks we chose are stochastic bandit problems, more challenging variants of the original task endowed with \textit{concept drift}, where the reward distribution changes over time \cite{garivierUpperConfidenceBoundPolicies2008, besbesStochasticMultiArmedBanditProblem2014, cavenaghiNonStationaryMultiArmed2021}.
 
 % brief overview of the model
 The architecture of our model consists of two connected neuronal layers, both with as many neurons as the arms of the bandit task.
 The first layer is inspired by the functionality of the orbitofrontal cortex (OFC), and its scope is to maintain an active representation of the arms weighted by the input from the second layer. These two areas are thought to be involved in motivation and representation of the expected value of the actions, either positive or negative \cite{odohertyAbstractRewardPunishment2001, ricebergRewardStabilityDetermines2012, tremblayRelativeRewardPreference1999}, action selection in uncertain environments \cite{elliottDissociableFunctionsMedial2000}, and contextual processing \cite{frankAnatomyDecisionStriatoorbitofrontal2006}.
 The second layer is instead modeled after the ACC, and it is meant to represent the value of the arms. Its input connections are updated through a learning rule dependant on the reward history and current connectivity pattern.
-% The Pre-Frontal Cortex (PFC) is considered a fundamental high-level region for attention and cognitive control, in particular the medial PFC \cite{millerIntegrativeTheoryPrefrontal2001a, sheynikhovichLongtermMemorySynaptic2023}.
 
 % main motivations
 Our model features two important aspects of the brain during decision making. Firstly, the option selection process itself is implemented as a dynamical interaction between neural populations, similarly to bump attractor networks for perceptual cognition \cite{carrollEncodingCertaintyBump2014, esnaola-acebesBumpAttractorDynamics2021}.
 The final choice of the arm is achieved by the agreement or disagreement between the two populations, and it depends on their underlying value representation \cite{bariDynamicDecisionMaking2021, houstonMatchingBehavioursRewards2021}.
 
 Secondly, plasticity is based on a non-associative learning rule, endowed with a non-linear kernel for the weight update term.
-% The specific values of a parametrization of the kernel has been optimized through an evolutionary algorithm.
 Behind this design choice there is our hypothesis that the scale of the synaptic update should vary non-linearly according to its magnitude.
 This consideration is aligned with the idea that the learning rate is a parameter specific to each neuron. This synapse-type specific plasticity (STSP) \cite{larsenSynapsetypespecificPlasticityLocal2015} is a function of the resources available at the synaptic button and its state, including the size \cite{blackmanTargetcellspecificShorttermPlasticity2013, bartolHippocampalSpineHead2015, arielIntrinsicVariabilityPv2012}.
 This approach has been already adopted in several computational architectures, for instance in spiking neural networks \cite{inglisModulationDopamineAdaptive2021} and for synaptic metaplasticity \cite{iigayaAdaptiveLearningDecisionmaking2016}.

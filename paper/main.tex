@@ -16,20 +16,38 @@
 \usepackage{siunitx} % for handling numbers with uncertainty
 \usepackage{multirow}
 
+\usepackage{authblk} % For author and affiliation formatting
 
+
+\title{A Bio-Inspired Minimal Model for Non-Stationary K-Armed Bandits}
+
+\author[1]{Krubeal Danieli}
+\author[2]{Mikkel Elle Lepperød}
+\affil[1]{Center for Integrative Neuroplasticity, FYSCELL, University of Oslo, Norway}
+\affil[2]{Simula Research Laboratory, Oslo, Norway}
+
+\date{} % Removes the default date
 
 \begin{document}
 
-\title{A bio-inspired minimal model for non-stationary K-armed bandits}
-\author{Krubeal Danieli, Mikkel Elle Lepperød}
-
 \maketitle
 
-\newpage
+\begin{abstract}
+While reinforcement learning algorithms have made significant progress in solving multi-armed bandit problems, they often lack biological plausibility in architecture and dynamics.
+Here, we propose a bio-inspired neural model based on interacting populations of rate neurons, drawing inspiration from the orbitofrontal cortex and anterior cingulate cortex.
+Our model reports robust performance across various stochastic bandit problems, matching the effectiveness of standard algorithms such as Thompson Sampling and UCB.
+Notably, the model exhibits adaptive behavior: employing greedy strategies in low-uncertainty situations while increasing exploratory behavior as uncertainty rises. Through evolutionary optimization, the model's hyperparameters converged to values that align with known synaptic mechanisms,
+particularly in terms of synapse-dependent neural activity and learning rate adaptation.
+These findings suggest that biologically-inspired computational architectures can achieve competitive performance while providing insights into neural mechanisms of decision-making under uncertainty.
+\end{abstract}
 
-\tableofcontents
+% \newpage
 
-\newpage
+% \tableofcontents
+
+% \newpage
+\hfill \break
+\vspace {0.5cm}
 
 \input{introduction}
 
