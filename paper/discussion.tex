@@ -34,7 +34,8 @@ function was inversely proportional to the synaptic weight, which can be related
 Despite the promising results, there are some limitations to the model. First and foremost, the great level of abstraction in the neuronal details, as we considered simple point neurons with synapses modeled with relatively elementary functions.
 In particular, the model does not account for the presence of noise in the neural dynamics, which is a well-known feature of biological neurons \cite{faisalNoiseNeuronsOther2012}.
 Further, the functional association with the pre-frontal cortical region is only moderate, although present.
-On the computational side, since our interest lied in the biological plausibility and evolution of adaptive meta-learning solutions, we used as reference only a few well established and relatively simple algorithms, and did not take into account more advanced variants
-\cite{tokicAdaptiveEGreedyExploration2010, tokicValueDifferenceBasedExploration2011, qiForcedExplorationBandit2023}.
+On the computational side, since our interest lied in the biological plausibility and evolution of adaptive meta-learning solutions, we used as reference only a few well established and relatively simple algorithms, and did not take into account more advanced variants such as VDBE
+\cite{tokicAdaptiveEGreedyExploration2010, tokicValueDifferenceBasedExploration2011}, \textit{f-Discounted-Sliding-Window Thompson Sampling} (\textit{f-dsw TS}) \cite{cavenaghiNonStationaryMultiArmed2021}, and variants of $\epsilon$-Greedy \cite{qiForcedExplorationBandit2023}.
+
 Future work could involve the comparison with more complex algorithms, and the introduction of more realistic neural dynamics, such as spiking neurons \cite{nunesSpikingNeuralNetworks2022}.
 

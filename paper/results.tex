@@ -80,7 +80,7 @@ This firing behaviour is reminiscent of coincidence detector neurons, which are 
 The model has been tested and compared with the other algorithms: Thompson Sampling (TS), $\epsilon$-Greedy, and UCB. The benchmark were the four different variants of the K-armed bandit problem listed above \ref{sec:envs}, with a variable number of arms ranging from 5 to 1000.
 The results are reported in table \ref{tab:results}.
 Overall, our model displayed a solid performance over all environments, most of the time being equally good or better than the other algorithms.
-Interestingly, large numbers of $K$\textit{s} did not pose a significant difficulty, with the model being able to adapt to the different environments and reward distributions.
+Interestingly, a large numbers of arms ($K$) did not present a significant challenge, as the model effectively adapted to the different environments and reward distributions.
 However, this is in part due to the randomness in the assignment of arm probabilities, and the statistics of the quantity of high-reward arms as their number increases. Nonetheless, given the non-stationarity it is still a non trivial task to re-calibrate to new distributions.
 
 

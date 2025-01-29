@@ -191,35 +191,6 @@ Kimberlee D'Ardenne, Neir Eshel, Joseph Luka, Agatha Lenartowicz, Leigh~E. Nystr
 Han Qi, Fei Guo, and Li~Zhu.
 \newblock Forced {{Exploration}} in {{Bandit Problems}}, December 2023.
 
-\bibitem{ockerFlexibleNeuralConnectivity2020}
-Gabriel~Koch Ocker and Michael~A. Buice.
-\newblock Flexible neural connectivity under constraints on total connection strength, January 2020.
-
-\bibitem{apicellaSurveyModernTrainable2021}
-Andrea Apicella, Francesco Donnarumma, Francesco Isgr{\`o}, and Roberto Prevete.
-\newblock A survey on modern trainable activation functions.
-\newblock {\em Neural Networks}, 138:14--32, June 2021.
-
-\bibitem{millerCombinedMechanismsNeural2019}
-Paul Miller and Jonathan Cannon.
-\newblock Combined mechanisms of neural firing rate homeostasis.
-\newblock {\em Biological Cybernetics}, 113(1):47--59, 2019.
-
-\bibitem{citriSynapticPlasticityMultiple2008}
-Ami Citri and Robert~C. Malenka.
-\newblock Synaptic {{Plasticity}}: {{Multiple Forms}}, {{Functions}}, and {{Mechanisms}}.
-\newblock {\em Neuropsychopharmacology}, 33(1):18--41, January 2008.
-
-\bibitem{kennedySynapticSignalingLearning2016}
-Mary~B. Kennedy.
-\newblock Synaptic {{Signaling}} in {{Learning}} and {{Memory}}.
-\newblock {\em Cold Spring Harbor Perspectives in Biology}, 8(2):a016824, February 2016.
-
-\bibitem{samavatSynapticInformationStorage2024}
-Mohammad Samavat, Thomas~M. Bartol, Kristen~M. Harris, and Terrence~J. Sejnowski.
-\newblock Synaptic {{Information Storage Capacity Measured With Information Theory}}.
-\newblock {\em Neural Computation}, 36(5):781--802, April 2024.
-
 \bibitem{lukChoiceCodingFrontal2013}
 Chung-Hay Luk and Jonathan~D. Wallis.
 \newblock Choice {{Coding}} in {{Frontal Cortex}} during {{Stimulus-Guided}} or {{Action-Guided Decision-Making}}.
@@ -250,6 +221,25 @@ Zuzanna~Z. Balewski, Thomas~W. Elston, Eric~B. Knudsen, and Joni~D. Wallis.
 \newblock Value dynamics affect choice preparation during decision-making.
 \newblock {\em Nature neuroscience}, 26(9):1575--1583, September 2023.
 
+\bibitem{martinRepresentationObjectConcepts2007a}
+Alex Martin.
+\newblock The {{Representation}} of {{Object Concepts}} in the {{Brain}}.
+\newblock {\em Annual Review of Psychology}, 58(1):25--45, January 2007.
+
+\bibitem{ockerFlexibleNeuralConnectivity2020}
+Gabriel~Koch Ocker and Michael~A. Buice.
+\newblock Flexible neural connectivity under constraints on total connection strength, January 2020.
+
+\bibitem{apicellaSurveyModernTrainable2021}
+Andrea Apicella, Francesco Donnarumma, Francesco Isgr{\`o}, and Roberto Prevete.
+\newblock A survey on modern trainable activation functions.
+\newblock {\em Neural Networks}, 138:14--32, June 2021.
+
+\bibitem{millerCombinedMechanismsNeural2019}
+Paul Miller and Jonathan Cannon.
+\newblock Combined mechanisms of neural firing rate homeostasis.
+\newblock {\em Biological Cybernetics}, 113(1):47--59, 2019.
+
 \bibitem{backmanEffectsWorkingMemoryTraining2011}
 Lars B{\"a}ckman, Lars Nyberg, Anna Soveri, Jarkko Johansson, Micael Andersson, Erika Dahlin, Anna~S. Neely, Jere Virta, Matti Laine, and Juha~O. Rinne.
 \newblock Effects of {{Working-Memory Training}} on {{Striatal Dopamine Release}}.
@@ -260,15 +250,25 @@ Pierre Enel, Joni~D Wallis, and Erin~L Rich.
 \newblock Stable and dynamic representations of value in the prefrontal cortex.
 \newblock {\em eLife}, 9:e54313, July 2020.
 
+\bibitem{citriSynapticPlasticityMultiple2008}
+Ami Citri and Robert~C. Malenka.
+\newblock Synaptic {{Plasticity}}: {{Multiple Forms}}, {{Functions}}, and {{Mechanisms}}.
+\newblock {\em Neuropsychopharmacology}, 33(1):18--41, January 2008.
+
+\bibitem{kennedySynapticSignalingLearning2016}
+Mary~B. Kennedy.
+\newblock Synaptic {{Signaling}} in {{Learning}} and {{Memory}}.
+\newblock {\em Cold Spring Harbor Perspectives in Biology}, 8(2):a016824, February 2016.
+
+\bibitem{samavatSynapticInformationStorage2024}
+Mohammad Samavat, Thomas~M. Bartol, Kristen~M. Harris, and Terrence~J. Sejnowski.
+\newblock Synaptic {{Information Storage Capacity Measured With Information Theory}}.
+\newblock {\em Neural Computation}, 36(5):781--802, April 2024.
+
 \bibitem{wangMetalearningNaturalArtificial2021}
 Jane~X Wang.
 \newblock Meta-learning in natural and artificial intelligence.
 \newblock {\em Current Opinion in Behavioral Sciences}, 38:90--95, April 2021.
-
-\bibitem{martinRepresentationObjectConcepts2007a}
-Alex Martin.
-\newblock The {{Representation}} of {{Object Concepts}} in the {{Brain}}.
-\newblock {\em Annual Review of Psychology}, 58(1):25--45, January 2007.
 
 \bibitem{igelCovarianceMatrixAdaptation2007}
 Christian Igel, Nikolaus Hansen, and Stefan Roth.
