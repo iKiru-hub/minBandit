@@ -11,7 +11,7 @@ The model has been tested in a series of benchmark environments, each with a dif
 technically improper to call them \textit{probability distributions}; we will therefore refer to either \textit{probability} or \textit{distribution} separately at any given time for avoiding confusion.}
 We choose this setting as it resembles an ecological scenario in which an animal has to forage in an environment with food (reward) is distributed over a set of fixed locations, but whose occurrence probability can change over time.
 Four different variants were used, obtained by introducing different types of non-stationarity: piecewise constant, uniformly changing, sinusoidally changing, and sinusoidally changing with piecewise constant arms.
-The reason for this choices is to test the model performance under different speed and uniformity of the distribution changes.
+The reason for these choices is to test the model performance under different speed and uniformity of the distribution changes.
 Figure \ref{fig:envs} visually illustrates their specificities.
 
 \hfill \break
@@ -42,7 +42,7 @@ of rounds is reached.
 % Evolution: fitness evolution
 \subsection{Evolution search}
 The optimization of the hyper-parameters was performed using the Covariance Matrix Adaptation evolutionary strategy algorithm (CMA-ES) \cite{igelCovarianceMatrixAdaptation2007}.
-The search was run with a population of $256$ individuals for $80$ generations. Each individual was endowed with genome, corresponding to a vector of 22 parameters of the model.
+The search was run with a population of $256$ individuals for $80$ generations. Each individual was endowed with a genome, corresponding to a vector of 22 parameters of the model.
 The fitness function of the evolution was defined as the average reward obtained by an individual over 3 different non-stationary bandit environments, each for $K=\{40, 200\}$, and all averaged over 2 iterations.
 The results are summarized below in figure \ref{fig:evolution}.
 
@@ -55,21 +55,21 @@ The results are summarized below in figure \ref{fig:evolution}.
 \end{figure}
 
 % comment on the evolved functions
-\noindent The evolution progress, plot \textbf{a} of figure \ref{fig:evolution}, showed a steady improvement over the generations, with the fitness hitting a plateau once the total reward could not get any closer to the optimum $\approx 1$ due to randomness and the finite horizon.
+\noindent The evolution progress, plot \textbf{\ref{fig:evolution}a}, showed a steady improvement over the generations, with the fitness hitting a plateau once the total reward could not get any closer to the optimum $\approx 1$ due to randomness and the finite horizon.
 
-The evolved parameters (genome) are displayed as a frequency heatmap in \textbf{b}, which was obtained from the individuals whose fitness was equal or above the median. The most relevant parameters resulted to be those concerning directly neuronal activity and learning.
+The evolved parameters (genome) are displayed as a frequency heatmap in \textbf{\ref{fig:evolution}b}, which was obtained from the individuals whose fitness was equal or above the median. The most relevant parameters resulted to be those concerning directly neuronal activity and learning.
 
-More in details, the two Gaussian-sigmoid functions $\Phi_{v}, \Phi_{\eta}$, which are respectively the option value and learning rate functions, are shown in \textbf{c}.
+More in details, the two Gaussian-sigmoid functions $\Phi_{v}, \Phi_{\eta}$, which are respectively the option value and learning rate functions, are shown in \textbf{\ref{fig:evolution}c}.
 On the one hand, the learning rate function $\Phi_{\eta}$ is characterized by a decreasing curve, associated with the dominance of the right-side of the Gaussian, and a completely ignored sigmoid component.
-A possible interpretation for this shape is to ensure an high learning speed when the value options are more uncertain (weak weights), and low otherwise; thus preventing overshooting and oscillations in the weight updates.
+A possible interpretation for this shape is to ensure a high learning speed when the value options are more uncertain (weak weights), and low otherwise; thus preventing overshooting and oscillations in the weight updates.
 This adaptive behaviour is in line with known neuronal dynamics such as homeostatic plasticity, which works towards a stabilization of synapses, for instance through synaptic scaling and proportional updates \cite{citriSynapticPlasticityMultiple2008}.
-A variable learning rate is an important feature of several plasticity rules, from the more biologically plausible like the Oja \cite{ojaOjaLearningRule2008} to deep learning optimizers like Adam \cite{kingmaAdamMethodStochastic2017}.
+A variable learning rate is an important feature of several plasticity rules, from the more biologically plausible like the Oja rule \cite{ojaOjaLearningRule2008} to deep learning optimizers like Adam \cite{kingmaAdamMethodStochastic2017}.
 
 On the other hand, the option value function $\Phi_{v}$ follows instead a steep sigmoid curve.
 This is consistent with the idea that the input of population $U$ to population $V$ is weighted maximally for high option values (strong synapses), whereas for weaker estimates the contributions are low or close to zero, allowing for more exploration.
 Interestingly, a common feature seemed to be a slight concavity after zero, a slim influence of the Gaussian component, which might be interpreted as a sort of test for newly formed synapses. However, the size of this effect is not large.
 
-The neural response functions are shown in \textbf{d}. Both population evolved to have a similar shape, a sharp sigmoid with a clear threshold, with population \textit{U} having a more variable distribution.
+The neural response functions are shown in \textbf{\ref{fig:evolution}d}. Both population evolved to have a similar shape, a sharp sigmoid with a clear threshold, with population \textit{U} having a more variable distribution.
 The form is characterized by not allowing for a fine-grained linear reponse but rather an high-pass filter, with activity occurring only after strong excitation.
 This firing behaviour is reminiscent of coincidence detector neurons, which are sometimes referred to as class III neurons with respect to their f-I curve \cite{ratteImpactNeuronalProperties2013}.
 
@@ -80,8 +80,8 @@ This firing behaviour is reminiscent of coincidence detector neurons, which are 
 The model has been tested and compared with the other algorithms: Thompson Sampling (TS), $\epsilon$-Greedy, and UCB. The benchmark were the four different variants of the K-armed bandit problem listed above \ref{sec:envs}, with a variable number of arms ranging from 5 to 1000.
 The results are reported in table \ref{tab:results}.
 Overall, our model displayed a solid performance over all environments, most of the time being equally good or better than the other algorithms.
-Interestingly, large numbers of $K$ did not pose a significant difficulty, with the model being able to adapt to the different environments and reward distributions.
-However, this is in part due to the randomness in the assignment of arm probabilities, and the statistics of the quantity of high-reward arms as their number increases. Nonetheless, given the non-stationarity it is still a not trivial task to re-calibrate to new distributions.
+Interestingly, large numbers of $K$\textit{s} did not pose a significant difficulty, with the model being able to adapt to the different environments and reward distributions.
+However, this is in part due to the randomness in the assignment of arm probabilities, and the statistics of the quantity of high-reward arms as their number increases. Nonetheless, given the non-stationarity it is still a non trivial task to re-calibrate to new distributions.
 
 
 % % --- table mabp
@@ -127,7 +127,7 @@ UCB & $0.00(6)$ & $0.26(17)$ & $0.18(6)$ & $0.29(3)$ & $0.34(1)$ & $0.52(3)$ \\
 % entropy over rounds
 \subsubsection{Entropy analysis}\label{sec:entropy}
 \noindent For a better understanding of the qualitative differences between the models, we analyzed the progress over the rounds by tracking the selected arms in a simple piecewise stationary distribution environment.
-The simulation was ran for $3$ trials with $2000$, and averaged over $5$ iterations.
+The simulation was run for $3$ trials with $2000$, and averaged over $5$ iterations.
 Additionally, in order to quantify the variability of the decision policy at a given time and highlight the particularity of each decision-making behaviour, we calculated the entropy of the probability distribution $p$ of chosen arms, calculated over a window of 20 rounds, as $H=-\sum^{K}_{i} p_{i}\log(p_{i})$.
 The unit of entropy is in nats, and it ranges from $0$ (no uncertainty) to $\log_{e}(K)$ (maximum uncertainty).
 In figure \ref{fig:entropy_fig1}-\textbf{a}, it is plotted for each model the raster plot of selected arms together with its level of entropy. The reward probability distribution over the arms has an average of $H=2.02$.
@@ -136,7 +136,7 @@ As expected, the shape of the entropy curve expresses the inherent strategy adop
 In particular, the UCB algorithm showed the highest variability, marked by a persistent exploratory behaviour throughout the trials despite converging to reward options. Thompson Sampling was able to reach most solutions, although with difficulty in adapting to new reward distributions
 leading to high entropy levels.
 $\epsilon-$Greedy also showed a good performance quite reliably, with the greedy strategy assuring low entropy for most of the rounds.
-Similar behaviour was observed for our model, which was able to reach the optimal policy and maintain it over time, with entropy peaking mostly at the beggining of the trials and being, on average, the lowest among all models.
+Similar behaviour was observed for our model, which was able to reach the optimal policy and maintain it over time, with entropy peaking mostly at the beginning of the trials and being, on average, the lowest among all models.
 Indeed, the dynamics of our model make it particularly suited for the task of non-stationary K-armed bandits, as it is able to quickly adapt to new reward distributions and firmly maintain a greedy policy.
 
 \begin{figure}[H]
@@ -155,9 +155,9 @@ The red lines represent the entropy level, calculated from the distribution of s
 
 % robustness
 \noindent Then, we sought to investigate the robustness of the model, quantified as the capacity to endure increasing levels of entropy in the reward distribution.
-The simulation was done in a piecewise stationary environment with $K=200$ in two trials averaged over 5 independent runs, and it is showed in figure \ref{fig:entropy_fig1}-\textbf{b}.
+The simulation was done in a piecewise stationary environment with $K=200$ in two trials averaged over 5 independent runs, and it is showed in figure \textbf{\ref{fig:entropy_fig1}b}.
 The distributions were chosen such to have only one strongly rewarding arm, in order to highlight the models ability to find it.
-In plot \textbf{d}, an example of distributions is plotted in \textbf{d} and are aligned with the x-axis in plot \textbf{b}.
+In plot \textbf{\ref{fig:entropy_fig1}d}, an example of distributions is plotted in \textbf{\ref{fig:entropy_fig1}d} and are aligned with the x-axis in plot \textbf{\ref{fig:entropy_fig1}b}.
 For more details about the distribution see the appendix \ref{sec:appendix_entropy}.
 In the top two plots, it is shown the average reward and regret obtained by each model against the reward distribution entropy for the two trials.
 The results reported how all models are capable of robust performance in the first trial even in the presence of high uncertainty.
