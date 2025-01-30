@@ -30,15 +30,27 @@ The approach is based on the idea of maintaining an upper limit on the reward pr
 Other successful algorithms are $\epsilon$-Greedy and VDBE \cite{gittinsBanditProcessesDynamic1979, banMultifacetContextualBandits2021, tokicAdaptiveEGreedyExploration2010, tokicValueDifferenceBasedExploration2011}.
 
 % why bio-plausibility is important
-Nonetheless, put aside their marked success, they bear little resemblance to actual neuronal dynamics, besides lacking a clear functional similarity to brain regions.
-Indeed, the interest in bio-inspired algorithms has seen a rise in recent years. One of the reasons is the optimization of energy usage, through the design of models with a better tradeoff between performance and power consumption \cite{EvaluationBioInspiredModels}, and possibly running on specialized neuromorphic hardware \cite{ReviewNeuroscienceInspiredMachine}.
-Other important advantages include novel algorithmic approaches employed by biological brains such as neural networks and predictive coding, which have been shown to be reach state of the art in several tasks and deal with the so-called \textit{machine-challenging tasks} (MCTs) \cite{schmidgallBraininspiredLearningArtificial2024, hassabisNeuroscienceInspiredArtificialIntelligence2017, leeBraininspiredPredictiveCoding2022}.
-Lastly, bio-inspired models can be used to improve algorithmic intepretability, namely understanding what is actually happening behind the scene, and make more direct comparison with real biological dynamics and components \cite{liuSeeingBelievingBrainInspired2023}.
+Nonetheless, they bear little resemblance to actual neuronal dynamics, besides lacking a clear functional similarity to brain regions.
+Indeed, the interest in bio-inspired algorithms has seen a rise in recent years.
+
+% novelty
+One of the main advantages is the algorithmic novelty, directly sourced from our understanding of biological brains, which have led to important concepts such as neural networks and predictive coding. In fact, such new approaches have been shown to be capable of reaching state of the art levels in several domains, and good performances on the so-called \textit{machine-challenging tasks} (MCTs) \cite{schmidgallBraininspiredLearningArtificial2024, hassabisNeuroscienceInspiredArtificialIntelligence2017, leeBraininspiredPredictiveCoding2022}.
+
+% algorithmic interpretability
+Another important consideration is that bio-inspired models can be used to improve algorithmic intepretability, namely increasing our understanding of the functional role and relations among the internal components.
+
+% normative modeling
+Further, their application to tasks for which there are experimental data can foster insights and lead to better predictions about brain dynamics and hint at new research directions \cite{liuSeeingBelievingBrainInspired2023}.
+
+% energy efficiency
+Lastly, given the remarkable power efficiency of the brain, models directly inspired by its architecture may bring to substantial optimization of energy usage \cite{EvaluationBioInspiredModels}, especially if coupled with specialized neuromorphic hardware \cite{ReviewNeuroscienceInspiredMachine}.
 
 \hfill \break
 % aim of the work
 \indent In this work, we aimed at improving the biological plausibility of algorithms in the context of the multi-armed bandit problem by proposing a new model based on rate neurons and synaptic plasticity.
-Additionally, we optimized the hyper-parameters of the model through an evolution search, showing the convergence to solutions in line with experimental observations.
+It represents a novel approach, 
+
+
 The benchmarks we chose are stochastic bandit problems, more challenging variants of the original task endowed with \textit{concept drift}, where the reward distribution changes over time \cite{garivierUpperConfidenceBoundPolicies2008, besbesStochasticMultiArmedBanditProblem2014, cavenaghiNonStationaryMultiArmed2021}.
 
 % brief overview of the model

@@ -19,7 +19,7 @@ One notable insight was that in situation with low uncertainty, the model was re
 When the uncertainty increased over a certain level the option entropy of the model followed, which however did not necessarily hinder performance, except for switching arm in new trials.
 Here, the adopted policy became markedly exploratory, akin to the approach of UCB.
 
-The strengths of the model can be traced both in the architecture and in the learning paradigm, whose hyperparameters were optimized through an evolutionary process. Interestingly, the values found converged to solutions that can be mapped to real synaptic mechanisms, corroborating the model's biological plausibility.
+The strengths of the model can be traced both in the architecture and in the learning paradigm, whose hyperparameters were optimized through an evolutionary process. Interestingly, the values found converged to solutions that can be mapped to plausible synaptic mechanisms.
 On one hand the neural dynamics, which rely on plastic connections and a consensus-like selection process.
 Particularly important was the choice of modulating the afferent connections to the value population $V$ according to a non-linear function dependant on the synaptic weight itself. In so doing, it was possible to evolve implicitly an effective option-value policy for the tradeoff between exploration and exploitation.
 This approach can be seen as a form of meta-plasticity implemented through neuromodulation \cite{wangMetalearningNaturalArtificial2021}, where a region external to the network affects the synaptic connections withough alterning their actual weights; dopamine is a well-suited candidate \cite{toblerAdaptiveCodingReward2005, roeschDopamineNeuronsEncode2007, coolsChemistryAdaptiveMind2019}.

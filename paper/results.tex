@@ -120,7 +120,6 @@ UCB & $0.00(6)$ & $0.26(17)$ & $0.18(6)$ & $0.29(3)$ & $0.34(1)$ & $0.52(3)$ \\
 \end{table}\label{tab:results}
 
 
-
 % How the models work and compare
 \subsection{Analysis of dynamics and robustness}
 
@@ -144,8 +143,7 @@ Indeed, the dynamics of our model make it particularly suited for the task of no
     \includegraphics[width=1.0\textwidth]{figures/entropy_main_plot_2.png}
     \caption{\textsc{Decision-making dynamics for different models} - \textbf{a}: \textit{Each plot display the results from one model. The raster plots (black dots) show the arms selected at each round.
 The red lines represent the entropy level, calculated from the distribution of selections over the preceeding 20 rounds, smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy over all trials are also reported.}
- - \textbf{b}: \textit{the top two rows display  the average reward for trial 1 and 2 obtained by each model for increasing levels of entropy (in nats) in the reward distribution; a dashed line is the regret with respect to the upper bound (black solid line). The two bottom average entropy of the selections for the first and second trial of the simulation, each with 2000 rounds. -
-\textbf{c}: \textit{testing of the model to a 500 arms MAB-P enviroment for three epochs. - \textbf{d}: representation of the arms reward distributions for different levels of entropy, aligned with the x-axis in plot \textbf{b}.}}}
+ - \textbf{b}: \textit{the top two rows display  the average reward for trial 1 and 2 obtained by each model for increasing levels of entropy (in nats) in the reward distribution; a dashed line is the regret with respect to the upper bound (black solid line). The two bottom average entropy of the selections for the first and second trial of the simulation, each with 2000 rounds.}}
     \label{fig:entropy_fig1}
 \end{figure}
 
@@ -157,7 +155,6 @@ The red lines represent the entropy level, calculated from the distribution of s
 \noindent Then, we sought to investigate the robustness of the model, quantified as the capacity to endure increasing levels of entropy in the reward distribution.
 The simulation was done in a piecewise stationary environment with $K=200$ in two trials averaged over 5 independent runs, and it is showed in figure \textbf{\ref{fig:entropy_fig1}b}.
 The distributions were chosen such to have only one strongly rewarding arm, in order to highlight the models ability to find it.
-In plot \textbf{\ref{fig:entropy_fig1}d}, an example of distributions is plotted in \textbf{\ref{fig:entropy_fig1}d} and are aligned with the x-axis in plot \textbf{\ref{fig:entropy_fig1}b}.
 For more details about the distribution see the appendix \ref{sec:appendix_entropy}.
 In the top two plots, it is shown the average reward and regret obtained by each model against the reward distribution entropy for the two trials.
 The results reported how all models are capable of robust performance in the first trial even in the presence of high uncertainty.

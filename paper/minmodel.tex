@@ -40,7 +40,7 @@ The model hyperparameters were optimized for maximizing the average total reward
 
 \subsubsection{Option selection}
 The decision-making process within a single round is structured in two distinct phases. Initially, the model receives a constant external input targeting all neurons in the memory population \textit{U} equally.
-During this phase, $\textbf{I}_{\text{ext}}$ works as an equilibrium value while the reciprocal interactions with population \textit{V} push $\textbf{u}$ to different values, depending on the current policy encoded in $\tilde{\textbf{W}}^{UV}$.
+During this phase, $\textbf{I}_{\text{ext}}$ works as an equilibrium value while the reciprocal interactions with population \textit{V} push $\textbf{u}$ to different values, depending on the current policy encoded in $\widetilde{\textbf{W}}^{UV}$.
 Importantly, the weights $\textbf{W}^{UV}$ are initialized to zero, and thus the input from $U$ to $V$ is uniform. This approach ensures the absence of biases towards any arm by having all weights equal, and corresponds to a completely untrained network.
 After a fixed amount of time $\sim 2 \text{s}$, the second phase begins. Here, the external input is removed and the model is left to evolve autonomously, and since there are no recurrent connections in neither population the dynamics are entirely driven by their coupling.
 A selection $k$ is sampled after another fixed amount of time $\sim 5 \text{s}$, and it is defined according to the following rule:
@@ -64,7 +64,7 @@ This rule is a way to express the exploration-exploitation trade-off, and it is 
 \caption{Two-phases option selection process}
 \label{alg:decision}
 \SetAlgoLined
-\KwIn{External input $\textbf{I}_{\text{ext}}$, population $\textbf{u}$, population $\textbf{v}$, weights $\tilde{\textbf{W}}^{UV}$}
+\KwIn{External input $\textbf{I}_{\text{ext}}$, population $\textbf{u}$, population $\textbf{v}$, weights $\widetilde{\textbf{W}}^{UV}$}
 \KwOut{Selected action $k$}
 
 \SetKwComment{Comment}{// }{ }

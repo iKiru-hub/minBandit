@@ -48,14 +48,6 @@ Michel Tokic and G{\"u}nther Palm.
 \newblock Value-{{Difference Based Exploration}}: {{Adaptive Control}} between {{Epsilon-Greedy}} and {{Softmax}}.
 \newblock In Joscha Bach and Stefan Edelkamp, editors, {\em {{KI}} 2011: {{Advances}} in {{Artificial Intelligence}}}, volume 7006, pages 335--346. Springer Berlin Heidelberg, Berlin, Heidelberg, 2011.
 
-\bibitem{EvaluationBioInspiredModels}
-Evaluation of {{Bio-Inspired Models}} under {{Different Learning Settings For Energy Efficiency}} in {{Network Traffic Prediction}}.
-\newblock https://arxiv.org/html/2412.17565.
-
-\bibitem{ReviewNeuroscienceInspiredMachine}
-A {{Review}} of {{Neuroscience-Inspired Machine Learning}}.
-\newblock https://arxiv.org/html/2403.18929v1.
-
 \bibitem{schmidgallBraininspiredLearningArtificial2024}
 Samuel Schmidgall, Rojin Ziaei, Jascha Achterberg, Louis Kirsch, S.~Pardis Hajiseyedrazi, and Jason Eshraghian.
 \newblock Brain-inspired learning in artificial neural networks: {{A}} review.
@@ -74,6 +66,14 @@ Jangho Lee, Jeonghee Jo, Byounghwa Lee, Jung-Hoon Lee, and Sungroh Yoon.
 \bibitem{liuSeeingBelievingBrainInspired2023}
 Ziming Liu, Eric Gan, and Max Tegmark.
 \newblock Seeing is {{Believing}}: {{Brain-Inspired Modular Training}} for {{Mechanistic Interpretability}}, June 2023.
+
+\bibitem{EvaluationBioInspiredModels}
+Evaluation of {{Bio-Inspired Models}} under {{Different Learning Settings For Energy Efficiency}} in {{Network Traffic Prediction}}.
+\newblock https://arxiv.org/html/2412.17565.
+
+\bibitem{ReviewNeuroscienceInspiredMachine}
+A {{Review}} of {{Neuroscience-Inspired Machine Learning}}.
+\newblock https://arxiv.org/html/2403.18929v1.
 
 \bibitem{garivierUpperConfidenceBoundPolicies2008}
 Aur{\'e}lien Garivier and Eric Moulines.
@@ -265,11 +265,6 @@ Mohammad Samavat, Thomas~M. Bartol, Kristen~M. Harris, and Terrence~J. Sejnowski
 \newblock Synaptic {{Information Storage Capacity Measured With Information Theory}}.
 \newblock {\em Neural Computation}, 36(5):781--802, April 2024.
 
-\bibitem{wangMetalearningNaturalArtificial2021}
-Jane~X Wang.
-\newblock Meta-learning in natural and artificial intelligence.
-\newblock {\em Current Opinion in Behavioral Sciences}, 38:90--95, April 2021.
-
 \bibitem{igelCovarianceMatrixAdaptation2007}
 Christian Igel, Nikolaus Hansen, and Stefan Roth.
 \newblock Covariance {{Matrix Adaptation}} for {{Multi-objective Optimization}}.
@@ -303,6 +298,11 @@ Eric Schulz, Nicholas~T. Franklin, and Samuel~J. Gershman.
 Shunan Zhang and Angela~J Yu.
 \newblock Forgetful {{Bayes}} and myopic planning: {{Human}} learning and decision-making in a bandit setting.
 \newblock In {\em Advances in {{Neural Information Processing Systems}}}, volume~26. Curran Associates, Inc., 2013.
+
+\bibitem{wangMetalearningNaturalArtificial2021}
+Jane~X Wang.
+\newblock Meta-learning in natural and artificial intelligence.
+\newblock {\em Current Opinion in Behavioral Sciences}, 38:90--95, April 2021.
 
 \bibitem{roeschDopamineNeuronsEncode2007}
 Matthew~R. Roesch, Donna~J. Calu, and Geoffrey Schoenbaum.
