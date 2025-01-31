@@ -48,6 +48,16 @@ Michel Tokic and G{\"u}nther Palm.
 \newblock Value-{{Difference Based Exploration}}: {{Adaptive Control}} between {{Epsilon-Greedy}} and {{Softmax}}.
 \newblock In Joscha Bach and Stefan Edelkamp, editors, {\em {{KI}} 2011: {{Advances}} in {{Artificial Intelligence}}}, volume 7006, pages 335--346. Springer Berlin Heidelberg, Berlin, Heidelberg, 2011.
 
+\bibitem{leeBraininspiredPredictiveCoding2022}
+Jangho Lee, Jeonghee Jo, Byounghwa Lee, Jung-Hoon Lee, and Sungroh Yoon.
+\newblock Brain-inspired {{Predictive Coding Improves}} the {{Performance}} of {{Machine Challenging Tasks}}.
+\newblock {\em Frontiers in Computational Neuroscience}, 16:1062678, 2022.
+
+\bibitem{spratlingReviewPredictiveCoding2017}
+M.~W. Spratling.
+\newblock A review of predictive coding algorithms.
+\newblock {\em Brain and Cognition}, 112:92--97, March 2017.
+
 \bibitem{schmidgallBraininspiredLearningArtificial2024}
 Samuel Schmidgall, Rojin Ziaei, Jascha Achterberg, Louis Kirsch, S.~Pardis Hajiseyedrazi, and Jason Eshraghian.
 \newblock Brain-inspired learning in artificial neural networks: {{A}} review.
@@ -57,11 +67,6 @@ Samuel Schmidgall, Rojin Ziaei, Jascha Achterberg, Louis Kirsch, S.~Pardis Hajis
 Demis Hassabis, Dharshan Kumaran, Christopher Summerfield, and Matthew Botvinick.
 \newblock Neuroscience-{{Inspired Artificial Intelligence}}.
 \newblock {\em Neuron}, 95(2):245--258, July 2017.
-
-\bibitem{leeBraininspiredPredictiveCoding2022}
-Jangho Lee, Jeonghee Jo, Byounghwa Lee, Jung-Hoon Lee, and Sungroh Yoon.
-\newblock Brain-inspired {{Predictive Coding Improves}} the {{Performance}} of {{Machine Challenging Tasks}}.
-\newblock {\em Frontiers in Computational Neuroscience}, 16:1062678, 2022.
 
 \bibitem{liuSeeingBelievingBrainInspired2023}
 Ziming Liu, Eric Gan, and Max Tegmark.
@@ -114,25 +119,6 @@ Michael~J. Frank and Eric~D. Claus.
 \newblock Anatomy of a decision: {{Striato-orbitofrontal}} interactions in reinforcement learning, decision making, and reversal.
 \newblock {\em Psychological Review}, 113(2):300--326, April 2006.
 
-\bibitem{carrollEncodingCertaintyBump2014}
-Sam Carroll, Kre{\v s}imir Josi{\'c}, and Zachary~P. Kilpatrick.
-\newblock Encoding certainty in bump attractors.
-\newblock {\em Journal of Computational Neuroscience}, 37(1):29--48, August 2014.
-
-\bibitem{esnaola-acebesBumpAttractorDynamics2021}
-Jose~M. {Esnaola-Acebes}, Alex Roxin, and Klaus Wimmer.
-\newblock Bump attractor dynamics underlying stimulus integration in perceptual estimation tasks, March 2021.
-
-\bibitem{bariDynamicDecisionMaking2021}
-Bilal~A. Bari and Jeremiah~Y. Cohen.
-\newblock Dynamic decision making and value computations in medial frontal cortex.
-\newblock {\em International review of neurobiology}, 158:83--113, 2021.
-
-\bibitem{houstonMatchingBehavioursRewards2021}
-Alasdair~I. Houston, Pete~C. Trimmer, and John~M. McNamara.
-\newblock Matching {{Behaviours}} and {{Rewards}}.
-\newblock {\em Trends in Cognitive Sciences}, 25(5):403--415, May 2021.
-
 \bibitem{larsenSynapsetypespecificPlasticityLocal2015}
 Rylan~S Larsen and P~Jesper Sj{\"o}str{\"o}m.
 \newblock Synapse-type-specific plasticity in local circuits.
@@ -161,31 +147,6 @@ Jeffrey~B. Inglis, Vivian~V. Valentin, and F.~Gregory Ashby.
 Kiyohito Iigaya.
 \newblock Adaptive learning and decision-making under uncertainty by metaplastic synapses guided by a surprise detection system.
 \newblock {\em eLife}, 5:e18073, August 2016.
-
-\bibitem{toblerAdaptiveCodingReward2005}
-Philippe~N. Tobler, Christopher~D. Fiorillo, and Wolfram Schultz.
-\newblock Adaptive {{Coding}} of {{Reward Value}} by {{Dopamine Neurons}}.
-\newblock {\em Science}, 307(5715):1642--1645, March 2005.
-
-\bibitem{schultzNeuralSubstratePrediction1997}
-Wolfram Schultz, Peter Dayan, and P.~Read Montague.
-\newblock A {{Neural Substrate}} of {{Prediction}} and {{Reward}}.
-\newblock {\em Science}, 275(5306):1593--1599, March 1997.
-
-\bibitem{didomenicoDopaminergicModulationPrefrontal2023}
-Danila Di~Domenico and Lisa Mapelli.
-\newblock Dopaminergic {{Modulation}} of {{Prefrontal Cortex Inhibition}}.
-\newblock {\em Biomedicines}, 11(5):1276, May 2023.
-
-\bibitem{lohaniDopamineModulationPrefrontal2019}
-Sweyta Lohani, Adria~K. Martig, Karl Deisseroth, Ilana~B. Witten, and Bita Moghaddam.
-\newblock Dopamine {{Modulation}} of {{Prefrontal Cortex Activity Is Manifold}} and {{Operates}} at {{Multiple Temporal}} and {{Spatial Scales}}.
-\newblock {\em Cell Reports}, 27(1):99--114.e6, April 2019.
-
-\bibitem{dardenneRolePrefrontalCortex2012}
-Kimberlee D'Ardenne, Neir Eshel, Joseph Luka, Agatha Lenartowicz, Leigh~E. Nystrom, and Jonathan~D. Cohen.
-\newblock Role of prefrontal cortex and the midbrain dopamine system in working memory updating.
-\newblock {\em Proceedings of the National Academy of Sciences}, 109(49):19900--19909, December 2012.
 
 \bibitem{qiForcedExplorationBandit2023}
 Han Qi, Fei Guo, and Li~Zhu.
@@ -303,6 +264,11 @@ Shunan Zhang and Angela~J Yu.
 Jane~X Wang.
 \newblock Meta-learning in natural and artificial intelligence.
 \newblock {\em Current Opinion in Behavioral Sciences}, 38:90--95, April 2021.
+
+\bibitem{toblerAdaptiveCodingReward2005}
+Philippe~N. Tobler, Christopher~D. Fiorillo, and Wolfram Schultz.
+\newblock Adaptive {{Coding}} of {{Reward Value}} by {{Dopamine Neurons}}.
+\newblock {\em Science}, 307(5715):1642--1645, March 2005.
 
 \bibitem{roeschDopamineNeuronsEncode2007}
 Matthew~R. Roesch, Donna~J. Calu, and Geoffrey Schoenbaum.
