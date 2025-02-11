@@ -9,7 +9,7 @@ The model has been tested in a series of benchmark environments, each with a dif
 % In particular, the agent is evaluated over a number $T_{\text{trials}}$ of \textit{trials}, each composed by an arbitrary number $T_{\text{rounds}}$ of \textit{rounds}; each \textit{trial} is characterized by a different reward distribution $\mathbf{p}\sim\mathcal{U}(0,1)^{K}$ (although in practice the bounds have been set to $(0.1, 0.9)$ such that the distributions are less trivial).
 \noindent Our goal is to investigate the performance of the agent in a non-stationary environment, meaning that its underlying distribution changes over time \footnote{Since the arm probabilities are not normalized to $1$, it is
 technically improper to call them \textit{probability distributions}; we will therefore refer to either \textit{probability} or \textit{distribution} separately at any given time for avoiding confusion.}
-We choose this setting as it resembles an ecological scenario in which an animal has to forage in an environment with food (reward) is distributed over a set of fixed locations, but whose occurrence probability can change over time.
+We choose this setting as it resembles an scenario in which an animal has to forage in an environment with food (reward) distributed over a set of fixed locations, but whose occurrence probability can change over time.
 Four different variants were used, obtained by introducing different types of non-stationarity: piecewise constant, uniformly changing, sinusoidally changing, and sinusoidally changing with piecewise constant arms.
 The reason for these choices is to test the model performance under different speed and uniformity of the distribution changes.
 Figure \ref{fig:envs} visually illustrates their specificities.
@@ -79,7 +79,7 @@ This firing behaviour is reminiscent of coincidence detector neurons, which are 
 
 The model has been tested and compared with the other algorithms: Thompson Sampling (TS), $\epsilon$-Greedy, and UCB. The benchmark were the four different variants of the K-armed bandit problem listed above \ref{sec:envs}, with a variable number of arms ranging from 5 to 1000.
 The results are reported in table \ref{tab:results}.
-Overall, our model displayed a solid performance over all environments, most of the time being equally good or better than the other algorithms.
+Overall, our model displays a solid performance over all environments, most of the time being equally good or better than the other algorithms.
 Interestingly, a large numbers of arms ($K$) did not present a significant challenge, as the model effectively adapted to the different environments and reward distributions.
 However, this is in part due to the randomness in the assignment of arm probabilities, and the statistics of the quantity of high-reward arms as their number increases. Nonetheless, given the non-stationarity it is still a non trivial task to re-calibrate to new distributions.
 
@@ -126,7 +126,7 @@ UCB & $0.00(6)$ & $0.26(17)$ & $0.18(6)$ & $0.29(3)$ & $0.34(1)$ & $0.52(3)$ \\
 % entropy over rounds
 \subsubsection{Entropy analysis}\label{sec:entropy}
 \noindent For a better understanding of the qualitative differences between the models, we analyzed the progress over the rounds by tracking the selected arms in a simple piecewise stationary distribution environment.
-The simulation was run for $3$ trials with $2000$, and averaged over $5$ iterations.
+The simulation was run for $3$ trials with $2000$ rounds each, and then averaged over $5$ iterations.
 Additionally, in order to quantify the variability of the decision policy at a given time and highlight the particularity of each decision-making behaviour, we calculated the entropy of the probability distribution $p$ of chosen arms, calculated over a window of 20 rounds, as $H=-\sum^{K}_{i} p_{i}\log(p_{i})$.
 The unit of entropy is in nats, and it ranges from $0$ (no uncertainty) to $\log_{e}(K)$ (maximum uncertainty).
 In figure \ref{fig:entropy_fig1}-\textbf{a}, it is plotted for each model the raster plot of selected arms together with its level of entropy. The reward probability distribution over the arms has an average of $H=2.02$.
