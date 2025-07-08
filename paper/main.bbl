@@ -48,7 +48,7 @@ Michel Tokic and G{\"u}nther Palm.
 \newblock Value-{{Difference Based Exploration}}: {{Adaptive Control}} between {{Epsilon-Greedy}} and {{Softmax}}.
 \newblock In Joscha Bach and Stefan Edelkamp, editors, {\em {{KI}} 2011: {{Advances}} in {{Artificial Intelligence}}}, volume 7006, pages 335--346. Springer Berlin Heidelberg, Berlin, Heidelberg, 2011.
 
-\bibitem{leeBraininspiredPredictiveCoding2022}
+\bibitem{lee2022}
 Jangho Lee, Jeonghee Jo, Byounghwa Lee, Jung-Hoon Lee, and Sungroh Yoon.
 \newblock Brain-inspired {{Predictive Coding Improves}} the {{Performance}} of {{Machine Challenging Tasks}}.
 \newblock {\em Frontiers in Computational Neuroscience}, 16:1062678, 2022.
@@ -72,52 +72,10 @@ Demis Hassabis, Dharshan Kumaran, Christopher Summerfield, and Matthew Botvinick
 Ziming Liu, Eric Gan, and Max Tegmark.
 \newblock Seeing is {{Believing}}: {{Brain-Inspired Modular Training}} for {{Mechanistic Interpretability}}, June 2023.
 
-\bibitem{EvaluationBioInspiredModels}
-Evaluation of {{Bio-Inspired Models}} under {{Different Learning Settings For Energy Efficiency}} in {{Network Traffic Prediction}}.
-\newblock https://arxiv.org/html/2412.17565.
-
-\bibitem{ReviewNeuroscienceInspiredMachine}
-A {{Review}} of {{Neuroscience-Inspired Machine Learning}}.
-\newblock https://arxiv.org/html/2403.18929v1.
-
-\bibitem{garivierUpperConfidenceBoundPolicies2008}
-Aur{\'e}lien Garivier and Eric Moulines.
-\newblock On {{Upper-Confidence Bound Policies}} for {{Non-Stationary Bandit Problems}}, May 2008.
-
-\bibitem{besbesStochasticMultiArmedBanditProblem2014}
-Omar Besbes, Yonatan Gur, and Assaf Zeevi.
-\newblock Stochastic {{Multi-Armed-Bandit Problem}} with {{Non-stationary Rewards}}.
-\newblock In {\em Advances in {{Neural Information Processing Systems}}}, volume~27. Curran Associates, Inc., 2014.
-
-\bibitem{cavenaghiNonStationaryMultiArmed2021}
-Emanuele Cavenaghi, Gabriele Sottocornola, Fabio Stella, and Markus Zanker.
-\newblock Non {{Stationary Multi-Armed Bandit}}: {{Empirical Evaluation}} of a {{New Concept Drift-Aware Algorithm}}.
-\newblock {\em Entropy}, 23(3):380, March 2021.
-
-\bibitem{odohertyAbstractRewardPunishment2001}
-J.~O'Doherty, M.~L. Kringelbach, E.~T. Rolls, J.~Hornak, and C.~Andrews.
-\newblock Abstract reward and punishment representations in the human orbitofrontal cortex.
-\newblock {\em Nature Neuroscience}, 4(1):95--102, January 2001.
-
-\bibitem{ricebergRewardStabilityDetermines2012}
-Justin~S. Riceberg and Matthew~L. Shapiro.
-\newblock Reward {{Stability Determines}} the {{Contribution}} of {{Orbitofrontal Cortex}} to {{Adaptive Behavior}}.
-\newblock {\em Journal of Neuroscience}, 32(46):16402--16409, November 2012.
-
-\bibitem{tremblayRelativeRewardPreference1999}
-L{\'e}on Tremblay and Wolfram Schultz.
-\newblock Relative reward preference in primate orbitofrontal cortex.
-\newblock {\em Nature}, 398(6729):704--708, April 1999.
-
-\bibitem{elliottDissociableFunctionsMedial2000}
-Rebecca Elliott, Raymond~J. Dolan, and Chris~D. Frith.
-\newblock Dissociable {{Functions}} in the {{Medial}} and {{Lateral Orbitofrontal Cortex}}: {{Evidence}} from {{Human Neuroimaging Studies}}.
-\newblock {\em Cerebral Cortex}, 10(3):308--317, March 2000.
-
-\bibitem{frankAnatomyDecisionStriatoorbitofrontal2006}
-Michael~J. Frank and Eric~D. Claus.
-\newblock Anatomy of a decision: {{Striato-orbitofrontal}} interactions in reinforcement learning, decision making, and reversal.
-\newblock {\em Psychological Review}, 113(2):300--326, April 2006.
+\bibitem{behrens2007}
+Timothy E.~J. Behrens, Mark~W. Woolrich, Mark~E. Walton, and Matthew F.~S. Rushworth.
+\newblock Learning the value of information in an uncertain world.
+\newblock {\em Nature Neuroscience}, 10(9):1214--1221, September 2007.
 
 \bibitem{larsenSynapsetypespecificPlasticityLocal2015}
 Rylan~S Larsen and P~Jesper Sj{\"o}str{\"o}m.
@@ -138,49 +96,58 @@ Pablo Ariel, Michael~B. Hoppa, and Timothy~A. Ryan.
 \newblock Intrinsic variability in {{Pv}}, {{RRP}} size, {{Ca}}(2+) channel repertoire, and presynaptic potentiation in individual synaptic boutons.
 \newblock {\em Frontiers in Synaptic Neuroscience}, 4:9, 2012.
 
-\bibitem{inglisModulationDopamineAdaptive2021}
+\bibitem{inglis2021}
 Jeffrey~B. Inglis, Vivian~V. Valentin, and F.~Gregory Ashby.
 \newblock Modulation of {{Dopamine}} for {{Adaptive Learning}}: {{A Neurocomputational Model}}.
 \newblock {\em Computational brain \& behavior}, 4(1):34--52, March 2021.
 
-\bibitem{iigayaAdaptiveLearningDecisionmaking2016}
-Kiyohito Iigaya.
-\newblock Adaptive learning and decision-making under uncertainty by metaplastic synapses guided by a surprise detection system.
-\newblock {\em eLife}, 5:e18073, August 2016.
+\bibitem{iigaya2016}
+Kiyohito Iigaya, Giles~W Story, Zeb {Kurth-Nelson}, Raymond~J Dolan, and Peter Dayan.
+\newblock The modulation of savouring by prediction error and its effects on choice.
+\newblock {\em eLife}, 5:e13747, April 2016.
+
+\bibitem{starkweather2018}
+Clara~Kwon Starkweather, Samuel~J. Gershman, and Naoshige Uchida.
+\newblock The {{Medial Prefrontal Cortex Shapes Dopamine Reward Prediction Errors}} under {{State Uncertainty}}.
+\newblock {\em Neuron}, 98(3):616--629.e6, May 2018.
+
+\bibitem{babayan2018}
+Benedicte~M. Babayan, Naoshige Uchida, and Samuel~J. Gershman.
+\newblock Belief state representation in the dopamine system.
+\newblock {\em Nature Communications}, 9(1):1891, May 2018.
+
+\bibitem{khorsand2017}
+Peyman Khorsand and Alireza Soltani.
+\newblock Optimal structure of metaplasticity for adaptive learning.
+\newblock {\em PLOS Computational Biology}, 13(6):e1005630, June 2017.
+
+\bibitem{farashahi2017}
+Shiva Farashahi, Christopher~H. Donahue, Peyman Khorsand, Hyojung Seo, Daeyeol Lee, and Alireza Soltani.
+\newblock Metaplasticity as a {{Neural Substrate}} for {{Adaptive Learning}} and {{Choice}} under {{Uncertainty}}.
+\newblock {\em Neuron}, 94(2):401--414.e6, April 2017.
+
+\bibitem{fusi2005}
+Stefano Fusi, Patrick~J. Drew, and L.~F. Abbott.
+\newblock Cascade {{Models}} of {{Synaptically Stored Memories}}.
+\newblock {\em Neuron}, 45(4):599--611, February 2005.
+
+\bibitem{garivierUpperConfidenceBoundPolicies2008}
+Aur{\'e}lien Garivier and Eric Moulines.
+\newblock On {{Upper-Confidence Bound Policies}} for {{Non-Stationary Bandit Problems}}, May 2008.
+
+\bibitem{besbesStochasticMultiArmedBanditProblem2014}
+Omar Besbes, Yonatan Gur, and Assaf Zeevi.
+\newblock Stochastic {{Multi-Armed-Bandit Problem}} with {{Non-stationary Rewards}}.
+\newblock In {\em Advances in {{Neural Information Processing Systems}}}, volume~27. Curran Associates, Inc., 2014.
+
+\bibitem{cavenaghiNonStationaryMultiArmed2021}
+Emanuele Cavenaghi, Gabriele Sottocornola, Fabio Stella, and Markus Zanker.
+\newblock Non {{Stationary Multi-Armed Bandit}}: {{Empirical Evaluation}} of a {{New Concept Drift-Aware Algorithm}}.
+\newblock {\em Entropy}, 23(3):380, March 2021.
 
 \bibitem{qiForcedExplorationBandit2023}
 Han Qi, Fei Guo, and Li~Zhu.
 \newblock Forced {{Exploration}} in {{Bandit Problems}}, December 2023.
-
-\bibitem{lukChoiceCodingFrontal2013}
-Chung-Hay Luk and Jonathan~D. Wallis.
-\newblock Choice {{Coding}} in {{Frontal Cortex}} during {{Stimulus-Guided}} or {{Action-Guided Decision-Making}}.
-\newblock {\em Journal of Neuroscience}, 33(5):1864--1871, January 2013.
-
-\bibitem{kennerleyDecisionMakingReward2011a}
-Steven~W. Kennerley and Mark~E. Walton.
-\newblock Decision {{Making}} and {{Reward}} in {{Frontal Cortex}}.
-\newblock {\em Behavioral Neuroscience}, 125(3):297--317, June 2011.
-
-\bibitem{khamassiChapter22Medial2013}
-Mehdi Khamassi, Pierre Enel, Peter~Ford Dominey, and Emmanuel Procyk.
-\newblock Chapter 22 - {{Medial}} prefrontal cortex and the adaptive regulation of reinforcement learning parameters.
-\newblock In V.~S.~Chandrasekhar Pammi and Narayanan Srinivasan, editors, {\em Progress in {{Brain Research}}}, volume 202 of {\em Decision {{Making}}}, pages 441--464. Elsevier, January 2013.
-
-\bibitem{funahashiPrefrontalContributionDecisionMaking2017}
-Shintaro Funahashi.
-\newblock Prefrontal {{Contribution}} to {{Decision-Making}} under {{Free-Choice Conditions}}.
-\newblock {\em Frontiers in Neuroscience}, 11, July 2017.
-
-\bibitem{marcosDeterminingMonkeyFree2016}
-Encarni Marcos and Aldo Genovesio.
-\newblock Determining {{Monkey Free Choice Long}} before the {{Choice Is Made}}: {{The Principal Role}} of {{Prefrontal Neurons Involved}} in {{Both Decision}} and {{Motor Processes}}.
-\newblock {\em Frontiers in Neural Circuits}, 10, September 2016.
-
-\bibitem{balewskiValueDynamicsAffect2023}
-Zuzanna~Z. Balewski, Thomas~W. Elston, Eric~B. Knudsen, and Joni~D. Wallis.
-\newblock Value dynamics affect choice preparation during decision-making.
-\newblock {\em Nature neuroscience}, 26(9):1575--1583, September 2023.
 
 \bibitem{martinRepresentationObjectConcepts2007a}
 Alex Martin.
@@ -226,7 +193,7 @@ Mohammad Samavat, Thomas~M. Bartol, Kristen~M. Harris, and Terrence~J. Sejnowski
 \newblock Synaptic {{Information Storage Capacity Measured With Information Theory}}.
 \newblock {\em Neural Computation}, 36(5):781--802, April 2024.
 
-\bibitem{igelCovarianceMatrixAdaptation2007}
+\bibitem{igel2007}
 Christian Igel, Nikolaus Hansen, and Stefan Roth.
 \newblock Covariance {{Matrix Adaptation}} for {{Multi-objective Optimization}}.
 \newblock {\em Evolutionary Computation}, 15(1):1--28, March 2007.
@@ -245,6 +212,11 @@ St{\'e}phanie Ratt{\'e}, Sungho Hong, Erik De~Schutter, and Steven~A. Prescott.
 \newblock Impact of {{Neuronal Properties}} on {{Network Coding}}: {{Roles}} of {{Spike Initiation Dynamics}} and {{Robust Synchrony Transfer}}.
 \newblock {\em Neuron}, 78(5):758--772, June 2013.
 
+\bibitem{liu2024a}
+Junyang Liu.
+\newblock Comprehensive {{Exploration}} and {{Implementation}} of {{Multi-Armed Bandit Algorithms Across Various Domains}}.
+\newblock {\em Highlights in Science, Engineering and Technology}, 94:230--235, April 2024.
+
 \bibitem{steyversBayesianAnalysisHuman2009a}
 Mark Steyvers, Michael~D. Lee, and Eric-Jan Wagenmakers.
 \newblock A {{Bayesian}} analysis of human decision-making on bandit problems.
@@ -260,25 +232,50 @@ Shunan Zhang and Angela~J Yu.
 \newblock Forgetful {{Bayes}} and myopic planning: {{Human}} learning and decision-making in a bandit setting.
 \newblock In {\em Advances in {{Neural Information Processing Systems}}}, volume~26. Curran Associates, Inc., 2013.
 
-\bibitem{wangMetalearningNaturalArtificial2021}
-Jane~X Wang.
-\newblock Meta-learning in natural and artificial intelligence.
-\newblock {\em Current Opinion in Behavioral Sciences}, 38:90--95, April 2021.
+\bibitem{kennerleyDecisionMakingReward2011a}
+Steven~W. Kennerley and Mark~E. Walton.
+\newblock Decision {{Making}} and {{Reward}} in {{Frontal Cortex}}.
+\newblock {\em Behavioral Neuroscience}, 125(3):297--317, June 2011.
 
-\bibitem{toblerAdaptiveCodingReward2005}
-Philippe~N. Tobler, Christopher~D. Fiorillo, and Wolfram Schultz.
-\newblock Adaptive {{Coding}} of {{Reward Value}} by {{Dopamine Neurons}}.
-\newblock {\em Science}, 307(5715):1642--1645, March 2005.
+\bibitem{khamassiChapter22Medial2013}
+Mehdi Khamassi, Pierre Enel, Peter~Ford Dominey, and Emmanuel Procyk.
+\newblock Chapter 22 - {{Medial}} prefrontal cortex and the adaptive regulation of reinforcement learning parameters.
+\newblock In V.~S.~Chandrasekhar Pammi and Narayanan Srinivasan, editors, {\em Progress in {{Brain Research}}}, volume 202 of {\em Decision {{Making}}}, pages 441--464. Elsevier, January 2013.
 
-\bibitem{roeschDopamineNeuronsEncode2007}
-Matthew~R. Roesch, Donna~J. Calu, and Geoffrey Schoenbaum.
-\newblock Dopamine neurons encode the better option in rats deciding between differently delayed or sized rewards.
-\newblock {\em Nature Neuroscience}, 10(12):1615--1624, December 2007.
+\bibitem{lukChoiceCodingFrontal2013}
+Chung-Hay Luk and Jonathan~D. Wallis.
+\newblock Choice {{Coding}} in {{Frontal Cortex}} during {{Stimulus-Guided}} or {{Action-Guided Decision-Making}}.
+\newblock {\em Journal of Neuroscience}, 33(5):1864--1871, January 2013.
 
-\bibitem{coolsChemistryAdaptiveMind2019}
-Roshan Cools.
-\newblock Chemistry of the {{Adaptive Mind}}: {{Lessons}} from {{Dopamine}}.
-\newblock {\em Neuron}, 104(1):113--131, October 2019.
+\bibitem{klein-flugge2013}
+Miriam~Cornelia {Klein-Fl{\"u}gge}, Helen~Catharine Barron, Kay~Henning Brodersen, Raymond~J. Dolan, and Timothy Edward~John Behrens.
+\newblock Segregated {{Encoding}} of {{Reward}}--{{Identity}} and {{Stimulus}}--{{Reward Associations}} in {{Human Orbitofrontal Cortex}}.
+\newblock {\em Journal of Neuroscience}, 33(7):3202--3211, February 2013.
+
+\bibitem{kolling2016}
+Nils Kolling, Marco~K. Wittmann, Tim E.~J. Behrens, Erie~D. Boorman, Rogier~B. Mars, and Matthew F.~S. Rushworth.
+\newblock Value, search, persistence and model updating in anterior cingulate cortex.
+\newblock {\em Nature Neuroscience}, 19(10):1280--1285, October 2016.
+
+\bibitem{rich2016}
+Erin~L. Rich and Jonathan~D. Wallis.
+\newblock Decoding subjective decisions from orbitofrontal cortex.
+\newblock {\em Nature Neuroscience}, 19(7):973--980, July 2016.
+
+\bibitem{funahashiPrefrontalContributionDecisionMaking2017}
+Shintaro Funahashi.
+\newblock Prefrontal {{Contribution}} to {{Decision-Making}} under {{Free-Choice Conditions}}.
+\newblock {\em Frontiers in Neuroscience}, 11, July 2017.
+
+\bibitem{marcosDeterminingMonkeyFree2016}
+Encarni Marcos and Aldo Genovesio.
+\newblock Determining {{Monkey Free Choice Long}} before the {{Choice Is Made}}: {{The Principal Role}} of {{Prefrontal Neurons Involved}} in {{Both Decision}} and {{Motor Processes}}.
+\newblock {\em Frontiers in Neural Circuits}, 10, September 2016.
+
+\bibitem{balewskiValueDynamicsAffect2023}
+Zuzanna~Z. Balewski, Thomas~W. Elston, Eric~B. Knudsen, and Joni~D. Wallis.
+\newblock Value dynamics affect choice preparation during decision-making.
+\newblock {\em Nature neuroscience}, 26(9):1575--1583, September 2023.
 
 \bibitem{faisalNoiseNeuronsOther2012}
 A.~Aldo Faisal.

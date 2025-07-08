@@ -12,7 +12,7 @@ try:
     from utils import setup_logger
 except ImportError or ModuleNotFoundError:
     from src.utils import sigmoid, gaussian_sigmoid, generalized_sigmoid, neural_response_func
-    from src.utils import plot_online_3d, plot_online_2d, plot_online_tape, setup_logger
+    from src.utils import plot_online_3d, plot_online_2d, plot_online_tape, setup_logger, plot_online_choices
 
 
 logger = setup_logger(__name__, level=2)
@@ -122,7 +122,8 @@ class Model(MBsolver):
             # Attempt to create an instance of the current class
             return super().__new__(cls, *args, **kwargs)
         except TypeError:
-            logger.warning("Invalid parameters for Model, using Modelv2 instead")
+            logger.warning("Invalid parameters for Model," + \
+                f" using Modelv2 instead")
             return Modelv2(*args, **kwargs)
 
     def __str__(self):

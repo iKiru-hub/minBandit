@@ -465,11 +465,11 @@ def make_new_env(K: int, env_type: str, nb_trials: int=3,
         phases = np.random.uniform(0, 6.28, K)
         constants = np.random.uniform(0, 0.7, K//2)
         env = KABsinv0(K=K,
-                            frequencies=frequencies,
-                            normalize=False,
-                            phases=phases,
-                            constants=constants,
-                            verbose=False)
+                       frequencies=frequencies,
+                       normalize=False,
+                       phases=phases,
+                       constants=constants,
+                       verbose=False)
     elif env_type == "v0":
         env = KABv0(K=K,
                     probabilities_set=probabilities_set,
@@ -834,7 +834,7 @@ def visual_trial(model: object,
     for trial_i in tqdm(range(nb_trials)):
 
         # env
-        environment.update()
+        environment._update()
         p = environment.probabilities
         # all_top += [p.argmax()]
 
@@ -872,7 +872,7 @@ def visual_trial(model: object,
 
             # update the model
             model.update(k=k, reward=reward)
-            environment.update()
+            environment._update()
 
         #
         total_reward = reward_round / nb_rounds

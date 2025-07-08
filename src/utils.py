@@ -533,6 +533,7 @@ def plot_online_choices(ax: plt.Axes, K: int, choices: list,
     ax.set_title(title)
     ax.set_ylim(-1, K)
     ax.set_ylabel(f"{K} arms")
+    ax.set_xlim(0, max((1, len(z))))
     ax.grid(True)
     # if K < 10:
     ax.set_yticks(range(0, K))

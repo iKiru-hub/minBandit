@@ -22,29 +22,70 @@ This problem has been extensively studied in the context of reinforcement learni
 % \subsection{Related work}
 % \hfill \break
 
-The multi-armed bandit problem comes in several variants, with the simplest featuring a stationary reward distribution. Researchers have proposed numerous algorithms to address this problem, each with distinct theoretical guarantees.
-Thompson sampling, a widely adopted approach based on Bayesian optimization, maintains a posterior distribution over action reward probabilities and has demonstrated near-optimal regret bounds in stochastic settings \cite{agrawalAnalysisThompsonSampling2012, kaufmannThompsonSamplingAsymptotically2012}.
-Similarly, the Upper Confidence Bound (UCB) algorithm achieves near-optimal regret bounds in adversarial settings by maintaining upper limits on action reward probabilities \cite{auerFinitetimeAnalysisMultiarmed2002}.
-Other notable approaches include $\epsilon$-Greedy and VDBE \cite{gittinsBanditProcessesDynamic1979, banMultifacetContextualBandits2021, tokicAdaptiveEGreedyExploration2010, tokicValueDifferenceBasedExploration2011}.
-However, these traditional algorithms, despite their effectiveness, lack biological plausibility – they neither resemble neural circuits nor capture brain dynamics. While not the primary driver, these limitations align with a growing intereset in machine learning towards bio-inspired algorithms,
-such as neural networks and predictive coding \cite{leeBraininspiredPredictiveCoding2022, spratlingReviewPredictiveCoding2017}, offering several advantages.
-Indeed, these methods can achieve state-of-the-art performance in various domains, including the challenging \textit{machine-challenging tasks} (MCTs), set of problems that are hard for machines but relatively easy for humans \cite{schmidgallBraininspiredLearningArtificial2024, hassabisNeuroscienceInspiredArtificialIntelligence2017, leeBraininspiredPredictiveCoding2022}.
-Further, bio-inspired models enhance algorithmic interpretability by clarifying the functional relationships between internal components. When applied to tasks with existing experimental data, these models can generate new insights into brain dynamics and suggest novel research directions \cite{liuSeeingBelievingBrainInspired2023}.
-Finally, given the brain's remarkable energy efficiency, architectures inspired by its design may significantly reduce power consumption \cite{EvaluationBioInspiredModels}, particularly when implemented on specialized neuromorphic hardware \cite{ReviewNeuroscienceInspiredMachine}.
+The multi-armed bandit problem comes in several variants, with the simplest featuring a stationary reward distribution.
+An important performance measure in these tasks is \textit{regret}, usually defined as the distance between the selected choice and the theoretically optimal one.
+Researchers have proposed numerous algorithms to address this problem, each with distinct theoretical guarantees.
+
+Thompson sampling (TS) is a widely adopted approach rooted in Bayesian optimization. It maintains a posterior distribution over action reward probabilities and selects actions by sampling from these distributions. Thompson sampling has demonstrated near-optimal regret bounds in stochastic settings \cite{agrawalAnalysisThompsonSampling2012, kaufmannThompsonSamplingAsymptotically2012}.
+
+In contrast, the Upper Confidence Bound (UCB) algorithm uses an optimistic principle for exploration. It maintains an estimate of the reward for each option by a confidence interval. Action selection relies on the upper bound of this interval, encouraging exploration of less-visited options by assigning them higher uncertainty. UCB has been shown to achieve logarithmic regret in stochastic bandits \cite{auerFinitetimeAnalysisMultiarmed2002}.
+
+Another effective baseline is the $\epsilon$-Greedy strategy. At each decision step, a random action is selected with probability $\epsilon$, and the best-known action with probability $1 - \epsilon$ (exploitation).
+Although not as theoretically optimal as Thompson sampling or UCB, $\epsilon$-Greedy is simple to implement and often effective in practice.
+Extensions such as VDBE adapt $\epsilon$ dynamically based on the value function’s variance, providing better control over exploration \cite{gittinsBanditProcessesDynamic1979, banMultifacetContextualBandits2021, tokicAdaptiveEGreedyExploration2010, tokicValueDifferenceBasedExploration2011}.
+
+However, these traditional algorithms, despite their effectiveness, lack biological plausibility – they neither resemble neural circuits nor follow synaptic plasticity dynamics.
+For instance, they do not rely on a network-like architecture with interconnected units, as seen in the brain.
+Additionally, their action selection process is typically instantaneous, whereas decision-making in the brain occurs over time, often requiring the activity of a neural circuit to evolve and stabilize before converging on a final selection.
+
+Their learning mechanisms also differ fundamentally. They typically involve explicit updates to statistical parameters (e.g., reward estimates or exploration rates) based on observed outcomes.
+In contrast, biological learning relies on local plasticity rules, where synaptic changes depend on the activity of connected neurons, modulating how input is integrated and how output signals are generated.
+
+While not the primary driver, these limitations align with a growing intereset in machine learning towards bio-inspired algorithms, such as neural networks and predictive coding \cite{lee2022, spratlingReviewPredictiveCoding2017}, offering several advantages.
+
+Indeed, these methods can achieve state-of-the-art performance in various domains, including the challenging \textit{machine-challenging tasks} (MCTs), set of problems that are hard for machines but relatively easy for humans \cite{schmidgallBraininspiredLearningArtificial2024, hassabisNeuroscienceInspiredArtificialIntelligence2017, lee2022}.
+Further, bio-inspired models enhance algorithmic interpretability by clarifying the functional relationships between internal components.
+When applied to tasks with existing experimental data, these models can generate new insights into brain and suggest novel research directions \cite{liuSeeingBelievingBrainInspired2023}.
+While other approaches such as Bayesian learning can demonstrate optimal performance and can match well human data \cite{behrens2007}, they are more difficult to relate to neuronal dynamics.
+
 \hfill \break
-% aim of the work
-\indent In this work, we aimed at improving the biological plausibility of algorithms within multi-armed bandit tasks by introducing a novel model comprising two interacting rate neuron populations exhibiting synaptic plasticity.
-Our model addresses stochastic bandit problems with \textit{concept drift} - scenarious where the reward distribution changes over time \cite{garivierUpperConfidenceBoundPolicies2008, besbesStochasticMultiArmedBanditProblem2014, cavenaghiNonStationaryMultiArmed2021}.
-The proposed model achieves performance comparable to established algorithms like Thompson Sampling, $\epsilon$-Greedy and Upper Confidence Bound, while offering a more neurobiologically grounded interpretation of the decision-making process.
 
-Architecturally, it is inspired by the prefrontal cortex, specifically modeling two critical regions: the orbitofrontal cortex (OFC) and anterior cingulate cortex (ACC). These brain areas are involved in motivational processing, expected value representation, action selection under uncertainty, and contextual interpretation \cite{odohertyAbstractRewardPunishment2001, ricebergRewardStabilityDetermines2012, tremblayRelativeRewardPreference1999, elliottDissociableFunctionsMedial2000, frankAnatomyDecisionStriatoorbitofrontal2006}.
-The model's plasticity mechanism is based on a non-associative rule dependent on inter-population connection weight magnitudes. This approach aligns with synapse-type specific plasticity (STSP), a mechanism supported by emerging evidence linking learning rates to synaptic resource availability,
-current states, and morphological characteristics \cite{larsenSynapsetypespecificPlasticityLocal2015, blackmanTargetcellspecificShorttermPlasticity2013, bartolHippocampalSpineHead2015, arielIntrinsicVariabilityPv2012}. Previous work has made use of such plasticity methods in spiking neural networks and synaptic metaplasticity models \cite{inglisModulationDopamineAdaptive2021, iigayaAdaptiveLearningDecisionmaking2016}.
+% aim of the work ---
+\indent In this work, we aim to enhance the biological plausibility of models used in multi-armed bandit tasks by introducing a novel, minimal decision-making architecture.
+This model comprises two interacting rate-based neuronal populations connected by plastic synapses, and uses a biologically inspired plasticity rule.
 
-Finally, the significance of our work is to bridge the gap between adaptive decision making under uncertainty and computational neuroscience.
-Our approach represents a possible way for how neural systems may implement choice selection in non-stationary environments, providing insights that could inform both artificial intelligence design and experimental research on adaptive behavior.
+% We test the model in environments with varying numbers of arms, including high-dimensional cases.
+
+The model's plasticity mechanism is non-Hebbian and depends on the magnitude of inter-population synaptic weights.
+This formulation aligns with synapse-type specific plasticity (STSP), a biologically supported mechanism linking learning dynamics to synaptic resource availability, current state, and morphological properties \cite{larsenSynapsetypespecificPlasticityLocal2015, blackmanTargetcellspecificShorttermPlasticity2013, bartolHippocampalSpineHead2015, arielIntrinsicVariabilityPv2012}.
+Learning rates are also adaptive, in line with observations in human experiments \cite{behrens2007}.
+
+Similar forms of plasticity have been employed in prior work on spiking neural networks and models of synaptic metaplasticity \cite{inglis2021, iigaya2016}.
+Despite its simplicity, our model performs comparably to standard algorithms such as Thompson Sampling, $\epsilon$-Greedy, and Upper Confidence Bound, while offering a more neurobiologically grounded account of decision-making.
+
+Other studies have also proposed solutions to bridge reinforcement learning and neural mechanisms.
+For instance, \cite{starkweather2018} proposed belief-state temporal difference algorithms \cite{babayan2018} that abstract dopaminergic signaling and medial prefrontal projections.
+These models highlights the role of hidden-state inference during probabilistic tasks, though they assume fixed reward distributions and do not incorporate explicit synaptic plasticity. % true?
+
+In \cite{khorsand2017}, metaplasticity mechanisms were explored in relation to the probability estimation of binary sequences, uncovering informative patterns of functional synaptic states.
+However, the environment varied along a single stimulus dimension.
+Similarly, \cite{farashahi2017} applied a metaplasticity model to a probabilistic reversal learning task—effectively a stationary two-armed bandit—revealing the emergence of option-specific learning dynamics.
+
+A notable exception is \cite{iigaya2016}, which addressed a non-stationary two-arm bandit using a synaptic cascade model \cite{fusi2005} equipped with a surprise detection mechanism to track changes in reward probability.
+
+In contrast to previous work, our study addresses more challenging, high-dimensional non-stationary reward environments—featuring up to one thousand arms with independently drifting reward probabilities.
+We specifically focus on stochastic bandit problems with \textit{concept drift}, where reward distributions evolve over time, either gradually or through abrupt changes, thus requiring flexible and adaptive decision-making strategies \cite{garivierUpperConfidenceBoundPolicies2008, besbesStochasticMultiArmedBanditProblem2014, cavenaghiNonStationaryMultiArmed2021}.
+
+Despite its simplicity, the proposed model performs competitively with standard algorithms such as Thompson Sampling, $\epsilon$-Greedy, and Upper Confidence Bound, while offering a more biologically grounded perspective on decision-making mechanisms.
+
+Overall, our work aims to bridge adaptive decision-making under uncertainty with principles from computational neuroscience.
+By proposing a biologically plausible mechanism for choice behavior in dynamic environments, we contribute a framework that may inform both the development of adaptive artificial systems and the interpretation of neural processes underlying flexible behavior.
 
 \hfill \break
 % structure of the paper
 The remainder of this paper first describes our model design and learning, then presents experimental results and comparative analyses with established algorithms, lastly discusses the findings' broader implications and potential future directions.
 
+
+% ---
+
+% Architecturally, it is inspired by the prefrontal cortex, specifically modeling two critical regions: the orbitofrontal cortex (OFC) and anterior cingulate cortex (ACC). These brain areas are involved in motivational processing, expected value representation, action selection under uncertainty, and contextual interpretation \cite{odohertyAbstractRewardPunishment2001, ricebergRewardStabilityDetermines2012, tremblayRelativeRewardPreference1999, elliottDissociableFunctionsMedial2000, frankAnatomyDecisionStriatoorbitofrontal2006}.

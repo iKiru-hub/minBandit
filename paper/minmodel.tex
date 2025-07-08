@@ -1,8 +1,7 @@
 
 \subsection{Model description}
-The model is constructed as a rate network composed of two neuronal populations, \textit{U} and \textit{V}. The first, \textit{U}, represents the memory traces of the \textit{K} available options (\textit{i.e.}, the bandits), while the second, \textit{V}, encodes their values under the current policy. This architecture is inspired by the prefrontal cortex (PFC) and its central role in decision-making processes. Specifically, the two populations correspond to the orbitofrontal cortex (OFC) and the anterior cingulate cortex (ACC), respectively.
-
-The OFC is known to represent different options, updating their values based on reward history and outcomes \cite{lukChoiceCodingFrontal2013, kennerleyDecisionMakingReward2011a}. Meanwhile, the ACC has been associated with action valuation and regulating the balance between exploration and exploitation \cite{khamassiChapter22Medial2013}. Additionally, the dynamic interaction between the ACC and OFC has been linked to transient pre-stimulus activations, which bias decisions toward the most valuable option \cite{funahashiPrefrontalContributionDecisionMaking2017, marcosDeterminingMonkeyFree2016, balewskiValueDynamicsAffect2023}.
+The model is constructed as a rate network composed of two neuronal populations, \textit{U} and \textit{V}.
+The first, \textit{U}, represents the memory traces of the \textit{K} available options (\textit{i.e.}, the bandits), while the second, \textit{V}, encodes their values under the current policy.
 
 In our model, the first layer represents the available options, while learned connections to the second layer encode their values based on recent reward history. A key simplification is the lumping of option representations into single neurons. While this choice abstracts the more distributed encoding found in actual brain networks, it allows for a more tractable model design \cite{martinRepresentationObjectConcepts2007a}.
 
@@ -22,7 +21,7 @@ They have been chosen to be a step-function with threshold $\theta_{v},\theta_{u
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.6\textwidth]{figures/minb_architecture.png}
-    \caption{\textsc{Model architecture} - \textit{The model is composed of a layer $U$ (blue), receiving a feedfoward input $I_{\text{ext}}$, a layer $V$ (orange), and connections $\textbf{W}^{UV}$ and $\textbf{W}^{VU}$. Additionally, two indexes $k_{U}, k_{V}$  are extracted from the layers and
+    \caption{\textsc{Model architecture} - \textit{The model is composed of a layer $U$ (grey), receiving a feedfoward input $I_{\text{ext}}$, a layer $V$ (orange), and connections $\textbf{W}^{UV}$ and $\textbf{W}^{VU}$. Additionally, two indexes $k_{U}, k_{V}$  are extracted from the layers and
     corresponds to the selection made by the two populations as $k_{U}=\text{argmax}_{k} \{\textbf{u}\}$, $k_{V}=\text{argmax}_{k} \{\textbf{v}\}$.}}
     \label{fig:main_architecture}
 \end{figure}
@@ -104,4 +103,10 @@ Then, the weights $\textbf{W}^{UV}$ for the neuron corresponding to the option $
 The shape of $\Phi_{\eta}$ is again a Gaussian-sigmoid but with different parameters, giving evolution the opportunity to combine the two characteristic traits of plateau and bell-shaped tuning.
 In particular, these features can be combined so to define mechanisms of synapse-type specific plasticity as a function of the current synaptic strenght \cite{larsenSynapsetypespecificPlasticityLocal2015}, as well the application of other useful homeostatic constraints with computational advantages, such as synaptic scaling and proportional updates \cite{citriSynapticPlasticityMultiple2008, kennedySynapticSignalingLearning2016, samavatSynapticInformationStorage2024}.
 
+
+% --- commented out
+
+% This architecture is inspired by the prefrontal cortex (PFC) and its central role in decision-making processes. Specifically, the two populations correspond to the orbitofrontal cortex (OFC) and the anterior cingulate cortex (ACC), respectively.
+
+% The OFC is known to represent different options, updating their values based on reward history and outcomes \cite{lukChoiceCodingFrontal2013, kennerleyDecisionMakingReward2011a}. Meanwhile, the ACC has been associated with action valuation and regulating the balance between exploration and exploitation \cite{khamassiChapter22Medial2013}. Additionally, the dynamic interaction between the ACC and OFC has been linked to transient pre-stimulus activations, which bias decisions toward the most valuable option \cite{funahashiPrefrontalContributionDecisionMaking2017, marcosDeterminingMonkeyFree2016, balewskiValueDynamicsAffect2023}.
 

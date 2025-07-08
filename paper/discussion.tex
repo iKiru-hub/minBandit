@@ -2,40 +2,59 @@
 \section{Discussion}
 
 % work on the k-armed bandit problem and neuroscience
-The process of making decision in uncertain situations is a remarkable aspect of cognition. For instance, such behaviour is implemented in animals during foraging and matching behaviour.
-In the context of humans, it has been observed that the pool of adopted policies vary considerably \cite{steyversBayesianAnalysisHuman2009a}.
-Nevertheless, the human subjects seems able to integrate environmental uncertainty and trial generalization in their strategy, and Bayesian algorithms are generally a good fit for the observed policies \cite{schulzFindingStructureMultiarmed2020, zhangForgetfulBayesMyopic2013}.
-A useful formalization of such tasks are multi-armed bandit problems (MABs), which has been extensively studied in the context of reinforcement learning \cite{suttonReinforcementLearningProblem1998}.
-Although several algorithms have been proposed to solve the problem with robust theoretical guarentees, there is a general lack of biological plausibility of the architecture and dynamics.
+The ability to make decisions under uncertainty is a fundamental aspect of cognition. One well-established framework for studying this capacity is the multi-armed bandit (MAB) problem, which has been widely explored and extended across multiple domains \cite{suttonReinforcementLearningProblem1998, liu2024a}.
 
-%
-The goal of this work was to design a bio-inspired architecture and learning for solving MABs. In particular, we introduced a model based on two interactive population of rate neurons to address the binomial K-armed bandit problem in non-stationary environments.
-We took inspiration from the functional role of the orbitofrontal cortex (OFC) and anterior cingulate cortex (ACC), two important pre-frontal regions known to be involved in decision-making processes \cite{kennerleyDecisionMakingReward2011a, khamassiChapter22Medial2013}.
-The results obtained report its adaptability to changing reward distributions and maintaining a rewarding policy over time, achieving equally well when compared to standard algorithms.
-The assessment was done over four different variants of stochastic bandit problems and a wide range of number of arms, providing evidence for the consistency of the model.
+In behavioral experiments, humans demonstrate remarkable adaptability in such settings, integrating environmental uncertainty, generalizing across trials, and dynamically adjusting their learning rates. These behaviors reflect a diversity of cognitive strategies \cite{steyversBayesianAnalysisHuman2009a}. While Bayesian approaches often capture human behavior well \cite{behrens2007, schulzFindingStructureMultiarmed2020, zhangForgetfulBayesMyopic2013}, they are challenging to map directly onto biologically realistic neural dynamics. Despite the existence of many algorithms with strong theoretical guarantees, most lack biological plausibility—particularly in their architectural assumptions and mechanisms of learning and choice.
 
-Further analysis involved the evaluation of the its behaviour in situations with variable levels of entropy in the reward distribution.
-One notable insight was that in situation with low uncertainty, the model was reliably capable of quickly switching to the rewarding option and settling to a greedy strategy, similarly to Thompson Sampling but unlike UCB, which is used to persevere in a noticeable exploratory behaviour.
-When the uncertainty increased over a certain level the option entropy of the model followed, which however did not necessarily hinder performance, except for switching arm in new trials.
-Here, the adopted policy became markedly exploratory, akin to the approach of UCB.
+In this work, we aimed to design a minimal, biologically inspired architecture able of solving non-stationary MAB tasks. Specifically, we proposed a simple model composed of two interacting populations of rate-based neurons connected via plastic synapses.
+We evaluated the model across four variants of the MAB problem, each differing in how reward probabilities evolved over time, and across a wide range of arm counts—from a few options to over a thousand. For comparison, we also tested three standard algorithms.
 
+Our results show demonstrated the model's ability of adapting to changing reward distributions and quickly recovering performance over time.
+It reliably tracked reward-optimal options and sustained effective decision policies, matching the performance of established methods such as Thompson Sampling, $\epsilon$-Greedy, and Upper Confidence Bound.
+
+To better understand the behavior of the system, we analyzed its responses across varying levels of reward distribution entropy.
+In low-uncertainty settings, the model quickly identified the rewarding option and adopted a greedy policy—similarly to Thompson Sampling.
+In contrast, UCB maintained a higher degree of exploration. As uncertainty increased, the model exhibited higher option entropy in its decisions, transitioning to a more exploratory strategy akin to UCB.
+While this shift modestly impaired the model’s ability to switch arms in highly volatile environments, overall performance remained robust.
+
+% ---
 The strengths of the model can be traced both in the architecture and in the learning paradigm, whose hyperparameters were optimized through an evolutionary process. Interestingly, the values found converged to solutions that can be mapped to plausible synaptic mechanisms.
 On one hand the neural dynamics, which rely on plastic connections and a consensus-like selection process.
 Particularly important was the choice of modulating the afferent connections to the value population $V$ according to a non-linear function dependant on the synaptic weight itself. In so doing, it was possible to evolve implicitly an effective option-value policy for the tradeoff between exploration and exploitation.
-This approach can be seen as a form of meta-plasticity implemented through neuromodulation \cite{wangMetalearningNaturalArtificial2021}, where a region external to the network affects the synaptic connections withough alterning their actual weights; dopamine is a well-suited candidate \cite{toblerAdaptiveCodingReward2005, roeschDopamineNeuronsEncode2007, coolsChemistryAdaptiveMind2019}.
+
+% ---
 The emerged neural response functions were characterized by a steep sigmoidal shape, which can be related to the saturation of the neural response once a certain threshold is crossed, a feature observed in biological network as class III neurons, besides being a common choice for artificial ones \cite{ratteImpactNeuronalProperties2013, ockerFlexibleNeuralConnectivity2020, apicellaSurveyModernTrainable2021}.
 
 On another hand, learning was structured as a non-associative plasticity rule based on the reward. Similarly to before, a non-linear function of the synaptic weights played a critical role, specifically in defining the synapse-specific learning rate \cite{larsenSynapsetypespecificPlasticityLocal2015}.
-Again, this mechanism can be considered a form of meta-learning, with evolution leading to the emergence of hyper-parameter encoding important inductive biases \cite{inglisModulationDopamineAdaptive2021, iigayaAdaptiveLearningDecisionmaking2016}. Further, the evolved shape of the learning rate
-function was inversely proportional to the synaptic weight, which can be related to the resource availability at the synapse and its state, including the size \cite{blackmanTargetcellspecificShorttermPlasticity2013, bartolHippocampalSpineHead2015, arielIntrinsicVariabilityPv2012}.
+Further, the evolved shape of the learning rate function was inversely proportional to the synaptic weight, which can be related to the resource availability at the synapse and its state, including the size \cite{bartolHippocampalSpineHead2015, arielIntrinsicVariabilityPv2012}.
 
+An additional consideration is the inspiration from the functional role of the orbitofrontal cortex (OFC) and anterior cingulate cortex (ACC), two important pre-frontal regions known to be involved in decision-making processes \cite{kennerleyDecisionMakingReward2011a, khamassiChapter22Medial2013}.
+
+In our work, we have explored ways in which an option value can be formed according to recent reward history and connection weights, updating the option representations.
+The OFC is known to represent different options, updating their values based on reward history and outcomes \cite{lukChoiceCodingFrontal2013, kennerleyDecisionMakingReward2011a, klein-flugge2013}.
+
+Next, the model relies on some inductive biases -the shape of the Gaussian-sigmoid function, affecting the neural activity and the weight-dependant learning rate.
+These biases may be considered to encode implicitly a policy dictating how the two populations interact, how new information should be incorporated into the weight value update, and what option to choose next.
+Indeed, the ACC has been associated with action evaluation and regulating the balance between exploration and exploitation \cite{khamassiChapter22Medial2013, kolling2016}.
+
+Additionally, the generation of an option selection results from a temporal interaction of the activity of the two neural population, before converging to a choices.
+In a similar direction, it has been observed the OFC to transiently visit chosen and unchosen options before committing \cite{rich2016}
+Further, the dynamic interaction between the ACC and OFC has been linked to transient pre-stimulus activations, which bias decisions toward the most valuable option \cite{funahashiPrefrontalContributionDecisionMaking2017, marcosDeterminingMonkeyFree2016, balewskiValueDynamicsAffect2023}.
 
 % limits
 Despite the promising results, there are some limitations to the model. First and foremost, the great level of abstraction in the neuronal details, as we considered simple point neurons with synapses modeled with relatively elementary functions, lacking the anatomical complexity of actual dendrites.
 In particular, the model does not account for the presence of noise in the neural dynamics, which is a well-known feature of biological neurons \cite{faisalNoiseNeuronsOther2012}.
 Further, the functional association with the pre-frontal cortical region is only moderate, although present.
-On the computational side, since our interest lied in the biological plausibility and evolution of adaptive meta-learning solutions, we used as reference only a few well established and relatively simple algorithms, and did not take into account more advanced variants such as VDBE
-\cite{tokicAdaptiveEGreedyExploration2010, tokicValueDifferenceBasedExploration2011}, \textit{f-Discounted-Sliding-Window Thompson Sampling} (\textit{f-dsw TS}) \cite{cavenaghiNonStationaryMultiArmed2021}, and variants of $\epsilon$-Greedy \cite{qiForcedExplorationBandit2023}.
+On the computational side, since our interest lied in the biological plausibility and evolution of adaptive meta-learning solutions, we used as reference only a few well established and relatively simple algorithms, and did not take into account more advanced variants such as VDBE \cite{tokicAdaptiveEGreedyExploration2010, tokicValueDifferenceBasedExploration2011}, \textit{f-Discounted-Sliding-Window Thompson Sampling} (\textit{f-dsw TS}) \cite{cavenaghiNonStationaryMultiArmed2021}, and variants of $\epsilon$-Greedy \cite{qiForcedExplorationBandit2023}.
 
-Future work could involve the comparison with more complex algorithms, and the introduction of more realistic neural dynamics, such as spiking neurons \cite{nunesSpikingNeuralNetworks2022}.
+Future work could involve the comparison with more sophisticated algorithms, the introduction of a larger architecture, and more realistic neural dynamics, such as spiking neurons \cite{nunesSpikingNeuralNetworks2022}.
+
+% --- commented out
+
+% In the context of humans, it has been observed that the pool of adopted policies vary considerably \cite{steyversBayesianAnalysisHuman2009a}.
+% Nevertheless, the human subjects seems able to integrate environmental uncertainty and trial generalization in their strategy, and Bayesian algorithms are generally a good fit for the observed policies \cite{schulzFindingStructureMultiarmed2020, zhangForgetfulBayesMyopic2013}.
+% We took inspiration from the functional role of the orbitofrontal cortex (OFC) and anterior cingulate cortex (ACC), two important pre-frontal regions known to be involved in decision-making processes \cite{kennerleyDecisionMakingReward2011a, khamassiChapter22Medial2013}.
+% This approach can be seen as a form of meta-plasticity implemented through neuromodulation \cite{wangMetalearningNaturalArtificial2021}, where a region external to the network affects the synaptic connections withough alterning their actual weights; dopamine is a well-suited candidate
+% \cite{tobler2005, roeschDopamineNeuronsEncode2007, cools2019}.
+% This mechanism can be considered a form of meta-learning, with evolution leading to the emergence of hyper-parameter encoding important inductive biases \cite{inglis2021, iigayaAdaptiveLearningDecisionmaking2016}.
 

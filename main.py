@@ -10,7 +10,7 @@ logger = utils.setup_logger(__name__)
 
 
 def main(args, return_model: bool=False,
-         env: object=None) -> dict:
+         env: object=None, style: bool="choice") -> dict:
 
     # parameters
     K = args.K
@@ -23,7 +23,7 @@ def main(args, return_model: bool=False,
     # define proababilities set
     probabilities_set = utils.make_probability_set(K=K,
                                                    nb_trials=nb_trials,
-                                                   fixed_p=0.9,
+                                                   fixed_p=0.6,
                                                    normalize=False)
     # define the environment
     if env is None:
@@ -86,6 +86,7 @@ def main(args, return_model: bool=False,
                 "value_function": "gaussian",
                 "lr_function": "gaussian",
             }
+            logger.warning("default params")
 
         model = mm.Model(**params)
 
@@ -97,7 +98,7 @@ def main(args, return_model: bool=False,
                           nb_rounds=nb_rounds,
                           nb_trials=nb_trials,
                           t_update=200,
-                          style="choice")
+                          style=args.style)
         results = None
     else:
         results = envs.trial(model=model,
@@ -363,9 +364,15 @@ if __name__ == "__main__":
                         f' `driftv0`, `driftv1`, `sinv0`,' + \
                         ' or nothing for `v0`',
                         default="simple")
+    parser.add_argument('--style', type=str,
+                        help='style of online plotting:' + \
+                        f' `choice`, `3d`, `2d`,' + \
+                        ', `tape`',
+                        default="choice")
     parser.add_argument('--multiple', type=int,
-                        help='run multiple models: 0 (single) or 1 (multiple)',
-                        default=1)
+                        help='run multiple models: 0 (single)' + \
+                            f' or 1 (multiple)',
+                        default=0)
     parser.add_argument('--visual', action='store_true',
                         help='visualize the trial',
                         default=False)
