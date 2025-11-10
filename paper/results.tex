@@ -1,6 +1,6 @@
 \section{Experiments}
 
-The model has been tested in a series of benchmark environments, each with a different number of arms and reward distributions. The performance has been compared with the following algorithms: Random Baseline, Upper-Confidence Bound (UCB), Thompson Sampling, and Epsilon-Greedy.
+The NSA model has been tested in a series of benchmark environments, each with a different number of arms and reward distributions. The performance has been compared with the following algorithms: Random Baseline, Upper-Confidence Bound (UCB), Thompson Sampling, and Epsilon-Greedy.
 
 % Description of the environments
 \subsection{Game variants}\label{sec:envs}
@@ -81,9 +81,9 @@ This firing behaviour is reminiscent of coincidence detector neurons, which are 
 % Results: scores and brief discussion
 \subsection{Environment variants and number of arms}
 
-The model has been tested and compared with the other algorithms: Thompson Sampling (TS), $\epsilon$-Greedy, and UCB. The benchmark were the four different variants of the MAB problem listed above \ref{sec:envs}, with a variable number of arms ranging from 5 to 1000.
+The NSA model has been tested and compared with the other algorithms: Thompson Sampling (TS), $\epsilon$-Greedy, and UCB. The benchmark were the four different variants of the MAB problem listed above \ref{sec:envs}, with a variable number of arms ranging from 5 to 1000.
 The results are reported in table \ref{tab:results}.
-Overall, our model displays a solid performance over all environments, most of the time being equally good or better than the other algorithms.
+Overall, our NSA model displays a solid performance over all environments, most of the time being equally good or better than the other algorithms.
 Interestingly, a large numbers of arms ($K$) did not present a significant challenge, as the model effectively adapted to the different environments and reward distributions.
 However, this is in part due to the randomness in the assignment of arm probabilities, and the statistics of the quantity of high-reward arms as their number increases. Nonetheless, given the non-stationarity of the reward distribution it is still a non trivial task to re-calibrate to new distributions.
 
@@ -104,7 +104,7 @@ However, this is in part due to the randomness in the assignment of arm probabil
 & TS & $\mathbf{0.03(8)}$ & $\mathbf{0.02(6)}$ & $\mathbf{0.02(7)}$ & $\mathbf{0.04(5)}$ & $\mathbf{0.02(3)}$ & $0.16(2)$ \\
 & $\epsilon$-Greedy & $0.05(14)$ & $0.07(5)$ & $0.08(7)$ & $0.15(6)$ & $0.08(2)$ & $0.10(4)$ \\
 & UCB & $0.05(15)$ & $0.05(8)$ & $0.19(6)$ & $0.33(3)$ & $0.39(2)$ & $0.54(3)$ \\
-& \textit{Model} & $\mathit{0.08(13)}$ & $\mathit{0.07(11)}$ & $\mathit{0.07(14)}$ & $\mathit{0.07(8)}$ & $\mathit{0.09(9)}$ & $\mathbf{0.07(8)}$ \\
+& \textit{NSA} & $\mathit{0.08(13)}$ & $\mathit{0.07(11)}$ & $\mathit{0.07(14)}$ & $\mathit{0.07(8)}$ & $\mathit{0.09(9)}$ & $\mathbf{0.07(8)}$ \\
 \midrule
 
 % mabD
@@ -112,7 +112,7 @@ However, this is in part due to the randomness in the assignment of arm probabil
 & TS & $\mathbf{0.03(6)}$ & $\mathbf{0.08(13)}$ & $0.16(6)$ & $\mathbf{0.19(3)}$ & $0.28(7)$ & $0.34(3)$ \\
 & $\epsilon$-Greedy & $0.04(7)$ & $0.14(13)$ & $0.22(5)$ & $0.19(8)$ & $0.26(7)$ & $0.16(4)$ \\
 & UCB & $0.05(6)$ & $0.09(13)$ & $0.21(3)$ & $0.36(4)$ & $0.40(3)$ & $0.49(2)$ \\
-& \textit{Model} & $\mathit{0.13(10)}$ & $\mathit{0.15(16)}$ & $\mathbf{0.05(6)}$ & $\mathit{0.21(5)}$ & $\mathbf{0.26(7)}$ & $\mathbf{0.12(7)}$ \\
+& \textit{NSA} & $\mathit{0.13(10)}$ & $\mathit{0.15(16)}$ & $\mathbf{0.05(6)}$ & $\mathit{0.21(5)}$ & $\mathbf{0.26(7)}$ & $\mathbf{0.12(7)}$ \\
 \midrule
 
 % mabsin
@@ -120,14 +120,14 @@ However, this is in part due to the randomness in the assignment of arm probabil
 & TS & $0.21(22)$ & $0.22(16)$ & $0.07(5)$ & $0.10(5)$ & $\mathbf{0.06(4)}$ & $0.21(5)$ \\
 & $\epsilon$-Greedy & $0.21(21)$ & $0.18(10)$ & $0.12(5)$ & $0.12(6)$ & $0.10(4)$ & $0.10(1)$ \\
 & UCB & $0.03(4)$ & $0.05(3)$ & $0.17(4)$ & $0.23(1)$ & $0.33(3)$ & $0.49(3)$ \\
-& \textit{Model} & $\mathbf{0.00(3)}$ & $\mathbf{0.02(4)}$ & $\mathbf{0.05(3)}$ & $\mathbf{0.06(4)}$ & $\mathit{0.08(1)}$ & $\mathbf{0.05(4)}$ \\
+& \textit{NSA} & $\mathbf{0.00(3)}$ & $\mathbf{0.02(4)}$ & $\mathbf{0.05(3)}$ & $\mathbf{0.06(4)}$ & $\mathit{0.08(1)}$ & $\mathbf{0.05(4)}$ \\
 \midrule
 
 \multirow{4}{*}{\rotatebox[origin=c]{90}{\textbf{MAB-$\sin$P}}}
 & TS & $0.19(21)$ & $0.43(19)$ & $0.17(10)$ & $0.11(6)$ & $0.09(6)$ & $0.19(6)$ \\
 & $\epsilon$-Greedy & $0.24(26)$ & $0.43(10)$ & $0.24(10)$ & $0.14(5)$ & $0.15(6)$ & $0.14(2)$ \\
 & UCB & $0.00(6)$ & $0.26(17)$ & $0.18(6)$ & $0.29(3)$ & $0.34(1)$ & $0.52(3)$ \\
-& \textit{Model} & $\mathbf{0.00(9)}$ & $\mathbf{0.23(17)}$ & $\mathbf{0.14(7)}$ & $\mathbf{0.08(8)}$ & $\mathbf{0.06(4)}$ & $\mathbf{0.09(7)}$ \\\\
+& \textit{NSA} & $\mathbf{0.00(9)}$ & $\mathbf{0.23(17)}$ & $\mathbf{0.14(7)}$ & $\mathbf{0.08(8)}$ & $\mathbf{0.06(4)}$ & $\mathbf{0.09(7)}$ \\\\
 \bottomrule
 \end{tabular}
 \caption{\textsc{Table of performance} — \textit{From top to bottom: results for MAB-P, MAB-D, MAB-$\sin$, and MAB-$\sin$P, for different numbers $K$ of arms. Each cell shows average regret and standard deviation (in parentheses), computed over 2 trials of 2000 rounds, averaged over 5 simulations.}}
@@ -141,24 +141,24 @@ However, this is in part due to the randomness in the assignment of arm probabil
 % entropy over rounds
 \subsubsection{Entropy analysis}\label{sec:entropy}
 \noindent For a better understanding of the qualitative differences between the models, we analyzed the progress over the rounds by tracking the selected arms in a simple piecewise stationary distribution environment.
-The simulation was run for $3$ trials with $2000$ rounds each, and then averaged over $5$ iterations.
-Additionally, in order to quantify the variability of the decision policy at a given time and highlight the particularity of each decision-making behaviour, we calculated the entropy of the probability distribution $p$ of chosen arms, calculated over a window of 20 rounds, as $H=-\sum^{K}_{i} p_{i}\log(p_{i})$.
+The simulation was run for $3$ trials with $2000$ rounds each and then averaged over $5$ iterations.
+Furthermore, in order to quantify the variability of the decision policy at a given time and highlight the particularity of each decision-making behavior, we calculated the entropy of the probability distribution $p$ of the chosen arms, calculated over a window of 20 rounds, as $H=-\sum^{K}_{i} p_{i}\log(p_{i})$.
 The unit of entropy is in nats, and it ranges from $0$ (no uncertainty) to $\log_{e}(K)$ (maximum uncertainty).
-In figure \ref{fig:entropy_fig1}-\textbf{a}, it is plotted for each model the raster plot of selected arms together with its level of entropy. The reward probability distribution over the arms has an average of $H=2.02$.
+In Figure \ref{fig:entropy_fig1}-\textbf{a}, the raster plot of the selected arms is plotted for each model together with its level of entropy. The distribution of the probability of reward on the arms has an average of $H=2.02$.
 
 As expected, the shape of the entropy curve expresses the inherent strategy adopted by each model.
-In particular, the UCB algorithm showed the highest variability, marked by a persistent exploratory behaviour throughout the trials despite converging to reward options. Thompson Sampling was able to reach most solutions, although with difficulty in adapting to new reward distributions
-leading to high entropy levels.
-$\epsilon-$Greedy also showed a good performance quite reliably, with the greedy strategy assuring low entropy for most of the rounds.
-Similar behaviour was observed for our model, which was able to reach the optimal policy and maintain it over time, with entropy peaking mostly at the beginning of the trials and being, on average, the lowest among all models.
-Indeed, the dynamics of our model make it particularly suited for the task of non-stationary MAB, as it is able to quickly adapt to new reward distributions and firmly maintain a greedy policy.
+In particular, the UCB algorithm showed the highest variability, marked by persistent exploratory behavior throughout the trials despite converging to reward options. Thompson Sampling was able to reach most solutions, although it had difficulty adapting to new reward distributions
+that led to high entropy levels.
+$\epsilon$-Greedy also showed a good performance quite reliably, with the greedy strategy ensuring low entropy for most rounds.
+Similar behaviour was observed for NSA, which was able to reach the optimal policy and maintain it over time, with entropy peaking mostly at the beginning of the trials and being, on average, the lowest among all models.
+Indeed, the dynamics of NSA makes it particularly suited for the task of non-stationary MAB, as it is able to quickly adapt to new reward distributions and firmly maintain a greedy policy.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{figures/entropy_main_plot_2.png}
     \caption{\textsc{Decision-making dynamics for different models} - \textbf{a}: \textit{Each plot display the results from one model. The raster plots (black dots) show the arms selected at each round.
 The red lines represent the entropy level, calculated from the distribution of selections over the preceeding 20 rounds, smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy (H) over all trials are also reported.}
- - \textbf{b}: \textit{the top two rows display  the average reward for trial 1 and 2 obtained by each model for increasing levels of entropy (in nats) in the reward distribution; a dashed line is the regret with respect to the upper bound (black solid line). The two bottom average entropy of the selections for the first and second trial of the simulation, each with 2000 rounds.}}
+- \textbf{b}: \textit{rows 1-3 display the average reward $\langle R\rangle$ for trial 1 and 2 obtained by each model for increasing levels of distribution entropy (in nats) in the reward distribution. Rows 2-4 display the average entropy of the selections $\langle H_{s}\rangle$ for the first and second trial of the simulation, each with 2000 rounds.}}
     \label{fig:entropy_fig1}
 \end{figure}
 
@@ -167,21 +167,22 @@ The red lines represent the entropy level, calculated from the distribution of s
 % \subsubsection{Robustness}
 
 % robustness
-\noindent Then, we sought to investigate the robustness of the model by targeting the capacity to endure increasing levels of entropy in the reward distribution, defined as $-\sum^{N}_{i} p_{i} \log(p_{i})$ and calculated in nats.
-In particular, this analsysis tracked the performance, cumulative reward and regret, as well as the selection entropy, defined as the entropy of the distribution of selected options within a sliding window of $20$ rounds.
+\noindent Then, we sought to investigate the robustness of NSA by targeting the capacity to endure increasing levels of entropy in the reward distribution, defined as $-\sum^{N}_{i} p_{i} \log(p_{i})$ and calculated in nats.
+In particular, this analysis tracked performance, cumulative reward, as well as selection entropy $H_{s}$, defined as the entropy of the distribution of selected options within a sliding window of $20$ rounds.
 
-The simulation was done in a piecewise stationary environment with $K=200$ in two trials averaged over 5 independent runs, and it is showed in figure \textbf{\ref{fig:entropy_fig1}b}.
-The distributions were chosen such to have only one strongly rewarding arm, in order to highlight the models ability to find it.
-For more details about the distribution see the appendix \ref{sec:appendix_entropy}.
-In the top two plots, it is shown the average reward and regret obtained by each model against the reward distribution entropy for the two trials.
+The simulation was carried out in a piecewise stationary environment with $K=200$ in two trials averaged over 5 independent runs, and it is shown in Figure \textbf{\ref{fig:entropy_fig1}b}.
+The distributions were chosen such that they have only one strongly rewarding arm in order to highlight the models' ability to find it.
+For more details on the distribution, see the Appendix \ref{sec:appendix_entropy}.
+In the top two plots, the average reward and regret obtained by each model is shown against the entropy of the reward distribution for the two trials.
 
 The results reported how all models are capable of robust performance in the first trial even in the presence of high uncertainty.
-In the second trial, $\epsilon$-Greedy and Thompson Sampling suffered the increasing difficulty of switching arms, probably due to their conservative approaches. However, this challenge afflicted UCB and our model only with higher entropy levels, recognizing their adaptability.
+In the second trial, $\epsilon$-Greedy and Thompson Sampling suffered the increasing difficulty of switching arms, probably due to their conservative approaches. However, this challenge affected UCB and NSA only with higher entropy levels, recognizing their adaptability.
 
-Another perspective to this analysis was given by the two bottom plots, which showed the average entropy over the trials.
-Overall, there was the unsuprising trend of increasing selection entropy with the entropy of the reward distribution. Nonetheless, striking is the exception of Epsilon-Greedy, which still maintained a constant level throughout.
+Another perspective on this analysis was given by the two bottom plots, which showed the average entropy over the trials.
+Overall, there was an unsuprising trend of increasing selection entropy with the entropy of the reward distribution.
+However, striking is the exception of Epsilon-Greedy, which still maintained a constant level throughout.
 UCB displayed the highest average values, while Thompson Sampling followed with some delay.
-On the other hand, our model display a more abrupt change, going from a state of very low to high variability, sign of a solid exploratory behaviour.
+On the other hand, NSA displays a more abrupt change, going from a state of very low to high variability, a sign of solid exploratory behavior.
 
 
 % -- commented out
