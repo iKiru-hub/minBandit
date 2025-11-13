@@ -36,7 +36,7 @@ Identical to the sinusoidal distribution shift, but a half of the arms change si
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=1.\textwidth]{figures/envs_1.png}
+    \includegraphics[width=1.\textwidth]{envs_1.png}
     \caption{\textsc{Reward distribution for the four MAB variants} - \textit{The reward distribution for each variant is illustrated: piecewise stationary distribution (MAB-P), piecewise stationary distribution with drift (MAB-D), sinusoidal distribution shift (MAB-sin), partial sinusoidal distribution shift (KAB-sinP).
     The arms are organized in rows; the grey dashed lines demarcate trials (3), which are block of rounds represented by columns, and here only reporting the arm reward proability.}}
     \label{fig:envs}
@@ -52,9 +52,9 @@ The results are summarized below in figure \ref{fig:evolution}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{figures/evolution_comp_1.png}
+    \includegraphics[width=1.0\textwidth]{evolution_comp_1.png}
     \caption{\textsc{Evolution results} - \textbf{a}: \textit{top fitness, mean and standard deviation (as 16-84 percentile) of the population over generations.} - \textbf{b}: \textit{heatmap of the evolved parameters (rows) as histogram bins (y-axis) calculated from the 50 percentile of the
-    population of the last generation; higher density is in dark blue} - \textbf{c-d}: \textit{Gaussian-sigmoid [c] and neural response functions [d] of the top-half of the population, the color intensity is proportional to the fitness.}}
+    population of the last generation; higher density is in dark blue} - \textbf{c-d}: \textit{neural response functions [d] and Gaussian-sigmoid [c] of the top-half of the population, the color intensity is proportional to the fitness.}}
     \label{fig:evolution}
 \end{figure}
 
@@ -155,7 +155,7 @@ Indeed, the dynamics of NSA makes it particularly suited for the task of non-sta
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{figures/entropy_main_plot_2.png}
+    \includegraphics[width=1.0\textwidth]{entropy_main_plot_2.png}
     \caption{\textsc{Decision-making dynamics for different models} - \textbf{a}: \textit{Each plot display the results from one model. The raster plots (black dots) show the arms selected at each round.
 The red lines represent the entropy level, calculated from the distribution of selections over the preceeding 20 rounds, smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy (H) over all trials are also reported.}
 - \textbf{b}: \textit{rows 1-3 display the average reward $\langle R\rangle$ for trial 1 and 2 obtained by each model for increasing levels of distribution entropy (in nats) in the reward distribution. Rows 2-4 display the average entropy of the selections $\langle H_{s}\rangle$ for the first and second trial of the simulation, each with 2000 rounds.}}
@@ -189,3 +189,4 @@ On the other hand, NSA displays a more abrupt change, going from a state of very
 
 % \noindent The game environments considered in this work are non-stationary K-Armed Bandits with Binomial rewards.
 % In particular, the agent is evaluated over a number $T_{\text{trials}}$ of \textit{trials}, each composed by an arbitrary number $T_{\text{rounds}}$ of \textit{rounds}; each \textit{trial} is characterized by a different reward distribution $\mathbf{p}\sim\mathcal{U}(0,1)^{K}$ (although in practice the bounds have been set to $(0.1, 0.9)$ such that the distributions are less trivial).
+

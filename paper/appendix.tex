@@ -1,4 +1,3 @@
-
 \section{Appendix}\label{sec:appendix}
 
 \subsection{Neural response function}
@@ -35,7 +34,7 @@ $\alpha$, and intensity $\gamma_{1}$).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/gaussian_sigmoid.png}
+    \includegraphics[width=0.8\textwidth]{gaussian_sigmoid.png}
     \caption{\textsc{Activation function $\Phi_{v}$} - \textit{Parameters $\beta=10$, $\alpha=1$, $\mu=1$, $\sigma=1$, and $r=0.5$.}}
     \label{fig:gau_sigm}
 \end{figure}
@@ -95,7 +94,7 @@ Following the evolution search, it is taken the distribution of parameters over 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.\textwidth]{figures/evo_tabplot.png}
+    \includegraphics[width=1.\textwidth]{evo_tabplot.png}
     \caption{\textsc{Genome distribution} - \textit{each parameter is plotted against the fitness score.}}
     \label{fig:evo_tabplot}
 \end{figure}
@@ -132,22 +131,23 @@ $\mathbf{p}_i \gets \frac{\exp(\beta_i \mathbf{z})}{\sum_j \exp(\beta_i \mathbf{
 % weight update over rounds
 \subsection{Weight update dynamics}
 \noindent We also analyzed the weight update dynamics of the model over the rounds.
-In figure \ref{fig:rew_update}, we plotted the evolution of the total weight $\Delta W^{UV}$ over time, averaged over 20 simulations and smoothed over 30 rounds.
-The results show that the model is able to quickly adapt to new reward distributions. It is also able to maintain the optimal policy over time, with the weights remaining approximately stable.
-The update quantity $\Delta W_{k}^{UV}$, which at each round is applied to one connection $k$, changes sign according to the collected reward, with its magnitude being higher at the beginning of the trials.
+In figure \ref{fig:rew_update}, we plotted the evolution of the total weight $\Delta W^{UV}$ over time, averaged over 20 simulations, and smoothed over 30 rounds.
+The results show that the model can quickly adapt to new reward distributions. It is also able to maintain the optimal policy over time, with the weights remaining approximately stable.
+The quantity of updates $\Delta W_{k}^{UV}$, which in each round is applied to one connection $k$, changes sign according to the collected reward, with its magnitude higher at the beginning of the trials.
 Initially, the sign is mostly positive (potentiation) since the weights start at zero, and after some uncertainty a consistently preferred arm emerges.
-However, when the reward distribution switches a regular series of sub-optimal choices with respect to the new distribution is made, leading to zero reward.
-This causes an accumulation of weight updates with negative sign (depression), eventually bringing the value of the preferred arm to drop. In the meantime, other options are probed until another sequence of choices converges to another arm, promoted by a trail of positive weight updates.
+However, when the reward distribution switches, a regular series of suboptimal choices with respect to the new distribution is made, leading to zero reward.
+This causes an accumulation of negative sign weight updates (depression), eventually causing the value of the preferred arm to drop. In the meantime, other options are probed until another sequence of choices converges to another arm, promoted by a trail of positive weight updates.
 
 This behaviour is consistent with the low entropy levels observed in the previous analysis.
 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{figures/reward_update_plot.png}
+    \includegraphics[width=1.0\textwidth]{reward_update_plot.png}
     \caption{\textsc{Weight update developement for the model} \textit{The plot displays the weight update quantity $\Delta W_{k}^{UV}$ for each round (blue line), smoothed as a 20-steps moving average.
     It is also reported the average reward in a window of 30 rounds (orange line). The results have been obtained averaging over 30 iterations.}}
     \label{fig:rew_update}
 \end{figure}
+
 
 

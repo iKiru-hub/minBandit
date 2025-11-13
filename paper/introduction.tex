@@ -1,16 +1,41 @@
 
 \section{Introduction}
-% \hfill \break
-% \vspace {0.5cm}
 
 % brief introduction to decision making and the brain.
-The ability to make decisions for long-term reward maximization is a fundamental aspect of cognition. The brain has evolved specialized and interconnected regions to implement this behaviour under the constraints of biology.
+The ability to make choices for long-term reward maximization is a fundamental aspect of cognition. The brain has evolved specialized and interconnected regions to implement this behaviour under the constraints of biology.
+
+An established framework for investigating decision-making is reinforcement learning and Bayesian Decision-Theory (BDT), which have led to the formalization of possible cognitive strategies in relation to reward \cite{suttonReinforcementLearningProblem1998}.
+In this picture, the decision process possibly relies on information about the past and predictions about the future, and whose outputs directly affects the eventuality of a positive or negative gain \cite{dayanDecisionTheoryReinforcement2008}.
+
+% interesting questions
+% - maximising future reward
+% - disambiguation and multistability/multi-choice
+% - value formation
+In this regard, important lines of research enquired the underlying learning mechanisms, the evaluation of the available options to decide from, and the selection process in case of conflicting scenarios.
+
+% answers
+% - classical vs instrumental conditioning
+% - model based vs free
+% - explicit and implicit elements
+A variety of learning paradigms have been proposed for explaining animal behaviour in different task conditions.
+One of the classical proposal is a type of associative learning known as Pavlovian conditioning, where the animal forms direct pairings of external cue and hard-wired responses \cite{allen_closer_1985}.
+An evolution of such paradigm is operant conditioning, in which the response of the animal can actually be reshaped through repeated experiences \cite{baldassarre_classical_nodate}.
+Another approach to decision-making sees the brain being abstracted in terms of an agent or controller, involving the developement of values estimates for the internal states.
+Some of the modeling proposals in this regard can be classified as model based or model free.
+The main distinction between the two is whether the calculation of the agent's behaviour involves the refinement of an internal model of the environment or solely a mapping between of the current state and the set of possible actions, with important consequences on adaptability and computational efficiency \cite{suttonReinforcementLearningProblem1998}.
+Concerning their brain implementation, it has been hypothetized the co-existance of an array of controllers, which may vary, among all dimensions, in local arrangements, plasticity details, and hierarchical position \cite{bach_algorithms_2017}.
+The midbrain dopaminergic neurons in the ventral striatum have been long associated to a type of model-free algorithm, temporal difference learning, given their strong correlation with reward prediction errors \cite{suri_td_2002, niv_dopamine_2005, schultz_dopamine_2016}.
+However, these dopaminergic neurons have been speculated to contributed to model-based dynamics as well, in particular through the interplay with the orbito-frontal cortex (OFC), a region known for being involved in value representation \cite{frank_anatomy_2006, singh_nucleus_2010,
+kennerley_decision_2011, mcdannald_model-based_2012}.
+
+
+% brain areas
 
 % bridge between decision making and the k-armed bandit problem.
 Well-studied ecological settings for decision making are foraging tasks, such as food search. In these problems, the agent is usually asked to choose between different options to maximize an expected reward.
 In nature, animals have been shown to exhibit different strategies depending on context.
 \textit{Matching behaviour} is a well-known phenomenon in which the animal's decision patterns are proportional to the reward probability of the available options.
-This behavior is believed to be the result of the trade-off between exploration and exploitation \cite{suttonReinforcementLearningProblem1998, nivEvolutionReinforcementLearning2002}.
+This behavior is believed to be the result of the trade-off between exploration and exploitation \cite{nivEvolutionReinforcementLearning2002}.
 In fact, this is a well known phenomenon in the reinforcement learning literature, in which an agent is faced with the dilemma of exploring new alternatives, potentially more rewarding, or exploiting known options, despite being possibly sup-optimal.
 
 A popular formalization of these types of tasks is the \textit{multi-armed bandit} problem (MAB) \cite{averbeckTheoryChoiceBandit2015}. This setting is usually described in terms of a slot machine endowed with $K$ distinct arms, also called levers.
@@ -86,6 +111,4 @@ By proposing a biologically plausible mechanism for choice behavior in dynamic e
 The remainder of this paper first describes our model design and learning, then presents experimental results and comparative analyses with established algorithms, and lastly discusses the findings' broader implications and potential future directions.
 
 
-% ---
 
-% Architecturally, it is inspired by the prefrontal cortex, specifically modeling two critical regions: the orbitofrontal cortex (OFC) and anterior cingulate cortex (ACC). These brain areas are involved in motivational processing, expected value representation, action selection under uncertainty, and contextual interpretation \cite{odohertyAbstractRewardPunishment2001, ricebergRewardStabilityDetermines2012, tremblayRelativeRewardPreference1999, elliottDissociableFunctionsMedial2000, frankAnatomyDecisionStriatoorbitofrontal2006}.
