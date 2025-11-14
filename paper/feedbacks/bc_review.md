@@ -3,7 +3,8 @@ The manuscript presents a bio-inspired 2-layer neural network optimized using an
  
 ---
 - [ ] (1)
-I believe the introduction of the manuscript can benefit from richer connections to existing literature and, in particular, further emphasis on the importance of the key principle of reward maximization as a fundamental aspect of cognition. I would suggest, authors expand the very first sentence, “The ability … is a fundamental aspect of cognition,” a little bit, and mention finer-grained aspects of cognition. I’d suggest, at least, mentioning and citing core decision-making (Dayan and Daw, 2008), perception (Safavi and Dayan, 2022), and emotion processing (Bach and Dayan, 2017).
+I believe the introduction of the manuscript can benefit from richer connections to existing literature and, in particular, further emphasis on the importance of the key principle of reward maximization as a fundamental aspect of cognition.
+I would suggest, authors expand the very first sentence, “The ability … is a fundamental aspect of cognition,” a little bit, and mention finer-grained aspects of cognition. I’d suggest, at least, mentioning and citing core decision-making (Dayan and Daw, 2008), perception (Safavi and Dayan, 2022), and emotion processing (Bach and Dayan, 2017).
  
  ---
 - [ ] (2)
@@ -42,13 +43,12 @@ The consensus mechanism between U and V seems a bit artificial; is there any bio
     |> alignment of the OFC - ACC
  
  ---
-- [ ] (7)
 Minor comments:
 1. It would be helpful to cite different sections of the appendix more thoroughly in the main text. For instance, instead of referring to the whole Appendix 5, its sections get cited in relevant places.
 2. Some typos:
-- Page 5: extra comma in “that is, the bandits”
-- Page 6 and 11: “In more detail”
- 
+- [x] Page 5: extra comma in “that is, the bandits”
+- [x] Page 6 and 11: “In more detail”
+
 ## references
 Dayan, Peter, and Nathaniel D. Daw. "Decision theory, reinforcement learning, and the brain." Cognitive, Affective, & Behavioral Neuroscience 8.4 (2008): 429-453.
  
@@ -78,11 +78,11 @@ Relatedly, did those models have any free parameters and how are they fit? This 
 **Minor comments**
  
 ---
-- [ ] (1) Introduction
+(1) Introduction
  
-- [ ] The introduction has many paragraphs that consist of only one or two sentences. Would recommend grouping them to streamline the exposition.
+- [x] The introduction has many paragraphs that consist of only one or two sentences. Would recommend grouping them to streamline the exposition.
  
-- [ ] “In fact, these methods can achieve state-of-the-art performance” – which methods do you mean by “these methods”?
+- [x] {**} “In fact, these methods can achieve state-of-the-art performance” – which methods do you mean by “these methods”?
     |> bio-inspired ones
  
 - [ ] “In addition, bioinspired models enhance algorithmic interpretability by clarifying the functional relationships between internal components” – I would disagree, biologically plausible models are often less interpretable algorithmically, as it is difficult to tell what each neuron / set of neurons / set of synapses is doing/learning.
@@ -93,72 +93,69 @@ and match human data well [16], they are more difficult to relate to neuronal dy
     |> true, i should restricted the semantic breadth of my statement 
  
  ---
-- [ ] (2)
 2.1 Binomial MAB problem
  
-“with an associated reward distribution” – more appropriately, “associated reward probabilities”. The distribution is the Bernoulli distribution with the probabilities as parameters
+- [x] “with an associated reward distribution” – more appropriately, “associated reward probabilities”. The distribution is the Bernoulli distribution with the probabilities as parameters
  
 “and the policy as a function that returns a selected arm π(ht ) = at“ – this seems to imply that only deterministic policies are considered, which is inconsistent with Thompson sampling and epsilon greedy, and the author’s own formulation in the previous sentence: “the policy is often defined as a *distribution* over actions“. More generally: at ~ π(ht ).
  
 “Formally, given defined a function r(π) that returns the expected reward while following policy π,” – why introduce confusing new notation when you can simply reuse the p’s for the arms and index according to the action chosen by π
  
 ---
-- [ ] (3)
 2.2 Neural Selection Agreement model (NSA)
  
-“The first, U, represents the memory traces of the K available options ( that is,, the bandits)“ – unnecessary italics and double ,
+- [x] “The first, U, represents the memory traces of the K available options ( that is,, the bandits)“ – unnecessary italics and double ,
  
-“while the second, V, encodes their values ac- cording to current policy“ – “according to *the* current policy”
+- [x] “while the second, V, encodes their values ac- cording to current policy“ – “according to *the* current policy”
  
-Figure 1: missing tilde ~ over W_UV
+- [ ] Figure 1: missing tilde ~ over W_UV
+    |> actually no, in the figure it is represented the *connectivity*, while in the system of equations it is used the *surrogate* connectivity by means of the gating function
  
-“More in detail, the weight matrix WV U is simply made of 1s,” – the diagonal of the weight matrix
+- [x] “More in detail, the weight matrix WV U is simply made of 1s,” – the diagonal of the weight matrix
  
-“The function Φv is defined as the weighted sum of a generalized sigmoid and a Gaussian” – I know the authors visualized these in the results but it would be super useful to have a schematic somewhere here
+- [ ] “The function Φv is defined as the weighted sum of a generalized sigmoid and a Gaussian” – I know the authors visualized these in the results but it would be super useful to have a schematic somewhere here
  
 ---
-- [ ] (4)
 2.2.1 Option selection
  
 - [ ] “After a fixed time ∼ 2s, the second phase begins” – how do you solve the ODE? What is the time delta, if you’re doing a discrete approximation?
-   |>Euler-Kutta algorithm. just step the dynamics. 
+   |> Euler-Kutta algorithm. just step the dynamics. 
  
 - [ ] argmaxk {v} – how are ties broken? This seems critical since all the weights are initialized uniformly.
     |> *todo*
  
-- [ ] “Lastly, the structure of the option selection process resembles the prefrontal circuitry, as the choices emerge from the state sampling of the network following a period of autonomous neural activity.” – this analogy seems a bit tenuous, I would recommend either elaborating more and actually visualizing the state sampling and stabilization, or removing it.
+- [x] “Lastly, the structure of the option selection process resembles the prefrontal circuitry, as the choices emerge from the state sampling of the network following a period of autonomous neural activity.” – this analogy seems a bit tenuous, I would recommend either elaborating more and actually visualizing the state sampling and stabilization, or removing it.
     |> *todo*
  
  ---
-- [ ] (5)
 2.3 Learning
  
-“a reward R ∈ {0, 1} with probability pk” – this is a little imprecise, it returns reward R = 1 with probability pk
+- [ ] “a reward R ∈ {0, 1} with probability pk” – this is a little imprecise, it returns reward R = 1 with probability pk
  
-"In particular, these characteristics can be combined to define mechanisms of synapse-type specific plasticity as a function of current synaptic strength" - can you elaborate a little bit more and also on the next sentence? In general, throughout the paper the authors draw analogies with known circuit motifs in the brain without elaborating (including an abstract). I would recommend either removing them or elaborating a little more.
+- [ ] "In particular, these characteristics can be combined to define mechanisms of synapse-type specific plasticity as a function of current synaptic strength" - can you elaborate a little bit more and also on the next sentence? In general, throughout the paper the authors draw analogies with known circuit motifs in the brain without elaborating (including an abstract). I would recommend either removing them or elaborating a little more.
 
-Algorithm 1: "Let system evolve through population coupling according to 2.2;" - how is that different mechanistically from "Update populations u, v according to 2.2;" a few lines above? If it's the same thing I would recommend using the exact same phrasing, to avoid confusion.
+- [x] Algorithm 1: "Let system evolve through population coupling according to 2.2;" - how is that different mechanistically from "Update populations u, v according to 2.2;" a few lines above? If it's the same thing I would recommend using the exact same phrasing, to avoid confusion.
 
 ---
-- [ ] (6)
 3 Experiments
 
-"The NSA model has been tested" - unusual past perfect tense here and everywhere else. Usually this is used to denote things that have been done in the literature prior to this study. I recommend switching to past simple "mode was tested"
+- [x] "The NSA model has been tested" - unusual past perfect tense here and everywhere else. Usually this is used to denote things that have been done in the literature prior to this study. I recommend switching to past simple "mode was tested"
 
-"At the end of each trial i it is drawn a new distribution" - grammar
+- [x] "At the end of each trial i it is drawn a new distribution" - grammar
 
-"the target distribution keep changing" - keeps
+- [x] "the target distribution keep changing" - keeps
 
-Figure 2: inconsistent notation with the text - KAB vs MAB
+- [x] Figure 2: inconsistent notation with the text - KAB vs MAB
 
 ---
 - [ ] (7)
 3.2 Evolution search
 
-- [ ] "Evolution search" - this terminology is somewhat unusual, I believe "evolutionary search" is more standard, and in this case the author appeared to be using a genetic algorithm, which is a particular kind of evolutionary search.
+- [x] "Evolution search" - this terminology is somewhat unusual, I believe "evolutionary search" is more standard, and in this case the author appeared to be using a genetic algorithm, which is a particular kind of evolutionary search.
 
-- [ ] "The most relevant parameters resulted to be those concerning directly neuronal activity and learning." - I would rephrase this sentence
-"The neural response functions are shown in 3d" - isn't it 3c? Also I recommend describing the results in the same order in the text and in the figure panels (a,b,c,d).
+- [x] "The most relevant parameters resulted to be those concerning directly neuronal activity and learning." - I would rephrase this sentence
+
+- [x] "The neural response functions are shown in 3d" - isn't it 3c? Also I recommend describing the results in the same order in the text and in the figure panels (a,b,c,d).
 
 - [ ] "Overall, our NSA model displays a solid performance over all environments" - solid sounds a little informal, maybe competitive? Also how do we know if these differences are significant? Some statistical tests would be helpful
     |> *todo*

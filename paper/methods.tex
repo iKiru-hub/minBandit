@@ -7,7 +7,7 @@ and showcase its dynamics in a simple example.
 % mathematical formulation of the k-armed bandit problem.
 \subsection{Binomial MAB problem}
 \hfill \break
-\noindent The standard formulation of the task is structured as a set of $K$ arms (or levers) $\mathcal{A}_{K}=\{a_{1}\ldots a_{K}\}$, with an associated reward distribution $\mathbf{p}=\{p_{1}, \ldots p_{K}\}$.
+\noindent The standard formulation of the task is structured as a set of $K$ arms (or levers) $\mathcal{A}_{K}=\{a_{1}\ldots a_{K}\}$, with an associated reward probabilities $\mathbf{p}=\{p_{1}, \ldots p_{K}\}$.
 At each iteration, the agent pulls an arm and collects a possible reward drawn as a Bernoulli variable $R\sim \mathcal{B}(\{0,1\},p_{k})$. The agent's objective is to maximize the total reward $\sum^{T}_{t} R_{t}$, after a certain number of rounds $T$, also called the horizon.
 Importantly, the agent is unaware of the true probability of reward and therefore has to make its decisions following a certain policy, denoted $\pi$.
 In the reinforcement learning literature, the policy is often defined as a distribution over actions, here the arms $\mathcal{A}_{K}$, given the current state at time $t$. In the bandit problem, the state can be taken to correspond to the history $h_{t}$ of past actions and rewards in the period

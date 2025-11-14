@@ -40,38 +40,48 @@ $\alpha$, and intensity $\gamma_{1}$).
 \end{figure}
 
 
-\subsection{Evolution search}
-The optimization was carried out over several parameters concerning the model architecture and dynamics:
+\subsection{Evolutionary search}
+The optimization was carried out over several parameters concerning the model architecture, its dynamics, as well as three hyperparmeters of the selection process.
+The following is the entire set of evolved valued, with in parenthesis the range in which they were allowed to be sampled from.
+The specific choice of range has been chosen by trial and error, such that the ending distribution would not cluster over either the positive or negative (if allowed) boundary, as shown in \ref{fig:evo_tabplot}.
 
+\hfill \break
 \noindent \textbf{Network parameters}
 \begin{itemize}
-    \item $\tau_{u}$: time constant of population $U$
-    \item $\tau_{v}$: time constant of population $V$
-    \item $g_{u}$: gain of the neural response function of population $U$
-    \item $g_{v}$: gain of the neural response function of population $V$
-    \item $o_{u}$: offset of the neural response function of population $U$
-    \item $o_{v}$: offset of the neural response function of population $V$
-    \item $\theta_{u}$: threshold of the neural response function of population $U$
-    \item $\theta_{v}$: threshold of the neural response function of population $V$
-    \item $W^{+}$: maximal weight value for the weights $\textbf{W}^{UV}$
+    \item $\tau_{u}\in (1, 300)$: time constant of population $U$
+    \item $\tau_{v}\in (1, 300)$: time constant of population $V$ 
+    \item $g_{u}\in (1, 50)$: gain of the neural response function of population $U$
+    \item $g_{v}\in (1, 50)$: gain of the neural response function of population $V$
+    \item $s_{u}\in (0.1, 5)$: offset of the neural response function of population $U$
+    \item $s_{v}\in (0.1, 5)$: offset of the neural response function of population $V$
+    \item $\theta_{u}\in (-0.5, 0.9)$: threshold of the neural response function of population $U$
+    \item $\theta_{v}\in (-0.5, 0.9)$: threshold of the neural response function of population $V$
+    \item $W^{+}\in (2, 5)$: maximal weight value for the weights $\textbf{W}^{UV}$
 \end{itemize}
 
 \noindent \textbf{Option value function parameters}
 \begin{itemize}
-    \item $\beta_{v}$: steepness of the sigmoid
-    \item $\alpha_{v}$: shift of the sigmoid
-    \item $\mu_{v}$: mean of the Gaussian
-    \item $\sigma_{v}$: variance of the Gaussian
-    \item $r_{v}$: weight of the sigmoid
+    \item $\beta_{v}\in (0.1, 10)$: steepness of the sigmoid
+    \item $\alpha_{v}\in (-5, 5)$: shift of the sigmoid
+    \item $\mu_{v}\in (-5, 5)$: mean of the Gaussian
+    \item $\sigma_{v}\in (0.01, 10)$: variance of the Gaussian
+    \item $r_{v}\in (-0.5, 1.5)$: weight of the sigmoid
 \end{itemize}
 
 \noindent \textbf{Learning rate function parameters}
 \begin{itemize}
-    \item $\beta_{\eta}$: steepness of the sigmoid
-    \item $\alpha_{\eta}$: shift of the sigmoid
-    \item $\mu_{\eta}$: mean of the Gaussian
-    \item $\sigma_{\eta}$: variance of the Gaussian
-    \item $r_{\eta}$: weight of the sigmoid
+    \item $\beta_{\eta}\in (0.1, 10)$: steepness of the sigmoid
+    \item $\alpha_{\eta}\in (-5, 5)$: shift of the sigmoid
+    \item $\mu_{\eta}\in (-5, 5)$: mean of the Gaussian
+    \item $\sigma_{\eta}\in (0.1, 10)$: variance of the Gaussian
+    \item $r_{\eta}\n (-0.5, 1.5)$: weight of the sigmoid
+\end{itemize}
+
+\noindent \textbf{Option selection process hyperparameters}
+\begin{itemize}
+    \item $\text{dur}_{\text{pre}}\in (400, 3000)$: duration of the first phase
+    \item $\text{dur}_{\text{post}}\n (400, 3000)$: duration of the second phase
+    \item $I_{\text{ext}}\in (0.1, 1)$: magnitude of the external input
 \end{itemize}
 
 \noindent Each individual has been evaluated over environment the following environments:
@@ -90,7 +100,7 @@ The optimization has been implemented in Python using the \texttt{DEAP} library,
 The run were carried out on a 256-core AMD EPYC 7763 with 2TB of RAM.
 
 \subsubsection{Genome distribution}
-Following the evolution search, it is taken the distribution of parameters over the top-scoring half of the population, corresponding to 128 individuals.
+Following the evolutionary search, it is taken the distribution of parameters over the top-scoring half of the population, corresponding to 128 individuals.
 
 \begin{figure}[H]
     \centering
@@ -102,6 +112,17 @@ Following the evolution search, it is taken the distribution of parameters over 
 \noindent Figure \ref{fig:evo_tabplot} reveals those parameters shared among the models with the highest fitness score, and those that are more variable.
 The most stable parameters are, predicatbly, those involved in directly shaping the neural activity (neural activation functions) and learning policy (Gaussian sigmoid).
 
+\hfill \break
+For what concerns the option selection algorithm \ref{alg:decision1}, the values for the duration of the two phases resulted to be of not modest importance, with the distribution being weakly skewed towards longer times.
+As shown in \ref{fig:eduration}, also the fitness is seemingly not associated with particular values for either phase.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{evo_duration.png}
+    \caption{\textsc{Phase durations and fitness} - \textit{duration of the first and second phase, over the x and y axis respectively, for each individual of the top-scoring half of the population.
+    The color indicates the fitness, with yellow being the highest.}}
+    \label{fig:eduration}
+\end{figure}
 
 \subsection{Reward distribution entropy}\label{sec:appendix_entropy}
 

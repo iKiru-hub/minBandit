@@ -5,7 +5,7 @@ import src.envs as envs
 import src.models as mm
 import src.utils as utils
 
-logger = utils.setup_logger(__name__)
+logger = utils.setup_logger(name=__name__, level=2)
 
 
 

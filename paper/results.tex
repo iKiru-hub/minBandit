@@ -1,6 +1,6 @@
 \section{Experiments}
 
-The NSA model has been tested in a series of benchmark environments, each with a different number of arms and reward distributions. The performance has been compared with the following algorithms: Random Baseline, Upper-Confidence Bound (UCB), Thompson Sampling, and Epsilon-Greedy.
+The NSA model was tested in a series of benchmark environments, each with a different number of arms and reward distributions. The performance has been compared with the following algorithms: Random Baseline, Upper-Confidence Bound (UCB), Thompson Sampling, and Epsilon-Greedy.
 
 % Description of the environments
 \subsection{Game variants}\label{sec:envs}
@@ -15,14 +15,15 @@ Figure \ref{fig:envs} visually illustrates their specificities.
 
 \hfill \break
 \noindent \textbf{Piecewise stationary distribution} [\textsc{MAB-P}]\\
-Within a trial the reward distribution is stationary and it is drawn from a normal $\mathbf{p}=\mathcal{N}(0.5, 0.2)^{K}$, clipped in $(0, 1)$. At the end of each trial $i$ it is drawn a new distribution $\mathbf{\mathbf{p}}_{i} \to \mathbf{\mathbf{p}}_{i+1}$ \cite{qiForcedExplorationBandit2023}.
+Within a trial the reward distribution is stationary and it is drawn from a normal $\mathbf{p}=\mathcal{N}(0.5, 0.2)^{K}$, clipped in $(0, 1)$.
+At the end of each trial $i$, a new distribution $\mathbf{\mathbf{p}}_{i} \to \mathbf{\mathbf{p}}_{i+1}$ is drawn \cite{qiForcedExplorationBandit2023}.
 
 \hfill \break
 \noindent \textbf{Piecewise stationary distribution with drift} [\textsc{MAB-D}]\\
 At the very beginning, the reward distribution $\mathbf{p}$ is sampled from a normal $\mathbf{p}=\mathcal{N}(0.5, 0.2)^{K}$.
 Then, it changes gradually over the rounds, tracked as time $t$, such that its values tend towards a target distribution $\mathbf{q}_{i}$ as $\tau_{p}\dot{\mathbf{p}}_{t}=\mathbf{q}_{i}-\mathbf{p}_{t}$.
 Here, $\dot{\mathbf{p}}$ is the time derivative of the distribution and $\tau_{p}$ is its time constant.
-Once the distance is below a threshold $\delta$ as $\vert \mathbf{q}_{i} - \mathbf{p}_{t}\vert < \delta$, the target distribution is changed to a new one $\mathbf{q}_{i}\to\mathbf{q}_{i+1}$. In this variant, there are no proper trials but the target distribution keep changing until a maximum number
+Once the distance is below a threshold $\delta$ as $\vert \mathbf{q}_{i} - \mathbf{p}_{t}\vert < \delta$, the target distribution is changed to a new one $\mathbf{q}_{i}\to\mathbf{q}_{i+1}$. In this variant, there are no proper trials but the target distribution keeps changing until a maximum number
 of rounds is reached.
 
 \hfill \break
@@ -44,7 +45,7 @@ Identical to the sinusoidal distribution shift, but a half of the arms change si
 
 
 % Evolution: fitness evolution
-\subsection{Evolution search}
+\subsection{Evolutionary search}
 The optimization of the hyper-parameters was performed using the Covariance Matrix Adaptation evolutionary strategy algorithm (CMA-ES) \cite{igel2007}.
 The search was run with a population of $256$ individuals for $80$ generations. Each individual was endowed with a genome, corresponding to a vector of 22 parameters of the model.
 The fitness function of the evolution was defined as the average reward obtained by an individual over 3 different non-stationary bandit environments, each for $K=\{40, 200\}$, and all averaged over 2 iterations.
@@ -54,16 +55,21 @@ The results are summarized below in figure \ref{fig:evolution}.
     \centering
     \includegraphics[width=1.0\textwidth]{evolution_comp_1.png}
     \caption{\textsc{Evolution results} - \textbf{a}: \textit{top fitness, mean and standard deviation (as 16-84 percentile) of the population over generations.} - \textbf{b}: \textit{heatmap of the evolved parameters (rows) as histogram bins (y-axis) calculated from the 50 percentile of the
-    population of the last generation; higher density is in dark blue} - \textbf{c-d}: \textit{neural response functions [d] and Gaussian-sigmoid [c] of the top-half of the population, the color intensity is proportional to the fitness.}}
+    population of the last generation; higher density is in dark blue} - \textbf{c-d}: \textit{neural response functions [c] and Gaussian-sigmoid [d] of the top-half of the population, the color intensity is proportional to the fitness.}}
     \label{fig:evolution}
 \end{figure}
 
 % comment on the evolved functions
 \noindent The evolution progress, plot \textbf{\ref{fig:evolution}a}, showed a steady improvement over the generations, with the fitness hitting a plateau once the total reward could not get any closer to the optimum $\approx 1$ due to randomness and the finite horizon.
 
-The evolved parameters (genome) are displayed as a frequency heatmap in \textbf{\ref{fig:evolution}b}, which was obtained from the individuals whose fitness was equal or above the median. The most relevant parameters resulted to be those concerning directly neuronal activity and learning.
+The evolved parameters (genome) are displayed as a frequency heatmap in \textbf{\ref{fig:evolution}b}, which was obtained from the individuals whose fitness was equal or above the median.
+The parameters most strongly influencing the results were those directly associated with neuronal activity and learning.
 
-More in details, the two Gaussian-sigmoid functions $\Phi_{v}, \Phi_{\eta}$, which are respectively the option value and learning rate functions, are shown in \textbf{\ref{fig:evolution}c}.
+Concerning the neural response functions shown in \textbf{\ref{fig:evolution}c}, both population evolved to have a similar shape, a sharp sigmoid with a clear threshold, with population \textit{U} having a more variable distribution.
+The form is characterized by not allowing for a fine-grained linear reponse but rather an high-pass filter, with activity occurring only after strong excitation.
+This firing behaviour is reminiscent of coincidence detector neurons, which are sometimes referred to as class III neurons with respect to their f-I curve \cite{ratteImpactNeuronalProperties2013}.
+
+The two Gaussian-sigmoid functions $\Phi_{v}, \Phi_{\eta}$, which are respectively the option value and learning rate functions, are instead shown in \textbf{\ref{fig:evolution}d}.
 On the one hand, the learning rate function $\Phi_{\eta}$ is characterized by a decreasing curve, associated with the dominance of the right-side of the Gaussian, and a completely ignored sigmoid component.
 A possible interpretation for this shape is to ensure a high learning speed when the value options are more uncertain (weak weights), and low otherwise; thus preventing overshooting and oscillations in the weight updates.
 This adaptive behaviour is in line with known neuronal dynamics such as homeostatic plasticity, which works towards a stabilization of synapses, for instance through synaptic scaling and proportional updates \cite{citriSynapticPlasticityMultiple2008}.
@@ -73,9 +79,6 @@ On the other hand, the option value function $\Phi_{v}$ follows instead a steep 
 This is consistent with the idea that the input of population $U$ to population $V$ is weighted maximally for high option values (strong synapses), whereas for weaker estimates the contributions are low or close to zero, allowing for more exploration.
 Interestingly, a common feature seemed to be a slight concavity after zero, a slim influence of the Gaussian component, which might be interpreted as a sort of test for newly formed synapses. However, the size of this effect is not large.
 
-The neural response functions are shown in \textbf{\ref{fig:evolution}d}. Both population evolved to have a similar shape, a sharp sigmoid with a clear threshold, with population \textit{U} having a more variable distribution.
-The form is characterized by not allowing for a fine-grained linear reponse but rather an high-pass filter, with activity occurring only after strong excitation.
-This firing behaviour is reminiscent of coincidence detector neurons, which are sometimes referred to as class III neurons with respect to their f-I curve \cite{ratteImpactNeuronalProperties2013}.
 
 
 % Results: scores and brief discussion
