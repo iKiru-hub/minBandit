@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from numba import jit
 from tqdm import tqdm
 import time, warnings
 

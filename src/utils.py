@@ -6,17 +6,22 @@ from tqdm import tqdm
 import argparse
 from numba import jit
 
-CACHE_PATH = r"/Users/daniekru/Research/lab/minBandit/src/_evo_cache"
-CACHE_PATH_2 = r"/home/daniekru/lab/minBandit/src/_evo_cache"
-MEDIA_PATH = r"/Users/daniekru/Research/lab/minBandit/media"
-MEDIA_PATH_2 = r"/home/daniekru/lab/minBandit/media"
+# CACHE_PATH = r"/Users/daniekru/Research/lab/minBandit/src/_evo_cache"
+# CACHE_PATH_2 = r"/home/daniekru/lab/minBandit/src/_evo_cache"
+# MEDIA_PATH = r"/Users/daniekru/Research/lab/minBandit/media"
+# MEDIA_PATH_2 = r"/home/daniekru/lab/minBandit/media"
 
+WD = os.getcwd()
+CACHE_PATH = f"{WD}/src/_evo_cache"
+CACHE_PATH_2 = f"{WD}/src/_evo_cache"
+MEDIA_PATH = f"{WD}/media"
+MEDIA_PATH_2 = f"{WD}/media"
 
 DEBUG = False
 try:
     plt.rcParams['pdf.fonttype'] = 42
     plt.rcParams['ps.fonttype'] = 42
-    plt.rcParams['font.family'] = 'Arial'
+    # plt.rcParams['font.family'] = 'Arial'
 except:
     import warnings
     warnings.warn("Could not set font properties")

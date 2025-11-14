@@ -12,7 +12,7 @@ except ModuleNotFoundError:
     from utils import tqdm_enumerate, setup_logger, calc_entropy, cosine_similarity
 
 
-logger = setup_logger(__name__)
+logger = setup_logger(name=__name__, level=2)
 
 
 
@@ -571,7 +571,8 @@ def trial(model: object, environment: KAB,
             chances[round_i] = environment.chance_level
             upper_bounds[round_i] = environment.upper_bound
             selections[round_i] = k
-            weights[:, (trial_i+1)*round_i] = model._W.flatten()
+            if hasattr(model, "_W"):
+                weights[:, (trial_i+1)*round_i] = model._W.flatten()
 
        # ---------------------------- #
 
@@ -813,10 +814,10 @@ def visual_trial(model: object,
     if online:
         fig = plt.figure()
         if len(p) < 7:
-            fig.suptitle("$\mathbf{\pi}=$" + \
+            fig.suptitle("$\\mathbf{\\pi}=$" + \
                 f"{environment.probabilities} [$i=${idx_p}]")
         else:
-            fig.suptitle("$\mathbf{\pi}_{\\text{max}}=$" + \
+            fig.suptitle("$\\mathbf{\\pi}_{\\text{max}}=$" + \
                 f"{environment.probabilities.max()} [$i=${idx_p}]")
 
         if style == "3d":
@@ -841,10 +842,10 @@ def visual_trial(model: object,
         idx_p = np.argmax(p) + 1
         if online:
             if len(p) < 7:
-                fig.suptitle("$\mathbf{\pi}=$" + \
+                fig.suptitle("$\\mathbf{\\pi}=$" + \
                     f"{np.around(environment.probabilities, 2)} [$i=${idx_p}]")
             else:
-                fig.suptitle("$\mathbf{\pi}_{\\text{max}}=$" + \
+                fig.suptitle("$\\mathbf{\\pi}_{\\text{max}}=$" + \
                     f"{environment.probabilities.max()} [$i=${idx_p}]")
 
         #
