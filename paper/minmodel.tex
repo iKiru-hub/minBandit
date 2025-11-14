@@ -1,6 +1,6 @@
 \subsection{Neural Selection Agreement model (NSA)}
 The model is constructed as a rate network composed of two neuronal populations, U and V.
-The first (U) represents the memory traces of the \textit{K} available options (\textit{ that is}, the bandits), while the second, V, encodes their values according to the current policy.
+The first (U) represents the memory traces of the \textit{K} available options (that is, the bandits), while the second, V, encodes their values according to the current policy.
 
 In our model, the first layer represents the available options, while the learned connections to the second layer encode their values based on recent reward history. A key simplification is the lumping of option representations into single neurons. Although this choice abstracts the more distributed encoding found in actual brain networks, it allows for a more tractable model design \cite{martinRepresentationObjectConcepts2007a}.
 
@@ -14,26 +14,38 @@ More formally, the model is defined by a set of coupled ordinary differential eq
 \end{equation}\label{eq:main}
 
 \noindent The external input $\textbf{I}_{\text{ext}}$ is a constant input that is used to set the initial conditions of neural activity $\textbf{u}$.
+Notably, it does not deliver any practical information, given the unambiguity of the task, and should thus be treated more as an attention-related stimulation to prompt processing \cite{yantis_neural_2008}.
 The activation functions $\phi_{v},\phi_{u}$ are applied to population $v$ and $u$ respectively, and represent two distinct neural response functions tailored to each population vector.
 They have been chosen to be a step function with threshold $\theta_{v},\theta_{u}$ applied to a generalized sigmoid with gain $g_{v},g_{u}$ and offset $s_{v},s_{u}$.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.6\textwidth]{minb_architecture.png}
-    \caption{\textsc{Model architecture} - \textit{The model is composed of a layer $U$ (grey), receiving a feedfoward input $I_{\text{ext}}$, a layer $V$ (orange), and connections $\textbf{W}^{UV}$ and $\textbf{W}^{VU}$. Additionally, two indexes $k_{U}, k_{V}$  are extracted from the layers and
+    \caption{\textsc{Model architecture} - \textit{The model is composed of a layer $U$ (grey), receiving a feedfoward input $I_{\text{ext}}$, a layer $V$ (orange), and connections $\textbf{W}^{UV}$ and $\textbf{W}^{VU}$.
+            Additionally, two indexes $k_{U}, k_{V}$  are extracted from the layers and
     corresponds to the selection made by the two populations as $k_{U}=\text{argmax}_{k} \{\textbf{u}\}$, $k_{V}=\text{argmax}_{k} \{\textbf{v}\}$.}}
     \label{fig:main_architecture}
 \end{figure}
 
 \noindent Importantly, the two layers are not fully connected and the matrices are diagonal.
-More in detail, the weight matrix $\textbf{W}^{VU}$ is a diagonal matrix of made of $1$s, while $\widetilde{\textbf{W}}^{UV}$ is a function of the actual weights $\Phi_{v}(\textbf{W}^{UV})$ and represents the contribution of the active options $\textbf{u}$ to the value representation $\textbf{v}$, so it is called \textit{ the option value function}. The matrix $\textbf{W}^{UV}$ is initialized to all zeros.
-The function $\Phi_{v}$ is defined as the weighted sum of a generalized sigmoid and a Gaussian, whose shape is characterized by a bell curve that settles smoothly to a constant value. For details, see the Appendix \ref{sec:appendix}.
+More in detail, the weight matrix $\textbf{W}^{VU}$ is a diagonal matrix of made of $1$s and are fixed, while $\widetilde{\textbf{W}}^{UV}$ is a function of the actual weights $\Phi_{v}(\textbf{W}^{UV})$ and represents the contribution of the active options $\textbf{u}$ to the value representation $\textbf{v}$, so it is called \textit{ the option value function}.
+The matrix $\textbf{W}^{UV}$ is initialized to all zeros and is the only plastic parameter of the model during the task.
+The function $\Phi_{v}$ is defined as the weighted sum of a generalized sigmoid and a Gaussian, whose shape is characterized by a bell curve that settles smoothly to a constant value.
+For details of its implementation see the Appendix \ref{sec:appendix}.
 
-The motivation behind our choice of $\Phi_{v}$ is to be agnostic about its final form and to allow competition or integration of two distinct characteristics of the shape of the function.
-In particular, it corresponds to a smooth transition to a plateau value with a certain steepness (or gain), which can represent a saturation once a threshold is crossed; such features have been reported for biological and artificial neurons \cite{ockerFlexibleNeuralConnectivity2020, apicellaSurveyModernTrainable2021}.
-The other is a bell-shaped curve with a defined center and width, which can allow putting emphasis on values only within a given window and modulating information transfer \cite{millerCombinedMechanismsNeural2019}.
+The motivation behind our choice of $\Phi_{v}$ is to be agnostic about its final form.
+% , and to allow competition or integration of two distinct shape characteristics.
 
-The model hyperparameters were optimized to maximize the average total reward over multiple runs. In particular, given the non-differentiability of the model with respect to the fitness function, we employed an evolutionary algorithm, more specifically CMA-ES.
+In particular, the main difference between the two function is the presence (sigmoid) or absence (Gaussian) of a saturation limit on either side of their maximum, with variable offset (threshold) and steepness (gain).
+Our intent was to explore the effect on performance of the integration and competition of these traits.
+Furthermore, these features conforms with some characteristics of biological and artificial neurons, such as the firing rate functions being smoothly bounded and receptive fields being defined in a range \cite{butts_tuning_2006, millerCombinedMechanismsNeural2019, ockerFlexibleNeuralConnectivity2020, apicellaSurveyModernTrainable2021}.
+
+% In particular, it corresponds to a smooth transition to a plateau value with a certain steepness (or gain), which can represent a saturation once a threshold is crossed; such features have been reported for biological and artificial neurons \cite{ockerFlexibleNeuralConnectivity2020, apicellaSurveyModernTrainable2021}.
+% The other is a bell-shaped curve with a defined center and width, which can allow putting emphasis on values only within a given window and modulating information transfer \cite{millerCombinedMechanismsNeural2019}.
+Nonetheless, beside these reasons, other basis function could have been chosen with possibly not dissimilar results.
+
+The model parameters not updated during the task were optimized offline, with the goal of maximizing the average total reward over multiple runs and across testing environments.
+In particular, given the non-differentiability of the model with respect to the fitness function we relied on an evolutionary search using the Covariance-Matrix Adaptation algorithm (CMA-ES) \cite{igel_covariance_2007}.
 
 \subsubsection{Option selection}
 The decision-making process within a single round is structured in two distinct phases. Initially, the model receives a constant external input that targets all neurons in the memory population U equally.
@@ -55,6 +67,8 @@ A selection $k$ is sampled after another fixed amount of time duration $\text{du
 \noindent The selection rule is simple: if the value representation $\textbf{v}$ is in agreement with the memory trace $\textbf{u}$, then the option with the highest value is selected. Otherwise, a random option is chosen.
 This rule presents a way to express the exploration-exploitation trade-off through the possible agreement of the two populations, under the influence of current weight values $\widetilde{\textbf{W}}^{UV}$. \\ In subsection \ref{alg:decision1}, the pseudo-code for the algorithm behind the selection process is reported below, which is applied during each round $t$.
 The two durations hyperparameters $\text{dur}_{\text{pre}}$ and $\text{dur}_{\text{post}}$ are evolved through evolution alongside the others within a range of $(400, 3000$\textit{ms}.
+Although this range has been so defined out of empirical motivations and it closely depends on the settings of our model, at least for cases with few options it does align data from experiments measuring reaction times, typically in the order of 300-1500ms \cite{churchland_decision-making_2008,
+drugowitsch_optimal_2014}.
 
 % --- ALGORITHM
 \begin{algorithm}[ht]

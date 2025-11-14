@@ -40,7 +40,7 @@ $\alpha$, and intensity $\gamma_{1}$).
 \end{figure}
 
 
-\subsection{Evolutionary search}
+\subsection{Evolutionary search} \label{list:params}
 The optimization was carried out over several parameters concerning the model architecture, its dynamics, as well as three hyperparmeters of the selection process.
 The following is the entire set of evolved valued, with in parenthesis the range in which they were allowed to be sampled from.
 The specific choice of range has been chosen by trial and error, such that the ending distribution would not cluster over either the positive or negative (if allowed) boundary, as shown in \ref{fig:evo_tabplot}.
@@ -84,7 +84,7 @@ The specific choice of range has been chosen by trial and error, such that the e
     \item $I_{\text{ext}}\in (0.1, 1)$: magnitude of the external input
 \end{itemize}
 
-\noindent Each individual has been evaluated over environment the following environments:
+\noindent Each individual has been evaluated over two environments the following settings:
 
 \begin{itemize}
     \item \textsc{MAB-0}: average reward distribution entropy $\langle H\rangle=2.05$
@@ -92,7 +92,7 @@ The specific choice of range has been chosen by trial and error, such that the e
         another uniform $\sim \mathcal{U}(0.1, 0.7)$; the final reward distribution was not normalized.
 \end{itemize}
 
-\noindent The number of arms was $K=10$ and $150$, and lasted for $2$ trials with $2000$ rounds each.
+\noindent The number of arms was $K=40$ and $200$, and lasted for $2$ trials with $2000$ rounds each.
 The final fitenss was the average over $2$ iterations.
 
 \hfill \break

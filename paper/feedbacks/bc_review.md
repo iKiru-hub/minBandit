@@ -2,39 +2,38 @@
 The manuscript presents a bio-inspired 2-layer neural network optimized using an evolutionary algorithm to effectively perform multi-arm bandit tasks in environments with variability in reward distributions. The proposed model provides comparable performance to some typical algorithms for solving multi-arm bandit tasks, such as Thompson Sampling and UCB, while replicating some features of biological plasticity rules. The authors provide a comprehensive overview of previous attempts in the same direction and discuss their findings within that context. They also provide a fair description of the limitations of their current model. The overall approach is interesting and valuable to researchers interested in learning at the intersection of biological and normative approaches. However, I have some comments, for example, regarding the model design and its parameters that need to be clarified further.
  
 ---
-- [ ] (1)
+- [x] (1)
 I believe the introduction of the manuscript can benefit from richer connections to existing literature and, in particular, further emphasis on the importance of the key principle of reward maximization as a fundamental aspect of cognition.
 I would suggest, authors expand the very first sentence, “The ability … is a fundamental aspect of cognition,” a little bit, and mention finer-grained aspects of cognition. I’d suggest, at least, mentioning and citing core decision-making (Dayan and Daw, 2008), perception (Safavi and Dayan, 2022), and emotion processing (Bach and Dayan, 2017).
  
  ---
-- [ ] (2)
 Sensitivity to model parameters:
 
 - [ ] I could not find any information about some model parameters, for instance, how the size and the time constants of each layer are chosen, and how sensitive the results are to these choices.
     |> time constants are evolved, no much sensitivity given the population distribution
 
-- [ ] The activation functions (phi_v and phi_u) are set in a very specific form (as discussed in Appendix 5.1). It would be helpful to discuss the intuition behind this choice and also how sensitive the results are to this specific form. For example, if one chooses a different activation function, such as ReLU, would the results change?
+- [x] The activation functions (phi_v and phi_u) are set in a very specific form (as discussed in Appendix 5.1). It would be helpful to discuss the intuition behind this choice and also how sensitive the results are to this specific form. For example, if one chooses a different activation function, such as ReLU, would the results change?
     |> maintaining flexibility in the definition of a useful curve shape, thus acting as two basis functions. an approximation of ReLU can be obtained by certain parameters choices: it has not evolved so.
 
-- [ ] The timings of the option selection process are set manually (2s and 5s), but the logic behind these choices and the sensitivity of the results to them are not discussed.
+- [x] The timings of the option selection process are set manually (2s and 5s), but the logic behind these choices and the sensitivity of the results to them are not discussed.
     |> duration times are evolved as well
     |> sensitivity to explore by an additional plot in the appendix probing the effects of synchronicity of duration values (pre vs post)
  
  ---
-- [ ] (3)
-I am a bit confused about the role of I_ext. One would naturally expect that in a biologically plausible model, the external input reflects input from the environment, for instance, the received reward, but it does not seem to be the case here. Instead, the reward only appears in the learning rule without discussing how it is given to the model.
+- [x] I am a bit confused about the role of I_ext. One would naturally expect that in a biologically plausible model, the external input reflects input from the environment, for instance, the received reward, but it does not seem to be the case here. Instead, the reward only appears in the learning rule without discussing how it is given to the model.
     |> I_ext is simply meant to initiate the decision process, more like an attention mechanism than a sensory input (the task is one, no ambiguity and no further information needed)
     |> reward is delivered as a boolean/binary value, much like absence/presence of positive feedback after an action
  
  ---
-- [ ] (4)
+- [x] (4)
 The details of optimization in different environments were not clear. Is the model optimized on all 4 environments simultaneously, or would the authors have one model for each environment? In the case of the former, please provide more details about how it is done. In other words, are NSA models presented in Table 1 the same, or do they have different parameters?
     |> each model is evolved over all environment
  
  ---
-- [ ] (5)
-It would be helpful to provide a more intuitive understanding of why layer U acts as a memory trace, for example, is it related to feedback from V? Also, please clarify whether the weights from V to U are fixed to 1 during the optimization or if they are initialized as 1 but can change.
+- [ ] It would be helpful to provide a more intuitive understanding of why layer U acts as a memory trace, for example, is it related to feedback from V?
     |> *todo*
+
+- [x] Also, please clarify whether the weights from V to U are fixed to 1 during the optimization or if they are initialized as 1 but can change.
     |> they are initialized and fixed to 1, what's relevant is their activation value so the weight would be an additional but unnecessary degree of freedom
  
  ---

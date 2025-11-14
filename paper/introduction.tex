@@ -4,30 +4,28 @@
 % brief introduction to decision making and the brain.
 The ability to make choices for long-term reward maximization is a fundamental aspect of cognition. The brain has evolved specialized and interconnected regions to implement this behaviour under the constraints of biology.
 
-An established framework for investigating decision-making is reinforcement learning and Bayesian Decision-Theory (BDT), which have led to the formalization of possible cognitive strategies in relation to reward \cite{suttonReinforcementLearningProblem1998}.
-In this picture, the decision process possibly relies on information about the past and predictions about the future, and whose outputs directly affects the eventuality of a positive or negative gain \cite{dayanDecisionTheoryReinforcement2008}.
+An established framework for investigating decision-making is reinforcement learning and Bayesian Decision-Theory (BDT), which helped formalizing some possible cognitive strategies in relation to reward \cite{suttonReinforcementLearningProblem1998}.
+In this picture, the decision process possibly relies on past information as well as predictions about the future, whose outputs may affect the eventuality of a positive or negative gain \cite{dayanDecisionTheoryReinforcement2008}.
 % interesting questions
 % - maximising future reward
 % - disambiguation and multistability/multi-choice
 % - value formation
-In this regard, important lines of research revolved around the underlying learning mechanisms, the evaluation of the available options to decide from, and the selection process in case of conflicting scenarios.
+Important lines of research in this regard revolved around the underlying learning mechanisms, value estimation, and competition among conflicting options.
 % answers
 % - classical vs instrumental conditioning
 % - model based vs free
 % - explicit and implicit elements
-A variety of learning paradigms have been proposed for explaining animal behaviour in different task conditions.
-One of the classical proposal is a type of associative learning known as Pavlovian conditioning, where the animal forms direct pairings of external cue and hard-wired responses \cite{allen_closer_1985}.
-An evolution of such paradigm is operant conditioning, in which the response of the animal can actually be reshaped through repeated experiences \cite{baldassarre_classical_nodate}.
-Another approach to decision-making sees the brain being abstracted in terms of an agent or controller, involving the developement of values estimates for the agent's internal states.
-Some of the modeling proposals in this regard can be classified as model based or model free.
-The main distinction between the two is whether the calculation of the behaviour involves the refinement of an internal model of the environment or solely a mapping between the current state and the set of possible actions, with important consequences on adaptability and computational efficiency \cite{suttonReinforcementLearningProblem1998}.
-Concerning their brain implementation, it has been hypothetized the co-existance of an array of controllers, which may vary, among all dimensions, in local arrangements, plasticity details, and position within an architectural hierarchy \cite{bach_algorithms_2017}.
-The midbrain dopaminergic neurons in the ventral striatum have been long associated to a type of model-free algorithm, temporal difference learning, given their strong correlation with reward prediction errors \cite{suri_td_2002, niv_dopamine_2005, schultz_dopamine_2016}.
-However, these dopaminergic neurons have been speculated to contributed to model-based dynamics as well, in particular through the interplay with the orbito-frontal cortex (OFC), a region known for being involved in value representation \cite{frank_anatomy_2006, singh_nucleus_2010, kennerley_decision_2011, mcdannald_model-based_2012}.
-Another area that emerged for its role in option evaluation and selection is the anterior cingulate cortex (ACC), particularly during perceptual disambiguation and multi-stability situations \cite{walton_adaptive_2007, rosenbloom_functional_2012, safavi_multistability_2022}.
-
-
+One of the classical learning paradigms that have been suggested is Pavlovian conditioning, where the animal forms direct pairings of external cue and hard-wired responses \cite{allen_closer_1985}.
+A more flexbible variant is operant conditioning, in which the response of the animal can be reshaped through repeated experiences and feedbacks \cite{baldassarre_classical_nodate}.
+Another perspective to decision-making is more computational, and has the brain being abstracted in terms of an agent or controller \cite{dayanDecisionTheoryReinforcement2008}.
+Here, proposed approaches may be classified as either model based or model free, whose main difference is whether the calculation of the behaviour involves an internal model of the environment or solely a state-action mapping, with consequences on adaptability and computational efficiency \cite{suttonReinforcementLearningProblem1998}.
 % brain areas
+Concerning their possible brain implementation, the co-existance of an array of controllers has been hypothetized, which may vary in local arrangements, plasticity details, and position within an neuroanatomical hierarchy \cite{bach_algorithms_2017}.
+The midbrain dopaminergic neurons in the ventral striatum have been long associated to model-free algorithms, such as temporal difference learning, given their involvement in action selection and the strong correlation with reward prediction errors \cite{suri_td_2002, niv_dopamine_2005, schultz_dopamine_2016}.
+Nevertheless, they have been speculated to contributed to model-based dynamics as well, in particular through the interplay with the orbito-frontal cortex (OFC), a region known for being involved in value representation \cite{frank_anatomy_2006, singh_nucleus_2010, kennerley_decision_2011, mcdannald_model-based_2012}.
+Another area that emerged for its role in option evaluation and selection is the anterior cingulate cortex (ACC), particularly during action selection, perceptual disambiguation and multi-stability situations \cite{walton_adaptive_2007, safavi_multistability_2022}.
+Indeed, there is consistent evidence that the interaction between OFC and ACC plays a crucial part in decision-making, integrating high-level and emotional information sourced from the amygdala, and temporal and hippocampal regions \cite{rosenbloom_functional_2012, luk_choice_2013, balewski_value_2023, rolls_emotion_2023}.
+
 
 % bridge between decision making and the k-armed bandit problem.
 Well-studied ecological settings for decision making are foraging tasks, such as food search. In these problems, the agent is usually asked to choose between different options to maximize an expected reward.

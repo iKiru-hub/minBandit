@@ -62,8 +62,10 @@ The results are summarized below in figure \ref{fig:evolution}.
 % comment on the evolved functions
 \noindent The evolution progress, plot \textbf{\ref{fig:evolution}a}, showed a steady improvement over the generations, with the fitness hitting a plateau once the total reward could not get any closer to the optimum $\approx 1$ due to randomness and the finite horizon.
 
-The evolved parameters (genome) are displayed as a frequency heatmap in \textbf{\ref{fig:evolution}b}, which was obtained from the individuals whose fitness was equal or above the median.
+The evolved parameters (constituting a \textit{genome}) are displayed as a frequency heatmap in \textbf{\ref{fig:evolution}b}, which was obtained from the individuals whose fitness was equal or above the median.
 The parameters most strongly influencing the results were those directly associated with neuronal activity and learning.
+For each, the sensitivity of each value with respect to performance is inversely proportional to the variance its distribution over the population (related to the heatmap color intensity in \textbf{\ref{fig:evolution}b}).
+The intuition is that the higher the variability the smaller is the number of top-scoring genomes sharing a similar value.
 
 Concerning the neural response functions shown in \textbf{\ref{fig:evolution}c}, both population evolved to have a similar shape, a sharp sigmoid with a clear threshold, with population \textit{U} having a more variable distribution.
 The form is characterized by not allowing for a fine-grained linear reponse but rather an high-pass filter, with activity occurring only after strong excitation.

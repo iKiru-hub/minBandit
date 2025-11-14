@@ -122,8 +122,8 @@ class Model(MBsolver):
             # Attempt to create an instance of the current class
             return super().__new__(cls, *args, **kwargs)
         except TypeError:
-            logger.warning("Invalid parameters for Model," + \
-                f" using Modelv2 instead")
+            # logger.warning("Invalid parameters for Model," + \
+            #     f" using Modelv2 instead")
             return Modelv2(*args, **kwargs)
 
     def __str__(self):
