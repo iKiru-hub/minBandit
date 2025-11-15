@@ -71,28 +71,28 @@ def redact_score(results):
 
 if __name__ == "__main__":
 
-    np.random.seed(1)
+    np.random.seed(3)
 
     # ---
-    num_k = 8
-    num_epsilon = 8
-
-    nb_rounds = 1000
+    num_k = 5
+    nb_rounds = 2000
     nb_trials = 1
-    nb_reps = 2
+    nb_reps = 1
     env_type = "default"
     fixed_p = 0.9
 
     # ---
-    Ks = np.logspace(2, 7, num=num_k, base=2)
+    Ks = np.logspace(2, 10, num=num_k, base=2)
+    Ks = np.flip(Ks, axis=0)
     logger(f"{Ks=}")
     Ks = Ks.astype(int)
     logger(f"(int) {Ks=}")
 
-    Eps = np.around(np.linspace(0.01, 0.9, num_epsilon), 2)
+    # Eps = np.around(np.linspace(0.01, 0.9, num_epsilon), 2)
+    Eps = np.array([0.01, 0.05, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9])
+    num_epsilon = len(Eps)
 
-    table = np.zeros((num_epsilon, num_k))
-    table_raw = np.zeros((num_epsilon, num_k))
+    table = np.zeros((num_k, num_epsilon))
 
     # ---
     for i in tqdm(range(num_k)):
@@ -101,27 +101,25 @@ if __name__ == "__main__":
             for _ in range(nb_reps):
                 results = run(epsilon=Eps[j], K=Ks[i], nb_rounds=nb_rounds, nb_trials=nb_trials,
                               env_type=env_type, fixed_p=fixed_p, verbose=False)
-                table[j, i] += redact_score(results)
-                table_raw[j, i] += results['score']
+                table[i, j] += redact_score(results)
 
-            table[j, i] /= nb_reps
-            table_raw[j, i] /= nb_reps
+            table[i, j] /= nb_reps
 
     logger(f"{results['upper_bound']=}")
 
     # ---
-    table = np.flip(table, axis=0)
-    Eps = np.flip(Eps, axis=0)
+    # table = np.flip(table, axis=0)
+    # Eps = np.flip(Eps, axis=0)
     fig, ax = plt.subplots(figsize=(3, 10))
     im = ax.imshow(table, cmap="viridis")
 
-    ax.set_xticks(range(num_k))
-    ax.set_xticklabels(Ks, fontsize=15)
-    ax.set_xlabel("K", fontsize=19)
+    ax.set_xticks(range(num_epsilon))
+    ax.set_xticklabels(Eps, fontsize=15)
+    ax.set_xlabel("$\\epsilon$", fontsize=19)
 
-    ax.set_yticks(range(num_epsilon))
-    ax.set_yticklabels(Eps, fontsize=15)
-    ax.set_ylabel("$\\epsilon$", fontsize=19)
+    ax.set_yticks(range(num_k))
+    ax.set_yticklabels(Ks, fontsize=15)
+    ax.set_ylabel("K", fontsize=19)
 
     for i in range(len(table)):
         for j in range(len(table[i])):

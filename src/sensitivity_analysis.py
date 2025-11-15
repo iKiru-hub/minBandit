@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time, argparse, os, json
 from tqdm import tqdm
+from pprint import pprint
 
 try:
     import envs
@@ -56,6 +57,7 @@ def run(param: str, value: float,
     # define the model
     params = utils.load_model(idx=IDX)
     params["K"] = K
+    # pprint(params)
     assert param in tuple(params.keys()), f"{param} not recognized as a model parameters"
     params[param] = value
 
@@ -84,12 +86,13 @@ if __name__ == "__main__":
 
     nb_rounds = 400
     nb_trials = 1
-    nb_reps = 10
+    nb_reps = 1
     env_type = "default"
     fixed_p = 0.9
 
     # ---
     Ks = np.logspace(2, 8, num=num_k, base=2)
+    Ks = np.flip(Ks, axis=0)
     logger(f"{Ks=}")
     Ks = Ks.astype(int)
     logger(f"(int) {Ks=}")
@@ -97,7 +100,7 @@ if __name__ == "__main__":
     param = "dur_pre"
     values = np.around(np.linspace(100, 2000, num_param)).astype(int)
 
-    table = np.zeros((num_param, num_k))
+    table = np.zeros((num_k, num_param))
 
     # ---
     for i in tqdm(range(num_k)):
@@ -107,25 +110,25 @@ if __name__ == "__main__":
                 results = run(param=param, value=values[j], K=Ks[i], nb_rounds=nb_rounds,
                               nb_trials=nb_trials, env_type=env_type, fixed_p=fixed_p,
                               verbose=False)
-                table[j, i] += redact_score(results)
+                table[i, j] += redact_score(results)
 
-            table[j, i] /= nb_reps
+            table[i, j] /= nb_reps
 
     logger(f"{results['upper_bound']=}")
 
     # ---
-    table = np.flip(table, axis=0)
-    values = np.flip(values, axis=0)
+    # table = np.flip(table, axis=0)
+    # values = np.flip(values, axis=0)
     fig, ax = plt.subplots(figsize=(3, 10))
     im = ax.imshow(table, cmap="viridis")
 
-    ax.set_xticks(range(num_k))
-    ax.set_xticklabels(Ks, fontsize=15)
-    ax.set_xlabel("K", fontsize=19)
+    ax.set_xticks(range(num_param))
+    ax.set_xticklabels(values, fontsize=15)
+    ax.set_xlabel(f"{param}", fontsize=19)
 
-    ax.set_yticks(range(num_param))
-    ax.set_yticklabels(values, fontsize=15)
-    ax.set_ylabel(f"{param}", fontsize=19)
+    ax.set_yticks(range(num_k))
+    ax.set_yticklabels(Ks, fontsize=15)
+    ax.set_ylabel("number of arms", fontsize=19)
 
     for i in range(len(table)):
         for j in range(len(table[i])):
