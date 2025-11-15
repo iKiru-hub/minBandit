@@ -30,14 +30,14 @@ The details of optimization in different environments were not clear. Is the mod
     |> each model is evolved over all environment
  
  ---
-- [ ] It would be helpful to provide a more intuitive understanding of why layer U acts as a memory trace, for example, is it related to feedback from V?
-    |> *todo*
+- [x] It would be helpful to provide a more intuitive understanding of why layer U acts as a memory trace, for example, is it related to feedback from V?
+    |> true, it is not really memory but mostly a representation of the option that is mapped to outside. it is however unnecessary
 
 - [x] Also, please clarify whether the weights from V to U are fixed to 1 during the optimization or if they are initialized as 1 but can change.
     |> they are initialized and fixed to 1, what's relevant is their activation value so the weight would be an additional but unnecessary degree of freedom
  
  ---
-- [ ] (6)
+- [x] (6)
 The consensus mechanism between U and V seems a bit artificial; is there any biological support for this?
     |> alignment of the OFC - ACC
  
