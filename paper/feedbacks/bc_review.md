@@ -107,12 +107,12 @@ and match human data well [16], they are more difficult to relate to neuronal dy
  
 - [x] “while the second, V, encodes their values ac- cording to current policy“ – “according to *the* current policy”
  
-- [x] Figure 1: missing tilde ~ over W_UV
+- [ ] Figure 1: missing tilde ~ over W_UV
     |> actually no, in the figure it is represented the *connectivity*, while in the system of equations it is used the *surrogate* connectivity by means of the gating function
  
 - [x] “More in detail, the weight matrix WV U is simply made of 1s,” – the diagonal of the weight matrix
  
-- [ ] “The function Φv is defined as the weighted sum of a generalized sigmoid and a Gaussian” – I know the authors visualized these in the results but it would be super useful to have a schematic somewhere here
+- [x] “The function Φv is defined as the weighted sum of a generalized sigmoid and a Gaussian” – I know the authors visualized these in the results but it would be super useful to have a schematic somewhere here
  
 ---
 2.2.1 Option selection

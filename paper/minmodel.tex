@@ -2,7 +2,20 @@
 The model is constructed as a rate network composed of two neuronal populations, U and V.
 The first (U) represents the traces of the \textit{K} available options (that is, the bandits), while the second, V, encodes their values according to the current policy.
 
-In our model, the first layer represents the available options, while the learned connections to the second layer encode their values based on recent reward history. A key simplification is the lumping of option representations into single neurons. Although this choice abstracts the more distributed encoding found in actual brain networks, it allows for a more tractable model design \cite{martinRepresentationObjectConcepts2007a}.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.95\textwidth]{architecture.png}
+    \caption{\textsc{Model architecture} - \textbf{a}: \textit{the model is composed of a layer $U$ (grey), receiving a feedfoward input $I_{\text{ext}}$, a layer $V$ (orange), and connections $\textbf{W}^{UV}$ and $\textbf{W}^{VU}$.
+        Additionally, two indexes $k_{U}, k_{V}$  are extracted from the layers and corresponds to the selection made by the two populations as $k_{U}=\text{argmax}_{k} \{\textbf{u}\}$, $k_{V}=\text{argmax}_{k} \{\textbf{v}\}$.} - \textbf{b}: \textit{the function used to filter the weights ($\Phi_{v}$) and the learning rate ($\Phi_{\eta}$).
+                It is defined as a weighted sum of a generalized sigmoid and a Gaussian function, both of which have additional parameters controlling their offset and slope steepness (or width).
+        For more details about its implementation see the Appendix \ref{func:gs}.}}
+    \label{fig:main_architecture}
+\end{figure}
+
+\noindent In model, the first layer represents the available options, while the learned connections to the second layer encode their values based on recent reward history.
+In figure \ref{fig:main_architecture}\textbf{a} a visualization of the architecture is presented.
+A key simplification is the lumping of option representations into single neurons. Although this choice abstracts the more distributed encoding found in actual brain networks, it allows for a more tractable model design \cite{martinRepresentationObjectConcepts2007a}.
+
 
 More formally, the model is defined by a set of coupled ordinary differential equations (ODE). The first equation describes the evolution of neural activity $\textbf{u}$ in population U, while the second governs the activity $\textbf{v}$ in population V, each evolving with its respective time constant $\tau$.
 
@@ -18,25 +31,26 @@ Notably, it does not deliver any practical information, given the unambiguity of
 The activation functions $\phi_{v},\phi_{u}$ are applied to population $v$ and $u$ respectively, and represent two distinct neural response functions tailored to each population vector.
 They have been chosen to be a step function with threshold $\theta_{v},\theta_{u}$ applied to a generalized sigmoid with gain $g_{v},g_{u}$ and offset $s_{v},s_{u}$.
 
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.6\textwidth]{minb_architecture.png}
-    \caption{\textsc{Model architecture} - \textit{The model is composed of a layer $U$ (grey), receiving a feedfoward input $I_{\text{ext}}$, a layer $V$ (orange), and connections $\textbf{W}^{UV}$ and $\textbf{W}^{VU}$.
-            Additionally, two indexes $k_{U}, k_{V}$  are extracted from the layers and
-    corresponds to the selection made by the two populations as $k_{U}=\text{argmax}_{k} \{\textbf{u}\}$, $k_{V}=\text{argmax}_{k} \{\textbf{v}\}$.}}
-    \label{fig:main_architecture}
-\end{figure}
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[width=0.6\textwidth]{minb_architecture.png}
+%     \caption{\textsc{Model architecture} - \textit{The model is composed of a layer $U$ (grey), receiving a feedfoward input $I_{\text{ext}}$, a layer $V$ (orange), and connections $\textbf{W}^{UV}$ and $\textbf{W}^{VU}$.
+%             Additionally, two indexes $k_{U}, k_{V}$  are extracted from the layers and
+%     corresponds to the selection made by the two populations as $k_{U}=\text{argmax}_{k} \{\textbf{u}\}$, $k_{V}=\text{argmax}_{k} \{\textbf{v}\}$.}}
+%     \label{fig:main_architecture}
+% \end{figure}
 
-\noindent Importantly, the two layers are not fully connected and the matrices are diagonal.
-More in detail, the weight matrix $\textbf{W}^{VU}$ is a diagonal matrix of made of $1$s and are fixed, while $\widetilde{\textbf{W}}^{UV}$ is a function of the actual weights $\Phi_{v}(\textbf{W}^{UV})$ and represents the contribution of the active options $\textbf{u}$ to the value representation $\textbf{v}$, so it is called \textit{ the option value function}.
+Importantly, the two layers are not fully connected and the matrices are diagonal. Moreover, the weight matrix $\textbf{W}^{VU}$ is a diagonal matrix of made of $1$s and are fixed, while $\widetilde{\textbf{W}}^{UV}$ is a function of the actual weights $\Phi_{v}(\textbf{W}^{UV})$ and represents the contribution of the active options $\textbf{u}$ to the value representation $\textbf{v}$, so it is called \textit{ the option value function}.
+% For details of its implementation see the Appendix \ref{sec:appendix}.
 The matrix $\textbf{W}^{UV}$ is initialized to all zeros and is the only plastic parameter of the model during the task.
-The function $\Phi_{v}$ is defined as the weighted sum of a generalized sigmoid and a Gaussian, whose shape is characterized by a bell curve that settles smoothly to a constant value.
-For details of its implementation see the Appendix \ref{sec:appendix}.
+Concerning the others, they were optimized offline with the goal of maximizing the average total reward over multiple runs and across testing environments.
+In particular, given the non-differentiability of the model with respect to the fitness function we relied on an evolutionary search using the Covariance-Matrix Adaptation algorithm (CMA-ES) \cite{igel_covariance_2007}.
 
-The motivation behind our choice of $\Phi_{v}$ is to be agnostic about its final form.
+The function $\Phi_{v}$ is defined to be a combination of a Gaussian and a sigmoid, and its parameters were also optimized offline. \ref{fig:main_architecture}\textbf{b} illustrates an example.
+The motivation behind this choice is offloading to evolution the responsability of converging to a shape useful for solving the task.
 % , and to allow competition or integration of two distinct shape characteristics.
 
-In particular, the main difference between the two function is the presence (sigmoid) or absence (Gaussian) of a saturation limit on either side of their maximum, with variable offset (threshold) and steepness (gain).
+The main difference between the two function is the presence (sigmoid) or absence (Gaussian) of a saturation limit on either side of their maximum, with variable offset (threshold) and steepness (gain).
 Our intent was to explore the effect on performance of the integration and competition of these traits.
 Furthermore, these features conforms with some characteristics of biological and artificial neurons, such as the firing rate functions being smoothly bounded and receptive fields being defined in a range \cite{butts_tuning_2006, millerCombinedMechanismsNeural2019, ockerFlexibleNeuralConnectivity2020, apicellaSurveyModernTrainable2021}.
 
@@ -44,8 +58,6 @@ Furthermore, these features conforms with some characteristics of biological and
 % The other is a bell-shaped curve with a defined center and width, which can allow putting emphasis on values only within a given window and modulating information transfer \cite{millerCombinedMechanismsNeural2019}.
 Nonetheless, beside these reasons, other basis function could have been chosen with possibly not dissimilar results.
 
-The model parameters not updated during the task were optimized offline, with the goal of maximizing the average total reward over multiple runs and across testing environments.
-In particular, given the non-differentiability of the model with respect to the fitness function we relied on an evolutionary search using the Covariance-Matrix Adaptation algorithm (CMA-ES) \cite{igel_covariance_2007}.
 
 \subsubsection{Option selection}
 The decision-making process within a single round is structured in two distinct phases. Initially, the model receives a constant external input that targets all neurons in the population U equally.
@@ -108,7 +120,7 @@ Another relevant perspective is that of bump attractor models for perceptual dec
 
 
 \subsection{Learning}
-Given a selected option $k$, the environment (set of bandits) samples and returns a reward $R\in \{0, 1\}$ with probability $p_{k}$.
+Given a selected option $k$, the environment (set of bandits) samples and returns a reward $R=1$ with probability $p_{k}$.
 Then, the weights $\textbf{W}^{UV}$ for the neuron corresponding to option $k$ are updated according to the following plasticity rule.
 
 \begin{equation}
@@ -126,5 +138,6 @@ In particular, these characteristics can be combined to define mechanisms of syn
 % This architecture is inspired by the prefrontal cortex (PFC) and its central role in decision-making processes. Specifically, the two populations correspond to the orbitofrontal cortex (OFC) and the anterior cingulate cortex (ACC), respectively.
 
 % The OFC is known to represent different options, updating their values based on reward history and outcomes \cite{lukChoiceCodingFrontal2013, kennerleyDecisionMakingReward2011a}. Meanwhile, the ACC has been associated with action valuation and regulating the balance between exploration and exploitation \cite{khamassiChapter22Medial2013}. Additionally, the dynamic interaction between the ACC and OFC has been linked to transient pre-stimulus activations, which bias decisions toward the most valuable option \cite{funahashiPrefrontalContributionDecisionMaking2017, marcosDeterminingMonkeyFree2016, balewskiValueDynamicsAffect2023}.
+
 
 
