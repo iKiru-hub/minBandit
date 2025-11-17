@@ -14,11 +14,16 @@ import src.envs as envs
 logger = setup_logger(__name__,
                       level=2)
 
-main_PATH = r"/Users/daniekru/Research/lab/minBandit/src/data"
-tmp_PATH = r"/Users/daniekru/Research/lab/minBandit/src/tmp"
-pigeon_PATH = r"/Users/daniekru/Research/lab/pigeon/data"
-main_PATH_cl = r"/home/daniekru/lab/minBandit/src/data"
-pigeon_PATH_cl = r"/home/daniekru/lab/pigeon/data"
+WD = os.getcwd()
+
+main_PATH = f"{WD}/src/data"
+tmp_PATH = f"{WD}/src/tmp"
+
+# main_PATH = r"/Users/daniekru/Research/lab/minBandit/src/data"
+# tmp_PATH = r"/Users/daniekru/Research/lab/minBandit/src/tmp"
+# pigeon_PATH = r"/Users/daniekru/Research/lab/pigeon/data"
+# main_PATH_cl = r"/home/daniekru/lab/minBandit/src/data"
+# pigeon_PATH_cl = r"/home/daniekru/lab/pigeon/data"
 #PATH = pigeon_PATH_cl
 PATH = tmp_PATH
 
@@ -46,7 +51,7 @@ PATH = tmp_PATH
 
 # from evolution
 MODEL_IDX = 1
-model_params = load_model(idx=1) # 1
+model_params = load_model(idx=MODEL_IDX) # 1
 logger(f"LOADED MODEL INDEX = {MODEL_IDX}")
 
 
@@ -58,7 +63,7 @@ NB_TRIALS = 2
 # NB_REPS = 2
 
 entropy_calc = False
-#K_list = [5, 10]
+# K_list = [5, 10]
 #K_list = [50, 100]
 #K_list = [200, 1000]
 K_list = [5, 10, 50, 100, 200, 1000]
@@ -149,7 +154,7 @@ def run_for_one_k(K: int):
     all_results = {}
     env_bar = tqdm(("v0", "driftv0", "sinv0", "sinv1"))
     for env_name in env_bar:
-        env_bar.set_descritp
+        env_bar.set_description(f"[{env_name}]")
         env = envs.make_new_env(K=K, env_type=env_name,
                                 nb_trials=NB_TRIALS)
 
