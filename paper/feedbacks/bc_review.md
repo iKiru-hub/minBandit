@@ -9,7 +9,7 @@ I would suggest, authors expand the very first sentence, “The ability … is a
  ---
 Sensitivity to model parameters:
 
-- [ ] I could not find any information about some model parameters, for instance, how the size and the time constants of each layer are chosen, and how sensitive the results are to these choices.
+- [x] I could not find any information about some model parameters, for instance, how the size and the time constants of each layer are chosen, and how sensitive the results are to these choices.
     |> time constants are evolved, no much sensitivity given the population distribution
 
 - [x] The activation functions (phi_v and phi_u) are set in a very specific form (as discussed in Appendix 5.1). It would be helpful to discuss the intuition behind this choice and also how sensitive the results are to this specific form. For example, if one chooses a different activation function, such as ReLU, would the results change?
@@ -107,7 +107,7 @@ and match human data well [16], they are more difficult to relate to neuronal dy
  
 - [x] “while the second, V, encodes their values ac- cording to current policy“ – “according to *the* current policy”
  
-- [ ] Figure 1: missing tilde ~ over W_UV
+- [x] Figure 1: missing tilde ~ over W_UV
     |> actually no, in the figure it is represented the *connectivity*, while in the system of equations it is used the *surrogate* connectivity by means of the gating function
  
 - [x] “More in detail, the weight matrix WV U is simply made of 1s,” – the diagonal of the weight matrix
@@ -147,7 +147,6 @@ and match human data well [16], they are more difficult to relate to neuronal dy
 - [x] Figure 2: inconsistent notation with the text - KAB vs MAB
 
 ---
-- [ ] (7)
 3.2 Evolution search
 
 - [x] "Evolution search" - this terminology is somewhat unusual, I believe "evolutionary search" is more standard, and in this case the author appeared to be using a genetic algorithm, which is a particular kind of evolutionary search.
