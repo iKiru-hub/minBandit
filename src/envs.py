@@ -154,8 +154,6 @@ class KABv0(KAB):
 
         self._update_record()
 
-        pass
-
     def reset(self, complete: bool=False):
 
         """
@@ -164,6 +162,7 @@ class KABv0(KAB):
 
         super().reset(complete=complete)
 
+        # pick the next probability distribution (circular)
         self.counter += 1
         self.probabilities = self.probabilities_set[self.counter % \
             self.nb_sets]
@@ -743,7 +742,7 @@ def trial_multiple_models(models: list, environment: KAB,
                 logger.info(f">>> {name} : {score_list[i, rep_i].mean():.3f}")
 
     # ---------------------------- #
-    # calculate averages over all simulations
+    # calculate averages over all simulations | average over trials and repetitions
     scores = score_list.mean(axis=2).mean(axis=1)
 
     stats = {
@@ -845,7 +844,7 @@ def visual_trial(model: object,
                 fig.suptitle("$\\mathbf{\\pi}=$" + \
                     f"{np.around(environment.probabilities, 2)} [$i=${idx_p}]")
             else:
-                fig.suptitle("$\\mathbf{\\pi}_{\\text{max}}=$" + \
+                fig.suptitle("$\\mathbf{\pi}_{\\text{max}}=$" + \
                     f"{environment.probabilities.max()} [$i=${idx_p}]")
 
         #

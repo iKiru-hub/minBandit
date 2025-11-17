@@ -401,7 +401,7 @@ def plot_lr_policy(params: dict):
 
     fig, ax = plt.subplots(1, 1, figsize=(5, 5))
     ax.plot(X, Y)
-    ax.set_title("Learning rate policy $\\tilde{\eta}$")
+    ax.set_title("Learning rate policy $\\tilde{\\eta}$")
     ax.set_xlabel("weight value")
     ax.set_ylabel("learning rate")
     ax.grid()

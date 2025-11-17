@@ -45,7 +45,9 @@ PATH = tmp_PATH
 # "lr_function": "gaussian"}
 
 # from evolution
+MODEL_IDX = 1
 model_params = load_model(idx=1) # 1
+logger(f"LOADED MODEL INDEX = {MODEL_IDX}")
 
 
 """ settings """
@@ -108,42 +110,46 @@ def make_env(K: int,
     return env
 
 
+def save(path: str, data: dict, name: str):
+    with open(f"{path}/{name}.json", "w") as f:
+        json.dump(data, f)
+    logger(f"results saved as `{name}.json`")
+
+
+def process_k(K):
+    logger(f"running for K={K}...")
+    return K, run_for_one_k(K=K)  # Return a tuple (K, result) for aggregation
+
+
+
+def sanitize_for_json(data: dict):
+    """
+    Sanitize the data for json serialization.
+    Convert any numpy array at any level of the dictionary to a list.
+    """
+
+    for k, v in data.items():
+        if isinstance(v, dict):
+            data[k] = sanitize_for_json(v)
+        elif isinstance(v, np.ndarray):
+            data[k] = v.tolist()
+
+    return data
+
+
+""" run functions """
+
+
 def run_for_one_k(K: int):
 
     # update model parameters
     model_params["K"] = K
-
-    # define proababilities set
-    # probabilities_set = make_probability_set(K=K,
-    #                                          nb_trials=NB_TRIALS,
-    #                                          fixed_p=False,
-    #                                          normalize=False)
-
-    # define the environment
-    # envs_list = [
-    #         make_env(K=K,
-    #                  env_type="v0",
-    #                  probabilities_set=probabilities_set,
-    #                  tau=None),
-    #         make_env(K=K,
-    #                  env_type="driftv0",
-    #                  probabilities_set=probabilities_set,
-    #                  tau=10),
-    #         make_env(K=K,
-    #                  env_type="sinv0",
-    #                  probabilities_set=probabilities_set,
-    #                  tau=None),
-    #         make_env(K=K,
-    #                  env_type="sinv1",
-    #                  probabilities_set=probabilities_set,
-    #                  tau=None),
-    # ]
-
  
     # run
     all_results = {}
-    for env_name in tqdm(("v0", "driftv0", "sinv0", "sinv1")):
-
+    env_bar = tqdm(("v0", "driftv0", "sinv0", "sinv1"))
+    for env_name in env_bar:
+        env_bar.set_descritp
         env = envs.make_new_env(K=K, env_type=env_name,
                                 nb_trials=NB_TRIALS)
 
@@ -171,50 +177,6 @@ def run_for_one_k(K: int):
     return all_results
 
 
-def sanitize_for_json(data: dict):
-    """
-    Sanitize the data for json serialization.
-    Convert any numpy array at any level of the dictionary to a list.
-    """
-
-    for k, v in data.items():
-        if isinstance(v, dict):
-            data[k] = sanitize_for_json(v)
-        elif isinstance(v, np.ndarray):
-            data[k] = v.tolist()
-
-    return data
-
-
-def save(path: str, data: dict, name: str):
-    with open(f"{path}/{name}.json", "w") as f:
-        json.dump(data, f)
-    logger(f"results saved as `{name}.json`")
-
-
-def process_k(K):
-    logger(f"running for K={K}...")
-    return K, run_for_one_k(K=K)  # Return a tuple (K, result) for aggregation
-
-
-def run_for_all_k(K_list: list):
-
-    # Use a multiprocessing Pool
-    with Pool(processes=multiprocessing.cpu_count()) as pool:
-        results = list(tqdm(pool.imap(process_k, K_list), total=len(K_list)))
-
-    # make folder with timestamp
-    dirname = time.strftime("run_%d%m%Y_%H%M%S")
-    path = f"{PATH}/{dirname}"
-    os.makedirs(path, exist_ok=True)
-
-    # save each result separately
-    for K, result in results:
-        data = sanitize_for_json(result)
-        name = f"large_run_results_K{K}"
-        save(path=path, data=data, name=name)
-
-
 def process_over_ks(empty):
 
     """Encapsulate the per-beta computation."""
@@ -234,7 +196,11 @@ def parallel_run_over_ks(NUM_CORES: int, chunksize: int):
 
     """Run the computation over all Ks in parallel."""
 
-    logger(f"running for Ks={K_list}...")
+    logger("started parallel run")
+    logger(f"{K_list=}")
+    logger(f"{NUM_REPS=}")
+    logger(f"{NUM_CORES=}")
+    logger(f"{chunksize=}")
 
     with Pool(processes=NUM_CORES) as pool:
         results = list(
@@ -243,13 +209,12 @@ def parallel_run_over_ks(NUM_CORES: int, chunksize: int):
                  total=NUM_REPS)
         )
 
-    logger("run finished")
+    logger("[run finished]")
 
     # make folder with timestamp
     dirname = time.strftime("run_%d%m%Y_%H%M%S")
     path = f"{PATH}/{dirname}"
     os.makedirs(path, exist_ok=True)
-
 
     # save
     results = {i: res for i, res in enumerate(results)}
@@ -259,6 +224,29 @@ def parallel_run_over_ks(NUM_CORES: int, chunksize: int):
     save(path=path, data=data, name=name)
 
 
+# ---------------------------------------------
+# ---------------------------------------------
+# -- unused
+
+def run_for_all_k(K_list: list):
+
+    # Use a multiprocessing Pool
+    with Pool(processes=multiprocessing.cpu_count()) as pool:
+        results = list(tqdm(pool.imap(process_k, K_list), total=len(K_list)))
+
+    # make folder with timestamp
+    dirname = time.strftime("run_%d%m%Y_%H%M%S")
+    path = f"{PATH}/{dirname}"
+    os.makedirs(path, exist_ok=True)
+
+    # save each result separately
+    for K, result in results:
+        data = sanitize_for_json(result)
+        name = f"large_run_results_K{K}"
+        save(path=path, data=data, name=name)
+
+# ---------------------------------------------
+# ---------------------------------------------
 
 
 if __name__ == "__main__":
