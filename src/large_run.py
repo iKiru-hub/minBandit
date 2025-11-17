@@ -50,7 +50,7 @@ PATH = tmp_PATH
 # "lr_function": "gaussian"}
 
 # from evolution
-MODEL_IDX = 1
+MODEL_IDX = 5
 model_params = load_model(idx=MODEL_IDX) # 1
 logger(f"LOADED MODEL INDEX = {MODEL_IDX}")
 
@@ -154,7 +154,7 @@ def run_for_one_k(K: int):
     all_results = {}
     env_bar = tqdm(("v0", "driftv0", "sinv0", "sinv1"))
     for env_name in env_bar:
-        env_bar.set_description(f"[{env_name}]")
+        env_bar.set_description(f"[{env_name} (K={K})]")
         env = envs.make_new_env(K=K, env_type=env_name,
                                 nb_trials=NB_TRIALS)
 
