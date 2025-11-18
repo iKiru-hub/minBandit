@@ -5,8 +5,7 @@ The NSA model was tested in a series of benchmark environments, each with a diff
 % Description of the environments
 \subsection{Game variants}\label{sec:envs}
 
-\noindent Our goal is to investigate the performance of the agent in a non-stationary environment, meaning that its underlying distribution changes over time \footnote{Since the arm probabilities are not normalized to $1$, it is
-technically improper to call them \textit{probability distributions}; we will therefore refer to either \textit{probability} or \textit{distribution} separately at any given time for avoiding confusion.}
+\noindent Our goal is to investigate the performance of the agent in a non-stationary environment, meaning that its underlying distribution changes over time \footnote{Since the arm probabilities are not normalized to $1$, it is technically improper to call them \textit{probability distributions}; we will therefore refer to either \textit{probability} or \textit{distribution} separately at any given time for avoiding confusion.}
 We choose this setting as it resembles an scenario in which an animal has to forage in an environment with food (reward) distributed over a set of fixed locations, but whose occurrence probability can change over time.
 A \textit{round} -or horizon- is defined as an action-reward event; instead, a \textit{trial} is a a block of rounds.
 For testing, four slightly different MAB variants were used, obtained by introducing different types of non-stationarity: piecewise constant, uniformly changing, sinusoidally changing, and sinusoidally changing with piecewise constant arms.

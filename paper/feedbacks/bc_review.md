@@ -84,12 +84,12 @@ Relatedly, did those models have any free parameters and how are they fit? This 
 - [x] {**} “In fact, these methods can achieve state-of-the-art performance” – which methods do you mean by “these methods”?
     |> bio-inspired ones
  
-- [ ] “In addition, bioinspired models enhance algorithmic interpretability by clarifying the functional relationships between internal components” – I would disagree, biologically plausible models are often less interpretable algorithmically, as it is difficult to tell what each neuron / set of neurons / set of synapses is doing/learning.
+- [x] “In addition, bioinspired models enhance algorithmic interpretability by clarifying the functional relationships between internal components” – I would disagree, biologically plausible models are often less interpretable algorithmically, as it is difficult to tell what each neuron / set of neurons / set of synapses is doing/learning.
     |> partially. what I meant was that the architecture has more specialized features to which is easier (and costructed as such) to label and map to neural elements. as for the learning, it is true that the possibly more degrees of freedom and complex relationship makes more opaque the overall state-space landscape.
 
-- [ ] “Although other approaches such as Bayesian learning can demonstrate optimal performance
+- [x] “Although other approaches such as Bayesian learning can demonstrate optimal performance
 and match human data well [16], they are more difficult to relate to neuronal dynamics.“ – again I would disagree. Computations from purely normative models can still be mapped to brain regions and circuits. Classic example: TD reward prediction errors and dopaminergic neurons in the midbrain (Schultz et al 1996 science). Example that’s very relevant to this study: mapping of Thompson sampling and UCB and their hybrid to different brain regions (Tomov et al 2020 nature communications).
-    |> true, i should restricted the semantic breadth of my statement 
+    |> true, i should restricted the semantic breadth of my statement --> deleted
  
  ---
 2.1 Binomial MAB problem
@@ -162,4 +162,8 @@ and match human data well [16], they are more difficult to relate to neuronal dy
 
 - [ ] "The results reported how all models are capable of robust performance in the first trial even in the presence of high uncertainty" - same thing, how is that possible if the models don't know anything about any of the arms at this point? This raises questions about the methodology and the rest of the results.
 
+---
+
+mention:
+- [ ] testing distribution for different environments
 

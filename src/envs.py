@@ -14,6 +14,7 @@ except ModuleNotFoundError:
 
 logger = setup_logger(name=__name__, level=2)
 
+ROUND_TRIM = 95
 
 
 """ Game """
@@ -645,6 +646,7 @@ def trial_multiple_models(models: list, environment: KAB,
 
     # initialize
     K = environment.K
+    round_trim = int(nb_rounds / 100 * ROUND_TRIM)
     names = []
     for m in models:
         m.reset()
@@ -720,7 +722,7 @@ def trial_multiple_models(models: list, environment: KAB,
                     reward_list[i, rep_i, trial_i, round_i] = reward
 
             # ---------------------------- #
-            score_list[:, rep_i, trial_i] = reward_list[:, rep_i, trial_i, -int(nb_rounds/10):].mean(axis=1)
+            score_list[:, rep_i, trial_i] = reward_list[:, rep_i, trial_i, -round_trim:].mean(axis=1)
             # mean_score_list[:, rep_i, trial_i] = reward_list[:, rep_i, trial_i].mean(axis=1)
 
             # calculate entropy for the trial
