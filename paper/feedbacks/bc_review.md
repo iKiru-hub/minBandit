@@ -107,7 +107,7 @@ and match human data well [16], they are more difficult to relate to neuronal dy
  
 - [x] “while the second, V, encodes their values ac- cording to current policy“ – “according to *the* current policy”
  
-- [ ] Figure 1: missing tilde ~ over W_UV
+- [x] Figure 1: missing tilde ~ over W_UV
     |> actually no, in the figure it is represented the *connectivity*, while in the system of equations it is used the *surrogate* connectivity by means of the gating function
  
 - [x] “More in detail, the weight matrix WV U is simply made of 1s,” – the diagonal of the weight matrix
@@ -117,11 +117,11 @@ and match human data well [16], they are more difficult to relate to neuronal dy
 ---
 2.2.1 Option selection
  
-- [ ] “After a fixed time ∼ 2s, the second phase begins” – how do you solve the ODE? What is the time delta, if you’re doing a discrete approximation?
-   |> Euler-Kutta algorithm. just step the dynamics. 
+- [x] “After a fixed time ∼ 2s, the second phase begins” – how do you solve the ODE? What is the time delta, if you’re doing a discrete approximation?
+   |> forward Euler algorithm. just step the dynamics.
  
-- [ ] argmaxk {v} – how are ties broken? This seems critical since all the weights are initialized uniformly.
-    |> *todo*
+- [x] argmaxk {v} – how are ties broken? This seems critical since all the weights are initialized uniformly.
+    |> first result
  
 - [x] “Lastly, the structure of the option selection process resembles the prefrontal circuitry, as the choices emerge from the state sampling of the network following a period of autonomous neural activity.” – this analogy seems a bit tenuous, I would recommend either elaborating more and actually visualizing the state sampling and stabilization, or removing it.
     |> *todo*
@@ -129,7 +129,7 @@ and match human data well [16], they are more difficult to relate to neuronal dy
  ---
 2.3 Learning
  
-- [ ] “a reward R ∈ {0, 1} with probability pk” – this is a little imprecise, it returns reward R = 1 with probability pk
+- [x] “a reward R ∈ {0, 1} with probability pk” – this is a little imprecise, it returns reward R = 1 with probability pk
  
 - [ ] "In particular, these characteristics can be combined to define mechanisms of synapse-type specific plasticity as a function of current synaptic strength" - can you elaborate a little bit more and also on the next sentence? In general, throughout the paper the authors draw analogies with known circuit motifs in the brain without elaborating (including an abstract). I would recommend either removing them or elaborating a little more.
 
