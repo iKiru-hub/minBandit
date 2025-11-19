@@ -16,6 +16,7 @@ CACHE_PATH = f"{WD}/src/_evo_cache"
 CACHE_PATH_2 = f"{WD}/src/_evo_cache"
 MEDIA_PATH = f"{WD}/media"
 MEDIA_PATH_2 = f"{WD}/media"
+DATA_PATH = f"{WD}/src/data"
 
 DEBUG = False
 try:

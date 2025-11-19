@@ -39,19 +39,18 @@ settings1.idx = 1
 settings1.load = True
 settings1.env = "v0"
 settings1.K = 200
-
-# NUM_BETAS = 7
-
-probability = np.around(np.random.uniform(0.05, 0.5, settings1.K),
-                        2)
-probability[0] = 0.9
+settings1.num_values = 200
 
 model_params = utils.load_model(idx=settings1.idx)
 model_params["K"] = settings1.K
 
-# beta_values = 1.5**(np.linspace(7, 1, NUM_BETAS))
-beta_values = [17, 15, 12, 8, 4, 1.5, 0.5]
-NUM_BETAS = len(beta_values)
+# -- reference probability distribution
+# probability = np.around(np.random.uniform(0.05, 0.5, settings1.K), 2)
+# probability[0] = 0.8
+# beta_values = [17, 15, 12, 8, 4, 1.5, 0.5]
+# NUM_BETAS = len(beta_values)
+
+PROBABILITY = np.random.uniform(0., 0.4, settings1.K)
 
 
 def run_(probabilities_set, params):
