@@ -44,7 +44,7 @@ settings1.K = 200
 
 probability = np.around(np.random.uniform(0.05, 0.5, settings1.K),
                         2)
-probability[0] = 1.
+probability[0] = 0.9
 
 model_params = utils.load_model(idx=settings1.idx)
 model_params["K"] = settings1.K
@@ -144,7 +144,7 @@ def calculate_for_beta(beta):
     return prob_entropy, model_reward, model_reward_std, model_entropy, model_entropy_std, upper_list
 
 
-def calculation_over_betas(empty):
+def calculation_over_betas():
 
     """Encapsulate the per-beta computation."""
 

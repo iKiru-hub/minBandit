@@ -131,7 +131,7 @@ and match human data well [16], they are more difficult to relate to neuronal dy
  
 - [x] “a reward R ∈ {0, 1} with probability pk” – this is a little imprecise, it returns reward R = 1 with probability pk
  
-- [ ] "In particular, these characteristics can be combined to define mechanisms of synapse-type specific plasticity as a function of current synaptic strength" - can you elaborate a little bit more and also on the next sentence? In general, throughout the paper the authors draw analogies with known circuit motifs in the brain without elaborating (including an abstract). I would recommend either removing them or elaborating a little more.
+- [x] "In particular, these characteristics can be combined to define mechanisms of synapse-type specific plasticity as a function of current synaptic strength" - can you elaborate a little bit more and also on the next sentence? In general, throughout the paper the authors draw analogies with known circuit motifs in the brain without elaborating (including an abstract). I would recommend either removing them or elaborating a little more.
 
 - [x] Algorithm 1: "Let system evolve through population coupling according to 2.2;" - how is that different mechanistically from "Update populations u, v according to 2.2;" a few lines above? If it's the same thing I would recommend using the exact same phrasing, to avoid confusion.
 
@@ -166,4 +166,4 @@ and match human data well [16], they are more difficult to relate to neuronal dy
 
 mention:
 - [ ] testing distribution for different environments
-
+- [ ] redo entropy plot

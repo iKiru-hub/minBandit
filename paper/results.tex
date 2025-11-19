@@ -73,8 +73,8 @@ This firing behaviour is reminiscent of coincidence detector neurons, which are 
 The two Gaussian-sigmoid functions $\Phi_{v}, \Phi_{\eta}$, which are respectively the option value and learning rate functions, are instead shown in \textbf{\ref{fig:evolution}d}.
 On the one hand, the learning rate function $\Phi_{\eta}$ is characterized by a decreasing curve, associated with the dominance of the right-side of the Gaussian, and a completely ignored sigmoid component.
 A possible interpretation for this shape is to ensure a high learning speed when the value options are more uncertain (weak weights), and low otherwise; thus preventing overshooting and oscillations in the weight updates.
-This adaptive behaviour is in line with known neuronal dynamics such as homeostatic plasticity, which works towards a stabilization of synapses, for instance through synaptic scaling and proportional updates \cite{citriSynapticPlasticityMultiple2008}.
-A variable learning rate is an important feature of several plasticity rules, from the more biologically plausible like the Oja rule \cite{ojaOjaLearningRule2008} to deep learning optimizers like Adam \cite{kingmaAdamMethodStochastic2017}.
+%This adaptive behaviour is in line with known neuronal dynamics such as homeostatic plasticity, which works towards a stabilization of synapses, for instance through synaptic scaling and proportional updates \cite{citriSynapticPlasticityMultiple2008}.
+%A variable learning rate is an important feature of several plasticity rules, from the more biologically plausible like the Oja rule \cite{ojaOjaLearningRule2008} to deep learning optimizers like Adam \cite{kingmaAdamMethodStochastic2017}.
 
 On the other hand, the option value function $\Phi_{v}$ follows instead a steep sigmoid curve.
 This is consistent with the idea that the input of population $U$ to population $V$ is weighted maximally for high option values (strong synapses), whereas for weaker estimates the contributions are low or close to zero, allowing for more exploration.
@@ -144,8 +144,8 @@ However, this is in part due to the randomness in the assignment of arm probabil
 
 % entropy over rounds
 \subsubsection{Entropy analysis}\label{sec:entropy}
-\noindent For a better understanding of the qualitative differences between the models, we analyzed the progress over the rounds by tracking the selected arms in a simple piecewise stationary distribution environment.
-The simulation was run for $3$ trials with $2000$ rounds each and then averaged over $5$ iterations.
+\noindent For a better understanding of the qualitative differences between the models, we analyzed the progress over the rounds by tracking the selected arms in a simple piecewise stationary distribution environment with $K=200$ and highest probability set to $p=0.9$.
+The simulation was run for $2$ trials with $2000$ rounds each and then averaged over $5$ iterations.
 Furthermore, in order to quantify the variability of the decision policy at a given time and highlight the particularity of each decision-making behavior, we calculated the entropy of the probability distribution $p$ of the chosen arms, calculated over a window of 20 rounds, as $H=-\sum^{K}_{i} p_{i}\log(p_{i})$.
 The unit of entropy is in nats, and it ranges from $0$ (no uncertainty) to $\log_{e}(K)$ (maximum uncertainty).
 In Figure \ref{fig:entropy_fig1}-\textbf{a}, the raster plot of the selected arms is plotted for each model together with its level of entropy. The distribution of the probability of reward on the arms has an average of $H=2.02$.

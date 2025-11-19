@@ -132,8 +132,10 @@ Then, the weights $\textbf{W}^{UV}$ for the neuron corresponding to option $k$ a
 
 \noindent where $w^{+}$ is a constant maximum synaptic weight, while $\tilde{\eta}_{k}$ is the learning rate for the option $k$ determined by a function $\Phi_{\eta}$ of the current weights $\textbf{W}^{UV}_{k}$, known as the \textit{learning rate function}.
 
-The shape of $\Phi_{\eta}$ is again a Gaussian-sigmoid but with different parameters, giving evolution the opportunity to combine the two characteristic traits of the plateau and the bell-shaped tuning.
-In particular, these characteristics can be combined to define mechanisms of synapse-type specific plasticity as a function of current synaptic strength \cite{larsenSynapsetypespecificPlasticityLocal2015}, as well as the application of other useful homeostatic constraints with computational advantages, such as synaptic scaling and proportional updates \cite{citriSynapticPlasticityMultiple2008, kennedySynapticSignalingLearning2016, samavatSynapticInformationStorage2024}.
+The shape of $\Phi_{\eta}$ is again a Gaussian-sigmoid but with different parameters, giving evolution the opportunity to combine the two characteristic traits of smooth saturation and bell-shaped tuning.
+In terms of neural dynamics, the advantage is to introduce adapation in the learning of the weights, implemented as a more considerate scaling of the update magnitude.
+Computationally, this allows taking into account different learning phases for a given neuron, which represents an option, and approach similar to adaptive optimizers employed in training deep networks \cite{wen_evolution_2024}.
+Further, proportional updates and synaptic scaling have been observed in biological synapses, taking part plasticity mechanisms, like shaping the synaptic update kernel, or homeostatic constraints, for instance limits in the speed of chemical exchange in the synaptic cleft \cite{citriSynapticPlasticityMultiple2008, larsenSynapsetypespecificPlasticityLocal2015, kennedySynapticSignalingLearning2016, samavatSynapticInformationStorage2024}.
 
 
 % --- commented out
