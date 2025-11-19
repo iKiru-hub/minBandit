@@ -15,13 +15,13 @@ logger(f"{logger}")
 
 
 # -- general settings
-NB_ROUNDS = 50
+NB_ROUNDS = 1000
 NB_TRIALS = 2
 ENV_TYPE = "v0"
 VERBOSE = True
-MODEL_IDX = 5
+MODEL_IDX = 1
 K_VALUE = 200
-NUM_VALUES = 2
+NUM_VALUES = 7
 
 
 # -- model parameters
