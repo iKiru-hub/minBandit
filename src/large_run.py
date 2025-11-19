@@ -50,7 +50,7 @@ PATH = tmp_PATH
 # "lr_function": "gaussian"}
 
 # from evolution
-MODEL_IDX = 5
+MODEL_IDX = 1
 model_params = load_model(idx=MODEL_IDX) # 1
 logger(f"LOADED MODEL INDEX = {MODEL_IDX}")
 

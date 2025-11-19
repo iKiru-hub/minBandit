@@ -144,7 +144,7 @@ def calculate_for_beta(beta):
     return prob_entropy, model_reward, model_reward_std, model_entropy, model_entropy_std, upper_list
 
 
-def calculation_over_betas():
+def calculation_over_betas(empty):
 
     """Encapsulate the per-beta computation."""
 
@@ -252,7 +252,7 @@ if __name__ == "__main__":
 
 
     name = "entropy_run_" + time.strftime("%Y%m%d-%H%M%S") + ".json"
-    with open(f"data/{name}", 'w') as f:
+    with open(f"src/data/{name}", 'w') as f:
         json.dump(data, f)
 
     logger(f"saved to {name}")
