@@ -18,6 +18,7 @@ MEDIA_PATH = f"{WD}/media"
 MEDIA_PATH_2 = f"{WD}/media"
 DATA_PATH = f"{WD}/src/data"
 TMP_PATH = f"{WD}/src/tmp"
+FIG_PATH = f"{WD}/paper/figures"
 
 DEBUG = False
 try:

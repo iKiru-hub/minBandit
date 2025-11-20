@@ -69,13 +69,76 @@ def redact_score(results):
     return (results['score'] - results['chance']) / (results['upper_bound'] - results['chance'])
 
 
+def get_sgnf_d(x: float):
+    return len(str(x).split('.')[1].split('0'))
+
+
+
+plt.style.use('seaborn-v0_8-white')  # Requires matplotlib-style package
+
+plt.rcParams.update({
+    'figure.figsize': (10, 4),
+    'figure.dpi': 400,
+    'figure.subplot.wspace': 0.1,
+    'figure.subplot.hspace': 0.3,
+
+    'text.usetex': True,
+
+    'font.size': 7,
+    'font.family': 'serif',
+    'font.weight': 'normal',
+    'font.serif': ['Computer Modern Roman'],
+
+    'axes.labelsize': 9,
+    'axes.titlesize': 9,
+    'axes.labelweight': 'normal',
+    'axes.spines.top': True,
+    'axes.spines.right': True,
+
+    'lines.linewidth': 1.0,
+    'lines.markeredgewidth': 0.5,
+    'lines.markeredgecolor': 'black',
+
+    'xtick.labelsize': 7,
+    'ytick.labelsize': 7,
+
+})
+
+
+def make_plot(table: np.ndarray):
+
+    fig, ax = plt.subplots(figsize=(3, 10))
+    im = ax.imshow(table[:, :, 0], cmap="viridis")
+
+    ax.set_xticks(range(num_epsilon))
+    ax.set_xticklabels(Eps)
+    ax.set_xlabel("$\\epsilon$")
+
+    ax.set_yticks(range(num_k))
+    ax.set_yticklabels(Ks)
+    ax.set_ylabel("K")
+
+    for i in range(len(table)):
+        for j in range(len(table[i])):
+            _text = f"{table[i, j, 0]:.2f}"
+            _text += f"({get_sgnf_d(table[i, j, 1])})"
+            _ = ax.text(j, i, _text, ha="center", va="center", color="black",
+                        fontsize=15)
+
+    fig.suptitle("EpsilonGreedy algorithm for different $\\epsilon$ and $K$", fontsize=21)
+
+    plt.show()
+
+
+
+
 if __name__ == "__main__":
 
     np.random.seed(3)
 
     # ---
     num_k = 5
-    nb_rounds = 2000
+    nb_rounds = 1000
     nb_trials = 1
     nb_reps = 1
     env_type = "default"
@@ -88,46 +151,81 @@ if __name__ == "__main__":
     Ks = Ks.astype(int)
     logger(f"(int) {Ks=}")
 
-    # Eps = np.around(np.linspace(0.01, 0.9, num_epsilon), 2)
-    Eps = np.array([0.01, 0.05, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9])
+    Eps = np.around(np.linspace(0.01, 0.9, 3), 2)
+    # Eps = np.array([0.01, 0.05, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9])
     num_epsilon = len(Eps)
 
-    table = np.zeros((num_k, num_epsilon))
+    table = np.zeros((num_k, num_epsilon, 2))
 
     # ---
-    for i in tqdm(range(num_k)):
+    for i in range(num_k):
         logger(f"-->> K={Ks[i]}")
-        for j in tqdm(range(num_epsilon)):
-            for _ in range(nb_reps):
-                results = run(epsilon=Eps[j], K=Ks[i], nb_rounds=nb_rounds, nb_trials=nb_trials,
+        pbar = tqdm(range(num_epsilon))
+        for j in pbar:
+            pbar.set_description(f"epsilon={Eps[j]}")
+            results = np.zeros(nb_reps)
+            for l in range(nb_reps):
+                result = run(epsilon=Eps[j], K=Ks[i], nb_rounds=nb_rounds, nb_trials=nb_trials,
                               env_type=env_type, fixed_p=fixed_p, verbose=False)
-                table[i, j] += redact_score(results)
+                # table[i, j] += redact_score(results)
+                results[l] = redact_score(result)
 
-            table[i, j] /= nb_reps
+            # update tables
+            table[i, j, 0] = results.mean()
+            table[i, j, 1] = results.std()
 
-    logger(f"{results['upper_bound']=}")
+    # logger(f"{results['upper_bound']=}")
 
     # ---
-    # table = np.flip(table, axis=0)
-    # Eps = np.flip(Eps, axis=0)
-    fig, ax = plt.subplots(figsize=(3, 10))
-    im = ax.imshow(table, cmap="viridis")
+    fig, ax = plt.subplots(figsize=(4, 10))
+    im = ax.imshow(table[:, :, 0], cmap="viridis")
 
     ax.set_xticks(range(num_epsilon))
-    ax.set_xticklabels(Eps, fontsize=15)
-    ax.set_xlabel("$\\epsilon$", fontsize=19)
+    ax.set_xticklabels(Eps)
+    ax.set_xlabel("$\\epsilon$")
 
     ax.set_yticks(range(num_k))
-    ax.set_yticklabels(Ks, fontsize=15)
-    ax.set_ylabel("K", fontsize=19)
+    ax.set_yticklabels(Ks)
+    ax.set_ylabel("K")
 
     for i in range(len(table)):
         for j in range(len(table[i])):
-            _ = ax.text(j, i, f"{table[i, j]:.2f}", ha="center", va="center", color="black",
-                        fontsize=15)
+            _text = f"{table[i, j, 0]:.2f}"
+            _text += f"({get_sgnf_d(table[i, j, 1])})"
+            _ = ax.text(j, i, _text, ha="center", va="center", color="black",
+                        fontsize=6)
 
-    fig.suptitle("EpsilonGreedy algorithm for different $\\epsilon$ and $K$", fontsize=21)
+    fig.suptitle("EpsilonGreedy algorithm for different $\\epsilon$ and $K$", fontsize=7)
+    plt.colorbar(im)
 
     plt.show()
+
+    # -- save
+    count = len([f for f in os.listdir(utils.FIG_PATH) if "eps_plot_" in f])
+    logger(f"{count=}")
+    plt.savefig(f'{utils.FIG_PATH}/eps_plot_{count}.svg', bbox_inches='tight')
+    logger("[saved]")
+
+    # table = np.flip(table, axis=0)
+    # Eps = np.flip(Eps, axis=0)
+    # fig, ax = plt.subplots(figsize=(3, 10))
+    # im = ax.imshow(table, cmap="viridis")
+    #
+    # ax.set_xticks(range(num_epsilon))
+    # ax.set_xticklabels(Eps, fontsize=15)
+    # ax.set_xlabel("$\\epsilon$", fontsize=19)
+    #
+    # ax.set_yticks(range(num_k))
+    # ax.set_yticklabels(Ks, fontsize=15)
+    # ax.set_ylabel("K", fontsize=19)
+    #
+    # for i in range(len(table)):
+    #     for j in range(len(table[i])):
+    #         _ = ax.text(j, i, f"{table[i, j]:.2f}", ha="center", va="center", color="black",
+    #                     fontsize=15)
+    #
+    # fig.suptitle("EpsilonGreedy algorithm for different $\\epsilon$ and $K$", fontsize=21)
+    #
+    # plt.show()
 
 
