@@ -19,11 +19,11 @@ Warning--I didn't find a database entry for "spratlingReviewPredictiveCoding2017
 Warning--I didn't find a database entry for "schmidgallBraininspiredLearningArtificial2024"
 Warning--I didn't find a database entry for "hassabisNeuroscienceInspiredArtificialIntelligence2017"
 Warning--I didn't find a database entry for "liuSeeingBelievingBrainInspired2023"
+Warning--I didn't find a database entry for "behrens2007"
 Warning--I didn't find a database entry for "larsenSynapsetypespecificPlasticityLocal2015"
 Warning--I didn't find a database entry for "blackmanTargetcellspecificShorttermPlasticity2013"
 Warning--I didn't find a database entry for "bartolHippocampalSpineHead2015"
 Warning--I didn't find a database entry for "arielIntrinsicVariabilityPv2012"
-Warning--I didn't find a database entry for "behrens2007"
 Warning--I didn't find a database entry for "inglis2021"
 Warning--I didn't find a database entry for "iigaya2016"
 Warning--I didn't find a database entry for "starkweather2018"
@@ -91,9 +91,6 @@ Warning--empty journal in balewski_value_2023
 Warning--empty year in balewski_value_2023
 Warning--empty journal in rolls_emotion_2023
 Warning--empty year in rolls_emotion_2023
-Warning--empty year in shu_bio-inspired_2014
-Warning--empty journal in triche_exploration_2022
-Warning--empty year in triche_exploration_2022
 Warning--empty journal in yantis_neural_2008
 Warning--empty year in yantis_neural_2008
 Warning--empty journal in igel_covariance_2007
@@ -116,45 +113,45 @@ Warning--empty journal in carroll_encoding_2014
 Warning--empty year in carroll_encoding_2014
 Warning--empty journal in wen_evolution_2024
 Warning--empty year in wen_evolution_2024
-You've used 30 entries,
+You've used 28 entries,
             1791 wiz_defined-function locations,
-            697 strings with 11558 characters,
-and the built_in function-call counts, 7313 in all, are:
-= -- 634
-> -- 298
-< -- 1
-+ -- 111
-- -- 81
-* -- 628
-:= -- 1107
-add.period$ -- 96
-call.type$ -- 30
-change.case$ -- 30
+            686 strings with 11072 characters,
+and the built_in function-call counts, 6664 in all, are:
+= -- 572
+> -- 276
+< -- 0
++ -- 103
+- -- 75
+* -- 585
+:= -- 1021
+add.period$ -- 89
+call.type$ -- 28
+change.case$ -- 28
 chr.to.int$ -- 0
-cite$ -- 87
-duplicate$ -- 279
-empty$ -- 706
-format.name$ -- 81
-if$ -- 1522
+cite$ -- 82
+duplicate$ -- 247
+empty$ -- 644
+format.name$ -- 75
+if$ -- 1372
 int.to.chr$ -- 0
-int.to.str$ -- 30
-missing$ -- 29
-newline$ -- 159
-num.names$ -- 30
-pop$ -- 118
+int.to.str$ -- 28
+missing$ -- 27
+newline$ -- 148
+num.names$ -- 28
+pop$ -- 108
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 120
+skip$ -- 98
 stack$ -- 0
-substring$ -- 663
-swap$ -- 14
-text.length$ -- 1
+substring$ -- 604
+swap$ -- 1
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 57
-while$ -- 83
-width$ -- 32
-write$ -- 285
-(There were 113 warnings)
+warning$ -- 54
+while$ -- 76
+width$ -- 30
+write$ -- 264
+(There were 110 warnings)

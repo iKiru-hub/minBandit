@@ -1,4 +1,3 @@
-
 \section{Introduction}
 
 % brief introduction to decision making and the brain.
@@ -15,27 +14,27 @@ Important lines of research in this regard revolved around the underlying learni
 % - classical vs instrumental conditioning
 % - model based vs free
 % - explicit and implicit elements
-One of the classical learning paradigms that have been suggested is Pavlovian conditioning, where the animal forms direct pairings of external cue and hard-wired responses \cite{allen_closer_1985}.
-A more flexbible variant is operant conditioning, in which the response of the animal can be reshaped through repeated experiences and feedbacks \cite{baldassarre_classical_nodate}.
-Another perspective to decision-making is more computational, and has the brain being abstracted in terms of an agent or controller \cite{dayanDecisionTheoryReinforcement2008}.
-Here, proposed approaches may be classified as either model based or model free, whose main difference is whether the calculation of the behaviour involves an internal model of the environment or solely a state-action mapping, with consequences on adaptability and computational efficiency \cite{suttonReinforcementLearningProblem1998}.
+One of the classical learning paradigms that have been suggested is Pavlovian conditioning, where the animal forms direct pairings of external cues and hard-wired responses \cite{allen_closer_1985}.
+A more flexible variant is operant conditioning, in which the response of the animal can be reshaped through repeated experiences and feedback \cite{baldassarre_classical_nodate}.
+Another perspective on decision-making is more computational and has the brain abstracted in terms of an agent or controller \cite{dayanDecisionTheoryReinforcement2008}.
+Here, proposed approaches may be classified as model based or model free, whose main difference is whether the calculation of the behavior involves an internal model of the environment or only a state-action mapping, with consequences on adaptability and computational efficiency \cite{suttonReinforcementLearningProblem1998}.
 % brain areas
-Concerning their possible brain implementation, the co-existance of an array of controllers has been hypothetized, which may vary in local arrangements, plasticity details, and position within an neuroanatomical hierarchy \cite{bach_algorithms_2017}.
-The midbrain dopaminergic neurons in the ventral striatum have been long associated to model-free algorithms, such as temporal difference learning, given their involvement in action selection and the strong correlation with reward prediction errors \cite{suri_td_2002, niv_dopamine_2005, schultz_dopamine_2016}.
-Nevertheless, they have been speculated to contributed to model-based dynamics as well, in particular through the interplay with the orbito-frontal cortex (OFC), a region known for being involved in value representation \cite{frank_anatomy_2006, singh_nucleus_2010, kennerley_decision_2011, mcdannald_model-based_2012}.
-Another area that emerged for its role in option evaluation and selection is the anterior cingulate cortex (ACC), particularly during action selection, perceptual disambiguation and multi-stability situations \cite{walton_adaptive_2007, safavi_multistability_2022}.
-Indeed, there is consistent evidence that the interaction between OFC and ACC plays a crucial part in decision-making, integrating high-level and emotional information sourced from the amygdala, and temporal and hippocampal regions \cite{rosenbloom_functional_2012, luk_choice_2013, balewski_value_2023, rolls_emotion_2023}.
+Concerning their possible brain implementation, the coexistence of a number of controllers has been hypothetized, which may vary in local arrangements, plasticity details, and position within a neuroanatomical hierarchy \cite{bach_algorithms_2017}.
+ Dopaminergic neurons in the ventral striatum of the midbrain have long been associated with model-free algorithms, such as temporal difference learning, given their involvement in action selection and the strong correlation with reward prediction errors \cite{suri_td_2002, niv_dopamine_2005, schultz_dopamine_2016}.
+Nevertheless, it has also been speculated that they contributed to model-based dynamics, in particular through the interplay with the orbito-frontal cortex (OFC), a region known for being involved in value representation \cite{frank_anatomy_2006, singh_nucleus_2010, kennerley_decision_2011, mcdannald_model-based_2012}.
+Another area that emerged for its role in option evaluation and selection is the anterior cingulate cortex (ACC), particularly during action selection, perceptual disambiguation, and multi-stability situations \cite{walton_adaptive_2007, safavi_multistability_2022}.
+Indeed, there is consistent evidence that the interaction between OFC and ACC plays a crucial role in decision-making, integrating emotional and high-level information sourced from the amygdala, and the temporal and hippocampal regions \cite{rosenbloom_functional_2012, luk_choice_2013, balewski_value_2023, rolls_emotion_2023}.
 
 
 % bridge between decision making and the k-armed bandit problem.
 Well-studied ecological settings for decision making are foraging tasks, such as food search. In these problems, the agent is usually asked to choose between different options to maximize an expected reward.
-In nature, animals have been shown to exhibit different strategies depending on context.
+In nature, animals have been shown to exhibit different strategies depending on the context.
 \textit{Matching behaviour} is a well-known phenomenon in which the animal's decision patterns are proportional to the reward probability of the available options.
 This behavior is believed to be the result of the trade-off between exploration and exploitation \cite{nivEvolutionReinforcementLearning2002}.
 In fact, this is a well known phenomenon in the reinforcement learning literature, in which an agent is faced with the dilemma of exploring new alternatives, potentially more rewarding, or exploiting known options, despite being possibly sup-optimal.
 
-A popular formalization of these types of tasks is the \textit{multi-armed bandit} problem (MAB) \cite{averbeckTheoryChoiceBandit2015}. This setting is usually described in terms of a slot machine endowed with $K$ distinct arms, also called levers.
-During a round, the agent selects one of the arms and collects a reward $R$ according to an unknown probability of reward specific to the chosen arm.
+A popular formalization of these types of task is the \textit{multi-armed bandit} problem (MAB) \cite{averbeckTheoryChoiceBandit2015}. This setting is usually described in terms of a slot machine endowed with $K$ distinct arms, also called levers.
+During a round, the agent selects one of the arms and collects a reward $R$ according to an unknown probability of the specific reward for the chosen arm.
 The goal is simply to maximize the total reward after a given number of steps, which is achieved by effectively updating a selection policy after each round.
 This problem has been extensively studied in the context of reinforcement learning and is considered a fundamental building block for more complex tasks \cite{suttonReinforcementLearningProblem1998}.
 
@@ -45,7 +44,7 @@ This problem has been extensively studied in the context of reinforcement learni
 
 The multi-armed bandit problem comes in several variants, with the simplest featuring a stationary reward distribution.
 An important performance measure in these tasks is \textit{regret}, usually defined as the distance between the selected choice and the theoretically optimal one.
-Researchers have proposed numerous algorithms to address this problem, each with distinct theoretical guarantees.
+Researchers have proposed numerous algorithms to address this problem, each with distinct theoretical guaranties.
 
 Thompson sampling (TS) is a widely adopted approach rooted in Bayesian optimization. It maintains a posterior distribution over action reward probabilities and selects actions by sampling from these distributions. Thompson sampling has demonstrated near-optimal regret bounds in stochastic settings \cite{agrawalAnalysisThompsonSampling2012, kaufmannThompsonSamplingAsymptotically2012}.
 In contrast, the Upper Confidence Bound (UCB) algorithm uses an optimistic principle for exploration. It maintains an estimate of the reward for each option by a confidence interval. Action selection relies on the upper bound of this interval, encouraging exploration of less-visited options by assigning them higher uncertainty. UCB has been shown to achieve logarithmic regret in stochastic bandits \cite{auerFinitetimeAnalysisMultiarmed2002}.
@@ -58,15 +57,12 @@ For example, they do not rely on a network-like architecture with interconnected
 Additionally, their action selection process is typically instantaneous, whereas decision making in the brain occurs over time, often requiring the activity of a neural circuit to evolve and stabilize before converging on a final selection.
 Their learning mechanisms also differ fundamentally. They typically involve explicit updates to statistical parameters (e.g., reward estimates or exploration rates) based on observed outcomes.
 In contrast, biological learning relies on local plasticity rules, where synaptic changes depend on the activity of connected neurons, modulating how input is integrated and how output signals are generated.
-Although not the primary driver, these limitations align with a growing interest in machine learning towards bioinspired algorithms, such as neural networks and predictive coding \cite{lee2022, spratlingReviewPredictiveCoding2017}, offering several advantages.
+Although not the primary driver, these limitations align with a growing interest in machine learning towards bioinspired algorithms, such as neural networks and predictive coding \cite{lee2022, spratlingReviewPredictiveCoding2017}, which offers several advantages.
 
 In fact, some of these biological cognitive systems can achieve state-of-the-art performance in various domains, including the challenging \textit{machine-challenging tasks} (MCTs), set of problems that are difficult for machines but relatively easy for humans \cite{schmidgallBraininspiredLearningArtificial2024, hassabisNeuroscienceInspiredArtificialIntelligence2017, lee2022}.
-In addition, the architecture bioinspired models might enhance algorithmic interpretability by clarifying the functional relationships between internal components.
-In addition, bioinspired architectures may be composed of more specialized and diverse internal components, which are easier to relate to known neural structures or mechanism.
-A good case of this are bio-physical and spiking models \cite{shu_bio-inspired_2014, triche_exploration_2022}, differing from deep neural networks which made of stacks of many relatively simple artificial neurons.
-This might enhance algorithmic interpretability by making more explicit the functional relationships architectural components, although part of the dynamics might still remain overall too complicated and opaque.
+In addition, bioinspired models improve algorithmic interpretability by clarifying the functional relationships between internal components.
 When applied to tasks with existing experimental data, these models can generate new insights into the brain and suggest new research directions \cite{liuSeeingBelievingBrainInspired2023}.
-% Although other approaches such as Bayesian learning can demonstrate optimal performance and match human data well \cite{behrens2007}, they are more difficult to relate to neuronal dynamics.
+Although other approaches such as Bayesian learning can demonstrate optimal performance and match human data well \cite{behrens2007}, they are more difficult to relate to neuronal dynamics.
 
 \hfill \break
 
@@ -101,6 +97,8 @@ By proposing a biologically plausible mechanism for choice behavior in dynamic e
 \hfill \break
 % structure of the paper
 The remainder of this paper first describes our model design and learning, then presents experimental results and comparative analyses with established algorithms, and lastly discusses the findings' broader implications and potential future directions.
+
+
 
 
 

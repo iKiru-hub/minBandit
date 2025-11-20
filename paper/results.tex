@@ -1,28 +1,28 @@
 \section{Experiments}
 
-The NSA model was tested in a series of benchmark environments, each with a different number of arms and reward distributions. The performance has been compared with the following algorithms: Random Baseline, Upper-Confidence Bound (UCB), Thompson Sampling, and Epsilon-Greedy.
+The NSA model was tested in a series of benchmark environments, each with a different number of arms and reward distributions. Performance has been compared with the following algorithms: Random Baseline, Upper-Confidence Bound (UCB), Thompson Sampling, and Epsilon-Greedy.
 
 % Description of the environments
 \subsection{Game variants}\label{sec:envs}
 
-\noindent Our goal is to investigate the performance of the agent in a non-stationary environment, meaning that its underlying distribution changes over time \footnote{Since the arm probabilities are not normalized to $1$, it is technically improper to call them \textit{probability distributions}; we will therefore refer to either \textit{probability} or \textit{distribution} separately at any given time for avoiding confusion.}
-We choose this setting as it resembles an scenario in which an animal has to forage in an environment with food (reward) distributed over a set of fixed locations, but whose occurrence probability can change over time.
-A \textit{round} -or horizon- is defined as an action-reward event; instead, a \textit{trial} is a a block of rounds.
+\noindent Our goal is to investigate the performance of the agent in a non-stationary environment, meaning that its underlying distribution changes over time \footnote{Since the arm probabilities are not normalized to $1$, it is technically improper to call them \textit{probability distributions}; we will therefore refer to either \textit{probability} or \textit{distribution} separately at any given time to avoid confusion.}
+We choose this setting as it resembles an environment in which an animal has to forage in an environment with food (reward) distributed over a set of fixed locations, but whose occurrence probability can change over time.
+A \textit{round} -or horizon - is defined as an action-reward event; instead, a \textit{trial} is a block of rounds.
 For testing, four slightly different MAB variants were used, obtained by introducing different types of non-stationarity: piecewise constant, uniformly changing, sinusoidally changing, and sinusoidally changing with piecewise constant arms.
-The reason for these choices is to test the model performance under different speed and uniformity of the distribution changes.
+The reason for these choices is to test the performance of the model at different speeds and uniformities in the distribution changes.
 Figure \ref{fig:envs} visually illustrates their specificities.
 
 \hfill \break
 \noindent \textbf{Piecewise stationary distribution} [\textsc{MAB-P}]\\
-Within a trial the reward distribution is stationary and it is drawn from a normal $\mathbf{p}=\mathcal{N}(0.5, 0.2)^{K}$, clipped in $(0, 1)$.
+Within a trial, the reward distribution is stationary and is drawn from a normal $\mathbf{p}=\mathcal{N}(0.5, 0.2)^{K}$, clipped in $(0, 1)$.
 At the end of each trial $i$, a new distribution $\mathbf{\mathbf{p}}_{i} \to \mathbf{\mathbf{p}}_{i+1}$ is drawn \cite{qiForcedExplorationBandit2023}.
 
 \hfill \break
 \noindent \textbf{Piecewise stationary distribution with drift} [\textsc{MAB-D}]\\
-At the very beginning, the reward distribution $\mathbf{p}$ is sampled from a normal $\mathbf{p}=\mathcal{N}(0.5, 0.2)^{K}$.
-Then, it changes gradually over the rounds, tracked as time $t$, such that its values tend towards a target distribution $\mathbf{q}_{i}$ as $\tau_{p}\dot{\mathbf{p}}_{t}=\mathbf{q}_{i}-\mathbf{p}_{t}$.
-Here, $\dot{\mathbf{p}}$ is the time derivative of the distribution and $\tau_{p}$ is its time constant.
-Once the distance is below a threshold $\delta$ as $\vert \mathbf{q}_{i} - \mathbf{p}_{t}\vert < \delta$, the target distribution is changed to a new one $\mathbf{q}_{i}\to\mathbf{q}_{i+1}$. In this variant, there are no proper trials but the target distribution keeps changing until a maximum number
+At first, the reward distribution $\mathbf{p}$ is sampled from a normal $\mathbf{p}=\mathcal{N}(0.5, 0.2)^{K}$.
+Then, it changes gradually over the rounds, tracked over time $t$, such that its values tend towards a target distribution $\mathbf{q}_{i}$ as $\tau_{p}\dot{\mathbf{p}}_{t}=\mathbf{q}_{i}-\mathbf{p}_{t}$.
+Here, $\dot{\mathbf{p}}$ is the time derivative of the distribution, and $\tau_{p}$ is its time constant.
+Once the distance is below a threshold $\delta$ as $\vert \mathbf{q}_{i} - \mathbf{p}_{t}\vert < \delta$, the target distribution is changed to a new one $\mathbf{q}_{i}\to\mathbf{q}_{i+1}$. In this variant, there are no proper trials, but the target distribution keeps changing until a maximum number
 of rounds is reached.
 
 \hfill \break
@@ -31,7 +31,7 @@ The reward distribution changes over rounds, with the probability of each arm fo
 
 \hfill \break
 \noindent \textbf{Partial sinusoidal distribution shift} [\textsc{MAB-$\sin$P}]\\
-Identical to the sinusoidal distribution shift, but a half of the arms change sinusoidally while the other half is always kept at a constant value. The distribution is not normalized.
+Identical to the sinusoidal distribution shift, half of the arms change sinusoidally, while the other half is always kept at a constant value. The distribution is not normalized.
 
 
 \begin{figure}[ht]
@@ -46,7 +46,7 @@ Identical to the sinusoidal distribution shift, but a half of the arms change si
 % Evolution: fitness evolution
 \subsection{Evolutionary search}
 The optimization of the hyper-parameters was performed using the Covariance Matrix Adaptation evolutionary strategy algorithm (CMA-ES) \cite{igel2007}.
-The search was run with a population of $256$ individuals for $80$ generations. Each individual was endowed with a genome, corresponding to a vector of 22 parameters of the model.
+The search was carried out with a population of $256$ individuals for $80$ generations. Each individual was endowed with a genome, corresponding to a vector of 22 parameters of the model.
 The fitness function of the evolution was defined as the average reward obtained by an individual over 3 different non-stationary bandit environments, each for $K=\{40, 200\}$, and all averaged over 2 iterations.
 The results are summarized below in figure \ref{fig:evolution}.
 
@@ -61,22 +61,22 @@ The results are summarized below in figure \ref{fig:evolution}.
 % comment on the evolved functions
 \noindent The evolution progress, plot \textbf{\ref{fig:evolution}a}, showed a steady improvement over the generations, with the fitness hitting a plateau once the total reward could not get any closer to the optimum $\approx 1$ due to randomness and the finite horizon.
 
-The evolved parameters (constituting a \textit{genome}) are displayed as a frequency heatmap in \textbf{\ref{fig:evolution}b}, which was obtained from the individuals whose fitness was equal or above the median.
+The evolved parameters (constituting a \textit{genome}) are displayed as a frequency heatmap in \textbf{\ref{fig:evolution}b}, which was obtained from individuals whose fitness was equal to or above the median.
 The parameters most strongly influencing the results were those directly associated with neuronal activity and learning.
 For each, the sensitivity of each value with respect to performance is inversely proportional to the variance its distribution over the population (related to the heatmap color intensity in \textbf{\ref{fig:evolution}b}).
 The intuition is that the higher the variability the smaller is the number of top-scoring genomes sharing a similar value.
 
-Concerning the neural response functions shown in \textbf{\ref{fig:evolution}c}, both population evolved to have a similar shape, a sharp sigmoid with a clear threshold, with population \textit{U} having a more variable distribution.
-The form is characterized by not allowing for a fine-grained linear reponse but rather an high-pass filter, with activity occurring only after strong excitation.
+Regarding the neural response functions shown in \textbf{\ref{fig:evolution}c}, both populations evolved to have a similar shape, a sharp sigmoid with a clear threshold, with population \textit{U} having a more variable distribution.
+The form is characterized by not allowing for a fine-grained linear reponse but rather a high-pass filter, with activity occurring only after strong excitation.
 This firing behaviour is reminiscent of coincidence detector neurons, which are sometimes referred to as class III neurons with respect to their f-I curve \cite{ratteImpactNeuronalProperties2013}.
 
-The two Gaussian-sigmoid functions $\Phi_{v}, \Phi_{\eta}$, which are respectively the option value and learning rate functions, are instead shown in \textbf{\ref{fig:evolution}d}.
+The two Gaussian-sigmoid functions $\Phi_{v}, \Phi_{\eta}$, which are, respectively, the option value and learning rate functions, are instead shown in \textbf{\ref{fig:evolution}d}.
 On the one hand, the learning rate function $\Phi_{\eta}$ is characterized by a decreasing curve, associated with the dominance of the right-side of the Gaussian, and a completely ignored sigmoid component.
 A possible interpretation for this shape is to ensure a high learning speed when the value options are more uncertain (weak weights), and low otherwise; thus preventing overshooting and oscillations in the weight updates.
 %This adaptive behaviour is in line with known neuronal dynamics such as homeostatic plasticity, which works towards a stabilization of synapses, for instance through synaptic scaling and proportional updates \cite{citriSynapticPlasticityMultiple2008}.
 %A variable learning rate is an important feature of several plasticity rules, from the more biologically plausible like the Oja rule \cite{ojaOjaLearningRule2008} to deep learning optimizers like Adam \cite{kingmaAdamMethodStochastic2017}.
 
-On the other hand, the option value function $\Phi_{v}$ follows instead a steep sigmoid curve.
+On the other hand, the option value function $\Phi_{v}$ instead follows a steep sigmoid curve.
 This is consistent with the idea that the input of population $U$ to population $V$ is weighted maximally for high option values (strong synapses), whereas for weaker estimates the contributions are low or close to zero, allowing for more exploration.
 Interestingly, a common feature seemed to be a slight concavity after zero, a slim influence of the Gaussian component, which might be interpreted as a sort of test for newly formed synapses. However, the size of this effect is not large.
 
@@ -87,8 +87,8 @@ Interestingly, a common feature seemed to be a slight concavity after zero, a sl
 
 The NSA model has been tested and compared with the other algorithms: Thompson Sampling (TS), $\epsilon$-Greedy, and UCB. The benchmark were the four different variants of the MAB problem listed above \ref{sec:envs}, with a variable number of arms ranging from 5 to 1000.
 The results are reported in table \ref{tab:results}.
-Overall, our NSA model displays a solid performance over all environments, most of the time being equally good or better than the other algorithms.
-Interestingly, a large numbers of arms ($K$) did not present a significant challenge, as the model effectively adapted to the different environments and reward distributions.
+Overall, our NSA model displays solid performance in all environments, most of the time being equally good or better than the other algorithms.
+Interestingly, a large number of arms ($K$) did not present a significant challenge, as the model was effectively adapted to the different environments and reward distributions.
 However, this is in part due to the randomness in the assignment of arm probabilities, and the statistics of the quantity of high-reward arms as their number increases. Nonetheless, given the non-stationarity of the reward distribution it is still a non trivial task to re-calibrate to new distributions.
 
 
@@ -144,9 +144,9 @@ However, this is in part due to the randomness in the assignment of arm probabil
 
 % entropy over rounds
 \subsubsection{Entropy analysis}\label{sec:entropy}
-\noindent For a better understanding of the qualitative differences between the models, we analyzed the progress over the rounds by tracking the selected arms in a simple piecewise stationary distribution environment with $K=200$ and highest probability set to $p=0.9$.
-The simulation was run for $2$ trials with $2000$ rounds each and then averaged over $5$ iterations.
-Furthermore, in order to quantify the variability of the decision policy at a given time and highlight the particularity of each decision-making behavior, we calculated the entropy of the probability distribution $p$ of the chosen arms, calculated over a window of 20 rounds, as $H=-\sum^{K}_{i} p_{i}\log(p_{i})$.
+\noindent For a better understanding of the qualitative differences between the models, we analyzed the progress over the rounds by tracking the selected arms in a simple piecewise stationary distribution environment with $K=200$.
+The simulation was run for $2$ trials with $2000$ rounds each and then averaged over $40$ iterations.
+In order to quantify the variability of the decision policy at a given time and highlight the particularity of each decision-making behavior, we calculated the entropy of the probability distribution $p$ of the chosen arms, calculated over a window of 20 rounds, as $H=-\sum^{K}_{i} p_{i}\log(p_{i})$.
 The unit of entropy is in nats, and it ranges from $0$ (no uncertainty) to $\log_{e}(K)$ (maximum uncertainty).
 In Figure \ref{fig:entropy_fig1}-\textbf{a}, the raster plot of the selected arms is plotted for each model together with its level of entropy. The distribution of the probability of reward on the arms has an average of $H=2.02$.
 
@@ -193,4 +193,5 @@ On the other hand, NSA displays a more abrupt change, going from a state of very
 
 % \noindent The game environments considered in this work are non-stationary K-Armed Bandits with Binomial rewards.
 % In particular, the agent is evaluated over a number $T_{\text{trials}}$ of \textit{trials}, each composed by an arbitrary number $T_{\text{rounds}}$ of \textit{rounds}; each \textit{trial} is characterized by a different reward distribution $\mathbf{p}\sim\mathcal{U}(0,1)^{K}$ (although in practice the bounds have been set to $(0.1, 0.9)$ such that the distributions are less trivial).
+
 

@@ -85,17 +85,6 @@ Edmund~T. Rolls.
 \newblock Emotion, motivation, decision-making, the orbitofrontal cortex, anterior cingulate cortex, and the amygdala.
 \newblock 228(5):1201--1257.
 
-\bibitem{shu_bio-inspired_2014}
-Na~Shu, Q~Tang, and Haihua Liu.
-\newblock A bio-inspired approach modeling spiking neural networks of visual cortex for human action recognition.
-\newblock In {\em 2014 International Joint Conference on Neural Networks ({IJCNN})}, pages 3450--3457.
-\newblock {ISSN}: 2161-4407.
-
-\bibitem{triche_exploration_2022}
-Anthony Triche, Anthony~S. Maida, and Ashok Kumar.
-\newblock Exploration in neo-hebbian reinforcement learning: Computational approaches to the exploration–exploitation balance with bio-inspired neural networks.
-\newblock 151:16--33.
-
 \bibitem{yantis_neural_2008}
 Steven Yantis.
 \newblock The neural basis of selective attention.
