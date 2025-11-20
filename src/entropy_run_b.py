@@ -31,7 +31,7 @@ model_params["K"] = K_VALUE
 # -- reference probability distribution
 PROBABILITY_MAX = 0.4
 DISTRIBUTIONS = []
-for _ in rane(NB_TRIALS):
+for _ in range(NB_TRIALS):
     _distr = np.random.uniform(0., PROBABILITY_MAX, K_VALUE)
     _distr[-1] = PROBABILITY_MAX
     DISTRIBUTIONS += [_distr]
