@@ -1,46 +1,160 @@
-This is BibTeX, Version 0.99d (TeX Live 2025/Homebrew)
+This is BibTeX, Version 0.99d (TeX Live 2025/dev/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: unsrt.bst
 Database file #1: mkb_bibliography.bib
-You've used 59 entries,
+Warning--I didn't find a database entry for "suttonReinforcementLearningProblem1998"
+Warning--I didn't find a database entry for "dayanDecisionTheoryReinforcement2008"
+Warning--I didn't find a database entry for "nivEvolutionReinforcementLearning2002"
+Warning--I didn't find a database entry for "averbeckTheoryChoiceBandit2015"
+Warning--I didn't find a database entry for "agrawalAnalysisThompsonSampling2012"
+Warning--I didn't find a database entry for "kaufmannThompsonSamplingAsymptotically2012"
+Warning--I didn't find a database entry for "auerFinitetimeAnalysisMultiarmed2002"
+Warning--I didn't find a database entry for "gittinsBanditProcessesDynamic1979"
+Warning--I didn't find a database entry for "banMultifacetContextualBandits2021"
+Warning--I didn't find a database entry for "tokicAdaptiveEGreedyExploration2010"
+Warning--I didn't find a database entry for "tokicValueDifferenceBasedExploration2011"
+Warning--I didn't find a database entry for "lee2022"
+Warning--I didn't find a database entry for "spratlingReviewPredictiveCoding2017"
+Warning--I didn't find a database entry for "schmidgallBraininspiredLearningArtificial2024"
+Warning--I didn't find a database entry for "hassabisNeuroscienceInspiredArtificialIntelligence2017"
+Warning--I didn't find a database entry for "liuSeeingBelievingBrainInspired2023"
+Warning--I didn't find a database entry for "larsenSynapsetypespecificPlasticityLocal2015"
+Warning--I didn't find a database entry for "blackmanTargetcellspecificShorttermPlasticity2013"
+Warning--I didn't find a database entry for "bartolHippocampalSpineHead2015"
+Warning--I didn't find a database entry for "arielIntrinsicVariabilityPv2012"
+Warning--I didn't find a database entry for "behrens2007"
+Warning--I didn't find a database entry for "inglis2021"
+Warning--I didn't find a database entry for "iigaya2016"
+Warning--I didn't find a database entry for "starkweather2018"
+Warning--I didn't find a database entry for "babayan2018"
+Warning--I didn't find a database entry for "khorsand2017"
+Warning--I didn't find a database entry for "farashahi2017"
+Warning--I didn't find a database entry for "fusi2005"
+Warning--I didn't find a database entry for "garivierUpperConfidenceBoundPolicies2008"
+Warning--I didn't find a database entry for "besbesStochasticMultiArmedBanditProblem2014"
+Warning--I didn't find a database entry for "cavenaghiNonStationaryMultiArmed2021"
+Warning--I didn't find a database entry for "qiForcedExplorationBandit2023"
+Warning--I didn't find a database entry for "martinRepresentationObjectConcepts2007a"
+Warning--I didn't find a database entry for "millerCombinedMechanismsNeural2019"
+Warning--I didn't find a database entry for "ockerFlexibleNeuralConnectivity2020"
+Warning--I didn't find a database entry for "apicellaSurveyModernTrainable2021"
+Warning--I didn't find a database entry for "citriSynapticPlasticityMultiple2008"
+Warning--I didn't find a database entry for "kennedySynapticSignalingLearning2016"
+Warning--I didn't find a database entry for "samavatSynapticInformationStorage2024"
+Warning--I didn't find a database entry for "igel2007"
+Warning--I didn't find a database entry for "ratteImpactNeuronalProperties2013"
+Warning--I didn't find a database entry for "liu2024a"
+Warning--I didn't find a database entry for "steyversBayesianAnalysisHuman2009a"
+Warning--I didn't find a database entry for "schulzFindingStructureMultiarmed2020"
+Warning--I didn't find a database entry for "zhangForgetfulBayesMyopic2013"
+Warning--I didn't find a database entry for "kennerleyDecisionMakingReward2011a"
+Warning--I didn't find a database entry for "khamassiChapter22Medial2013"
+Warning--I didn't find a database entry for "lukChoiceCodingFrontal2013"
+Warning--I didn't find a database entry for "klein-flugge2013"
+Warning--I didn't find a database entry for "kolling2016"
+Warning--I didn't find a database entry for "rich2016"
+Warning--I didn't find a database entry for "funahashiPrefrontalContributionDecisionMaking2017"
+Warning--I didn't find a database entry for "marcosDeterminingMonkeyFree2016"
+Warning--I didn't find a database entry for "balewskiValueDynamicsAffect2023"
+Warning--I didn't find a database entry for "faisalNoiseNeuronsOther2012"
+Warning--I didn't find a database entry for "nunesSpikingNeuralNetworks2022"
+Warning--empty journal in allen_closer_1985
+Warning--empty year in allen_closer_1985
+Warning--empty journal in baldassarre_classical_nodate
+Warning--empty year in baldassarre_classical_nodate
+Warning--empty journal in bach_algorithms_2017
+Warning--empty year in bach_algorithms_2017
+Warning--empty journal in suri_td_2002
+Warning--empty year in suri_td_2002
+Warning--empty journal in niv_dopamine_2005
+Warning--empty year in niv_dopamine_2005
+Warning--empty journal in schultz_dopamine_2016
+Warning--empty year in schultz_dopamine_2016
+Warning--empty journal in frank_anatomy_2006
+Warning--empty year in frank_anatomy_2006
+Warning--empty journal in singh_nucleus_2010
+Warning--empty year in singh_nucleus_2010
+Warning--empty journal in kennerley_decision_2011
+Warning--empty year in kennerley_decision_2011
+Warning--empty journal in mcdannald_model-based_2012
+Warning--empty year in mcdannald_model-based_2012
+Warning--empty journal in walton_adaptive_2007
+Warning--empty year in walton_adaptive_2007
+Warning--empty journal in safavi_multistability_2022
+Warning--empty year in safavi_multistability_2022
+Warning--empty journal in rosenbloom_functional_2012
+Warning--empty year in rosenbloom_functional_2012
+Warning--empty journal in luk_choice_2013
+Warning--empty year in luk_choice_2013
+Warning--empty journal in balewski_value_2023
+Warning--empty year in balewski_value_2023
+Warning--empty journal in rolls_emotion_2023
+Warning--empty year in rolls_emotion_2023
+Warning--empty year in shu_bio-inspired_2014
+Warning--empty journal in triche_exploration_2022
+Warning--empty year in triche_exploration_2022
+Warning--empty journal in yantis_neural_2008
+Warning--empty year in yantis_neural_2008
+Warning--empty journal in igel_covariance_2007
+Warning--empty year in igel_covariance_2007
+Warning--empty journal in butts_tuning_2006
+Warning--empty year in butts_tuning_2006
+Warning--empty journal in churchland_decision-making_2008
+Warning--empty year in churchland_decision-making_2008
+Warning--empty journal in drugowitsch_optimal_2014
+Warning--empty year in drugowitsch_optimal_2014
+Warning--empty journal in cisek_neural_2010
+Warning--empty year in cisek_neural_2010
+Warning--empty journal in cisek_making_2012
+Warning--empty year in cisek_making_2012
+Warning--empty journal in suzuki_neural_2015
+Warning--empty year in suzuki_neural_2015
+Warning--empty journal in you_dynamics_2013
+Warning--empty year in you_dynamics_2013
+Warning--empty journal in carroll_encoding_2014
+Warning--empty year in carroll_encoding_2014
+Warning--empty journal in wen_evolution_2024
+Warning--empty year in wen_evolution_2024
+You've used 30 entries,
             1791 wiz_defined-function locations,
-            844 strings with 17313 characters,
-and the built_in function-call counts, 14367 in all, are:
-= -- 1261
-> -- 679
-< -- 11
-+ -- 247
-- -- 188
-* -- 1137
-:= -- 2266
-add.period$ -- 177
-call.type$ -- 59
-change.case$ -- 59
+            697 strings with 11558 characters,
+and the built_in function-call counts, 7313 in all, are:
+= -- 634
+> -- 298
+< -- 1
++ -- 111
+- -- 81
+* -- 628
+:= -- 1107
+add.period$ -- 96
+call.type$ -- 30
+change.case$ -- 30
 chr.to.int$ -- 0
-cite$ -- 59
-duplicate$ -- 579
-empty$ -- 1392
-format.name$ -- 188
-if$ -- 3154
+cite$ -- 87
+duplicate$ -- 279
+empty$ -- 706
+format.name$ -- 81
+if$ -- 1522
 int.to.chr$ -- 0
-int.to.str$ -- 59
-missing$ -- 51
-newline$ -- 290
-num.names$ -- 67
-pop$ -- 142
+int.to.str$ -- 30
+missing$ -- 29
+newline$ -- 159
+num.names$ -- 30
+pop$ -- 118
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 273
+skip$ -- 120
 stack$ -- 0
-substring$ -- 1052
-swap$ -- 122
-text.length$ -- 11
+substring$ -- 663
+swap$ -- 14
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 0
-while$ -- 143
-width$ -- 61
-write$ -- 639
+warning$ -- 57
+while$ -- 83
+width$ -- 32
+write$ -- 285
+(There were 113 warnings)

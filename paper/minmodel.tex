@@ -4,7 +4,7 @@ The first (U) represents the traces of the \textit{K} available options (that is
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.95\textwidth]{architecture.png}
+    \includegraphics[width=0.95\textwidth]{figure_1.png}
     \caption{\textsc{Model architecture} - \textbf{a}: \textit{the model is composed of a layer $U$ (grey), receiving a feedfoward input $I_{\text{ext}}$, a layer $V$ (orange), and connections $\textbf{W}^{UV}$ and $\textbf{W}^{VU}$.
         Additionally, two indexes $k_{U}, k_{V}$  are extracted from the layers and corresponds to the selection made by the two populations as $k_{U}=\text{argmax}_{k} \{\textbf{u}\}$, $k_{V}=\text{argmax}_{k} \{\textbf{v}\}$.} - \textbf{b}: \textit{the function used to filter the weights ($\Phi_{v}$) and the learning rate ($\Phi_{\eta}$).
                 It is defined as a weighted sum of a generalized sigmoid and a Gaussian function, both of which have additional parameters controlling their offset and slope steepness (or width).
@@ -105,11 +105,13 @@ Update populations $\textbf{u}, \textbf{v}$ according to \ref{eq:main}\;
 \textbf{Selection process:}\;
 $k_{u} \gets \text{argmax}_{k}\{\textbf{u}\}$\;
 $k_{v} \gets \text{argmax}_{k}\{\textbf{v}\}$\;
-\eIf{$k_{u} = k_{v}$\quad \text{and} k_{u}>0}{
-    $k \gets k_{v}$ \Comment*[r]{Exploitation}}{
+\eIf{$k_{u} = k_{v}\quad \text{and}\quad k_{u}>0$}{
+    $k \gets k_{v}$ \Comment*[r]{Exploitation}
+}{
     $k \gets \text{random}(K)$ \Comment*[r]{Exploration}
 }
 \Return $k$
+
 \end{algorithm}\label{alg:decision1}
 
 \noindent In the computation of the $\text{argmax}$, in case of a tie between options the first result is taken.

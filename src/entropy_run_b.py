@@ -20,7 +20,7 @@ NB_TRIALS = 2
 ENV_TYPE = "v0"
 VERBOSE = True
 MODEL_IDX = 1
-K_VALUE = 100
+K_VALUE = 200
 NUM_VALUES = 5
 
 
@@ -33,7 +33,7 @@ PROBABILITY_MAX = 0.4
 DISTRIBUTIONS = []
 for _ in range(NB_TRIALS):
     _distr = np.random.uniform(0., PROBABILITY_MAX, K_VALUE)
-    _distr[-1] = PROBABILITY_MAX
+    _distr[K_VALUE//2] = PROBABILITY_MAX
     DISTRIBUTIONS += [_distr]
 
 # -- beta values | 1, 0.57.., 0.32.., 0.19.., 0.1.., 0.0625, ...

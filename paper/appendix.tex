@@ -34,7 +34,7 @@ $\alpha$, and intensity $\gamma_{1}$).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{gaussian_sigmoid.png}
+    \includegraphics[width=0.8\textwidth]{figure_appx_1.png}
     \caption{\textsc{Activation function $\Phi_{v}$} - \textit{Parameters $\beta=10$, $\alpha=1$, $\mu=1$, $\sigma=1$, and $r=0.5$.}}
     \label{fig:gau_sigm}
 \end{figure}
@@ -74,13 +74,13 @@ The specific choice of range has been chosen by trial and error, such that the e
     \item $\alpha_{\eta}\in (-5, 5)$: shift of the sigmoid
     \item $\mu_{\eta}\in (-5, 5)$: mean of the Gaussian
     \item $\sigma_{\eta}\in (0.1, 10)$: variance of the Gaussian
-    \item $r_{\eta}\n (-0.5, 1.5)$: weight of the sigmoid
+    \item $r_{\eta}\in (-0.5, 1.5)$: weight of the sigmoid
 \end{itemize}
 
 \noindent \textbf{Option selection process hyperparameters}
 \begin{itemize}
     \item $\text{dur}_{\text{pre}}\in (400, 3000)$: duration of the first phase
-    \item $\text{dur}_{\text{post}}\n (400, 3000)$: duration of the second phase
+    \item $\text{dur}_{\text{post}}\in (400, 3000)$: duration of the second phase
     \item $I_{\text{ext}}\in (0.1, 1)$: magnitude of the external input
 \end{itemize}
 
@@ -104,7 +104,7 @@ Following the evolutionary search, it is taken the distribution of parameters ov
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.\textwidth]{evo_tabplot.png}
+    \includegraphics[width=1.\textwidth]{figure_appx_2.png}
     \caption{\textsc{Genome distribution} - \textit{each parameter is plotted against the fitness score.}}
     \label{fig:evo_tabplot}
 \end{figure}
@@ -118,7 +118,7 @@ As shown in \ref{fig:eduration}, also the fitness is seemingly not associated wi
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.4\textwidth]{evo_duration.png}
+    \includegraphics[width=0.4\textwidth]{figure_appx_3.png}
     \caption{\textsc{Phase durations and fitness} - \textit{duration of the first and second phase, over the x and y axis respectively, for each individual of the top-scoring half of the population.
     The color indicates the fitness, with yellow being the highest.}}
     \label{fig:eduration}
@@ -148,6 +148,13 @@ $\mathbf{p}_i \gets \frac{\exp(\beta_i \mathbf{z})}{\sum_j \exp(\beta_i \mathbf{
 \Return ${\mathbf{p}_i}$
 \end{algorithm}\label{alg:entr_alg}
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figure_appx_5}
+    \caption{\textsc{Showcase of distribution entropy}}
+    \label{fig:}
+\end{figure}
+
 
 % weight update over rounds
 \subsection{Weight update dynamics}
@@ -164,7 +171,7 @@ This behaviour is consistent with the low entropy levels observed in the previou
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{reward_update_plot.png}
+    \includegraphics[width=1.0\textwidth]{figure_appx_4.png}
     \caption{\textsc{Weight update developement for the model} \textit{The plot displays the weight update quantity $\Delta W_{k}^{UV}$ for each round (blue line), smoothed as a 20-steps moving average.
     It is also reported the average reward in a window of 30 rounds (orange line). The results have been obtained averaging over 30 iterations.}}
     \label{fig:rew_update}
