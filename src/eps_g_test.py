@@ -177,7 +177,7 @@ if __name__ == "__main__":
     # -- save
     count = len([f for f in os.listdir(utils.FIG_PATH) if "eps_plot_" in f])
     logger(f"{count=}")
-    plt.savefig(f'{utils.FIG_PATH}/eps_plot_{count}.svg', bbox_inches='tight')
+    fig.savefig(f'{utils.FIG_PATH}/eps_plot_{count}.svg', bbox_inches='tight')
     logger("[saved]")
 
 
