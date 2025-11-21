@@ -101,8 +101,6 @@ def single_run(probabilities_set: list, params: dict):
                             env_type=ENV_TYPE,
                             nb_trials=NB_TRIALS,
                             probabilities_set=probabilities_set)
-    if VERBOSE:
-        logger.info(f"%env: {env}")
 
     # define models
     params["K"] = K_VALUE
