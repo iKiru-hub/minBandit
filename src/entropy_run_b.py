@@ -28,32 +28,60 @@ NUM_VALUES = 5
 model_params = utils.load_model(idx=MODEL_IDX)
 model_params["K"] = K_VALUE
 
-# -- reference probability distribution
-PROBABILITY_MAX = 0.4
-DISTRIBUTIONS = []
-for _ in range(NB_TRIALS):
-    _distr = np.random.uniform(0., PROBABILITY_MAX, K_VALUE)
-    _distr[K_VALUE//2] = PROBABILITY_MAX
-    DISTRIBUTIONS += [_distr]
-
-# -- beta values | 1, 0.57.., 0.32.., 0.19.., 0.1.., 0.0625, ...
-BETA_VALUES = 1 / np.logspace(0, 4, num=NUM_VALUES, base=2)
 
 
 """ local utils """
-
 
 def make_probabililties_set(index: int) -> tuple:
 
     """ define a new set of distributions from the reference with a
     level of entropy dependant on the index """
 
+    # -- reference probability distribution
+    probability_max = 0.4
+    distributions = []
+    for _ in range(NB_TRIALS):
+        _distr = np.random.uniform(0., probability_max, K_VALUE)
+        _distr[K_VALUE//2] = probability_max
+        distributions += [_distr]
+
+    # -- beta values | 1, 0.57.., 0.32.., 0.19.., 0.1.., 0.0625, ...
+    lambda_values = 1 / np.logspace(0, 4, num=NUM_VALUES, base=2)
+
     probabilities_set = []
     entropies = []
-    for ref_distribution in DISTRIBUTIONS:
+    for ref_distribution in distributions:
         distribution = ref_distribution.copy()
         # distribution[K_VALUE//2] = PROBABILITY_MAX + (1 - PROBABILITY_MAX) / (index + 1)
-        distribution[K_VALUE//2] = PROBABILITY_MAX + (1 - PROBABILITY_MAX) * BETA_VALUES[index]
+        distribution[K_VALUE//2] = probability_max + (1 - probability_max) * lambda_values[index]
+        probabilities_set += [distribution]
+
+        entropies += [utils.calc_entropy(distribution)]
+
+    return probabilities_set, entropies
+
+
+def make_probabililties_set_v2(index: int) -> tuple:
+
+    """ define a new set of distributions from the reference with a
+    level of entropy dependant on the index """
+
+    # -- reference probability distribution
+    probability_mean = 0.4
+    distributions = []
+    for _ in range(NB_TRIALS):
+        _distr = np.clip(np.random.normal(probability_mean, 0.13, K_VALUE)
+        _distr[K_VALUE//2] = 0.7
+        distributions += [_distr]
+
+    # -- beta values | 1, 0.57.., 0.32.., 0.19.., 0.1.., 0.0625, ...
+    lambda_values = 5 / np.logspace(0, 5, num=NUM_VALUES, base=1.4)
+
+    probabilities_set = []
+    entropies = []
+    for ref_distribution in distributions:
+        distribution = utils.softmax(ref_distribution, lambda_values[i]) * ref_distribution.sum()
+        distribution = np.clip(distribution, 0, 1)
         probabilities_set += [distribution]
 
         entropies += [utils.calc_entropy(distribution)]
@@ -115,7 +143,8 @@ def run_multiple_indexes(empty):
         pbar.set_description(f"{index=}")
 
         # define proababilities
-        probabilities_set, entropies = make_probabililties_set(index=index)
+        # probabilities_set, entropies = make_probabililties_set(index=index)
+        probabilities_set, entropies = make_probabililties_set_v2(index=index)
         prob_entropy += [entropies]
 
         # run

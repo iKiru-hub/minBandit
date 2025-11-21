@@ -894,19 +894,17 @@ class EpsilonGreedy(MBsolver):
     Epsilon-Greedy bandit algorithm.
     """
 
-    def __init__(self, K: int, epsilon: float):
+    def __init__(self, K: int, **kwargs):
 
         """
         Parameters
         ----------
         K : int
             Number of arms of the bandit.
-        epsilon : float
-            Probability of selecting a random arm.
         """
 
         super().__init__(K)
-        self.epsilon = epsilon
+        self.epsilon = 0.04 * np.log(0.6 * K)
         self.q = np.zeros(K)
         self.n = np.zeros(K)
 
