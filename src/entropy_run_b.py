@@ -70,7 +70,7 @@ def make_probabililties_set_v2(index: int) -> tuple:
     probability_mean = 0.4
     distributions = []
     for _ in range(NB_TRIALS):
-        _distr = np.clip(np.random.normal(probability_mean, 0.13, K_VALUE)
+        _distr = np.clip(np.random.normal(probability_mean, 0.13, K_VALUE), 0, 0.65)
         _distr[K_VALUE//2] = 0.7
         distributions += [_distr]
 
