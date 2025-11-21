@@ -16,10 +16,10 @@ logger(f"{logger}")
 
 # -- general settings
 NB_ROUNDS = 2000
-NB_TRIALS = 2
+NB_TRIALS = 1
 ENV_TYPE = "v0"
 VERBOSE = True
-MODEL_IDX = 1
+MODEL_IDX = 5
 K_VALUE = 200
 NUM_VALUES = 5
 
@@ -67,15 +67,15 @@ def make_probabililties_set_v2(index: int) -> tuple:
     level of entropy dependant on the index """
 
     # -- reference probability distribution
-    probability_mean = 0.4
+    probability_mean = 0.2
     distributions = []
     for _ in range(NB_TRIALS):
-        _distr = np.clip(np.random.normal(probability_mean, 0.13, K_VALUE), 0, 0.65)
+        _distr = np.clip(np.random.normal(probability_mean, 0.13, K_VALUE), 0, 0.5)
         _distr[K_VALUE//2] = 0.7
         distributions += [_distr]
 
     # -- beta values | 1, 0.57.., 0.32.., 0.19.., 0.1.., 0.0625, ...
-    lambda_values = 5 / np.logspace(0, 5, num=NUM_VALUES, base=1.4)
+    lambda_values = 4 / np.logspace(0, 5, num=NUM_VALUES, base=1.3)
 
     probabilities_set = []
     entropies = []

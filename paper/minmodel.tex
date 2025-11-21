@@ -13,7 +13,7 @@ The first (U) represents the traces of the \textit{K} available options (that is
 \end{figure}
 
 \noindent In model, the first layer represents the available options, while the learned connections to the second layer encode their values based on recent reward history.
-In figure \ref{fig:main_architecture}\textbf{a} a visualization of the architecture is presented.
+In figure \textbf{\ref{fig:main_architecture}a} a visualization of the architecture is presented.
 A key simplification is the lumping of option representations into single neurons. Although this choice abstracts the more distributed encoding found in actual brain networks, it allows for a more tractable model design \cite{martinRepresentationObjectConcepts2007a}.
 
 
@@ -46,7 +46,7 @@ The matrix $\textbf{W}^{UV}$ is initialized to all zeros and is the only plastic
 Concerning the others, they were optimized offline with the goal of maximizing the average total reward over multiple runs and across testing environments.
 In particular, given the non-differentiability of the model with respect to the fitness function we relied on an evolutionary search using the Covariance-Matrix Adaptation algorithm (CMA-ES) \cite{igel_covariance_2007}.
 
-The function $\Phi_{v}$ is defined to be a combination of a Gaussian and a sigmoid, and its parameters were also optimized offline. \ref{fig:main_architecture}\textbf{b} illustrates an example.
+The function $\Phi_{v}$ is defined to be a combination of a Gaussian and a sigmoid, and its parameters were also optimized offline. \textbf{\ref{fig:main_architecture}b} illustrates an example.
 The motivation behind this choice is offloading to evolution the responsability of converging to a shape useful for solving the task.
 % , and to allow competition or integration of two distinct shape characteristics.
 

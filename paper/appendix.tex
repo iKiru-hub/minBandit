@@ -42,6 +42,8 @@ $\alpha$, and intensity $\gamma_{1}$).
 
 \subsection{Literature models}
 
+TODO
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figure_appx_6.png}
@@ -146,22 +148,24 @@ A description of the algorithm is presented below \ref{alg:entr_alg}.
 \caption{Reward Probability Distribution Generation}
 \label{alg:reward_distribution}
 \SetAlgoLined
-\KwIn{Number of distributions $N$, dimension $K$, max probability $p_{\text{max}}$}
+\KwIn{Number of distributions $N$, dimension $K$}
 
 \KwOut{Set of probability distributions ${\mathbf{p}_i}$ with decreasing entropy}
 \SetKwComment{Comment}{// }{ }
 \textbf{Define:}\\
 %Define set $B = \{17, 15, 12, 8, 4, 1.5, 0.5\}$; \\
 %Define set $B = \{2^{-i}\}$; \\
-\qquad$p_{\text{ref}}\gets\;\sim \mathcal{U}(0,p_{\text{max}})^K$ \Comment*[r]{reference distribution}
-\qquad$\Lambda\gets\;\{1.5^{-j}\;\vert\;j\in\text{linspace}(0, 6, N)\}$ \Comment*[r]{scaling}
+\qquad$p_{\text{ref}}\gets\;\sim \mathcal{N}(0.2, 0.13)^K$ \Comment*[r]{reference distribution}
+\qquad$p_{\text{ref}}\gets\; \text{clip}(p_{\text{ref}}, 0, 1)$ \Comment*[r]{clipping}
+\qquad$\Lambda\gets\;\{\lambda_{i}: 1.3^{-i}\;\vert\;i\in\text{linspace}(0, 6, N)\}$ \Comment*[r]{softmax temperature}
 
 \textbf{Initial Setup:}
 \For{$i \gets 0$ to $N$}{
     %$\mathbf{z} \gets \;\sim \mathcal{U}(0,p_{\text{max}})^K$ \Comment*[r]{sample random vector}
     $\mathbf{z} \gets p_{\text{ref}}$ \Comment*[r]{copy reference distribution}
-    $j \gets \;\sim \{1\ldots K\}$ \Comment*[r]{sample random scalar}
-    $\mathbf{z}_j \gets p_{\text{max}} + (1 - p_{\text{max}}) * \Lambda_{i}$;\\
+    $\mathbf{z} \gets \text{exp}(\lambda_{i} * \mathbf{z}) * \left(\sum_{j} \text{exp}(\lambda_{i} * z_{j})\right)^{-1}$ \Comment*[r]{softmax}
+    $\mathbf{z} \gets \mathbf{z} * \sum_{j} z_{j}$ \Comment*[r]{rescaling}
+    $\mathbf{z} \gets \text{clip}(\mathbf{z}, 0, 1)$ \Comment*[r]{clipping}
 
     %$\mathbf{z}_j \gets 1$;\\
     %$\beta_i \gets \text{Sample index=} i \text{ from }(B)$ \Comment*[r]{Sample temperature from $B$}
@@ -178,15 +182,14 @@ This measure is informative of how much the best arm stands out from the others.
     \centering
     \includegraphics[width=0.8\textwidth]{figure_appx_5}
     \caption{\textsc{Showcase of distribution entropy} - \textbf{a}: \textit{visualization of each distribution as heatmaps (columns), the entropy differences (x-axis) and arm indexes (y-axis); note that the entropy of distribution $i$ is inversely proportional to the difference $\Delta H$} -
-        \textbf{b}: \textit{examples of distributions for increasing levels of entropy; the reported values reference the same data of plot a} - \textbf{c}: \textit{log-log plot of the entropy differences (x-axis) against the scaling $\Lambda$ of the
-    top-arm with respect to the others (y-axis)}}
+        \textbf{b}: \textit{log-log plot of the entropy differences (x-axis) against the scaling $\lambda$ of the top-arm with respect to the others (y-axis)}.}
     \label{fig:entropy_sw}
 \end{figure}
 
-In Figure \ref{fig:entropy_sw} are illustrated examples of distributions with decreasing levels of entropy difference with the reference through an heatmap in \ref{fig:entropy_sw}\textbf{a} and a line plot in \ref{fig:entropy_sw}\textbf{b}.
+In Figure \ref{fig:entropy_sw} are illustrated examples of distributions with decreasing levels of entropy difference with the reference through an heatmap in \ref{fig:entropy_sw}\textbf{a}.
 Both plots highlight the blending of the probability associated with the best arm with the other ones, eventually becoming indistinguishable from the rest.
 In the MAB taks, this increase in entropy translates in a higher difficulty in picking the best option, although the other side of the medal is that regret also decreases, since the cost of selecting a non-optimal arm is less impactful on performance.
-Plot \ref{fig:entropy_sw}\textbf{c} shows the relationship between the scaling of the difference between the best arm and the rest.
+Plot \ref{fig:entropy_sw}\textbf{b} shows the relationship between the scaling of the difference between the best arm and the rest.
 
 % weight update over rounds
 \subsection{Weight update dynamics}

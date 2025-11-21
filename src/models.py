@@ -904,7 +904,7 @@ class EpsilonGreedy(MBsolver):
         """
 
         super().__init__(K)
-        self.epsilon = 0.04 * np.log(0.6 * K)
+        self.epsilon = 0.04 * np.log2(0.6 * K)
         self.q = np.zeros(K)
         self.n = np.zeros(K)
 
