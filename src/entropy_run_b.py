@@ -80,7 +80,7 @@ def make_probabililties_set_v2(index: int) -> tuple:
     probabilities_set = []
     entropies = []
     for ref_distribution in distributions:
-        distribution = utils.softmax(ref_distribution, lambda_values[i]) * ref_distribution.sum()
+        distribution = utils.softmax(ref_distribution, lambda_values[index]) * ref_distribution.sum()
         distribution = np.clip(distribution, 0, 1)
         probabilities_set += [distribution]
 
