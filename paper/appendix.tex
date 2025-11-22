@@ -1,5 +1,7 @@
 \section{Appendix}\label{sec:appendix}
 
+% ---------------------------------
+
 \subsection{Neural response function}
 
 The activation functions applied to the two neuronal population are defined as a step-function composed with a generalized sigmoid as follows:
@@ -21,6 +23,8 @@ Where:
 \end{itemize}
 \noindent Each population has its own set of parameters, which are optimized through evolutionary search.
 
+% ---------------------------------
+
 \subsection{Gaussian-sigmoid function}\label{func:gs}
 
 \noindent The function $\Phi_{\cdot}$ is defined by combining a generalized version of the sigmoid, namely with a gain $\beta \neq 1$ and offset $\alpha\neq 0$, and a Gaussian with mean $\mu$ and variance $\sigma^{2}$. Their contributions are weighted by as $r$ and $1-r$ ($r\in(0,1)$) respectively.
@@ -39,17 +43,134 @@ $\alpha$, and intensity $\gamma_{1}$).
     \label{fig:gau_sigm}
 \end{figure}
 
+% ---------------------------------
 
-\subsection{Literature models}
+\subsection{Baseline literature models}
 
-TODO
+The algorithms we chose to compare our model with are well-known in the literature of machine learning and reinforcement learning, although not representing the current state-of-the-art.
+They were implemented in native Python, and only $\epsilon-$Greedy required hyper-parameters calibration.
+
+\subsubsection{Upper Confidence Bound (UCB1)}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\caption{Upper Confidence Bound algorithm}
+\SetKwComment{Comment}{// }{ }
+\KwIn{Number of arms $K$}
+\KwOut{Sequence of selected arms $A_t$ and observed rewards $R_t$}
+\textbf{Initialize:}\;
+\quad Total time steps $t \gets 0$\;
+\quad For each arm $k \in \{1, \ldots, K\}$: initialize count $n_k \gets 0$ and average reward estimates $Q_k \gets 0$\;
+
+\textbf{Exploration:}\;
+\quad \For{$k \gets 1$ \KwTo $K$}{
+    Select arm $k$, observe reward $r_k$\;
+    $n_k \gets 1$\;
+    $Q_k \gets r_k$\;
+    $t \gets t + 1$\;
+}
+
+\textbf{Main:}\\
+\While{True}{
+    $t \gets t + 1$\;
+
+    \tcc{Calculate the UCB index for all arms}
+    \For{$k \gets 1$ \KwTo $K$}{
+        $B_k \gets \sqrt{\frac{2 \ln t}{n_k}}$ \Comment*[r]{Confidence bonus (exploration)}
+        $\text{UCB}_k \gets Q_k + B_k$ \Comment*[r]{Average reward (exploitation) and Bonus}
+    }
+
+    \tcc{Select the arm with the highest UCB index}
+    $k^* \gets \arg\max_{k \in \{1, \ldots, K\}} \text{UCB}_k$\;
+
+    \tcc{Observe the reward and update statistics}
+    Select arm $k^*$, observe reward $r_{k^*}$\;
+    $n_{k^*} \gets n_{k^*} + 1$\;
+    $Q_{k^*} \gets Q_{k^*} + \frac{1}{n_{k^*}} (r_{k^*} - Q_{k^*})$ \Comment*[r]{Incremental mean update}
+}
+\label{alg:ucb1}
+\end{algorithm}
+
+% --
+\subsubsection{Thompson Sampling (TS)}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\caption{Thompson Sampling algorithm}
+\SetKwComment{Comment}{// }{ }
+\KwIn{Number of arms $K$}
+\KwOut{Sequence of selected arms $A_t$ and observed rewards $R_t$}
+
+\textbf{Initialize:}\\
+\quad For each arm $k \in \{1, \ldots, K\}$:\;
+\quad \quad Initialize success count prior $\alpha_k \gets 1$\;
+\quad \quad Initialize failure count prior $\beta_k \gets 1$\;
+
+\textbf{Main:}\\
+\While{True}{
+    \tcc{Sampling from the posterior distribution}
+    \For{$k \gets 1$ \KwTo $K$}{
+        %Sample expected reward $\theta_k \sim \text{Beta}(\alpha_k, \beta_k)$\;
+        $\theta_k \gets \sim \text{Beta}(\alpha_k, \beta_k)$ \Comment*[r]{sample expected reward}
+    }
+
+    $k^* \gets \arg\max_{k \in \{1, \ldots, K\}} \theta_k$ \Comment*[r]{Select the arm with the highest sampled value}
+
+    \tcc{Observe the reward (must be $r_{k^*} \in \{0, 1\}$) and update the posterior}
+    Select arm $k^*$, observe binary reward $r_{k^*}$\;
+    $\alpha_{k^*} \gets \alpha_{k^*} + r_{k^*}$ \Comment*[r]{updated success count}
+    $\beta_{k^*} \gets \beta_{k^*} + (1 - r_{k^*})$ \Comment*[r]{updated failure count}
+}
+\label{alg:thompson}
+\end{algorithm}
+
+
+% --
+\subsubsection{Epsilon-Greedy ($\epsilon-$Greedy)}\label{alg:epsg}
+
+\begin{algorithm}[H]
+\caption{$\epsilon$-Greedy algorithm}
+\SetAlgoLined
+\SetKwComment{Comment}{// }{ }
+\KwIn{Number of arms $K$, exploration parameter $\epsilon \in [0, 1]$}
+\KwOut{Sequence of selected arms $A_t$ and observed rewards $R_t$}
+
+\textbf{Initialize:}\\
+\quad For each arm $k \in \{1, \ldots, K\}$: initialize play counts $n_k \leftarrow 0$ and average reward estimates $Q_k \leftarrow 0$\;
+
+\textbf{Main:}\\
+\While{True}{
+    $y \gets \sim \mathcal{U}(0, 1)$ \Comment*[r]{draw random variable}
+
+    % \tcc{Exploration-Exploitation decision}
+    \If{$y < \epsilon$}{
+        $k^* \gets \sim \{1, \ldots, K\}$ \Comment*[r]{exploration, draw random arm}
+    }
+    \Else{
+        $k^* \gets \arg\max_{k \in \{1, \ldots, K\}} Q_k$ \Comment*[r]{greedy exploitation}
+        \tcc{Tie-breaking is typically done by picking the first entry}
+    }
+
+    \tcc{Observe the reward and update}
+    Select arm $k^*$, observe reward $r_{k^*}$\;
+    $n_{k^*} \gets n_{k^*} + 1$\;
+    $Q_{k^*} \gets Q_{k^*} + \frac{1}{n_{k^*}} (r_{k^*} - Q_{k^*})$ \Comment*[r]{Incremental Mean Update}
+}
+\label{alg:epsilon_greedy}
+\end{algorithm}
+
+\noindent Since this algorithm relies on a specific choice of the exploration hyper-parameter $\epsilon$, we conducted a grid search over a sample of arm numbers $K$ for a range of $\epsilon$ values.
+Figure \textbf{\ref{fig:eps_table}} shows the results of this search as an heatmap, which suggests a positive direct relationship of the two variables.
+Subsequently, we modified the $\epsilon-$Greedy implementation such to set $\epsilon$ according to the number of arms, utilizing the function $0.4*\log_{2}(0.6*K)$, whose form and parametrization has been fit from the data of the search.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figure_appx_6.png}
-    \caption{\textsc{Sensitivity analysis of Epsilon-Greedy} - \textit{performance of the algorithm on a piecewise stationary MAB for varying number of arms and $\epsilon$ parameter}}
+    \caption{\textsc{Sensitivity analysis of Epsilon-Greedy} - \textit{performance of the algorithm on a piecewise stationary MAB for varying number of arms and $\epsilon$ parameter. In parenthesis is reported the decimal position of the first significant digit.}}
     \label{fig:eps_table}
 \end{figure}
+
+% ---------------------------------
 
 \subsection{Evolutionary search} \label{list:params}
 The optimization was carried out over several parameters concerning the model architecture, its dynamics, as well as three hyperparmeters of the selection process.
@@ -60,7 +181,7 @@ The specific choice of range has been chosen by trial and error, such that the e
 \noindent \textbf{Network parameters}
 \begin{itemize}
     \item $\tau_{u}\in (1, 300)$: time constant of population $U$
-    \item $\tau_{v}\in (1, 300)$: time constant of population $V$ 
+    \item $\tau_{v}\in (1, 300)$: time constant of population $V$
     \item $g_{u}\in (1, 50)$: gain of the neural response function of population $U$
     \item $g_{v}\in (1, 50)$: gain of the neural response function of population $V$
     \item $s_{u}\in (0.1, 5)$: offset of the neural response function of population $U$
@@ -145,8 +266,7 @@ A description of the algorithm is presented below \ref{alg:entr_alg}.
 \hfill \break
 
 \begin{algorithm}[H]
-\caption{Reward Probability Distribution Generation}
-\label{alg:reward_distribution}
+\caption{Reward probability distribution generation}
 \SetAlgoLined
 \KwIn{Number of distributions $N$, dimension $K$}
 
@@ -159,7 +279,7 @@ A description of the algorithm is presented below \ref{alg:entr_alg}.
 \qquad$p_{\text{ref}}\gets\; \text{clip}(p_{\text{ref}}, 0, 1)$ \Comment*[r]{clipping}
 \qquad$\Lambda\gets\;\{\lambda_{i}: 1.3^{-i}\;\vert\;i\in\text{linspace}(0, 6, N)\}$ \Comment*[r]{softmax temperature}
 
-\textbf{Initial Setup:}
+\textbf{Main:}\\
 \For{$i \gets 0$ to $N$}{
     %$\mathbf{z} \gets \;\sim \mathcal{U}(0,p_{\text{max}})^K$ \Comment*[r]{sample random vector}
     $\mathbf{z} \gets p_{\text{ref}}$ \Comment*[r]{copy reference distribution}
@@ -190,6 +310,8 @@ In Figure \ref{fig:entropy_sw} are illustrated examples of distributions with de
 Both plots highlight the blending of the probability associated with the best arm with the other ones, eventually becoming indistinguishable from the rest.
 In the MAB taks, this increase in entropy translates in a higher difficulty in picking the best option, although the other side of the medal is that regret also decreases, since the cost of selecting a non-optimal arm is less impactful on performance.
 Plot \ref{fig:entropy_sw}\textbf{b} shows the relationship between the scaling of the difference between the best arm and the rest.
+
+% ---------------------------------
 
 % weight update over rounds
 \subsection{Weight update dynamics}

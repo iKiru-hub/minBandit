@@ -70,12 +70,12 @@ def make_probabililties_set_v2(index: int) -> tuple:
     probability_mean = 0.2
     distributions = []
     for _ in range(NB_TRIALS):
-        _distr = np.clip(np.random.normal(probability_mean, 0.13, K_VALUE), 0, 0.5)
+        _distr = np.clip(np.random.normal(probability_mean, 0.15, K_VALUE), 0, 0.7)
         _distr[K_VALUE//2] = 0.7
         distributions += [_distr]
 
     # -- beta values | 1, 0.57.., 0.32.., 0.19.., 0.1.., 0.0625, ...
-    lambda_values = 4 / np.logspace(0, 5, num=NUM_VALUES, base=1.3)
+    lambda_values = 5 / np.logspace(0, 5, num=NUM_VALUES, base=1.4)
 
     probabilities_set = []
     entropies = []
@@ -151,8 +151,10 @@ def run_multiple_indexes(empty):
         model_reward_std += [results["score_list"][:, 0, :].tolist()]
         upper_list += [results["upper_bound_list"].tolist()]
         for i in range(NB_TRIALS):
-            model_entropy += [results["entropy_list"][:, :, i, :].mean(axis=2).mean(axis=1).tolist()]
-            model_entropy_std += [results["entropy_list"][:, :, i, :].mean(axis=2).std(axis=1)]
+            # model_entropy += [results["entropy_list"][:, :, i, :].mean(axis=2).mean(axis=1).tolist()]
+            # model_entropy_std += [results["entropy_list"][:, :, i, :].mean(axis=2).std(axis=1)]
+            model_entropy += [results["entropy_list"][:, :, i, :].mean(axis=2).tolist()]
+            model_entropy_std += [results["entropy_list"][:, :, i, :].std(axis=1)]
 
     model_reward_std = np.stack(model_reward_std).tolist()
     model_entropy_std = np.stack(model_entropy_std).tolist()

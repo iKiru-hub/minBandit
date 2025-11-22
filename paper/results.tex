@@ -2,7 +2,7 @@
 
 The NSA model was tested in a series of benchmark environments, each with a different number of arms and reward distributions. Performance has been compared with the following algorithms: Random Baseline, Upper-Confidence Bound (UCB), Thompson Sampling, and Epsilon-Greedy.
 The first of two of these were implemented free from any pre-defined hyper-parameters, such that they automatically balanced exploitation-exploration with experience.
-However, $\epsilon-$Greedy necessitated the tuning of its hyper-parameter $\epsilon$, for which we defined a calculation based on the number of options of the form $0.4*\text{log}_{2}(0.6*K)$, whose specific values were fitted empirically.
+However, $\epsilon-$Greedy necessitated the tuning of its hyper-parameter $\epsilon$, for which we defined a calculation based on the number of options of the form $0.4*\text{log}_{2}(0.6*K)$, whose specific values were fitted empirically (see the Appendix \ref{alg:epsg}).
 
 % Description of the environments
 \subsection{Game variants}\label{sec:envs}

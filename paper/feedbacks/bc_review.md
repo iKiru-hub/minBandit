@@ -66,7 +66,7 @@ Overall the paper is well-written and motivated, and the math is rigorous, altho
 --
 **Major comments**
  
-- [ ] (0)
+- [x] (0)
 My main concern is that the baselines (Thompson sampling, UCB, epsilon greedy) may not be given a fair chance here.
  
 For one, I couldn't find any details about how exactly they were implemented. For Thompson sampling, did the authors use Bayesian filtering to compute the posterior for each arm, e.g. using a Beta-Binomial, and then sample from those posteriors? For UCB, did the authors use the same posteriors to compute the confidence intervals? How were the confidence intervals defined? What was the scaling parameter between the value and the confidence interval? For epsilon greedy, what was epsilon? These details should be clarified somewhere.
