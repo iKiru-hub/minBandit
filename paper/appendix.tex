@@ -126,9 +126,9 @@ They were implemented in native Python, and only $\epsilon-$Greedy required hype
 
 
 % --
-\subsubsection{Epsilon-Greedy ($\epsilon-$Greedy)}\label{alg:epsg}
+\subsubsection{Epsilon-Greedy (\texorpdfstring{$\epsilon$-Greedy}{epsilon-Greedy})}\label{alg:epsg}
 
-\begin{algorithm}[H]
+\begin{algorithm}[ht]
 \caption{$\epsilon$-Greedy algorithm}
 \SetAlgoLined
 \SetKwComment{Comment}{// }{ }
@@ -161,7 +161,7 @@ They were implemented in native Python, and only $\epsilon-$Greedy required hype
 
 \noindent Since this algorithm relies on a specific choice of the exploration hyper-parameter $\epsilon$, we conducted a grid search over a sample of arm numbers $K$ for a range of $\epsilon$ values.
 Figure \textbf{\ref{fig:eps_table}} shows the results of this search as an heatmap, which suggests a positive direct relationship of the two variables.
-Subsequently, we modified the $\epsilon-$Greedy implementation such to set $\epsilon$ according to the number of arms, utilizing the function $0.4*\log_{2}(0.6*K)$, whose form and parametrization has been fit from the data of the search.
+Subsequently, we modified the $\epsilon-$Greedy implementation so that $\epsilon$ is set according to the number of arms, using the function $0.4*\log_{2}(0.6*K)$, whose form and parametrization have been fit from the search data.
 
 \begin{figure}[H]
     \centering
@@ -175,7 +175,7 @@ Subsequently, we modified the $\epsilon-$Greedy implementation such to set $\eps
 \subsection{Evolutionary search} \label{list:params}
 The optimization was carried out over several parameters concerning the model architecture, its dynamics, as well as three hyperparmeters of the selection process.
 The following is the entire set of evolved valued, with in parenthesis the range in which they were allowed to be sampled from.
-The specific choice of range has been chosen by trial and error, such that the ending distribution would not cluster over either the positive or negative (if allowed) boundary, as shown in \ref{fig:evo_tabplot}.
+The specific choice of range has been chosen by trial and error, so that the ending distribution would not cluster over the positive or negative (if allowed) boundary, as shown in \ref{fig:evo_tabplot}.
 
 \hfill \break
 \noindent \textbf{Network parameters}
@@ -188,7 +188,7 @@ The specific choice of range has been chosen by trial and error, such that the e
     \item $s_{v}\in (0.1, 5)$: offset of the neural response function of population $V$
     \item $\theta_{u}\in (-0.5, 0.9)$: threshold of the neural response function of population $U$
     \item $\theta_{v}\in (-0.5, 0.9)$: threshold of the neural response function of population $V$
-    \item $W^{+}\in (2, 5)$: maximal weight value for the weights $\textbf{W}^{UV}$
+    \item $W^{+}\in (2, 5)$: maximum weight value for the weights $\textbf{W}^{UV}$
 \end{itemize}
 
 \noindent \textbf{Option value function parameters}
@@ -216,7 +216,7 @@ The specific choice of range has been chosen by trial and error, such that the e
     \item $I_{\text{ext}}\in (0.1, 1)$: magnitude of the external input
 \end{itemize}
 
-\noindent Each individual has been evaluated over two environments the following settings:
+\noindent Each individual has been evaluated over two environments using the following settings:
 
 \begin{itemize}
     \item \textsc{MAB-0}: average reward distribution entropy $\langle H\rangle=2.05$
@@ -225,14 +225,14 @@ The specific choice of range has been chosen by trial and error, such that the e
 \end{itemize}
 
 \noindent The number of arms was $K=40$ and $200$, and lasted for $2$ trials with $2000$ rounds each.
-The final fitenss was the average over $2$ iterations.
+The final fit was the average of the $2$ iterations.
 
 \hfill \break
-The optimization has been implemented in Python using the \texttt{DEAP} library, and the algorithm used was the \texttt{CMA-ES} algorithm. The optimization involved $40$ generations with a population size of $256$ individuals. The mutation rate was set to $0.5$ with a sigma of $0.8$, the cross-over rate was set to $0.4$.
-The run were carried out on a 256-core AMD EPYC 7763 with 2TB of RAM.
+The optimization has been implemented in Python using the \texttt{DEAP} library and the algorithm used was the \texttt{CMA-ES} algorithm. Optimization involved $40$ generations with a population size of $256$ individuals. The mutation rate was set at $0.5$ with a sigma of $0.8$, the cross-over rate was set at $0.4$.
+The runs were carried out on a 256-core AMD EPYC 7763 with 2TB of RAM.
 
 \subsubsection{Genome distribution}
-Following the evolutionary search, it is taken the distribution of parameters over the top-scoring half of the population, corresponding to 128 individuals.
+Following the evolutionary search, the distribution of parameters over the top-scoring half of the population is taken, corresponding to 128 individuals.
 
 \begin{figure}[H]
     \centering
@@ -241,14 +241,14 @@ Following the evolutionary search, it is taken the distribution of parameters ov
     \label{fig:evo_tabplot}
 \end{figure}
 
-\noindent Figure \ref{fig:evo_tabplot} reveals those parameters shared among the models with the highest fitness score, and those that are more variable.
+\noindent Figure \ref{fig:evo_tabplot} reveals the parameters shared among the models with the highest fitness score and those that are more variable.
 The most stable parameters are, predicatbly, those involved in directly shaping the neural activity (neural activation functions) and learning policy (Gaussian sigmoid).
 
 \hfill \break
-For what concerns the option selection algorithm \ref{alg:decision1}, the values for the duration of the two phases resulted to be of not modest importance, with the distribution being weakly skewed towards longer times.
-As shown in \ref{fig:eduration}, also the fitness is seemingly not associated with particular values for either phase.
+For what concerns the option selection algorithm \ref{alg:decision1}, the values for the duration of the two phases were not of modest importance, with the distribution being weakly skewed towards longer times.
+As shown in \ref{fig:eduration}, fitness is also apparently not associated with particular values for either phase.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=0.4\textwidth]{figure_appx_3.png}
     \caption{\textsc{Phase durations and fitness} - \textit{duration of the first and second phase, over the x and y axis respectively, for each individual of the top-scoring half of the population.
@@ -256,7 +256,7 @@ As shown in \ref{fig:eduration}, also the fitness is seemingly not associated wi
     \label{fig:eduration}
 \end{figure}
 
-\noindent The effect of different durations for the first and second phases on performance are limited, as shown in Figure \ref{eduration}.
+\noindent The effect of different durations for the first and second phases on performance is limited, as shown in Figure \ref{fig:eduration}.
 
 \hfill \break
 \subsection{Reward distribution entropy}\label{sec:appendix_entropy}
@@ -295,8 +295,8 @@ A description of the algorithm is presented below \ref{alg:entr_alg}.
 \end{algorithm}\label{alg:entr_alg}
 
 \hfill \break
-\noindent Given the reference $p_{\text{ref}}$ and its entropy $H_{\text{ref}}$, it is possible to quantify the entropy difference with respect to each derived distribution $i$ as $\Delta H=H_{\text{ref}} - H_{i}$.
-This measure is informative of how much the best arm stands out from the others.
+\noindent Given the reference $p_{\text{ref}}$ and its entropy $H_{\text{ref}}$, it is possible to quantify the difference in entropy with respect to each derived distribution $i$ as $\Delta H=H_{\text{ref}} - H_{i}$.
+This measure is informative about how much the best arm stands out from the others.
 
 \begin{figure}[h]
     \centering
@@ -306,7 +306,7 @@ This measure is informative of how much the best arm stands out from the others.
     \label{fig:entropy_sw}
 \end{figure}
 
-In Figure \ref{fig:entropy_sw} are illustrated examples of distributions with decreasing levels of entropy difference with the reference through an heatmap in \ref{fig:entropy_sw}\textbf{a}.
+In Figure \ref{fig:entropy_sw} are illustrated examples of distributions with decreasing levels of entropy difference with the reference by means of a heat map in \ref{fig:entropy_sw}\textbf{a}.
 Both plots highlight the blending of the probability associated with the best arm with the other ones, eventually becoming indistinguishable from the rest.
 In the MAB taks, this increase in entropy translates in a higher difficulty in picking the best option, although the other side of the medal is that regret also decreases, since the cost of selecting a non-optimal arm is less impactful on performance.
 Plot \ref{fig:entropy_sw}\textbf{b} shows the relationship between the scaling of the difference between the best arm and the rest.
@@ -320,10 +320,10 @@ In figure \ref{fig:rew_update}, we plotted the evolution of the total weight $\D
 The results show that the model can quickly adapt to new reward distributions. It is also able to maintain the optimal policy over time, with the weights remaining approximately stable.
 The quantity of updates $\Delta W_{k}^{UV}$, which in each round is applied to one connection $k$, changes sign according to the collected reward, with its magnitude higher at the beginning of the trials.
 Initially, the sign is mostly positive (potentiation) since the weights start at zero, and after some uncertainty a consistently preferred arm emerges.
-However, when the reward distribution switches, a regular series of suboptimal choices with respect to the new distribution is made, leading to zero reward.
+However, when the reward distribution switches, a regular series of suboptimal choices is made with respect to the new distribution, leading to zero reward.
 This causes an accumulation of negative sign weight updates (depression), eventually causing the value of the preferred arm to drop. In the meantime, other options are probed until another sequence of choices converges to another arm, promoted by a trail of positive weight updates.
 
-This behaviour is consistent with the low entropy levels observed in the previous analysis.
+This behavior is consistent with the low entropy levels observed in the previous analysis.
 
 
 \begin{figure}[H]
@@ -333,6 +333,9 @@ This behaviour is consistent with the low entropy levels observed in the previou
     It is also reported the average reward in a window of 30 rounds (orange line). The results have been obtained averaging over 30 iterations.}}
     \label{fig:rew_update}
 \end{figure}
+
+
+
 
 
 

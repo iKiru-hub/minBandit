@@ -155,7 +155,7 @@ and match human data well [16], they are more difficult to relate to neuronal dy
 
 - [x] "The neural response functions are shown in 3d" - isn't it 3c? Also I recommend describing the results in the same order in the text and in the figure panels (a,b,c,d).
 
-- [ ] "Overall, our NSA model displays a solid performance over all environments" - solid sounds a little informal, maybe competitive? Also how do we know if these differences are significant? Some statistical tests would be helpful
+- [x] "Overall, our NSA model displays a solid performance over all environments" - solid sounds a little informal, maybe competitive? Also how do we know if these differences are significant? Some statistical tests would be helpful
     |> *todo*
 
 - [ ] Figure 4b, top panel: how is the reward on the first trial so close to 1? Even when there's clearly several options? Shouldn't all models be basically at chance?

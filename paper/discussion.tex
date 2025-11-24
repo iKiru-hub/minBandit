@@ -1,9 +1,9 @@
 \section{Discussion}
 
 % work on the k-armed bandit problem and neuroscience
-The ability to make decisions under uncertainty is a fundamental aspect of cognition. A well-established framework for studying this capacity is the multi-armed bandit problem (MAB), which has been widely explored and extended across multiple domains \cite{suttonReinforcementLearningProblem1998, liu2024a}.
+The ability to make decisions under uncertainty is a fundamental aspect of cognition. A well-established framework for studying this capacity is the multi-armed bandit problem (MAB), which has been widely explored and extended across multiple domains \cite{suttonReinforcementLearningProblem1998, liuComprehensiveExplorationImplementation2024}.
 
-In behavioral experiments, humans demonstrate remarkable adaptability in such settings, integrating environmental uncertainty, generalizing across trials, and dynamically adjusting their learning rates. These behaviors reflect a diversity of cognitive strategies \cite{steyversBayesianAnalysisHuman2009a}. Although Bayesian approaches often capture human behavior well \cite{behrens2007, schulzFindingStructureMultiarmed2020, zhangForgetfulBayesMyopic2013}, they are challenging to map directly onto biologically realistic neural dynamics. Despite the existence of many algorithms with strong theoretical guarantees, most lack biological plausibility, particularly in their architectural assumptions and learning and choice mechanisms.
+In behavioral experiments, humans demonstrate remarkable adaptability in such settings, integrating environmental uncertainty, generalizing across trials, and dynamically adjusting their learning rates. These behaviors reflect a diversity of cognitive strategies \cite{steyversBayesianAnalysisHuman2009}. Although Bayesian approaches often capture human behavior well \cite{behrensLearningValueInformation2007, schulzFindingStructureMultiarmed2020, zhangForgetfulBayesMyopic2013}, they are challenging to map directly onto biologically realistic neural dynamics. Despite the existence of many algorithms with strong theoretical guaranties, most lack biological plausibility, particularly in their architectural assumptions and learning and choice mechanisms.
 
 In this work, our aim was to design a minimal, biologically inspired architecture able to solve non-stationary MAB tasks.
 Specifically, we proposed a simple architecture composed of two interacting and plastic populations of rate-based neurons and producing choices through agreement, called Neural Selection Agreement model (NSA).
@@ -25,21 +25,21 @@ Particularly important was the choice of modulating the afferent connections to 
 % ---
 The neural response functions that emerged were characterized by a steep sigmoidal shape, which can be related to the saturation of the neural response once a certain threshold is crossed, a feature observed in the biological network as class III neurons, in addition to being a common choice for artificial ones \cite{ratteImpactNeuronalProperties2013, ockerFlexibleNeuralConnectivity2020, apicellaSurveyModernTrainable2021}.
 
-On the other hand, learning was structured as a nonassociative plasticity rule based on the reward. Similarly to before, a non-linear function of synaptic weights played a critical role, specifically in defining the synapse-specific learning rate \cite{larsenSynapsetypespecificPlasticityLocal2015}.
+On the other hand, learning was structured as a nonassociative plasticity rule based on reward. Similarly to before, a non-linear function of synaptic weights played a critical role, specifically in defining the synapse-specific learning rate \cite{larsenSynapsetypespecificPlasticityLocal2015}.
 Furthermore, the shape evolved of the learning rate function was inversely proportional to the synaptic weight, which can be related to the availability of resources in the synapse and its state, including size \cite{bartolHippocampalSpineHead2015, arielIntrinsicVariabilityPv2012}.
 
-An additional consideration is the inspiration from the functional role of the orbitofrontal cortex (OFC) and anterior cingulate cortex (ACC), two important pre-frontal regions known to be involved in decision-making processes \cite{kennerleyDecisionMakingReward2011a, khamassiChapter22Medial2013}.
+An additional consideration is the inspiration from the functional role of the orbitofrontal cortex (OFC) and the anterior cingulate cortex (ACC), two important pre-frontal regions known to be involved in decision-making processes \cite{kennerleyDecisionMakingReward2011, khamassiChapter22Medial2013}.
 
 In our work, we have explored ways in which an option value can be formed according to recent reward history and connection weights, updating the option representations.
-The OFC is known to represent different options, updating their values based on history and rewards \cite{lukChoiceCodingFrontal2013, kennerleyDecisionMakingReward2011a, klein-flugge2013}.
+The OFC is known to represent different options, updating their values based on history and rewards \cite{lukChoiceCodingFrontal2013, kennerleyDecisionMakingReward2011, klein-fluggeSegregatedEncodingReward2013}.
 
-Next, the NSA model relies on some inductive biases, the shape of the Gaussian-sigmoid function, affecting the neural activity and the weight-dependent learning rate.
+Next, the NSA model relies on some inductive biases, the shape of the Gaussian-sigmoid function, that affect the neural activity and the weight-dependent learning rate.
 These biases may be considered to implicitly encode a policy that dictates how the two populations interact, how new information should be incorporated into the update of the weight value, and what option to choose next.
-In fact, ACC has been associated with the evaluation of actions and the regulation of the balance between exploration and exploitation \cite{khamassiChapter22Medial2013, kolling2016}.
+In fact, ACC has been associated with the evaluation of actions and the regulation of the balance between exploration and exploitation \cite{khamassiChapter22Medial2013, kollingValueSearchPersistence2016}.
 
 Additionally, the generation of an option selection results from a temporal interaction of the activity of the two neural population, before converging to a choices.
-In a similar direction, it has been observed that the OFC transiently visits chosen and unchosen options before committing \cite{rich2016}.
-Further, the dynamic interaction between the ACC and OFC has been linked to transient pre-stimulus activations, which bias decisions toward the most valuable option \cite{funahashiPrefrontalContributionDecisionMaking2017, marcosDeterminingMonkeyFree2016, balewskiValueDynamicsAffect2023}.
+In a similar direction, it has been observed that the OFC transiently visits chosen and unchosen options before committing \cite{richDecodingSubjectiveDecisions2016}.
+Furthermore, the dynamic interaction between the ACC and OFC has been linked to transient pre-stimulus activations, which bias decisions toward the most valuable option \cite{funahashiPrefrontalContributionDecisionMaking2017, marcosDeterminingMonkeyFree2016, balewskiValueDynamicsAffect2023}.
 
 % limits
 Despite the promising results, there are some limitations to the model. First, we considered the great level of abstraction in the neuronal details, as we considered simple point neurons with synapses modeled with relatively elementary functions, lacking the anatomical complexity of actual dendrites.
@@ -57,5 +57,6 @@ Future work could involve comparison with more sophisticated algorithms, the int
 % This approach can be seen as a form of meta-plasticity implemented through neuromodulation \cite{wangMetalearningNaturalArtificial2021}, where a region external to the network affects the synaptic connections withough alterning their actual weights; dopamine is a well-suited candidate
 % \cite{tobler2005, roeschDopamineNeuronsEncode2007, cools2019}.
 % This mechanism can be considered a form of meta-learning, with evolution leading to the emergence of hyper-parameter encoding important inductive biases \cite{inglis2021, iigayaAdaptiveLearningDecisionmaking2016}.
+
 
 

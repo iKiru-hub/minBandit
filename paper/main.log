@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2025.11.20)  24 NOV 2025 04:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2025.11.20)  24 NOV 2025 06:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -483,16 +483,46 @@ Overfull \hbox (1.098pt too wide) in paragraph at lines 3--9
 
 ) (./introduction.tex
 
-LaTeX Warning: Citation `suttonReinforcementLearningProblem1998' on page 1 undefined on input line 6.
+LaTeX Warning: Citation `allenCloserLookClassical1985' on page 1 undefined on input line 17.
 
 
-LaTeX Warning: Citation `dayanDecisionTheoryReinforcement2008' on page 1 undefined on input line 7.
+LaTeX Warning: Citation `baldassarreClassicalInstrumentalConditioning' on page 1 undefined on input line 18.
 
 
-LaTeX Warning: Citation `dayanDecisionTheoryReinforcement2008' on page 1 undefined on input line 19.
+LaTeX Warning: Citation `bachAlgorithmsSurvivalComparative2017' on page 1 undefined on input line 22.
 
 
-LaTeX Warning: Citation `suttonReinforcementLearningProblem1998' on page 1 undefined on input line 20.
+LaTeX Warning: Citation `suriTDModelsReward2002' on page 1 undefined on input line 23.
+
+
+LaTeX Warning: Citation `nivDopamineUncertaintyTD2005' on page 1 undefined on input line 23.
+
+
+LaTeX Warning: Citation `schultzDopamineRewardPrediction2016' on page 1 undefined on input line 23.
+
+
+LaTeX Warning: Citation `frankAnatomyDecisionStriatoorbitofrontal2006' on page 1 undefined on input line 24.
+
+
+LaTeX Warning: Citation `singhNucleusAccumbensCore2010' on page 1 undefined on input line 24.
+
+
+LaTeX Warning: Citation `kennerleyDecisionMakingReward2011' on page 1 undefined on input line 24.
+
+
+LaTeX Warning: Citation `mcdannaldModelbasedLearningContribution2012' on page 1 undefined on input line 24.
+
+
+LaTeX Warning: Citation `waltonADAPTIVEDECISIONMAKING2007' on page 1 undefined on input line 25.
+
+
+LaTeX Warning: Citation `safaviMultistabilityPerceptualValue2022' on page 1 undefined on input line 25.
+
+
+LaTeX Warning: Citation `rosenbloomFunctionalNeuroanatomyDecisionMaking2012' on page 1 undefined on input line 26.
+
+
+LaTeX Warning: Citation `rollsEmotionMotivationDecisionmaking2023' on page 1 undefined on input line 26.
 
 
 
@@ -500,58 +530,15 @@ LaTeX Warning: Citation `suttonReinforcementLearningProblem1998' on page 1 undef
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 
-LaTeX Warning: Citation `nivEvolutionReinforcementLearning2002' on page 2 undefined on input line 33.
-
-
-LaTeX Warning: Citation `averbeckTheoryChoiceBandit2015' on page 2 undefined on input line 36.
-
-
-LaTeX Warning: Citation `suttonReinforcementLearningProblem1998' on page 2 undefined on input line 39.
-
-
-
 [2]
 
-LaTeX Warning: Citation `agrawalAnalysisThompsonSampling2012' on page 3 undefined on input line 49.
+LaTeX Warning: Citation `leeBraininspiredPredictiveCoding2022' on page 3 undefined on input line 60.
 
 
-LaTeX Warning: Citation `kaufmannThompsonSamplingAsymptotically2012' on page 3 undefined on input line 49.
+LaTeX Warning: Citation `leeBraininspiredPredictiveCoding2022' on page 3 undefined on input line 62.
 
 
-LaTeX Warning: Citation `auerFinitetimeAnalysisMultiarmed2002' on page 3 undefined on input line 50.
-
-
-LaTeX Warning: Citation `gittinsBanditProcessesDynamic1979' on page 3 undefined on input line 53.
-
-
-LaTeX Warning: Citation `banMultifacetContextualBandits2021' on page 3 undefined on input line 53.
-
-
-LaTeX Warning: Citation `tokicAdaptiveEGreedyExploration2010' on page 3 undefined on input line 53.
-
-
-LaTeX Warning: Citation `tokicValueDifferenceBasedExploration2011' on page 3 undefined on input line 53.
-
-
-LaTeX Warning: Citation `lee2022' on page 3 undefined on input line 60.
-
-
-LaTeX Warning: Citation `spratlingReviewPredictiveCoding2017' on page 3 undefined on input line 60.
-
-
-LaTeX Warning: Citation `schmidgallBraininspiredLearningArtificial2024' on page 3 undefined on input line 62.
-
-
-LaTeX Warning: Citation `hassabisNeuroscienceInspiredArtificialIntelligence2017' on page 3 undefined on input line 62.
-
-
-LaTeX Warning: Citation `lee2022' on page 3 undefined on input line 62.
-
-
-LaTeX Warning: Citation `liuSeeingBelievingBrainInspired2023' on page 3 undefined on input line 64.
-
-
-LaTeX Warning: Citation `behrens2007' on page 3 undefined on input line 65.
+LaTeX Warning: Citation `behrensLearningValueInformation2007' on page 3 undefined on input line 65.
 
 
 
@@ -561,52 +548,31 @@ Underfull \hbox (badness 10000) in paragraph at lines 67--68
  []
 
 
-LaTeX Warning: Citation `larsenSynapsetypespecificPlasticityLocal2015' on page 4 undefined on input line 76.
+LaTeX Warning: Citation `behrensLearningValueInformation2007' on page 4 undefined on input line 77.
 
 
-LaTeX Warning: Citation `blackmanTargetcellspecificShorttermPlasticity2013' on page 4 undefined on input line 76.
+LaTeX Warning: Citation `inglisModulationDopamineAdaptive2021' on page 4 undefined on input line 79.
 
 
-LaTeX Warning: Citation `bartolHippocampalSpineHead2015' on page 4 undefined on input line 76.
+LaTeX Warning: Citation `iigayaModulationSavouringPrediction2016' on page 4 undefined on input line 79.
 
 
-LaTeX Warning: Citation `arielIntrinsicVariabilityPv2012' on page 4 undefined on input line 76.
+LaTeX Warning: Citation `starkweatherMedialPrefrontalCortex2018' on page 4 undefined on input line 82.
 
 
-LaTeX Warning: Citation `behrens2007' on page 4 undefined on input line 77.
+LaTeX Warning: Citation `babayanBeliefStateRepresentation2018' on page 4 undefined on input line 82.
 
 
-LaTeX Warning: Citation `inglis2021' on page 4 undefined on input line 79.
+LaTeX Warning: Citation `khorsandOptimalStructureMetaplasticity2017' on page 4 undefined on input line 85.
 
 
-LaTeX Warning: Citation `iigaya2016' on page 4 undefined on input line 79.
+LaTeX Warning: Citation `farashahiMetaplasticityNeuralSubstrate2017' on page 4 undefined on input line 87.
 
 
-LaTeX Warning: Citation `starkweather2018' on page 4 undefined on input line 82.
+LaTeX Warning: Citation `iigayaAdaptiveLearningDecisionmaking2016' on page 4 undefined on input line 88.
 
 
-LaTeX Warning: Citation `babayan2018' on page 4 undefined on input line 82.
-
-
-LaTeX Warning: Citation `khorsand2017' on page 4 undefined on input line 85.
-
-
-LaTeX Warning: Citation `farashahi2017' on page 4 undefined on input line 87.
-
-
-LaTeX Warning: Citation `iigaya2016' on page 4 undefined on input line 88.
-
-
-LaTeX Warning: Citation `fusi2005' on page 4 undefined on input line 88.
-
-
-LaTeX Warning: Citation `garivierUpperConfidenceBoundPolicies2008' on page 4 undefined on input line 91.
-
-
-LaTeX Warning: Citation `besbesStochasticMultiArmedBanditProblem2014' on page 4 undefined on input line 91.
-
-
-LaTeX Warning: Citation `cavenaghiNonStationaryMultiArmed2021' on page 4 undefined on input line 91.
+LaTeX Warning: Citation `fusiCascadeModelsSynaptically2005' on page 4 undefined on input line 88.
 
 
 Overfull \hbox (5.85251pt too wide) in paragraph at lines 90--93
@@ -617,68 +583,78 @@ Overfull \hbox (5.85251pt too wide) in paragraph at lines 90--93
 
 [4]) (./methods.tex
 
-LaTeX Warning: Citation `qiForcedExplorationBandit2023' on page 5 undefined on input line 14.
-
-
-
 [5] (./minmodel.tex
-<figure_1.png, id=74, 274.77054pt x 126.90611pt>
+<figure_1.png, id=95, 274.77054pt x 126.90611pt>
 File: figure_1.png Graphic file (type png)
 <use figure_1.png>
 Package pdftex.def Info: figure_1.png  used on input line 7.
 (pdftex.def)             Requested size: 327.74895pt x 151.38419pt.
 
 
-LaTeX Warning: Citation `martinRepresentationObjectConcepts2007a' on page 6 undefined on input line 17.
+LaTeX Warning: Citation `martinRepresentationObjectConcepts2007' on page 6 undefined on input line 17.
 
 
 
 [6 <./figure_1.png>]
 
-LaTeX Warning: Citation `millerCombinedMechanismsNeural2019' on page 7 undefined on input line 55.
+LaTeX Warning: Citation `yantisNeuralBasisSelective2008' on page 7 undefined on input line 30.
 
 
-LaTeX Warning: Citation `ockerFlexibleNeuralConnectivity2020' on page 7 undefined on input line 55.
+LaTeX Warning: Citation `igelCovarianceMatrixAdaptation2007' on page 7 undefined on input line 47.
 
 
-LaTeX Warning: Citation `apicellaSurveyModernTrainable2021' on page 7 undefined on input line 55.
+LaTeX Warning: Citation `buttsTuningCurvesNeuronal2006' on page 7 undefined on input line 54.
 
 
 
 [7]
 
+LaTeX Warning: Citation `churchlandDecisionmakingMultipleAlternatives2008' on page 8 undefined on input line 83.
+
+
+LaTeX Warning: Citation `drugowitschOptimalMultisensoryDecisionmaking2014' on page 8 undefined on input line 83.
+
+
+LaTeX Warning: Citation `kennerleyDecisionMakingReward2011' on page 8 undefined on input line 121.
+
+
+LaTeX Warning: Citation `rollsEmotionMotivationDecisionmaking2023' on page 8 undefined on input line 121.
+
+
+LaTeX Warning: Citation `cisekNeuralMechanismsInteracting2010' on page 8 undefined on input line 122.
+
+
+LaTeX Warning: Citation `cisekMakingDecisionsDistributed2012' on page 8 undefined on input line 122.
+
+
+LaTeX Warning: Citation `suzukiNeuralMechanismsUnderlying2015' on page 8 undefined on input line 122.
+
+
+LaTeX Warning: Citation `youDynamicsMultipleChoiceDecision2013' on page 8 undefined on input line 123.
+
+
+LaTeX Warning: Citation `carrollEncodingCertaintyBump2014' on page 8 undefined on input line 123.
+
+
+LaTeX Warning: Citation `esnaola-acebesBumpAttractorDynamics2021' on page 8 undefined on input line 123.
+
+
+
 [8]
 
-LaTeX Warning: Citation `citriSynapticPlasticityMultiple2008' on page 9 undefined on input line 140.
-
-
-LaTeX Warning: Citation `larsenSynapsetypespecificPlasticityLocal2015' on page 9 undefined on input line 140.
-
-
-LaTeX Warning: Citation `kennedySynapticSignalingLearning2016' on page 9 undefined on input line 140.
-
-
-LaTeX Warning: Citation `samavatSynapticInformationStorage2024' on page 9 undefined on input line 140.
+LaTeX Warning: Citation `wenEvolutionRoleOptimizers2024' on page 9 undefined on input line 138.
 
 )) (./results.tex
 
 [9]
 
-LaTeX Warning: Citation `qiForcedExplorationBandit2023' on page 10 undefined on input line 20.
-
-
-
 [10]
-<figure_2.png, id=160, 610.97058pt x 279.10674pt>
+<figure_2.png, id=169, 610.97058pt x 279.10674pt>
 File: figure_2.png Graphic file (type png)
 <use figure_2.png>
 Package pdftex.def Info: figure_2.png  used on input line 41.
 (pdftex.def)             Requested size: 345.0pt x 157.60188pt.
-
-
-LaTeX Warning: Citation `igel2007' on page 11 undefined on input line 50.
-
-<figure_3.png, id=162, 559.80342pt x 320.30064pt>
+<figure_3.png, id=171, 559.80342pt x 320.30064pt>
 File: figure_3.png Graphic file (type png)
 <use figure_3.png>
 Package pdftex.def Info: figure_3.png  used on input line 57.
@@ -686,10 +662,6 @@ Package pdftex.def Info: figure_3.png  used on input line 57.
 
 
 [11 <./figure_2.png>]
-
-LaTeX Warning: Citation `ratteImpactNeuronalProperties2013' on page 12 undefined on input line 73.
-
-
 
 [12 <./figure_3.png>]
 Overfull \vbox (3.87729pt too high) detected at line 137
@@ -700,7 +672,7 @@ Overfull \vbox (3.87729pt too high) detected at line 137
 [13]
 
 [14]
-<figure_4b.png, id=200, 415.26341pt x 280.98576pt>
+<figure_4b.png, id=211, 415.26341pt x 280.98576pt>
 File: figure_4b.png Graphic file (type png)
 <use figure_4b.png>
 Package pdftex.def Info: figure_4b.png  used on input line 173.
@@ -709,163 +681,91 @@ Package pdftex.def Info: figure_4b.png  used on input line 173.
 
 [15 <./figure_4b.png>]) (./discussion.tex
 
-LaTeX Warning: Citation `suttonReinforcementLearningProblem1998' on page 16 undefined on input line 4.
+LaTeX Warning: Citation `liuComprehensiveExplorationImplementation2024' on page 16 undefined on input line 4.
 
 
-LaTeX Warning: Citation `liu2024a' on page 16 undefined on input line 4.
+LaTeX Warning: Citation `steyversBayesianAnalysisHuman2009' on page 16 undefined on input line 6.
 
 
-LaTeX Warning: Citation `steyversBayesianAnalysisHuman2009a' on page 16 undefined on input line 6.
-
-
-LaTeX Warning: Citation `behrens2007' on page 16 undefined on input line 6.
-
-
-LaTeX Warning: Citation `schulzFindingStructureMultiarmed2020' on page 16 undefined on input line 6.
-
-
-LaTeX Warning: Citation `zhangForgetfulBayesMyopic2013' on page 16 undefined on input line 6.
+LaTeX Warning: Citation `behrensLearningValueInformation2007' on page 16 undefined on input line 6.
 
 
 
 [16]
 
-LaTeX Warning: Citation `ratteImpactNeuronalProperties2013' on page 17 undefined on input line 26.
+LaTeX Warning: Citation `kennerleyDecisionMakingReward2011' on page 17 undefined on input line 31.
 
 
-LaTeX Warning: Citation `ockerFlexibleNeuralConnectivity2020' on page 17 undefined on input line 26.
+LaTeX Warning: Citation `kennerleyDecisionMakingReward2011' on page 17 undefined on input line 34.
 
 
-LaTeX Warning: Citation `apicellaSurveyModernTrainable2021' on page 17 undefined on input line 26.
+LaTeX Warning: Citation `klein-fluggeSegregatedEncodingReward2013' on page 17 undefined on input line 34.
 
 
-LaTeX Warning: Citation `larsenSynapsetypespecificPlasticityLocal2015' on page 17 undefined on input line 28.
+LaTeX Warning: Citation `kollingValueSearchPersistence2016' on page 17 undefined on input line 38.
 
 
-LaTeX Warning: Citation `bartolHippocampalSpineHead2015' on page 17 undefined on input line 29.
-
-
-LaTeX Warning: Citation `arielIntrinsicVariabilityPv2012' on page 17 undefined on input line 29.
-
-
-LaTeX Warning: Citation `kennerleyDecisionMakingReward2011a' on page 17 undefined on input line 31.
-
-
-LaTeX Warning: Citation `khamassiChapter22Medial2013' on page 17 undefined on input line 31.
-
-
-LaTeX Warning: Citation `lukChoiceCodingFrontal2013' on page 17 undefined on input line 34.
-
-
-LaTeX Warning: Citation `kennerleyDecisionMakingReward2011a' on page 17 undefined on input line 34.
-
-
-LaTeX Warning: Citation `klein-flugge2013' on page 17 undefined on input line 34.
-
-
-LaTeX Warning: Citation `khamassiChapter22Medial2013' on page 17 undefined on input line 38.
-
-
-LaTeX Warning: Citation `kolling2016' on page 17 undefined on input line 38.
-
-
-Overfull \hbox (5.76457pt too wide) in paragraph at lines 36--39
-\OT1/cmr/m/n/10 Gaussian-sigmoid func-tion, af-fect-ing the neu-ral ac-tiv-ity and the weight-dependent
+Overfull \hbox (12.9868pt too wide) in paragraph at lines 36--39
+\OT1/cmr/m/n/10 Gaussian-sigmoid func-tion, that af-fect the neu-ral ac-tiv-ity and the weight-dependent
  []
-
-
-LaTeX Warning: Citation `rich2016' on page 17 undefined on input line 41.
-
-
-LaTeX Warning: Citation `funahashiPrefrontalContributionDecisionMaking2017' on page 17 undefined on input line 42.
-
-
-LaTeX Warning: Citation `marcosDeterminingMonkeyFree2016' on page 17 undefined on input line 42.
-
-
-LaTeX Warning: Citation `balewskiValueDynamicsAffect2023' on page 17 undefined on input line 42.
 
 
 
 [17]
 
-LaTeX Warning: Citation `faisalNoiseNeuronsOther2012' on page 18 undefined on input line 46.
-
-
-LaTeX Warning: Citation `tokicAdaptiveEGreedyExploration2010' on page 18 undefined on input line 48.
-
-
-LaTeX Warning: Citation `tokicValueDifferenceBasedExploration2011' on page 18 undefined on input line 48.
-
-
-LaTeX Warning: Citation `cavenaghiNonStationaryMultiArmed2021' on page 18 undefined on input line 48.
-
-
-LaTeX Warning: Citation `qiForcedExplorationBandit2023' on page 18 undefined on input line 48.
-
-
-LaTeX Warning: Citation `nunesSpikingNeuralNetworks2022' on page 18 undefined on input line 50.
+LaTeX Warning: Citation `richDecodingSubjectiveDecisions2016' on page 18 undefined on input line 41.
 
 ) (./acknowledgement.tex) (./main.bbl
 
 [18{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-Underfull \hbox (badness 10000) in paragraph at lines 50--54
-[]\OT1/cmr/m/n/10 Michael A. Mc-Dan-nald, Yuji K. Taka-hashi, Nina Lopatina,
+
+./main.bbl:46: LaTeX Error: Unicode character ε (U+03B5)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.46 \newblock Adaptive ε
+                          -{{Greedy Exploration}} in {{Reinforcement Learnin...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+Underfull \hbox (badness 1178) in paragraph at lines 65--68
+[]\OT1/cmr/m/n/10 Demis Has-s-abis, Dhar-shan Ku-maran, Christo-pher Sum-mer-field, and
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 50--54
-\OT1/cmr/m/n/10 Brad W. Pietras, Josh L. Jones, and Ge-of-frey Schoen-
- []
-
-
-Underfull \hbox (badness 5050) in paragraph at lines 50--54
-\OT1/cmr/m/n/10 baum.  Model-based learn-ing and the con-tri-bu-tion of the or-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 50--54
-\OT1/cmr/m/n/10 bitofrontal cor-tex to the model-free world.  35(7):991--996.
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 50--54
-[]\OT1/cmr/m/n/10 eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1460-
+Underfull \hbox (badness 6559) in paragraph at lines 65--68
+\OT1/cmr/m/n/10 Matthew Botvinick.  Neuroscience-Inspired Ar-ti-fi-cial In-tel-li-gence.
  []
 
 
 
-[19])
+[19]
+Underfull \hbox (badness 1824) in paragraph at lines 130--133
+[]\OT1/cmr/m/n/10 Mary B. Kennedy.  Synap-tic Sig-nal-ing in Learn-ing and Mem-ory.
+ []
 
-[20] (./appendix.tex
-<figure_appx_1.png, id=236, 432.8973pt x 259.59384pt>
+
+
+[20])
+
+[21] (./appendix.tex
+<figure_appx_1.png, id=280, 432.8973pt x 259.59384pt>
 File: figure_appx_1.png Graphic file (type png)
 <use figure_appx_1.png>
 Package pdftex.def Info: figure_appx_1.png  used on input line 41.
 (pdftex.def)             Requested size: 276.00105pt x 165.51363pt.
 
 
-[21]
+[22]
 
-[22 <./figure_appx_1.png>]
-
-[23]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 129.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\epsilon' on input line 129.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 129.
-
-
+[23 <./figure_appx_1.png>]
 
 [24]
-<figure_appx_6.png, id=268, 247.74156pt x 150.17706pt>
+<figure_appx_6.png, id=305, 247.74156pt x 150.17706pt>
 File: figure_appx_6.png Graphic file (type png)
 <use figure_appx_6.png>
 Package pdftex.def Info: figure_appx_6.png  used on input line 168.
@@ -875,26 +775,21 @@ Package pdftex.def Info: figure_appx_6.png  used on input line 168.
 [25]
 
 [26 <./figure_appx_6.png>]
-<figure_appx_2.png, id=286, 652.88718pt x 478.13832pt>
+
+[27]
+<figure_appx_2.png, id=330, 652.88718pt x 478.13832pt>
 File: figure_appx_2.png Graphic file (type png)
 <use figure_appx_2.png>
 Package pdftex.def Info: figure_appx_2.png  used on input line 239.
 (pdftex.def)             Requested size: 345.0pt x 252.66063pt.
 
 
-[27]
-<figure_appx_3.png, id=294, 215.07552pt x 188.04654pt>
+[28]
+<figure_appx_3.png, id=339, 215.07552pt x 188.04654pt>
 File: figure_appx_3.png Graphic file (type png)
 <use figure_appx_3.png>
 Package pdftex.def Info: figure_appx_3.png  used on input line 253.
 (pdftex.def)             Requested size: 137.9979pt x 120.66212pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: Reference `eduration' on page 28 undefined on input line 259.
-
 
 Underfull \hbox (badness 10000) in paragraph at lines 261--262
 
@@ -907,8 +802,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 264--267
 
 
 
-[28 <./figure_appx_2.png>]
-<figure_appx_5.png, id=303, 481.17366pt x 218.11086pt>
+[29 <./figure_appx_2.png>]
+<figure_appx_5.png, id=350, 481.17366pt x 218.11086pt>
 File: figure_appx_5.png Graphic file (type png)
 <use figure_appx_5.png>
 Package pdftex.def Info: figure_appx_5.png  used on input line 303.
@@ -919,17 +814,17 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 
-[29 <./figure_appx_3.png>]
-<figure_appx_4.png, id=316, 548.5293pt x 331.7193pt>
+[30 <./figure_appx_3.png>]
+<figure_appx_4.png, id=361, 548.5293pt x 331.7193pt>
 File: figure_appx_4.png Graphic file (type png)
 <use figure_appx_4.png>
 Package pdftex.def Info: figure_appx_4.png  used on input line 331.
 (pdftex.def)             Requested size: 345.0pt x 208.64513pt.
 
 
-[30 <./figure_appx_5.png>])
+[31 <./figure_appx_5.png>])
 
-[31 <./figure_appx_4.png>] (./main.aux)
+[32 <./figure_appx_4.png>] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -940,18 +835,18 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 16832 strings out of 475102
- 328584 string characters out of 5764876
- 708168 words of memory out of 5000000
- 39522 multiletter control sequences out of 15000+600000
+ 16859 strings out of 475102
+ 330353 string characters out of 5764876
+ 709298 words of memory out of 5000000
+ 39536 multiletter control sequences out of 15000+600000
  570863 words of font info for 77 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 75i,16n,79p,1341b,1146s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,16n,79p,1349b,1150s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on main.pdf (31 pages, 3208593 bytes).
+Output written on main.pdf (32 pages, 3214313 bytes).
 PDF statistics:
- 542 PDF objects out of 1000 (max. 8388607)
- 429 compressed objects within 5 object streams
- 112 named destinations out of 1000 (max. 500000)
+ 589 PDF objects out of 1000 (max. 8388607)
+ 475 compressed objects within 5 object streams
+ 125 named destinations out of 1000 (max. 500000)
  243 words of extra memory for PDF output out of 10000 (max. 10000000)
 

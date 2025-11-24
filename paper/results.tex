@@ -47,7 +47,7 @@ Identical to the sinusoidal distribution shift, half of the arms change sinusoid
 
 % Evolution: fitness evolution
 \subsection{Evolutionary search}
-The optimization of the hyper-parameters was performed using the Covariance Matrix Adaptation evolutionary strategy algorithm (CMA-ES) \cite{igel2007}.
+The optimization of the hyper-parameters was performed using the Covariance Matrix Adaptation evolutionary strategy algorithm (CMA-ES).
 The search was carried out with a population of $256$ individuals for $80$ generations. Each individual was endowed with a genome, corresponding to a vector of 22 parameters of the model.
 The fitness function of the evolution was defined as the average reward obtained by an individual over 3 different non-stationary bandit environments, each for $K=\{40, 200\}$, and all averaged over 2 iterations.
 The results are summarized below in figure \ref{fig:evolution}.
@@ -177,7 +177,7 @@ The red lines represent the entropy level, calculated from the distribution of s
 - \textbf{c}: \textit{the top sub-plot displays the average reward $\langle R\rangle$ for one trial obtained by each model for increasing levels of distribution entropy in the reward distribution.
     The bottom sub-plot shows the average entropy of the selections $\langle H_{s}\rangle$ for the same
 trial.
-    The simulation used a stationary piecewise environment with $K=200$, $2000$ rounds, and averaged over 40 repetitions.
+    The simulation used a stationary piecewise environment (MAB-P) with $K=200$, $2000$ rounds, and averaged over 40 repetitions.
 }}
 
 % - \textbf{b}: \textit{rows 1-3 display the average reward $\langle R\rangle$ for trial 1 and 2 obtained by each model for increasing levels of distribution entropy (in nats) in the reward distribution. Rows 2-4 display the average entropy of the selections $\langle H_{s}\rangle$ for the first and second trial of the simulation, each with 2000 rounds.}}
@@ -197,8 +197,9 @@ The investigation used a simulation carried out in a piecewise stationary enviro
 The analysis tracked performance, as cumulative reward, as well as selection entropy $H_{s}$, defined as the entropy of the distribution of selected options within a sliding window of $20$ rounds.
 % The distributions were chosen such that they have only one strongly rewarding arm in order to highlight the models' ability to find it.
 In the top sub-plot, the average reward obtained by each model is shown against the entropy of the reward distribution.
-The results reported how all models are capable of robust performance in the first trial even in the presence of high uncertainty.
-In the second trial, $\epsilon$-Greedy and Thompson Sampling suffered the increasing difficulty of switching arms, probably due to their conservative approaches. However, this challenge affected UCB and NSA only with higher entropy levels, recognizing their adaptability.
+The results reported that all models were capable of keeping up with increasing uncertainty, with the NSA model being not different from the others.
+The high levels of entropy of the last arm distribution made the choice of arms less important, meaning that the optimal selection policy was getting closeer to chance levels (the dashed line), reflected by the similar performance across models.
+%In the second trial, $\epsilon$-Greedy and Thompson Sampling suffered the increasing difficulty of switching arms, probably due to their conservative approaches. However, this challenge affected UCB and NSA only with higher entropy levels, recognizing their adaptability.
 
 Another perspective on this analysis was given by the bottom plot, which showed the average entropy over the trials.
 Overall, there was an unsuprising trend of increasing selection entropy with the entropy of the reward distribution.

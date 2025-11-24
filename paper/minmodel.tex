@@ -14,7 +14,7 @@ The first (U) represents the traces of the \textit{K} available options (that is
 
 \noindent In model, the first layer represents the available options, while the learned connections to the second layer encode their values based on recent reward history.
 In figure \textbf{\ref{fig:main_architecture}a} a visualization of the architecture is presented.
-A key simplification is the lumping of option representations into single neurons. Although this choice abstracts the more distributed encoding found in actual brain networks, it allows for a more tractable model design \cite{martinRepresentationObjectConcepts2007a}.
+A key simplification is the lumping of option representations into single neurons. Although this choice abstracts the more distributed encoding found in actual brain networks, it allows for a more tractable model design \cite{martinRepresentationObjectConcepts2007}.
 
 
 More formally, the model is defined by a set of coupled ordinary differential equations (ODE). The first equation describes the evolution of neural activity $\textbf{u}$ in population U, while the second governs the activity $\textbf{v}$ in population V, each evolving with its respective time constant $\tau$.
@@ -27,7 +27,7 @@ More formally, the model is defined by a set of coupled ordinary differential eq
 \end{equation}\label{eq:main}
 
 \noindent The external input $\textbf{I}_{\text{ext}}$ is a constant input that is used to set the initial conditions of neural activity $\textbf{u}$.
-Notably, it does not deliver any practical information, given the unambiguity of the task, and should thus be treated more as an attention-related stimulation to prompt processing \cite{yantis_neural_2008}.
+Notably, it does not deliver any practical information, given the unambiguity of the task, and should thus be treated more as an attention-related stimulation to prompt processing \cite{yantisNeuralBasisSelective2008}.
 The activation functions $\phi_{v},\phi_{u}$ are applied to population $v$ and $u$ respectively, and represent two distinct neural response functions tailored to each population vector.
 They have been chosen to be a step function with threshold $\theta_{v},\theta_{u}$ applied to a generalized sigmoid with gain $g_{v},g_{u}$ and offset $s_{v},s_{u}$.
 
@@ -44,15 +44,14 @@ Importantly, the two layers are not fully connected and the matrices are diagona
 % For details of its implementation see the Appendix \ref{sec:appendix}.
 The matrix $\textbf{W}^{UV}$ is initialized to all zeros and is the only plastic parameter of the model during the task.
 Concerning the others, they were optimized offline with the goal of maximizing the average total reward over multiple runs and across testing environments.
-In particular, given the non-differentiability of the model with respect to the fitness function we relied on an evolutionary search using the Covariance-Matrix Adaptation algorithm (CMA-ES) \cite{igel_covariance_2007}.
-
-The function $\Phi_{v}$ is defined to be a combination of a Gaussian and a sigmoid, and its parameters were also optimized offline. \textbf{\ref{fig:main_architecture}b} illustrates an example.
+In particular, given the non-differentiability of the model with respect to the fitness function we relied on an evolutionary search using the Covariance-Matrix Adaptation algorithm (CMA-ES) \cite{igelCovarianceMatrixAdaptation2007}.
+he function $\Phi_{v}$ is defined to be a combination of a Gaussian and a sigmoid, and its parameters were also optimized offline. \textbf{\ref{fig:main_architecture}b} illustrates an example.
 The motivation behind this choice is offloading to evolution the responsability of converging to a shape useful for solving the task.
 % , and to allow competition or integration of two distinct shape characteristics.
 
 The main difference between the two function is the presence (sigmoid) or absence (Gaussian) of a saturation limit on either side of their maximum, with variable offset (threshold) and steepness (gain).
 Our intent was to explore the effect on performance of the integration and competition of these traits.
-Furthermore, these features conforms with some characteristics of biological and artificial neurons, such as the firing rate functions being smoothly bounded and receptive fields being defined in a range \cite{butts_tuning_2006, millerCombinedMechanismsNeural2019, ockerFlexibleNeuralConnectivity2020, apicellaSurveyModernTrainable2021}.
+Furthermore, these features conforms with some characteristics of biological and artificial neurons, such as the firing rate functions being smoothly bounded and receptive fields being defined in a range \cite{buttsTuningCurvesNeuronal2006, millerCombinedMechanismsNeural2019, ockerFlexibleNeuralConnectivity2020, apicellaSurveyModernTrainable2021}.
 
 % In particular, it corresponds to a smooth transition to a plateau value with a certain steepness (or gain), which can represent a saturation once a threshold is crossed; such features have been reported for biological and artificial neurons \cite{ockerFlexibleNeuralConnectivity2020, apicellaSurveyModernTrainable2021}.
 % The other is a bell-shaped curve with a defined center and width, which can allow putting emphasis on values only within a given window and modulating information transfer \cite{millerCombinedMechanismsNeural2019}.
@@ -81,7 +80,7 @@ A selection $k$ is sampled after another fixed amount of time duration $\text{du
 \noindent The selection rule is simple: if the value representation $\textbf{v}$ is in agreement with the trace $\textbf{u}$, then the option with the highest value is selected. Otherwise, a random option is chosen.
 This rule presents a way to express the exploration-exploitation trade-off through the possible agreement of the two populations, under the influence of current weight values $\widetilde{\textbf{W}}^{UV}$. \\ In subsection \ref{alg:decision1}, the pseudo-code for the algorithm behind the selection process is reported below, which is applied during each round $t$.
 The two durations hyperparameters $\text{dur}_{\text{pre}}$ and $\text{dur}_{\text{post}}$ are evolved through evolution alongside the others within a range of $(400, 3000$\textit{ms}.
-Although this range has been so defined out of empirical motivations and it closely depends on the settings of our model, at least for cases with few options it does align data from experiments measuring reaction times, typically in the order of 300-1500ms \cite{churchland_decision-making_2008, drugowitsch_optimal_2014}.
+Although this range has been so defined out of empirical motivations and it closely depends on the settings of our model, at least for cases with few options it does align data from experiments measuring reaction times, typically in the order of 300-1500ms \cite{churchlandDecisionmakingMultipleAlternatives2008, drugowitschOptimalMultisensoryDecisionmaking2014}.
 
 % --- ALGORITHM
 \begin{algorithm}[ht]
@@ -119,9 +118,9 @@ In fact, empirically no difference has been observed from random sampling, and i
 According to the values of the policy parameters, the behavior of the model displays periods of exploration followed by steady exploitation, which can be reverted in the case of a change in the environment's reward distribution.
 
 %\noindent Lastly, the structure of the option selection process resembles the prefrontal circuitry, as the choices emerge from the state sampling of the network following a period of autonomous neural activity. The stability of these neural activations depends on the strength and reliability of the option with the highest value \cite{backmanEffectsWorkingMemoryTraining2011, enelStableDynamicRepresentations2020}.
-The structure of this option selection process draws inspiration from the interaction between the values estimation, feedback integration, and option representation produced by the orbito-frontal cortex (OFC) and the anterior cingulate cortex (ACC) \cite{kennerley_decision_2011, luk_choice_2013, rolls_emotion_2023}.
-Particularly, consensus-like dynamics have been proposed for selecting actions, evaluated in a parallel and distributed fashion, and undergoing competition \cite{cisek_neural_2010, cisek_making_2012, suzuki_neural_2015}.
-Another relevant perspective is that of bump attractor models for perceptual decision-making, usually defined as recurrent networks trained to drift within their activity landscape to solve multi-choice tasks \cite{you_dynamics_2013, carroll_encoding_2014, esnaola-acebes_bump_2021}.
+The structure of this option selection process draws inspiration from the interaction between the values estimation, feedback integration, and option representation produced by the orbito-frontal cortex (OFC) and the anterior cingulate cortex (ACC) \cite{kennerleyDecisionMakingReward2011, lukChoiceCodingFrontal2013, rollsEmotionMotivationDecisionmaking2023}.
+Particularly, consensus-like dynamics have been proposed for selecting actions, evaluated in a parallel and distributed fashion, and undergoing competition \cite{cisekNeuralMechanismsInteracting2010, cisekMakingDecisionsDistributed2012, suzukiNeuralMechanismsUnderlying2015}.
+Another relevant perspective is that of bump attractor models for perceptual decision-making, usually defined as recurrent networks trained to drift within their activity landscape to solve multi-choice tasks \cite{youDynamicsMultipleChoiceDecision2013, carrollEncodingCertaintyBump2014, esnaola-acebesBumpAttractorDynamics2021}.
 
 
 \subsection{Learning}
@@ -136,7 +135,7 @@ Then, the weights $\textbf{W}^{UV}$ for the neuron corresponding to option $k$ a
 
 The shape of $\Phi_{\eta}$ is again a Gaussian-sigmoid but with different parameters, giving evolution the opportunity to combine the two characteristic traits of smooth saturation and bell-shaped tuning.
 In terms of neural dynamics, the advantage is to introduce adapation in the learning of the weights, implemented as a more considerate scaling of the update magnitude.
-Computationally, this allows taking into account different learning phases for a given neuron, which represents an option, and approach similar to adaptive optimizers employed in training deep networks \cite{wen_evolution_2024}.
+Computationally, this allows taking into account different learning phases for a given neuron, which represents an option, and approach similar to adaptive optimizers employed in training deep networks \cite{wenEvolutionRoleOptimizers2024}.
 Further, proportional updates and synaptic scaling have been observed in biological synapses, taking part plasticity mechanisms, like shaping the synaptic update kernel, or homeostatic constraints, for instance limits in the speed of chemical exchange in the synaptic cleft \cite{citriSynapticPlasticityMultiple2008, larsenSynapsetypespecificPlasticityLocal2015, kennedySynapticSignalingLearning2016, samavatSynapticInformationStorage2024}.
 
 
@@ -145,6 +144,7 @@ Further, proportional updates and synaptic scaling have been observed in biologi
 % This architecture is inspired by the prefrontal cortex (PFC) and its central role in decision-making processes. Specifically, the two populations correspond to the orbitofrontal cortex (OFC) and the anterior cingulate cortex (ACC), respectively.
 
 % The OFC is known to represent different options, updating their values based on reward history and outcomes \cite{lukChoiceCodingFrontal2013, kennerleyDecisionMakingReward2011a}. Meanwhile, the ACC has been associated with action valuation and regulating the balance between exploration and exploitation \cite{khamassiChapter22Medial2013}. Additionally, the dynamic interaction between the ACC and OFC has been linked to transient pre-stimulus activations, which bias decisions toward the most valuable option \cite{funahashiPrefrontalContributionDecisionMaking2017, marcosDeterminingMonkeyFree2016, balewskiValueDynamicsAffect2023}.
+
 
 
 
