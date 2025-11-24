@@ -841,14 +841,11 @@ L3 programming layer <2025-01-18>
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
  16876 strings out of 475102
  330681 string characters out of 5764876
- 709606 words of memory out of 5000000
+ 709608 words of memory out of 5000000
  39550 multiletter control sequences out of 15000+600000
  570863 words of font info for 77 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
