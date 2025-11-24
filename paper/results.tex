@@ -90,9 +90,13 @@ Interestingly, a common feature seemed to be a slight concavity after zero, a sl
 The NSA model has been tested and compared with the other algorithms: Thompson Sampling (TS), UCB, and $\epsilon$-Greedy.
 The benchmark were the four different variants of the MAB problem listed above \ref{sec:envs}, with a variable number of arms ranging from 5 to 1000.
 The results are reported in table \ref{tab:results}.
-Overall, our NSA model displays solid performance in all environments, most of the time being equally good or better than the other algorithms.
-Interestingly, a large number of arms ($K$) did not present a significant challenge, as the model was effectively adapted to the different environments and reward distributions.
-However, this is in part due to the randomness in the assignment of arm probabilities, and the statistics of the quantity of high-reward arms as their number increases. Nonetheless, given the non-stationarity of the reward distribution it is still a non trivial task to re-calibrate to new distributions.
+Overall, our NSA model displayed competitive performance in all environments, oftentimes being in the range or even better than the other algorithms.
+Interestingly, large numbers of arms ($K$) did not present a significant challenge for our model, especially in comparison with the others.
+However, this result may in part be affected by the randomness in the assignment of arm probabilities, and the statistical increase of the count of high-reward arms as more are present.
+Considered the non-stationarity of the reward distribution, re-calibrate to new distributions is still not a trivial task to accomplish.
+The NSA model encountered more difficulties, in comparison, in the second environment (piecewise stationary distribution with drift, MAB-D), making a positive difference only with the increase in arm number.
+A possible explanation is that MAB-D has a proportionally a lower density of high-reward options at any give time, less compatible with the explotative strategy emerging in the model.
+This is not the case for MAB-P, whose best arms has fewer but long lasting, and the sinusoidal MAB-$\text{sin}$ and MAB-$\text{sin}$P, which have more highly rewarding arms although changing frequently.
 
 
 % % --- table mabp
@@ -108,36 +112,40 @@ However, this is in part due to the randomness in the assignment of arm probabil
 
 % mabP
 \multirow{4}{*}{\rotatebox[origin=c]{90}{\textbf{MAB-P}}}
-& TS & $\mathbf{0.03(8)}$ & $\mathbf{0.02(6)}$ & $\mathbf{0.02(7)}$ & $\mathbf{0.04(5)}$ & $\mathbf{0.02(3)}$ & $0.16(2)$ \\
-& $\epsilon$-Greedy & $0.05(14)$ & $0.07(5)$ & $0.08(7)$ & $0.15(6)$ & $0.08(2)$ & $0.10(4)$ \\
-& UCB & $0.05(15)$ & $0.05(8)$ & $0.19(6)$ & $0.33(3)$ & $0.39(2)$ & $0.54(3)$ \\
-& \textit{NSA} & $\mathit{0.08(13)}$ & $\mathit{0.07(11)}$ & $\mathit{0.07(14)}$ & $\mathit{0.07(8)}$ & $\mathit{0.09(9)}$ & $\mathbf{0.07(8)}$ \\
+& TS & $0.06$\;\;\;\;\;& $\mathbf{0.06}$*\;\;\;\;& $0.10$\;\;\;\;\;& $0.11$\;\;\;\;\;& $0.13$***& $0.29$***\\
+& $\epsilon$-Greedy & $0.10$\;\;\;\;\;& $0.11$\;\;\;\;\;& $0.19$***& $0.22$***& $0.23$***& $0.25$***\\
+& UCB1 & $\mathbf{0.05}$*\;\;\;\;& $0.07$\;\;\;\;\;& $0.25$***& $0.36$***& $0.41$***& $0.49$***\\
+& NSA & $0.10$\;\;\;\;\;& $0.11$\;\;\;\;\;& $0.11$\;\;\;\;\;& $0.11$\;\;\;\;\;& $\mathbf{0.10}$\;\;\;\;\;& $\mathbf{0.10}$\;\;\;\;\;\\
 \midrule
 
 % mabD
 \multirow{4}{*}{\rotatebox[origin=c]{90}{\textbf{MAB-D}}}
-& TS & $\mathbf{0.03(6)}$ & $\mathbf{0.08(13)}$ & $0.16(6)$ & $\mathbf{0.19(3)}$ & $0.28(7)$ & $0.34(3)$ \\
-& $\epsilon$-Greedy & $0.04(7)$ & $0.14(13)$ & $0.22(5)$ & $0.19(8)$ & $0.26(7)$ & $0.16(4)$ \\
-& UCB & $0.05(6)$ & $0.09(13)$ & $0.21(3)$ & $0.36(4)$ & $0.40(3)$ & $0.49(2)$ \\
-& \textit{NSA} & $\mathit{0.13(10)}$ & $\mathit{0.15(16)}$ & $\mathbf{0.05(6)}$ & $\mathit{0.21(5)}$ & $\mathbf{0.26(7)}$ & $\mathbf{0.12(7)}$ \\
+& TS & $\mathbf{0.09}$\textit{***}& $\mathbf{0.08}$\textit{***}& $\mathbf{0.17}$\textit{***}& $\mathbf{0.23}$\textit{***}& $0.30$\;\;\;\;\;& $0.41$***\\
+& $\epsilon$-Greedy & $\mathbf{0.11}$\textit{**\;\;\;}& $\mathbf{0.10}$\textit{***}& $\mathbf{0.19}$\textit{***}& $\mathbf{0.23}$\textit{***}& $\mathbf{0.27}$\textit{***}& $0.33$***\\
+& UCB1 & $\mathbf{0.10}$\textit{***}& $\mathbf{0.11}$\textit{***}& $0.29$***& $0.38$***& $0.44$***& $0.49$***\\
+& NSA & $0.15$\;\;\;\;\;& $0.17$\;\;\;\;\;& $0.25$\;\;\;\;\;& $0.29$\;\;\;\;\;& $0.31$\;\;\;\;\;& $\mathbf{0.30}$\;\;\;\;\;\\
 \midrule
 
 % mabsin
 \multirow{4}{*}{\rotatebox[origin=c]{90}{\textbf{MAB-$\sin$}}}
-& TS & $0.21(22)$ & $0.22(16)$ & $0.07(5)$ & $0.10(5)$ & $\mathbf{0.06(4)}$ & $0.21(5)$ \\
-& $\epsilon$-Greedy & $0.21(21)$ & $0.18(10)$ & $0.12(5)$ & $0.12(6)$ & $0.10(4)$ & $0.10(1)$ \\
-& UCB & $0.03(4)$ & $0.05(3)$ & $0.17(4)$ & $0.23(1)$ & $0.33(3)$ & $0.49(3)$ \\
-& \textit{NSA} & $\mathbf{0.00(3)}$ & $\mathbf{0.02(4)}$ & $\mathbf{0.05(3)}$ & $\mathbf{0.06(4)}$ & $\mathit{0.08(1)}$ & $\mathbf{0.05(4)}$ \\
+& TS & $0.22$***& $0.17$***& $0.10$***& $0.10$***& $0.10$***& $0.26$***\\
+& $\epsilon$-Greedy & $0.29$***& $0.24$***& $0.18$***& $0.18$***& $0.17$***& $0.22$***\\
+& UCB1 & $0.11$\;\;\;\;\;& $0.09$***& $0.20$***& $0.26$***& $0.34$***& $0.51$***\\
+& NSA & $0.08$\;\;\;\;\;& $\mathbf{0.05}$\;\;\;\;\;& $\mathbf{0.06}$\;\;\;\;\;& $\mathbf{0.06}$\;\;\;\;\;& $\mathbf{0.06}$\;\;\;\;\;& $\mathbf{0.06}$\;\;\;\;\;\\
 \midrule
 
 \multirow{4}{*}{\rotatebox[origin=c]{90}{\textbf{MAB-$\sin$P}}}
-& TS & $0.19(21)$ & $0.43(19)$ & $0.17(10)$ & $0.11(6)$ & $0.09(6)$ & $0.19(6)$ \\
-& $\epsilon$-Greedy & $0.24(26)$ & $0.43(10)$ & $0.24(10)$ & $0.14(5)$ & $0.15(6)$ & $0.14(2)$ \\
-& UCB & $0.00(6)$ & $0.26(17)$ & $0.18(6)$ & $0.29(3)$ & $0.34(1)$ & $0.52(3)$ \\
-& \textit{NSA} & $\mathbf{0.00(9)}$ & $\mathbf{0.23(17)}$ & $\mathbf{0.14(7)}$ & $\mathbf{0.08(8)}$ & $\mathbf{0.06(4)}$ & $\mathbf{0.09(7)}$ \\\\
+& TS & $0.16$***& $0.20$***& $0.14$***& $0.12$***& $0.14$***& $0.28$***\\
+& $\epsilon$-Greedy & $0.20$***& $0.27$***& $0.23$***& $0.22$***& $0.23$***& $0.27$***\\
+& UCB1 & $0.09$\;\;\;\;\;& $0.11$\;\;\;\;\;& $0.23$***& $0.32$***& $0.41$***& $0.56$***\\
+& NSA & $0.06$\;\;\;\;\;& $0.09$\;\;\;\;\;& $\mathbf{0.07}$\;\;\;\;\;& $\mathbf{0.07}$\;\;\;\;\;& $\mathbf{0.08}$\;\;\;\;\;& $\mathbf{0.08}$\;\;\;\;\;\\
+\\
 \bottomrule
+
 \end{tabular}
-\caption{\textsc{Table of performance} — \textit{From top to bottom: results for MAB-P, MAB-D, MAB-$\sin$, and MAB-$\sin$P, for different numbers $K$ of arms. Each cell shows average regret and standard deviation (in parentheses), computed over 2 trials of 2000 rounds, averaged over 5 simulations.}}
+\caption{\textsc{Table of performance} — \textit{From top to bottom: results for MAB-P, MAB-D, MAB-$\sin$, and MAB-$\sin$P, for different numbers of arms $K$. Each cell reports the average regret, the stars represent the level of significance of the difference with respect to the NSA model,
+        calculated as a Welch's independent two-sample t-test with Bonferroni correction on multiple comparisons.
+        Values in bold indicate either the models meaningfully better then the NSA, or when the latter is better than all others. The results were obtained computed over 2 trials of 2000 rounds each, averaged over 64 simulations.}}
 \label{tab:results}
 \end{table}
 
@@ -187,10 +195,8 @@ For more details on the implementation, see the Appendix \ref{sec:appendix_entro
 The investigation used a simulation carried out in a piecewise stationary environment with $K=200$, results are plotted in Figure \textbf{\ref{fig:entropy_fig1}c}.
 
 The analysis tracked performance, as cumulative reward, as well as selection entropy $H_{s}$, defined as the entropy of the distribution of selected options within a sliding window of $20$ rounds.
-
 % The distributions were chosen such that they have only one strongly rewarding arm in order to highlight the models' ability to find it.
 In the top sub-plot, the average reward obtained by each model is shown against the entropy of the reward distribution.
-
 The results reported how all models are capable of robust performance in the first trial even in the presence of high uncertainty.
 In the second trial, $\epsilon$-Greedy and Thompson Sampling suffered the increasing difficulty of switching arms, probably due to their conservative approaches. However, this challenge affected UCB and NSA only with higher entropy levels, recognizing their adaptability.
 

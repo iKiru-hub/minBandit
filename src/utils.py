@@ -667,6 +667,13 @@ def cosine_similarity(x: np.ndarray, y: np.ndarray) -> float:
     return np.dot(x, y) / (np.linalg.norm(x) * np.linalg.norm(y))
 
 
+def get_sgnf_d(x: float):
+    tostr = str(x)
+    if 'e' in tostr:
+        if tostr[-2] == 0: return int(tostr[-1])
+        return int(tostr[-2:])  # hope no 99 is given
+    return len(str(x).split('.')[1].split('0'))
+
 
 def render_func():
 
