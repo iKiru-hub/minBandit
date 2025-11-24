@@ -258,6 +258,21 @@ As shown in \ref{fig:eduration}, fitness is also apparently not associated with 
 
 \noindent The effect of different durations for the first and second phases on performance is limited, as shown in Figure \ref{fig:eduration}.
 
+
+\hfill \break
+\subsection{Multiple runs on multiple environments}\label{sec:appendix_reps}
+\noindent The results reported in the table of results \ref{tab:results} were obtained by running all models on all environments on a variable number of arms for multiple times (64).
+Figure \textbf{\ref{fig:heat_res}} illustrates the outcome of the runs for each simulation setting.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figure_appx_7}
+    \caption{\textsc{Heatmap of multiple runs} - \textit{Each single heatmap shows the average regret (white=low, dark red=high) of two trials for a single model on a given environment for a specific number of arms $K$.}}
+    \label{fig:heat_res}
+\end{figure}
+
+\noindent Notably, the NSA model performs worst in the piecewise stationary with drift scenarion (MAB-D), while outcompeting the others in the sinusoidal cases and when $K$ is large.
+
 \hfill \break
 \subsection{Reward distribution entropy}\label{sec:appendix_entropy}
 

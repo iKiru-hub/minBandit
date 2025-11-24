@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2025.11.20)  24 NOV 2025 06:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2025.11.20)  24 NOV 2025 12:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -672,11 +672,11 @@ Overfull \vbox (3.87729pt too high) detected at line 137
 [13]
 
 [14]
-<figure_4b.png, id=211, 415.26341pt x 280.98576pt>
+<figure_4b.png, id=211, 415.40796pt x 280.98576pt>
 File: figure_4b.png Graphic file (type png)
 <use figure_4b.png>
 Package pdftex.def Info: figure_4b.png  used on input line 173.
-(pdftex.def)             Requested size: 345.0pt x 233.44534pt.
+(pdftex.def)             Requested size: 345.0pt x 233.35959pt.
 
 
 [15 <./figure_4b.png>]) (./discussion.tex
@@ -753,7 +753,7 @@ Underfull \hbox (badness 1824) in paragraph at lines 130--133
 [20])
 
 [21] (./appendix.tex
-<figure_appx_1.png, id=280, 432.8973pt x 259.59384pt>
+<figure_appx_1.png, id=282, 432.8973pt x 259.59384pt>
 File: figure_appx_1.png Graphic file (type png)
 <use figure_appx_1.png>
 Package pdftex.def Info: figure_appx_1.png  used on input line 41.
@@ -765,7 +765,7 @@ Package pdftex.def Info: figure_appx_1.png  used on input line 41.
 [23 <./figure_appx_1.png>]
 
 [24]
-<figure_appx_6.png, id=305, 247.74156pt x 150.17706pt>
+<figure_appx_6.png, id=307, 247.74156pt x 150.17706pt>
 File: figure_appx_6.png Graphic file (type png)
 <use figure_appx_6.png>
 Package pdftex.def Info: figure_appx_6.png  used on input line 168.
@@ -777,7 +777,7 @@ Package pdftex.def Info: figure_appx_6.png  used on input line 168.
 [26 <./figure_appx_6.png>]
 
 [27]
-<figure_appx_2.png, id=330, 652.88718pt x 478.13832pt>
+<figure_appx_2.png, id=332, 652.88718pt x 478.13832pt>
 File: figure_appx_2.png Graphic file (type png)
 <use figure_appx_2.png>
 Package pdftex.def Info: figure_appx_2.png  used on input line 239.
@@ -785,46 +785,54 @@ Package pdftex.def Info: figure_appx_2.png  used on input line 239.
 
 
 [28]
-<figure_appx_3.png, id=339, 215.07552pt x 188.04654pt>
+<figure_appx_3.png, id=341, 215.07552pt x 188.04654pt>
 File: figure_appx_3.png Graphic file (type png)
 <use figure_appx_3.png>
 Package pdftex.def Info: figure_appx_3.png  used on input line 253.
 (pdftex.def)             Requested size: 137.9979pt x 120.66212pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 261--262
+Underfull \hbox (badness 10000) in paragraph at lines 262--263
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 264--267
-
- []
-
+<figure_appx_7.png, id=345, 338.51268pt x 178.5069pt>
+File: figure_appx_7.png Graphic file (type png)
+<use figure_appx_7.png>
+Package pdftex.def Info: figure_appx_7.png  used on input line 269.
+(pdftex.def)             Requested size: 310.4979pt x 163.73804pt.
 
 
 [29 <./figure_appx_2.png>]
-<figure_appx_5.png, id=350, 481.17366pt x 218.11086pt>
+Underfull \hbox (badness 10000) in paragraph at lines 276--277
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 279--282
+
+ []
+
+
+
+[30 <./figure_appx_3.png> <./figure_appx_7.png>]
+<figure_appx_5.png, id=361, 481.17366pt x 218.11086pt>
 File: figure_appx_5.png Graphic file (type png)
 <use figure_appx_5.png>
-Package pdftex.def Info: figure_appx_5.png  used on input line 303.
+Package pdftex.def Info: figure_appx_5.png  used on input line 318.
 (pdftex.def)             Requested size: 276.00105pt x 125.1099pt.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-
-[30 <./figure_appx_3.png>]
-<figure_appx_4.png, id=361, 548.5293pt x 331.7193pt>
+[31 <./figure_appx_5.png>]
+<figure_appx_4.png, id=375, 548.5293pt x 331.7193pt>
 File: figure_appx_4.png Graphic file (type png)
 <use figure_appx_4.png>
-Package pdftex.def Info: figure_appx_4.png  used on input line 331.
+Package pdftex.def Info: figure_appx_4.png  used on input line 346.
 (pdftex.def)             Requested size: 345.0pt x 208.64513pt.
 
 
-[31 <./figure_appx_5.png>])
+[32])
 
-[32 <./figure_appx_4.png>] (./main.aux)
+[33 <./figure_appx_4.png>] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -833,20 +841,23 @@ L3 programming layer <2025-01-18>
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 16859 strings out of 475102
- 330353 string characters out of 5764876
- 709298 words of memory out of 5000000
- 39536 multiletter control sequences out of 15000+600000
+ 16876 strings out of 475102
+ 330681 string characters out of 5764876
+ 709606 words of memory out of 5000000
+ 39550 multiletter control sequences out of 15000+600000
  570863 words of font info for 77 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 75i,16n,79p,1349b,1150s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,16n,79p,1362b,1150s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on main.pdf (32 pages, 3214313 bytes).
+Output written on main.pdf (33 pages, 3413679 bytes).
 PDF statistics:
- 589 PDF objects out of 1000 (max. 8388607)
- 475 compressed objects within 5 object streams
- 125 named destinations out of 1000 (max. 500000)
- 243 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 605 PDF objects out of 1000 (max. 8388607)
+ 488 compressed objects within 5 object streams
+ 128 named destinations out of 1000 (max. 500000)
+ 256 words of extra memory for PDF output out of 10000 (max. 10000000)
 

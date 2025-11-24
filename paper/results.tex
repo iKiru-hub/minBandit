@@ -173,7 +173,7 @@ Indeed, the dynamics of NSA makes it particularly suited for the task of non-sta
     \includegraphics[width=1.0\textwidth]{figure_4b.png}
     \caption{\textsc{Decision-making dynamics for different models} - \textbf{a}: \textit{Each plot display the results from one model. The raster plots (black dots) show the arms selected at each round.
 The red lines represent the entropy level, calculated from the distribution of selections over the preceeding 20 rounds, smoothed with a 30-steps moving average. In the plot titles, the total reward and average entropy ($H$) over all trials are also reported.}
-- \textbf{b}: \textit{series of distributions of arm probabilities ($K=200$) with increasing levels of entropy. Subplot titles report the difference $\Delta H$ with respect to a reference uniform distribution with same mean, representing the limit of the distribution series with maximal entropy.}
+- \textbf{b}: \textit{example of a series of distributions of arm probabilities ($K=200$) with increasing levels of entropy. Subplot titles report the difference $\Delta H$ with respect to a reference uniform distribution with same mean, representing the limit of the distribution series with maximal entropy.}
 - \textbf{c}: \textit{the top sub-plot displays the average reward $\langle R\rangle$ for one trial obtained by each model for increasing levels of distribution entropy in the reward distribution.
     The bottom sub-plot shows the average entropy of the selections $\langle H_{s}\rangle$ for the same
 trial.
@@ -196,21 +196,22 @@ The investigation used a simulation carried out in a piecewise stationary enviro
 
 The analysis tracked performance, as cumulative reward, as well as selection entropy $H_{s}$, defined as the entropy of the distribution of selected options within a sliding window of $20$ rounds.
 % The distributions were chosen such that they have only one strongly rewarding arm in order to highlight the models' ability to find it.
-In the top sub-plot, the average reward obtained by each model is shown against the entropy of the reward distribution.
-The results reported that all models were capable of keeping up with increasing uncertainty, with the NSA model being not different from the others.
+In the top sub-plot of \textbf{\ref{fig:entropy_fig1}c}, the average reward obtained by each model is shown against the entropy of the reward distribution.
+The results reported that all models were capable of keeping up with increasing uncertainty, with the NSA model being not markedly different from the others.
+A noticeable performance was that of $\epsilon$-Greedy, which weakened only when entropy was raised significantly.
 The high levels of entropy of the last arm distribution made the choice of arms less important, meaning that the optimal selection policy was getting closeer to chance levels (the dashed line), reflected by the similar performance across models.
 %In the second trial, $\epsilon$-Greedy and Thompson Sampling suffered the increasing difficulty of switching arms, probably due to their conservative approaches. However, this challenge affected UCB and NSA only with higher entropy levels, recognizing their adaptability.
 
-Another perspective on this analysis was given by the bottom plot, which showed the average entropy over the trials.
+Another perspective on this analysis was given by the bottom sub-plot, which showed the average entropy over the trials.
 Overall, there was an unsuprising trend of increasing selection entropy with the entropy of the reward distribution.
-However, striking is the exception of Epsilon-Greedy, which still maintained a constant level throughout.
-UCB displayed the highest average values, while Thompson Sampling followed with some delay.
-On the other hand, NSA displays a more abrupt change, going from a state of very low to high variability, a sign of solid exploratory behavior.
-
+However, striking is the exception of Epsilon-Greedy, which still maintained a constant level throughout; it is $\epsilon$ parameter was however only calibrated with respect to the number of arms, and was therefore kept constant within the simulation.
+UCB displayed the highest average values, while Thompson Sampling followed with some delay, behaviour also observable on the left in plot \textbf{\ref{fig:entropy_fig1}a}.
+On the other hand, NSA displays a more abrupt change, going from a state of very low to high variability, a sign of more pronounced exploratory behavior as the best arms get harder to spot and hold.
 
 % -- commented out
 
 % \noindent The game environments considered in this work are non-stationary K-Armed Bandits with Binomial rewards.
 % In particular, the agent is evaluated over a number $T_{\text{trials}}$ of \textit{trials}, each composed by an arbitrary number $T_{\text{rounds}}$ of \textit{rounds}; each \textit{trial} is characterized by a different reward distribution $\mathbf{p}\sim\mathcal{U}(0,1)^{K}$ (although in practice the bounds have been set to $(0.1, 0.9)$ such that the distributions are less trivial).
+
 
 
