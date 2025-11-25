@@ -14,10 +14,10 @@ except ImportError:
 
 logger = utils.setup_logger(name=__name__, level=2)
 
-# ---------------------------------
-# this is meant to test the sensitivity of the `epsilon` paramenter
-# of the epsilon-greedy algorithm in different environments
-# ---------------------------------
+"""
+Goal: this is meant to test the sensitivity of the `epsilon` paramenter
+of the epsilon-greedy algorithm in different environments
+"""
 
 
 def run(epsilon: float, K: int, nb_rounds: int,  nb_trials: int,

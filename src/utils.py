@@ -1,30 +1,26 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator,FormatStrFormatter,MaxNLocator
+from IPython.display import clear_output
 import os, logging, coloredlogs, json, pprint
 from tqdm import tqdm
 import argparse
 from numba import jit
 
-# CACHE_PATH = r"/Users/daniekru/Research/lab/minBandit/src/_evo_cache"
-# CACHE_PATH_2 = r"/home/daniekru/lab/minBandit/src/_evo_cache"
-# MEDIA_PATH = r"/Users/daniekru/Research/lab/minBandit/media"
-# MEDIA_PATH_2 = r"/home/daniekru/lab/minBandit/media"
-
-WD = os.getcwd()
+WD = os.getcwd().split("src")[0]
+CONFIG_PATH = f"{WD}/configs"
 CACHE_PATH = f"{WD}/src/_evo_cache"
 CACHE_PATH_2 = f"{WD}/src/_evo_cache"
 MEDIA_PATH = f"{WD}/media"
 MEDIA_PATH_2 = f"{WD}/media"
 DATA_PATH = f"{WD}/src/data"
 TMP_PATH = f"{WD}/src/tmp"
-FIG_PATH = f"{WD}/paper/figures"
+#FIG_PATH = f"{WD}/paper/figures"
 
 DEBUG = False
 try:
     plt.rcParams['pdf.fonttype'] = 42
     plt.rcParams['ps.fonttype'] = 42
-    # plt.rcParams['font.family'] = 'Arial'
 except:
     import warnings
     warnings.warn("Could not set font properties")
@@ -137,7 +133,6 @@ def setup_logger(name: str="MAIN",
 logger = setup_logger(name="UTILS", colored=True,
                       level=0, is_debugging=False,
                       is_warning=False)
-
 
 def edit_logger(level: int=-1,
                 is_debugging: bool=True,
@@ -558,6 +553,8 @@ def plot_online_choices(ax: plt.Axes, K: int, choices: list,
     # ax.set_axis_off()
 
 
+def clf():
+    clear_output(wait=True)
 
 
 
@@ -691,8 +688,6 @@ def render_func():
     ax.grid()
     plt.show()
 
-    # fig.savefig("../paper/figures/gaussian_sigmoid.png",
-    #             dpi=500, bbox_inches="tight")
     print("saved")
 
 
@@ -700,23 +695,5 @@ def render_func():
 if __name__ == "__main__":
 
     render_func()
-
-    # parser = argparse.ArgumentParser(description="plotting functions")
-    # parser.add_argument("--policy", type=str, default=None,
-    #                     help="plot one of the policies: lr, value, activation")
-    # args = parser.parse_args()
-
-
-    # # load model
-    # model_params = load_model()
-
-    # if args.policy == "lr":
-    #     plot_lr_policy(model_params)
-    # elif args.policy == "value":
-    #     plot_value_function(model_params)
-    # elif args.policy == "activation":
-    #     plot_activation_function(model_params)
-    # else:
-    #     raise ValueError("Invalid policy")
 
 

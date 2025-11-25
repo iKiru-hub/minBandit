@@ -8,98 +8,110 @@ import models as mm
 import envs
 import utils
 
+# --
 
 logger = utils.setup_logger(level=2)
 logger(f"{logger}")
 
+"""
+Goal: benchmark each model on distribution with varying degree of entropy (probability)
+"""
 
-class Settings:
-
-    verbose = False
-    rounds = 2
-    trials = 2
-    reps = 10
-    K = 10
-    model = None
-    load = True
-    plot = False
-    env = "v0"
-    multiple = 1
-    visual = False
-    save = True
-    idx = 4
+# -- general settings
+NB_ROUNDS = 2000
+NB_TRIALS = 1
+ENV_TYPE = "v0"
+VERBOSE = True
+MODEL_IDX = 1
+K_VALUE = 100
+NUM_VALUES = 5
 
 
-settings1 = Settings()
-settings1.rounds = 1500
-settings1.trials = 2
-settings1.reps = 1
-settings1.verbose = False
-settings1.idx = 1
-settings1.load = True
-settings1.env = "v0"
-settings1.K = 200
-settings1.num_values = 200
-
-model_params = utils.load_model(idx=settings1.idx)
-model_params["K"] = settings1.K
-
-# -- reference probability distribution
-# probability = np.around(np.random.uniform(0.05, 0.5, settings1.K), 2)
-# probability[0] = 0.8
-# beta_values = [17, 15, 12, 8, 4, 1.5, 0.5]
-# NUM_BETAS = len(beta_values)
-
-PROBABILITY = np.random.uniform(0., 0.4, settings1.K)
+# -- model parameters
+model_params = utils.load_model(idx=MODEL_IDX)
+model_params["K"] = K_VALUE
 
 
-def run_(probabilities_set, params):
 
-    # parameters
-    K = settings1.K
-    nb_rounds = settings1.rounds
-    nb_trials = settings1.trials
-    nb_reps = 1
-    verbose = settings1.verbose
-    env_type = settings1.env
+""" local utils """
+
+def make_probabililties_set(index: int) -> tuple:
+
+    """ define a new set of distributions from the reference with a
+    level of entropy dependant on the index """
+
+    # -- reference probability distribution
+    probability_max = 0.4
+    distributions = []
+    for _ in range(NB_TRIALS):
+        _distr = np.random.uniform(0., probability_max, K_VALUE)
+        _distr[K_VALUE//2] = probability_max
+        distributions += [_distr]
+
+    # -- beta values | 1, 0.57.., 0.32.., 0.19.., 0.1.., 0.0625, ...
+    lambda_values = 1 / np.logspace(0, 4, num=NUM_VALUES, base=2)
+
+    probabilities_set = []
+    entropies = []
+    for ref_distribution in distributions:
+        distribution = ref_distribution.copy()
+        # distribution[K_VALUE//2] = PROBABILITY_MAX + (1 - PROBABILITY_MAX) / (index + 1)
+        distribution[K_VALUE//2] = probability_max + (1 - probability_max) * lambda_values[index]
+        probabilities_set += [distribution]
+
+        entropies += [utils.calc_entropy(distribution)]
+
+    return probabilities_set, entropies
+
+
+def make_probabililties_set_v2(index: int) -> tuple:
+
+    """ define a new set of distributions from the reference with a
+    level of entropy dependant on the index """
+
+    # -- reference probability distribution
+    probability_mean = 0.2
+    distributions = []
+    for _ in range(NB_TRIALS):
+        _distr = np.clip(np.random.normal(probability_mean, 0.15, K_VALUE), 0, 0.7)
+        _distr[K_VALUE//2] = 0.7
+        distributions += [_distr]
+
+    # -- beta values | 1, 0.57.., 0.32.., 0.19.., 0.1.., 0.0625, ...
+    lambda_values = 5 / np.logspace(0, 5, num=NUM_VALUES, base=1.4)
+
+    probabilities_set = []
+    entropies = []
+    for ref_distribution in distributions:
+        distribution = utils.softmax(ref_distribution, lambda_values[index]) * ref_distribution.sum()
+        distribution = np.clip(distribution, 0, 1)
+        probabilities_set += [distribution]
+
+        entropies += [utils.calc_entropy(distribution)]
+
+    return probabilities_set, entropies
+
+
+""" main functions """
+
+
+def single_run(probabilities_set: list, params: dict):
+
+    """ run all models on a given probability set """
 
     # define the environment
-    # if env_type == "driftv0":
-    #     env = envs.KABdriftv0(K=K,
-    #                           probabilities_set=probabilities_set,
-    #                           verbose=verbose,
-    #                           tau=5)
-    # elif env_type == "driftv1":
-    #     env = envs.KABdriftv1(K=K,
-    #                           verbose=verbose,
-    #                           tau=100,
-    #                           normalize=True,
-    #                           fixed_p=0.9)
-    # elif env_type == "sinv0":
-    #     frequencies = np.linspace(0, 0.4, K)
-    #     env = envs.KABsinv0(K=K,
-    #                         frequencies=frequencies,
-    #                         normalize=True,
-    #                         verbose=verbose)
-    # else:
-    #     env = envs.KABv0(K=K,
-    #                      probabilities_set=probabilities_set,
-    #                      verbose=verbose)
-
-    env = envs.make_new_env(K=K,
-                            env_type=env_type,
-                            nb_trials=nb_trials,
+    env = envs.make_new_env(K=K_VALUE,
+                            env_type=ENV_TYPE,
+                            nb_trials=NB_TRIALS,
                             probabilities_set=probabilities_set)
-    if verbose:
-        logger.info(f"%env: {env}")
 
     # define models
-    params["K"] = K
+    params["K"] = K_VALUE
 
     model_list = [
-        mm.ThompsonSampling(K=K),
-        mm.EpsilonGreedy(K=K, epsilon=0.1),
-        mm.UCB1(K=K),
+        mm.ThompsonSampling(K=K_VALUE),
+        mm.EpsilonGreedy(K=K_VALUE, epsilon=0.1),
+        mm.UCB1(K=K_VALUE),
         mm.Model(**params)
     ]
 
@@ -107,46 +119,17 @@ def run_(probabilities_set, params):
     results = envs.trial_multiple_models(
                          models=model_list,
                          environment=env,
-                         nb_trials=nb_trials,
-                         nb_rounds=nb_rounds,
-                         nb_reps=nb_reps,
+                         nb_trials=NB_TRIALS,
+                         nb_rounds=NB_ROUNDS,
+                         nb_reps=1,
                          entropy_calc=True,
-                         verbose=settings1.verbose)
+                         verbose=False)
     return results
 
 
-def softmax(z, beta):
-    return np.exp(beta*z) / np.exp(beta*z).sum()
+def run_multiple_indexes(empty):
 
-
-def calculate_for_beta(beta):
-
-    """Encapsulate the per-beta computation."""
-    # Define probabilities
-    p = softmax(probability, beta)
-    probabilities_set = np.array([p.tolist()])
-    prob_entropy = utils.calc_entropy(p)
-
-    # Run simulation
-    results = run_(settings1, probabilities_set, params)
-
-    model_reward = results["scores"]
-    model_reward_std = results["score_list"].mean(axis=2).std(axis=1)
-    upper_list = results["upper_bound_list"]
-
-    model_entropy = []
-    model_entropy_std = []
-    for i in range(settings1.trials):
-        model_entropy += [results["entropy_list"][:, :, i, :].mean(axis=2).mean(axis=1)]
-        model_entropy_std += [results["entropy_list"][:, :, i, :].mean(axis=2).std(axis=1)]
-
-    return prob_entropy, model_reward, model_reward_std, model_entropy, model_entropy_std, upper_list
-
-
-def calculation_over_betas(empty):
-
-    """Encapsulate the per-beta computation."""
-
+    """ run a list of indexes """
 
     prob_entropy = []
     model_entropy = []
@@ -155,37 +138,35 @@ def calculation_over_betas(empty):
     model_reward_std = []
     upper_list = []
 
-    probability_1, probability_2 = np.random.uniform(0.0, 0.5, (2, settings1.K))
-    probability_1[0] = 1.
-    probability_2[0] = 1.
+    pbar = tqdm(range(NUM_VALUES))
+    for index in pbar:
 
-    for beta in tqdm(beta_values):
-
-        #logger(f"running {beta=:.4f}")
+        pbar.set_description(f"{index=}")
 
         # define proababilities
-        p1 = np.clip(softmax(probability_1, beta) * probability_1.sum(),
-                     0., 1.)
-        p2 = np.clip(softmax(probability_2, beta) * probability_2.sum(),
-                     0., 1.)
-        probabilities_set = np.array([p1.tolist(),
-                                      p2.tolist()])
-        prob_entropy += [[utils.calc_entropy(p1),
-                          utils.calc_entropy(p2)]]
+        # probabilities_set, entropies = make_probabililties_set(index=index)
+        probabilities_set, entropies = make_probabililties_set_v2(index=index)
+        prob_entropy += [entropies]
 
-        """ run """
-        results = run_(probabilities_set, model_params)
+        # run
+        results = single_run(probabilities_set, model_params)
         model_reward += [results["score_list"][:, 0, :].tolist()]
         model_reward_std += [results["score_list"][:, 0, :].tolist()]
         upper_list += [results["upper_bound_list"].tolist()]
-        for i in range(settings1.trials):
-            model_entropy += [results["entropy_list"][:, :, i, :].mean(axis=2).mean(axis=1).tolist()]
-            model_entropy_std += [results["entropy_list"][:, :, i, :].mean(axis=2).std(axis=1)]
+        for i in range(NB_TRIALS):
+            # model_entropy += [results["entropy_list"][:, :, i, :].mean(axis=2).mean(axis=1).tolist()]
+            # model_entropy_std += [results["entropy_list"][:, :, i, :].mean(axis=2).std(axis=1)]
+            model_entropy += [results["entropy_list"][:, :, i, :].mean(axis=2).tolist()]
+            model_entropy_std += [results["entropy_list"][:, :, i, :].std(axis=1)]
 
     model_reward_std = np.stack(model_reward_std).tolist()
     model_entropy_std = np.stack(model_entropy_std).tolist()
 
     return prob_entropy, model_reward, model_reward_std, model_entropy, model_entropy_std, upper_list
+
+
+# ================================================================================
+# ================================================================================
 
 
 if __name__ == "__main__":
@@ -214,13 +195,13 @@ if __name__ == "__main__":
     logger(f"{NUM_CORES=}")
     logger(f"{NUM_REPS=}")
     logger(f"{chunksize=}")
-    logger(f"{NUM_BETAS=}")
+    logger(f"NUM_VALUES={NUM_VALUES}")
     logger(f"{names=}")
     logger(f"running...")
 
     with Pool(processes=NUM_CORES) as pool:
         results = list(
-            tqdm(pool.imap(calculation_over_betas, [None] * NUM_REPS,
+            tqdm(pool.imap(run_multiple_indexes, [None] * NUM_REPS,
                            chunksize=chunksize),
                  total=NUM_REPS)
         )
@@ -249,9 +230,8 @@ if __name__ == "__main__":
 
     """ save results """
 
-
     name = "entropy_run_" + time.strftime("%Y%m%d-%H%M%S") + ".json"
-    with open(f"src/data/{name}", 'w') as f:
+    with open(f"{utils.DATA_PATH}/{name}", 'w') as f:
         json.dump(data, f)
 
     logger(f"saved to {name}")

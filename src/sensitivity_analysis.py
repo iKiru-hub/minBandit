@@ -15,15 +15,14 @@ except ImportError:
 
 logger = utils.setup_logger(name=__name__, level=2)
 
-# ---------------------------------
-# this is meant to test the sensitivity of the various model paramenter
-# ---------------------------------
+"""
+Goal: test the sensitivity of a specified model parameter(s)
+"""
 
 IDX = 5
 
 
-def run(param: str, value: float,
-        K: int, nb_rounds: int,  nb_trials: int,
+def run(param: str, value: float, K: int, nb_rounds: int,  nb_trials: int,
         env_type: str, fixed_p: float=0.6, verbose: bool=True) -> dict:
 
     # define proababilities set
@@ -80,7 +79,7 @@ if __name__ == "__main__":
 
     np.random.seed(1)
 
-    # ---
+    # --- settings
     num_k = 3
     num_param = 3
 
@@ -90,7 +89,7 @@ if __name__ == "__main__":
     env_type = "default"
     fixed_p = 0.9
 
-    # ---
+    # --- define parameters to tweak
     Ks = np.logspace(2, 8, num=num_k, base=2)
     Ks = np.flip(Ks, axis=0)
     logger(f"{Ks=}")
@@ -102,7 +101,7 @@ if __name__ == "__main__":
 
     table = np.zeros((num_k, num_param))
 
-    # ---
+    # --- run
     for i in tqdm(range(num_k)):
         logger(f"-->> K={Ks[i]}")
         for j in tqdm(range(num_param)):
@@ -116,9 +115,7 @@ if __name__ == "__main__":
 
     logger(f"{results['upper_bound']=}")
 
-    # ---
-    # table = np.flip(table, axis=0)
-    # values = np.flip(values, axis=0)
+    # --- plot
     fig, ax = plt.subplots(figsize=(3, 10))
     im = ax.imshow(table, cmap="viridis")
 
@@ -132,7 +129,8 @@ if __name__ == "__main__":
 
     for i in range(len(table)):
         for j in range(len(table[i])):
-            _ = ax.text(j, i, f"{table[i, j]:.2f}", ha="center", va="center", color="black",
+            _ = ax.text(j, i, f"{table[i, j]:.2f}", ha="center",
+                        va="center", color="black",
                         fontsize=15)
 
     fig.suptitle(f"Model for different {param} and $K$", fontsize=21)

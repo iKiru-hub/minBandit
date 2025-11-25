@@ -1,1 +1,0 @@
-{"nb_trials": 60, "nb_rounds": 2, "nb_reps": 2, "K": 3, "params": {"alpha": 1.1, "beta": 2.0, "mu": 4.9, "sigma": 6.7, "r": 0.96, "w_max": 3.4, "lr": 0.1, "tau": 80.8, "dur_pre": 2987, "dur_post": 1837, "value_function": "gaussian", "K": 3}, "environment": "KArmedBanditSmooth(K=3, tau=40, fixed_p=0.7)"}
