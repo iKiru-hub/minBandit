@@ -18,12 +18,12 @@ In order to have the right necessary packaged, assuming ```pip``` is installed, 
 
 **Example usage**
 For a quick simulation:
-```python3 main.py --rounds 1000 --trials 2 --K 100 --multiple 1 --env --verbose```
+```python python3 main.py --rounds 1000 --trials 2 --K 100 --multiple 1 --env --verbose```
 
 all models (UCB, ThompsonSampling, EpsilonGreedy, NSA (our model)) are run on a piecewise stationary environment (MAB-D, the default one) for 2 trial 2000 rounds and 100 arms.
 
 All available options for the main simulations can be printed with the command ```python3 main.py --help```
-
+```txt
   -h, --help           show this help message and exit
   --verbose            verbose
   --rounds ROUNDS      number of rounds in a trial
@@ -41,6 +41,6 @@ All available options for the main simulations can be printed with the command `
   --visual             visualize the trial
   --save               save the results in a folder
   --idx IDX            the index of the model to load, default 5 (good parameters)
-
+```
  
 
