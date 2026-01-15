@@ -1,6 +1,8 @@
-# minBandit
+# A Bio-Inspired Minimal Model for Non-Stationary K-Armed Bandits
+
 A minimal rate neural model for solving a stochastic multi-armed bandit problem.
 
+---
 The repository is organized as follows:
 
 * **configs/**: YAML files containing hyperparameters for the model and evolutionary search
@@ -12,11 +14,12 @@ The repository is organized as follows:
     * `analysis/`: focused experiments to test specific features (entropy, single models, sensitivity)
     * `core/`: backend utils functions and classes
 
-
+---
 **Python dependancies**
 
 In order to have the right necessary packaged, assuming ```pip``` is installed, run the command ```pip install -r requirements.txt```
 
+---
 **Example usage**
 
 For a quick simulation:
