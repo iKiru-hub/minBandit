@@ -15,7 +15,7 @@ import utils
 
 logger = utils.setup_logger(name=__name__, level=2)
 DEFAULT_IDX = 5  # beware, only some indexes are compatible with the current version
-
+DRIFT_V0_TAU = 10
 
 def main(args, return_model: bool=False,
          env: object=None, style: bool="choice") -> dict:
@@ -36,24 +36,24 @@ def main(args, return_model: bool=False,
     # define the environment
     if env is None:
         if env_type == "driftv0":
-            env = envs.KABdriftv0(K=K,
+            env = envs.MABdriftv0(K=K,
                                   probabilities_set=probabilities_set,
                                   verbose=verbose,
-                                  tau=10)
+                                  tau=DRIFT_V0_TAU)
         elif env_type == "driftv1":
-            env = envs.KABdriftv1(K=K,
+            env = envs.MABdriftv1(K=K,
                                   verbose=verbose,
                                   tau=100,
                                   normalize=True,
                                   fixed_p=0.9)
         elif env_type == "sinv0":
             frequencies = np.linspace(0.1, 0.4, K)
-            env = envs.KABsinv0(K=K,
+            env = envs.MABsinv0(K=K,
                                 frequencies=frequencies,
                                 normalize=True,
                                 verbose=verbose)
         else:
-            env = envs.KABv0(K=K,
+            env = envs.MABv0(K=K,
                              probabilities_set=probabilities_set,
                              verbose=verbose)
 
@@ -124,24 +124,24 @@ def main_multiple(args, **kwargs) -> dict:
 
     # define the environment
     if env_type == "driftv0":
-        env = envs.KABdriftv0(K=K,
+        env = envs.MABdriftv0(K=K,
                               probabilities_set=probabilities_set,
                               verbose=verbose,
                               tau=5)
     elif env_type == "driftv1":
-        env = envs.KABdriftv1(K=K,
+        env = envs.MABdriftv1(K=K,
                               verbose=verbose,
                               tau=100,
                               normalize=True,
                               fixed_p=0.9)
     elif env_type == "sinv0":
         frequencies = np.linspace(0, 1, K)
-        env = envs.KABsinv0(K=K,
+        env = envs.MABsinv0(K=K,
                             frequencies=frequencies,
                             normalize=True,
                             verbose=verbose)
     else:
-        env = envs.KABv0(K=K,
+        env = envs.MABv0(K=K,
                          probabilities_set=probabilities_set,
                          verbose=verbose)
 
@@ -150,36 +150,14 @@ def main_multiple(args, **kwargs) -> dict:
 
     # define models
     if args.load:
-        # params = utils.load_model(idx=args.idx,
-        #                           verbose=verbose)
-
         idx = args.idx if args.idx >= 0 else None
         params = utils.load_model(idx=idx)
-        # params["K"] = K
         params["K"] = K
 
     else:
-        params = {
-            "K": K,
-            "dur_pre": 2000,
-            "dur_post": 2000,
-            "lr": 0.1,
-            "gain": 1.,
-            "threshold": 0.5,
-            "alpha": 0.,
-            "beta": 1.,
-            "mu": 0.,
-            "sigma": 1.,
-            "r": 1.,
-            "alpha_lr": 0.1,
-            "beta_lr": 0.1,
-            "mu_lr": 0.1,
-            "sigma_lr": 0.1,
-            "r_lr": 0.1,
-            "w_max": 5.,
-            "value_function": "gaussian",
-            "lr_function": "gaussian",
-        }
+        params = utils.load_model(idx=DEFAULT_IDX)
+        params["K"] = K
+        logger.warning("default params")
 
     models = [
         mm.ThompsonSampling(K=K),
@@ -339,10 +317,10 @@ if __name__ == "__main__":
     parser.add_argument('--model', type=str,
                         help='model to run: `ucb`, `thompson`, ' + \
         '`epsilon`; if nothing specified or wrong name, ' + \
-        'the default is the custom model',
+        'the default is the custom `model`',
                         default="model")
     parser.add_argument('--load', action='store_true',
-                        help='load saved model',
+                        help='load saved model from evolution search',
                         default=False)
     parser.add_argument('--plot', action='store_true',
                         help='plot at the end of the simulation',
@@ -371,7 +349,7 @@ if __name__ == "__main__":
                         help='save the results in a folder',
                         default=False)
     parser.add_argument('--idx', type=int,
-                        help='the index of the model to load',
+                        help='the index of the model to load, default 5 (good parameters)',
                         default=-1)
 
     args = parser.parse_args()

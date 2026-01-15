@@ -35,12 +35,12 @@ probabilities_set = utils.make_probability_set(K=K,
 def make_current_env(kind: str, probabilities_set: list):
 
     if env_type == "driftv0":
-        env = envs.KABdriftv0(K=K,
+        env = envs.MABdriftv0(K=K,
                               probabilities_set=probabilities_set,
                               verbose=verbose,
                               tau=5)
     elif env_type == "driftv1":
-        env = envs.KABdriftv1(K=K,
+        env = envs.MABdriftv1(K=K,
                               verbose=verbose,
                               tau=100,
                               normalize=True,
@@ -48,13 +48,13 @@ def make_current_env(kind: str, probabilities_set: list):
     elif env_type == "sinv0":
         frequencies = np.arange(1, K+1)
         phases = np.random.uniform(0, 2*np.pi, K)
-        env = envs.KABsinv0(K=K,
+        env = envs.MABsinv0(K=K,
                             frequencies=frequencies,
                             phases=phases,
                             normalize=True,
                             verbose=verbose)
     else:
-        env = envs.KABv0(K=K,
+        env = envs.MABv0(K=K,
                          probabilities_set=probabilities_set,
                          verbose=verbose)
 

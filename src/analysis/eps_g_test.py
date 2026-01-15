@@ -27,24 +27,24 @@ def run(epsilon: float, K: int, nb_rounds: int,  nb_trials: int,
                                                    normalize=False)
     # define the environment
     if env_type == "driftv0":
-        env = envs.KABdriftv0(K=K,
+        env = envs.MABdriftv0(K=K,
                               probabilities_set=probabilities_set,
                               verbose=verbose,
                               tau=10)
     elif env_type == "driftv1":
-        env = envs.KABdriftv1(K=K,
+        env = envs.MABdriftv1(K=K,
                               verbose=verbose,
                               tau=100,
                               normalize=True,
                               fixed_p=0.9)
     elif env_type == "sinv0":
         frequencies = np.linspace(0.1, 0.4, K)
-        env = envs.KABsinv0(K=K,
+        env = envs.MABsinv0(K=K,
                             frequencies=frequencies,
                             normalize=True,
                             verbose=verbose)
     else:
-        env = envs.KABv0(K=K,
+        env = envs.MABv0(K=K,
                          probabilities_set=probabilities_set,
                          verbose=verbose)
 

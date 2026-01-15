@@ -18,14 +18,14 @@ ROUND_TRIM = 95
 """
 Goal: describe the environment dynamics and simulation functions.
 
-nb. KAB = MAB
+nb. MAB = MAB
 """
 
 
 """ Game """
 
 
-class KAB(ABC):
+class MAB(ABC):
 
     """
     abstract class for all k-armed bandit problems
@@ -148,13 +148,20 @@ class KAB(ABC):
             self.best_arm_list = [np.argmax(self.probabilities)]
 
 
-class KABv0(KAB):
+class MABv0(MAB):
+
+    """
+    Piecewise stationary distribution (MAB-P)
+    """
 
     def __init__(self, K: int, probabilities_set: list,
                  record: bool=False, verbose: bool=False):
 
         super().__init__(K=K, probabilities_set=probabilities_set,
                          record=record, verbose=verbose)
+
+    def __str__(self) -> str:
+        return f"MAB-P({self.K})"
 
     def _update(self):
 
@@ -180,10 +187,11 @@ class KABv0(KAB):
             logger.info(f"%upper bound: {self.upper_bound:.3f}")
 
 
-class KABdriftv0(KAB):
+class MABdriftv0(MAB):
 
     """
-    concept drift occuring smoothly
+    Piecewise stationary distribution with drift (MAB-D),
+    in which the feature of concept drift occuring smoothly
     """
 
     def __init__(self, K: int, probabilities_set: list,
@@ -215,8 +223,11 @@ class KABdriftv0(KAB):
         self.counter = 0
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}({self.K}," + \
+        return f"MAB-D({self.K}," + \
             f" #sets={self.nb_sets}, tau={self._tau})"
+
+    def __str__(self) -> str:
+        return f"MAB-D({self.K})"
 
     def _update(self):
 
@@ -254,11 +265,14 @@ class KABdriftv0(KAB):
             self.trg_probabilities = np.array(self.probabilities_set[1])
 
 
-class KABdriftv1(KAB):
+class MABdriftv1(MAB):
 
     """
-    concept drift occuring smoothly but each time with a
-    random probability distribution
+    Piecewise stationary distribution version 2,
+    in which the feature of concept drift occuring smoothly but each time with a
+    random probability distribution.
+
+    nb. it does not feature in the paper.
     """
 
     def __init__(self, K: int, tau: float=5., verbose: bool=False,
@@ -296,8 +310,11 @@ class KABdriftv1(KAB):
         self.trg_probabilities = self._new_distribution()
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}({self.K}," + \
+        return f"MAB-D2({self.K}," + \
             f" tau={self._tau}, fixed_p={self._fixed_p})"
+
+    def __str__(self) -> str:
+        return f"MAB-D2({self.K})"
 
     def _new_distribution(self):
 
@@ -348,10 +365,13 @@ class KABdriftv1(KAB):
         self.best_arm_list = [np.argmax(self.probabilities)]
 
 
-class KABsinv0(KAB):
+class MABsinv0(MAB):
 
     """
-    use sin waves to generate a reward distribution
+    Sinusoidal distribution shift (MAB-sin) using sin waves to generate
+    a reward distribution.
+    If `constants` are provided, then it becomes a partial sinusoidal
+    distribution shift (MAB-sinP)
     """
 
     def __init__(self, K: int, frequencies: list,
@@ -396,17 +416,19 @@ class KABsinv0(KAB):
         self._update()
         self.counter = 0
         if self.num_constants > 0:
-            self._name = "KABsinv1"
+            self._name = "MABsinv1"
         else:
-            self._name = "KABsinv0"
-
-    def __str__(self) -> str:
-        return f"{self._name}"
+            self._name = "MABsinv0"
 
     def __repr__(self) -> str:
-        return f"{self._name}({self.K}," + \
+        return f"MAB-sin({self.K}," + \
             f" frequencies={self._frequencies}, " + \
             f"const={self.num_constants})"
+
+    def __str__(self) -> str:
+        if len(self.constants) > 0:
+            return f"MAB-sinP({self.K})"
+        return f"MAB-sin({self.K})"
 
     def _update(self):
 
@@ -453,14 +475,14 @@ def make_new_env(K: int, env_type: str, nb_trials: int=3,
 
     # define the environment
     if env_type == "driftv0":
-        env = KABdriftv0(K=K,
+        env = MABdriftv0(K=K,
                          probabilities_set=probabilities_set,
                          verbose=False,
                          tau=200)
     elif env_type == "sinv0":
         frequencies = np.random.uniform(0, 0.1, K)
         phases = np.random.uniform(0, 6.28, K)
-        env = KABsinv0(K=K,
+        env = MABsinv0(K=K,
                             frequencies=frequencies,
                             normalize=False,
                             phases=phases,
@@ -469,14 +491,14 @@ def make_new_env(K: int, env_type: str, nb_trials: int=3,
         frequencies = np.random.uniform(0, 0.1, K)
         phases = np.random.uniform(0, 6.28, K)
         constants = np.random.uniform(0, 0.7, K//2)
-        env = KABsinv0(K=K,
+        env = MABsinv0(K=K,
                        frequencies=frequencies,
                        normalize=False,
                        phases=phases,
                        constants=constants,
                        verbose=False)
     elif env_type == "v0":
-        env = KABv0(K=K,
+        env = MABv0(K=K,
                     probabilities_set=probabilities_set,
                     verbose=False)
     else:
@@ -489,7 +511,7 @@ def make_new_env(K: int, env_type: str, nb_trials: int=3,
 """ Trial """
 
 
-def trial(model: object, environment: KAB,
+def trial(model: object, environment: MAB,
           nb_trials: int, nb_rounds: int,
           verbose: bool=False,
           score_only: bool=False,
@@ -503,7 +525,7 @@ def trial(model: object, environment: KAB,
     ----------
     model : object
         The model to use
-    environment : KAB
+    environment : MAB
         The k-armed bandit environment
     nb_trials : int
         The number of trials
@@ -619,7 +641,7 @@ def trial(model: object, environment: KAB,
     return stats
 
 
-def trial_multiple_models(models: list, environment: KAB,
+def trial_multiple_models(models: list, environment: MAB,
                           nb_trials: int, nb_rounds: int, nb_reps: int=1,
                           bin_size: int=20,
                           entropy_calc: bool=False,
@@ -1021,15 +1043,15 @@ if __name__ == "__main__":
     Np = 3
     probabilities_set = np.random.uniform(0, 1, size=(Np, K)).tolist()
 
-    # mab = KABv0(K=K, probabilities_set=probabilities_set,
+    # mab = MABv0(K=K, probabilities_set=probabilities_set,
     #             verbose=False)
 
-    # mab = KABdriftv0(K=K, probabilities_set=probabilities_set,
+    # mab = MABdriftv0(K=K, probabilities_set=probabilities_set,
     #                  tau=100, verbose=False)
 
-    # mab = KABdriftv1(K=K, tau=80, verbose=False)
+    # mab = MABdriftv1(K=K, tau=80, verbose=False)
 
-    mab = KABsinv0(K=K, frequencies=np.linspace(0.1, 100, K),
+    mab = MABsinv0(K=K, frequencies=np.linspace(0.1, 0.4, K),
                    verbose=False)
 
     T = 1000

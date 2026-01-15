@@ -1,5 +1,9 @@
 """
 Evolution search over a defined collection of 'PARAMETERS'.
+
+It relies on the settings defined in the config files in the config/ folder.
+It support the possibility of using multiple cores for distributed processing,
+speeding up the evaluation of a population.
 """
 
 import numpy as np
