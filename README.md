@@ -14,13 +14,15 @@ The repository is organized as follows:
 
 
 **Python dependancies**
+
 In order to have the right necessary packaged, assuming ```pip``` is installed, run the command ```pip install -r requirements.txt```
 
 **Example usage**
+
 For a quick simulation:
 ```python3 main.py --rounds 1000 --trials 2 --K 100 --multiple 1 --env --verbose```
 
-all models (UCB, ThompsonSampling, EpsilonGreedy, NSA (our model)) are run on a piecewise stationary environment (MAB-D, the default one) for 2 trial 2000 rounds and 100 arms.
+here, all models (UCB, ThompsonSampling, EpsilonGreedy, NSA (our model)) are run on a piecewise stationary environment (MAB-D, the default one) for 2 trial 2000 rounds and 100 arms.
 
 All available options for the main simulations can be printed with the command ```python3 main.py --help```
 ```txt
