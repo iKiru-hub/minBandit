@@ -1,14 +1,19 @@
+"""
+Goal:
+    example run with visualization
+"""
+
+
 import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 import time, warnings
+import sys, os
+sys.path.append(os.getcwd().split("src")[0] + "src")
 
-try:
-    from src.utils import tqdm_enumerate, setup_logger
-except ModuleNotFoundError:
-    import utils
-    import models as mm
-    import envs
+import utils
+import models as mm
+import envs
 
 
 logger = utils.setup_logger(__name__)

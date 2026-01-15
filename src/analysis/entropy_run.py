@@ -1,9 +1,15 @@
+"""
+Study of selection entropy for different environmental conditions and models
+"""
+
 import numpy as np
 from multiprocessing import Pool, cpu_count
 import os, json
 from tqdm import tqdm
 import time
 
+import sys, os
+sys.path.append(os.getcwd().split("src")[0] + "src/core")
 import models as mm
 import envs
 import utils
@@ -22,7 +28,7 @@ NB_ROUNDS = 2000
 NB_TRIALS = 1
 ENV_TYPE = "v0"
 VERBOSE = True
-MODEL_IDX = 1
+MODEL_IDX = 5  # beware, only some indexes are compatible with the current version
 K_VALUE = 100
 NUM_VALUES = 5
 

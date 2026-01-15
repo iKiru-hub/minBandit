@@ -1,23 +1,22 @@
+"""
+Test the sensitivity of a specified model parameter(s)
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
-import time, argparse, os, json
+import time, argparse, json
 from tqdm import tqdm
 from pprint import pprint
 
-try:
-    import envs
-    import models as mm
-    import utils
-except ImportError:
-    import src.envs as envs
-    import src.models as mm
-    import src.utils as utils
+import sys, os
+sys.path.append(os.getcwd().split("src")[0] + "src/core")
+
+import envs
+import models as mm
+import utils
 
 logger = utils.setup_logger(name=__name__, level=2)
 
-"""
-Goal: test the sensitivity of a specified model parameter(s)
-"""
 
 IDX = 5
 

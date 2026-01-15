@@ -5,49 +5,20 @@ from tqdm import tqdm
 import multiprocessing
 from multiprocessing import Pool
 
-# set the path to the src directory
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from src.utils import setup_logger, make_probability_set, load_model
-import src.models as mm
-import src.envs as envs
+sys.path.append(os.getcwd().split("src")[0] + "src/core")
 
-logger = setup_logger(__name__,
-                      level=2)
+from utils import setup_logger, make_probability_set, load_model
+import models as mm
+import envs as envs
+
+logger = setup_logger(__name__, level=2)
 
 WD = os.getcwd()
 
 main_PATH = f"{WD}/src/data"
 tmp_PATH = f"{WD}/src/tmp"
 
-# main_PATH = r"/Users/daniekru/Research/lab/minBandit/src/data"
-# tmp_PATH = r"/Users/daniekru/Research/lab/minBandit/src/tmp"
-# pigeon_PATH = r"/Users/daniekru/Research/lab/pigeon/data"
-# main_PATH_cl = r"/home/daniekru/lab/minBandit/src/data"
-# pigeon_PATH_cl = r"/home/daniekru/lab/pigeon/data"
-#PATH = pigeon_PATH_cl
 PATH = tmp_PATH
-
-# from a sweep
-# model_params = {
-# "alpha":0.4450195718988339,
-# "alpha_lr":-2.958221399416473,
-# "beta":7.391580370882872,
-# "beta_lr":0.9526338245859882,
-# "gain":47.86910588825282,
-# "lr":0.2773642826170334,
-# "mu":2.6713225228884383,
-# "mu_lr":-0.6084876849578418,
-# "r":0.5161936304182647,
-# "r_lr":0.044296190220556864,
-# "sigma":0.5450255193262612,
-# "sigma_lr":4.463404997440599,
-# "threshold":0.3842711049268154,
-# "w_max":2.461390370832377,
-# "K": None,
-# "dur_pre": 2000,
-# "dur_post": 2000,
-# "value_function": "gaussian",
-# "lr_function": "gaussian"}
 
 # from evolution
 MODEL_IDX = 1
@@ -249,6 +220,7 @@ def run_for_all_k(K_list: list):
         data = sanitize_for_json(result)
         name = f"large_run_results_K{K}"
         save(path=path, data=data, name=name)
+
 
 # ---------------------------------------------
 # ---------------------------------------------

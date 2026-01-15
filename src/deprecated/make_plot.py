@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import os, time, json
+import sys, os, time, json
 from tqdm import tqdm
 
 from scipy.ndimage import convolve1d
@@ -8,9 +8,11 @@ from multiprocessing import Pool
 import warnings
 import argparse
 
-import envs as envs
+sys.path.append(os.getcwd().split("src")[0] + "src/core")
+
+import envs
 import models as mm
-import utils as utils
+import utils
 
 logger = utils.setup_logger(__name__)
 
@@ -43,7 +45,7 @@ class Settings:
     multiple = 1
     visual = False
     save = True
-    idx = 4
+    idx = 10
 
 
 def run_main(settings):
@@ -137,19 +139,30 @@ def main_multiple(args):
 
     # define the environment
     if args.env == "simple":
-        env = envs.KArmedBandit(K=K,
-                                probabilities_set=probabilities_set,
-                                verbose=False)
+        env = envs.KABv0(K=K, probabilities_set=probabilities_set,
+                         verbose=False)
     elif args.env == "smooth2":
-        env = envs.KArmedBanditSmoothII(K=K,
-                                verbose=False,
-                                tau=40,
-                                fixed_p=0.7)
+        env = envs.KABdriftv0(K=K, verbose=False,
+                              tau=40, fixed_p=0.7)
     else:
-        env = envs.KArmedBanditSmooth(K=K,
-                                probabilities_set=probabilities_set,
-                                verbose=False,
-                                tau=40)
+        env = envs.KABsinv0(K=K, frequencies=np.linspace(0.1, 100, K),
+                            verbose=False)
+
+    # # define the environment
+    # if args.env == "simple":
+    #     env = envs.KArmedBandit(K=K,
+    #                             probabilities_set=probabilities_set,
+    #                             verbose=False)
+    # elif args.env == "smooth2":
+    #     env = envs.KArmedBanditSmoothII(K=K,
+    #                             verbose=False,
+    #                             tau=40,
+    #                             fixed_p=0.7)
+    # else:
+    #     env = envs.KArmedBanditSmooth(K=K,
+    #                             probabilities_set=probabilities_set,
+    #                             verbose=False,
+    #                             tau=40)
 
     if verbose:
         logger.info(f"%env: {env}")
@@ -166,7 +179,7 @@ def main_multiple(args):
             "dur_pre": 2000,
             "dur_post": 2000,
             "lr": 0.1,
-            "gain": 1.,
+            "gain_v": 1.,
             "threshold": 0.5,
             "alpha": 0.,
             "beta": 1.,

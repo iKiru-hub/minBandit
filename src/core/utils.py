@@ -1,3 +1,9 @@
+"""
+helper functions and path definitions
+"""
+
+
+
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator,FormatStrFormatter,MaxNLocator
@@ -31,7 +37,7 @@ except:
 
 def setup_logger(name: str="MAIN",
                  colored: bool=True,
-                 level: int=0,
+                 level: int=1,
                  is_debugging: bool=True,
                  is_warning: bool=True) -> logging.Logger:
 
@@ -131,8 +137,9 @@ def setup_logger(name: str="MAIN",
 
 
 logger = setup_logger(name="UTILS", colored=True,
-                      level=0, is_debugging=False,
+                      level=1, is_debugging=False,
                       is_warning=False)
+
 
 def edit_logger(level: int=-1,
                 is_debugging: bool=True,
@@ -151,7 +158,7 @@ def tqdm_enumerate(iter, **tqdm_kwargs):
 
 
 def load_model(model_name: str=None, idx: int=None,
-               verbose: bool=True, CACHE_PATH=CACHE_PATH):
+               verbose: bool=False, CACHE_PATH=CACHE_PATH):
 
     """
     load a model from the models folder

@@ -1,13 +1,20 @@
+"""
+Main file in which it is possible to experiment and visualize simulations,
+using one or more models for comparison
+"""
+
 import numpy as np
-import time, argparse, os, json
+import time, argparse, json
+
+import sys, os
+sys.path.append(os.getcwd().split("src")[0] + "src/core")
 
 import envs
 import models as mm
 import utils
 
-
 logger = utils.setup_logger(name=__name__, level=2)
-DEFAULT_IDX = 5
+DEFAULT_IDX = 5  # beware, only some indexes are compatible with the current version
 
 
 def main(args, return_model: bool=False,

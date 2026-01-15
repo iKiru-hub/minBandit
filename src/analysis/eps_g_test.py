@@ -1,23 +1,20 @@
+"""
+Test the sensitivity of the `epsilon` paramenter of the epsilon-greedy algorithm in different environments
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
-import time, argparse, os, json
+import time, argparse, json
 from tqdm import tqdm
 
-try:
-    import envs
-    import models as mm
-    import utils
-except ImportError:
-    import src.envs as envs
-    import src.models as mm
-    import src.utils as utils
+import sys, os
+sys.path.append(os.getcwd().split("src")[0] + "src/core")
+
+import envs
+import models as mm
+import utils
 
 logger = utils.setup_logger(name=__name__, level=2)
-
-"""
-Goal: this is meant to test the sensitivity of the `epsilon` paramenter
-of the epsilon-greedy algorithm in different environments
-"""
 
 
 def run(epsilon: float, K: int, nb_rounds: int,  nb_trials: int,

@@ -6,15 +6,20 @@ import time, warnings
 from abc import ABC, abstractmethod
 from statistics import mode
 
-try:
-    from src.utils import tqdm_enumerate, setup_logger, calc_entropy, cosine_similarity
-except ModuleNotFoundError:
-    from utils import tqdm_enumerate, setup_logger, calc_entropy, cosine_similarity
+import sys, os
+sys.path.append(os.getcwd().split("src")[0] + "src")
+from utils import tqdm_enumerate, setup_logger, calc_entropy, cosine_similarity
 
 
 logger = setup_logger(name=__name__, level=2)
 
 ROUND_TRIM = 95
+
+"""
+Goal: describe the environment dynamics and simulation functions.
+
+nb. KAB = MAB
+"""
 
 
 """ Game """
@@ -310,7 +315,7 @@ class KABdriftv1(KAB):
             p /= p.sum()
         return p
 
-    def update(self):
+    def _update(self):
 
         """
         Renew the reward distribution
@@ -346,7 +351,7 @@ class KABdriftv1(KAB):
 class KABsinv0(KAB):
 
     """
-    use sin waves to generate a eward distribution
+    use sin waves to generate a reward distribution
     """
 
     def __init__(self, K: int, frequencies: list,
@@ -846,7 +851,7 @@ def visual_trial(model: object,
                 fig.suptitle("$\\mathbf{\\pi}=$" + \
                     f"{np.around(environment.probabilities, 2)} [$i=${idx_p}]")
             else:
-                fig.suptitle("$\\mathbf{\pi}_{\\text{max}}=$" + \
+                fig.suptitle("$\\mathbf{\\pi}_{\\text{max}}=$" + \
                     f"{environment.probabilities.max()} [$i=${idx_p}]")
 
         #
@@ -1016,23 +1021,23 @@ if __name__ == "__main__":
     Np = 3
     probabilities_set = np.random.uniform(0, 1, size=(Np, K)).tolist()
 
-    mab = KArmedBandit(K=K, probabilities_set=probabilities_set,
-                       verbose=False)
-    # mab = KArmedBanditSmooth(K=K,
-    #                          probabilities_set=probabilities_set,
-    #                          tau=100,
-    #                          verbose=False)
+    # mab = KABv0(K=K, probabilities_set=probabilities_set,
+    #             verbose=False)
 
-    # mab = KArmedBanditSmoothII(K=K,
-    #                          tau=80,
-    #                          verbose=False)
+    # mab = KABdriftv0(K=K, probabilities_set=probabilities_set,
+    #                  tau=100, verbose=False)
+
+    # mab = KABdriftv1(K=K, tau=80, verbose=False)
+
+    mab = KABsinv0(K=K, frequencies=np.linspace(0.1, 100, K),
+                   verbose=False)
 
     T = 1000
     rec = np.zeros((T, K))
     upp = np.zeros(T)
     for t in range(T):
         # print(f"p={np.around(mab.probabilities, 2),} (trg: {np.around(mab.trg_probabilities, 2)})" )
-        mab.update()
+        _ = mab.sample(k=0)
         rec[t] = mab.probabilities
         upp[t] = mab.probabilities.max()
 

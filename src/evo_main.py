@@ -1,13 +1,16 @@
+"""
+Evolution search over a defined collection of 'PARAMETERS'.
+"""
+
 import numpy as np
-import time, os, sys
+import time, os, sys, warnings
 import random
 import argparse, yaml
 from deap import base, creator, tools, cma
 
-import evolution
+sys.path.append(os.getcwd().split("src")[0] + "src/core")
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-import time, warnings
+import evolution
 import envs
 import models as mm
 
@@ -21,11 +24,10 @@ logger = setup_logger(name=__name__)
 class Env:
 
     """
-    The game class for a k-arm bandit task.
+    The game class for a MAB task tailored to evaluate a provided parameter set (genome).
     """
 
-    def __init__(self, protocol: dict,
-                 verbose: bool):
+    def __init__(self, protocol: dict, verbose: bool):
 
         """
         The game class.
@@ -57,7 +59,7 @@ class Env:
     def run(self, agent: object) -> float:
 
         """
-        Evaluate the agent on the k-arm bandit task.
+        Evaluate the agent on the multi-armed bandit task.
 
         Parameters
         ----------
