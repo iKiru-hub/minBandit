@@ -1,5 +1,5 @@
 # minBandit
-A minimal rate neural model for solving a stochastic multi-armed bandit problem
+A minimal rate neural model for solving a stochastic multi-armed bandit problem.
 
 The repository is organized as follows:
 
