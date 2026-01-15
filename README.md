@@ -1,4 +1,4 @@
-# A Bio-Inspired Minimal Model for Non-Stationary K-Armed Bandits
+# A Bio-Inspired Minimal Model for Non-Stationary K-Armed Bandit tasks
 
 A minimal rate neural model for solving a stochastic multi-armed bandit problem.
 
